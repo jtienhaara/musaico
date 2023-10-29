@@ -3,4 +3,4 @@
 # be checked into git:
 #
 runtime/root/
-runtime/host/
+runtime/app/

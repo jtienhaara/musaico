@@ -26,7 +26,7 @@ then
     SETTINGS_FILE="$ABSOLUTE_SETTINGS_FILE"
 fi
 
-echo "Creating Musaico settings $(SETTINGS_FILE)..."
+echo "Creating Musaico settings $SETTINGS_FILE..."
 
 SETTINGS_DIR=`dirname "$SETTINGS_FILE"`
 if test $? -ne 0
@@ -50,6 +50,27 @@ fi
 # Musaico version, used to build container images and so on:
 #
 export MUSAICO_VERSION=0.0.1
+
+#
+# Root directory of Musaico source code.
+#
+export MUSAICO_ROOT_DIR=`dirname $0`
+MAYBE_RELATIVE=`echo "$MUSAICO_ROOT_DIR" \
+                    | grep -v '^/'`
+if test ! -z "$MAYBE_RELATIVE"
+then
+    ABSOLUTE_MUSAICO_ROOT_DIR="$PWD/$MUSAICO_ROOT_DIR"
+    export MUSAICO_ROOT_DIR="$ABSOLUTE_MUSAICO_ROOT_DIR"
+fi
+
+#
+# Runtime directory, where we copy apps to plunk into hosts
+# like VMs and container images.
+#
+# Kinda hacky way of building hosts and guests, but oh well,
+# it'll do for now.
+#
+export MUSAICO_RUNTIME="$MUSAICO_ROOT_DIR/runtime"
 
 #
 # The user who will install, build, run, and so on, Musaico.
@@ -97,6 +118,9 @@ then
 else
     export MUSAICO_EMAIL="$MUSAICO_USER@${MUSAICO_HOST}.${MUSAICO_DOMAIN}"
 fi
+
+export MUSAICO_SETTINGS_SHA256=`sha256sum $0 \
+                                    | awk '{ print $1; }'`
 
 echo "  Musaico settings:"
 env \
