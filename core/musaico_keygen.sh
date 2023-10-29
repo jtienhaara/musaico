@@ -80,7 +80,7 @@ age-keygen \
                print "export MUSAICO_" key_pair_env_name "_PUBLIC_KEY=" $4;
            }
            $1 ~ /^AGE-SECRET-KEY-.*$/ {
-               print "export MUSAICO_" key_pair_env_name "_PUBLIC_KEY=" $1; }
+               print "export MUSAICO_" key_pair_env_name "_PRIVATE_KEY=" $1; }
           ' \
               >> "$KEY_PAIR_FILE" \
               || exit 4
