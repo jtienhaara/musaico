@@ -30,11 +30,26 @@ run: check_settings
 .PHONY: test
 test: check_settings
 	@echo "Testing Musaico language!"
+	@if test -d ./work; \
+	then \
+	    rm -rf ./work/*; \
+	fi
 	mkdir -p ./work
 	bison musaico.y \
-	    --output ./work/musaico.c \
+	    --output ./work/musaico_parse.c \
 	    -Werror
+	cp -f \
+	    ./musaico.c \
+	    ./musaico.h \
+	    ./work/
+	gcc -c ./work/musaico_parse.c -o ./work/musaico_parse.o
 	gcc -c ./work/musaico.c -o ./work/musaico.o
+	gcc \
+	    ./work/musaico_parse.o \
+	    ./work/musaico.o \
+	    -o ./work/musaico
+	@echo "Trying to compile test.musaico:"
+	./work/musaico test.musaico
 
 .PHONY: uninstall
 uninstall: check_settings

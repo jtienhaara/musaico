@@ -1,10 +1,22 @@
 %{
   #include <stdio.h>
+  #include <fcntl.h>
+  #include <unistd.h>
+
+  #include "musaico.h"
 %}
 
 %code provides {
-  int yylex (YYSTYPE *lvalp, YYLTYPE *llocp);
-  void yyerror (YYLTYPE *locp, char const *msg);
+  static int yylex (
+          YYSTYPE *lvalp,
+          YYLTYPE *llocp,
+          int fd
+          );
+  static void yyerror (
+          YYLTYPE *locp,
+          int fd,
+          char const *msg
+          );
 }
 
 %language "C"
@@ -12,20 +24,27 @@
 %define api.pure full
 %define api.symbol.prefix {MUSAICO_S_}
 %define api.token.prefix {MUSAICO_T_}
+%param {int fd}
 
 %start declaration
 
 %define api.value.type union /* Generate YYSTYPE from these types: */
 %token <char *>     BRACE_CLOSE                 "}"
 %token <char *>     BRACE_OPEN                  "{"
-%token <char *>     COMMENT_SINGLE_LINE
-%token <double>     FLOAT
-%token <char *>     ID
-%token <long>       INT
+%token <char *>     BRACKET_CLOSE               "]"
+%token <char *>     BRACKET_OPEN                "["
+%token <char *>     COMMENT_SINGLE_LINE         // // comment etc...
+%token <char *>     DOT                         "."
+%token <char *>     EQUAL                       "="
+%token <double>     FLOAT                       // [0-9]+(\.[0-9]+)?
+%token <char *>     ID                          // xyz etc
+%token <long>       INT                         // [0-9]+
 %token <char *>     NEWLINE                     "\n"
 %token <char *>     SEMI_COLON                  ";"
-%token <char *>     WHITESPACE
-%token <char *>     WHITESPACE_NO_NEWLINE
+%token <char *>     STRING                      // 'xyz' or "xyz" etc
+%token <char *>     TIMES                       "*"
+%token <char *>     WHITESPACE                  // [ \t\r\n]
+%token <char *>     WHITESPACE_NO_NEWLINE       // [ \t\r]
 
 
 %%
@@ -45,9 +64,38 @@ NEWLINE
 ;
 
 expression:
-ID op_binary_with_space expression SEMI_COLON
-| ID SEMI_COLON
+multiplier_expression
+| fully_qualified_id op_binary_with_space expression SEMI_COLON
+| fully_qualified_id SEMI_COLON
 | constructor
+| primitive_expression
+;
+
+multiplier_expression:
+INT WHITESPACE TIMES WHITESPACE expression
+| INT WHITESPACE TIMES expression
+| INT TIMES WHITESPACE expression
+| INT TIMES expression
+;
+
+primitive_expression:
+FLOAT WHITESPACE SEMI_COLON
+| FLOAT SEMI_COLON
+| INT WHITESPACE SEMI_COLON
+| INT SEMI_COLON
+| STRING WHITESPACE SEMI_COLON
+| STRING SEMI_COLON
+;
+
+fully_qualified_id:
+ID DOT fully_qualified_id
+| ID index DOT fully_qualified_id
+| ID index
+| ID
+;
+
+index:
+BRACKET_OPEN INT BRACKET_CLOSE
 ;
 
 op_binary_with_space:
@@ -58,7 +106,7 @@ op_binary WHITESPACE
 ;
 
 op_binary:
-'='
+EQUAL
 ;
 
 constructor:
@@ -66,8 +114,8 @@ constructor_header declaration constructor_footer
 ;
 
 constructor_header:
-ID WHITESPACE BRACE_OPEN
-| ID BRACE_OPEN
+fully_qualified_id WHITESPACE BRACE_OPEN
+| fully_qualified_id BRACE_OPEN
 ;
 
 constructor_footer:
@@ -79,88 +127,53 @@ BRACE_CLOSE WHITESPACE
 %%
 
 
-int yylex (YYSTYPE *lvalp, YYLTYPE *llocp)
+static int yylex (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        int fd
+        )
 {
   return 0;
 }
 
-void yyerror (YYLTYPE *locp, char const *msg)
+static void yyerror (
+        YYLTYPE *locp,
+        int fd,
+        char const *msg
+        )
 {
 }
 
 
-/* !!!
-
-input:
-  %empty
-| input line
-;
-
-
-line:
-  '\n'
-| exp '\n'      { printf ("%.10g\n", $1); }
-;
-
-
-exp:
-  NUM
-| exp exp '+'   { $$ = $1 + $2;      }
-| exp exp '-'   { $$ = $1 - $2;      }
-| exp exp '*'   { $$ = $1 * $2;      }
-| exp exp '/'   { $$ = $1 / $2;      }
-| exp exp '^'   { $$ = pow ($1, $2); }  / * Exponentiation * /
-| exp 'n'       { $$ = -$1;          }  / * Unary minus   * /
-;
-
-
-
-%union {
-  long n;
-  tree t;  / * tree is defined in ptypes.h. * /
+//
+// yyparse() returns:
+//
+//     The value returned by yyparse is 0 if parsing was successful
+//     (return is due to end-of-input).
+//
+//     The value is 1 if parsing failed because of invalid input, i.e.,
+//     input that contains a syntax error or that causes YYABORT to be invoked.
+//
+//     The value is 2 if parsing failed due to memory exhaustion.
+//
+// From:
+//     https://www.gnu.org/software/bison/manual/bison.html#Interface
+//
+int musaico_parse(
+        int fd
+        )
+{
+  int parse_result = yyparse(fd);
+  return parse_result;
 }
 
-
-%{
-  static void print_token (yytoken_kind_t token, YYSTYPE val);
-%}
-
-
-!!!
-
-
-%define api.prefix {c}
-// Emitted in the header file, after the definition of YYSTYPE.
-%code provides
+int musaico_parse_file(
+        char *filename
+        )
 {
-  // Tell Flex the expected prototype of yylex.
-  #define YY_DECL                             \
-    int clex (CSTYPE *yylval, CLTYPE *yylloc)
+  int fd = open(filename, O_RDONLY);
+  int parse_result = musaico_parse(fd);
+  close(fd);
 
-  // Declare the scanner.
-  YY_DECL;
+  return parse_result;
 }
-
-
-!!!
-location struct is:
-typedef struct YYLTYPE
-{
-  int first_line;
-  int first_column;
-  int last_line;
-  int last_column;
-} YYLTYPE;
-
-!!!
-int
-yylex (YYSTYPE *lvalp, YYLTYPE *llocp)
-{
-  …
-  *lvalp = value;  / * Put value onto Bison stack. * /
-  return INT;      / * Return the kind of the token. * /
-  …
-}
-
-!!!
-*/
