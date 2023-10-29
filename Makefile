@@ -24,61 +24,31 @@ settings:
 .PHONY: install
 install: settings
 	@. ./runtime/root/settings.env \
-	    && cd runtime \
-	    && make install
-	@. ./runtime/root/settings.env \
 	    && cd host \
-	    && make install
-	@. ./runtime/root/settings.env \
-	    && cd language \
 	    && make install
 
 .PHONY: build
 build: settings
 	@. ./runtime/root/settings.env \
-	    && cd runtime \
-	    && make build
-	@. ./runtime/root/settings.env \
 	    && cd host \
-	    && make build
-	@. ./runtime/root/settings.env \
-	    && cd language \
 	    && make build
 
 .PHONY: clean
 clean: settings
 	@. ./runtime/root/settings.env \
-	    && cd runtime \
-	    && make clean
-	@. ./runtime/root/settings.env \
 	    && cd host \
-	    && make clean
-	@. ./runtime/root/settings.env \
-	    && cd language \
 	    && make clean
 
 .PHONY: test
 test: settings
 	@. ./runtime/root/settings.env \
-	    && cd runtime \
-	    && make test
-	@. ./runtime/root/settings.env \
 	    && cd host \
-	    && make test
-	@. ./runtime/root/settings.env \
-	    && cd language \
 	    && make test
 
 .PHONY: uninstall
 uninstall: settings
 	@. ./runtime/root/settings.env \
-	    && cd runtime \
-	    && make uninstall
-	@. ./runtime/root/settings.env \
 	    && cd host \
-	    && make uninstall
-	@. ./runtime/root/settings.env \
-	    && cd language \
 	    && make uninstall
 
 
@@ -87,4 +57,11 @@ test_audio_app: settings install build test
 	@. ./runtime/root/settings.env \
 	    && cd host/container/docker/guest \
 	    && MUSAICO_APP_ID=audio MUSAICO_APP_DIR=$$MUSAICO_ROOT_DIR/app/audio \
+	           make install build test
+
+.PHONY: test_language
+test_language: settings install build test
+	@. ./runtime/root/settings.env \
+	    && cd host/container/docker/guest \
+	    && MUSAICO_APP_ID=musaico MUSAICO_APP_DIR=$$MUSAICO_ROOT_DIR/language \
 	           make install build test

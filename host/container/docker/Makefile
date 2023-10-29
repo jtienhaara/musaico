@@ -22,6 +22,7 @@ install: check_settings
 build: check_settings
 	@echo "Building Docker container musaico-core:$(MUSAICO_VERSION):"
 	docker build . \
+	    --build-arg "MUSAICO_VERSION=$(MUSAICO_VERSION)" \
 	    --tag musaico-core:$(MUSAICO_VERSION)
 
 .PHONY: clean

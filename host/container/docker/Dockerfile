@@ -187,6 +187,16 @@ RUN chmod -R u+rwx,go-rwx /musaico/keys/
 USER musaico
 WORKDIR /musaico
 
+ARG MUSAICO_VERSION
+RUN echo "export MUSAICO_ROOT_DIR=/musaico" \
+    >> /musaico/settings.env \
+    && echo "export MUSAICO_RUNTIME=/musaico/app" \
+    >> /musaico/settings.env \
+    && echo "export MUSAICO_USER=musaico" \
+    >> /musaico/settings.env \
+    && echo "export MUSAICO_VERSION=$MUSAICO_VERSION" \
+    >> /musaico/settings.env
+
 #
 # Start everything by running entrypoint.sh, which sets up encryption
 # and so on before executing whatever commands are desired by the

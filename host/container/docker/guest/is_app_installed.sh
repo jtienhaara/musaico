@@ -1,6 +1,12 @@
 #!/bin/sh
 
+OLD_PWD=$PWD
+NEW_PWD=`dirname $0`
+cd "$NEW_PWD" \
+    || exit 99
 make check_settings \
+    || exit 99
+cd "$OLD_PWD" \
     || exit 99
 
 echo "Checking whether $MUSAICO_APP_ID is already installed in $MUSAICO_RUNTIME..."

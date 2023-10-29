@@ -45,6 +45,7 @@ build: check_settings
 	cd "$(MUSAICO_RUNTIME)/app/$(MUSAICO_APP_ID)" \
 	    && docker build . \
 	        --file docker/Dockerfile \
+	        --build-arg "MUSAICO_VERSION=$(MUSAICO_VERSION)" \
 	        --tag "$(MUSAICO_APP_ID):$(MUSAICO_VERSION)"
 
 .PHONY: clean
@@ -58,6 +59,7 @@ test: check_settings
 	docker run \
 	    -i --tty \
 	    --rm \
+	    --env "MUSAICO_APP_ID=$(MUSAICO_APP_ID)" \
 	    --env "MUSAICO_DOMAIN=" \
 	    --env "MUSAICO_EMAIL=musaico@localhost" \
 	    --env "MUSAICO_HOST=0.0.0.0" \

@@ -3,6 +3,10 @@
 echo "Starting musaico $*..."
 MUSAICO_COMMANDS=$@
 
+echo "  Sourcing /musaico/settings.env:"
+. /musaico/settings.env \
+    || exit 1
+
 echo "  Generating in-flight keys:"
 /musaico/bin/musaico_keygen.sh "in_flight"
 
