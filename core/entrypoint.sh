@@ -9,6 +9,7 @@ echo "  Generating in-flight keys:"
 echo "  Sourcing keys:"
 for KEY_FILE in /musaico/keys/*.env
 do
+    echo "  Sourcing $KEY_FILE:"
     . "$KEY_FILE" \
         || exit 1
 done

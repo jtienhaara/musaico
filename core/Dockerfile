@@ -6,6 +6,8 @@
 #
 FROM debian:12.2-slim
 
+USER root
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 #
@@ -35,6 +37,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 #     bind9-dnsutils [troubleshooting] [network] [security]
 #         Includes dig, for troubleshooting out DNS problems from within
 #         a running Musaico container.
+#     ca-certificates [required] [network]
+#         Required for downloading and compiling packages from GitHub,
+#         such as SOPS and nats.c.
 #     cmake [required] [dynamic] [security]
 #         Newfangled cmake.  Required for building certain packages,
 #         such as nats.c.
@@ -84,7 +89,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 #     [required]
 #         Musaico cannot run without this package.
 #     [security]
-#         Can be uninstalled by derived containers, to limit
+#         Poses a potential security risk, such as enabling
+#         intruders or innocents access to tools or data
+#         that can be misused and break the distributed system.
+#         If a security package is not also required, then it
+#         can be uninstalled by derived containers, to limit
 #         what intruders or innocents can deliberately/accidentally do
 #         once they're inside a running Musaico core container.
 #         Note that this mitigation is imperfect: all of the files
@@ -97,6 +106,7 @@ RUN apt-get update --yes \
     && apt-get install --no-install-recommends --yes \
        age \
        bind9-dnsutils \
+       ca-certificates \
        cmake \
        curl \
        emacs \
@@ -117,7 +127,6 @@ RUN apt-get update --yes \
 # (See [footnote]s above in this file.)
 #
 ENV SOPS_VERSION=3.8.0
-RUN apt-get install --yes ca-certificates=20210119
 RUN if test `uname -m` = 'aarch64' \
     -o `uname -m` = 'arm64'; \
     then \
@@ -150,31 +159,33 @@ RUN mkdir /home/musaico \
 #
 # Persistent data used by Musaico processes is stored in /musaico/...
 #
-RUN mkdir /musaico \
-    && chown musaico:musaico /musaico \
-    && chmod ug+rwx,o-rwx /musaico
-USER musaico
-WORKDIR /musaico
-
+#   bin
+#     Scripts and commands that are used inside the running container,
+#     including entrypoint.sh, which initializes the running Musaico
+#     environment.
+#   keys
+#     Where at_rest, in_flight, and possibly other AGE key pairs
+#     will be stored.  To be sourced at runtime by entrypoint.sh.
 #
-# Prepare the keys directory, where at_rest, in_flight, and possibly
-# other AGE key pairs will be stored.  To be sourced at runtime
-# by entrypoint.sh.
-#
-RUN mkdir -p /musaico/keys
+RUN mkdir /musaico /musaico/bin /musaico/keys \
+    && chown -R musaico:musaico /musaico \
+    && chmod ug+rwx,o-rwx /musaico /musaico/bin /musaico/keys
 
 #
 # Install Musaico commands:
 #
-RUN mkdir -p /musaico/bin/
 COPY entrypoint.sh /musaico/bin/
 COPY musaico_keygen.sh /musaico/bin/
-RUN chmod u+x /musaico/bin/*
+RUN chown -R musaico:musaico /musaico/bin/* \
+    && chmod -R ug+x /musaico/bin/*
 
 #
-# Prevent any other user from accessing the /musaico/... directories.
+# Prevent any other user from accessing the /musaico/keys directory.
 #
-RUN chmod -R go-rwx /musaico/
+RUN chmod -R u+rwx,go-rwx /musaico/keys/
+
+USER musaico
+WORKDIR /musaico
 
 #
 # Start everything by running entrypoint.sh, which sets up encryption
