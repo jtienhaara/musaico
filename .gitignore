@@ -1,0 +1,6 @@
+#
+# Runtime environment variables and persistent data that should never
+# be checked into git:
+#
+runtime/root/
+runtime/host/

@@ -1,62 +1,77 @@
 .PHONY: all
 all: install build test
 
+.PHONY: create_settings
+create_settings:
+	./create_settings.sh ./runtime/root/settings.env
+
+.PHONY: settings
+settings:
+	@if test ! -f runtime/root/settings.env; \
+	then \
+	    make create_settings; \
+	else \
+	    echo "Musaico settings:" \
+	    && cat runtime/root/settings.env \
+	    | sed 's|^\(.*\)$$|    \1|'; \
+	fi
+
 .PHONY: install
-install:
-	@. ./settings.env \
+install: settings
+	@. ./runtime/root/settings.env \
 	    && cd language \
 	    && make install
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd host \
 	    && make install
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd runtime \
 	    && make install
 
 .PHONY: build
-build:
-	@. ./settings.env \
+build: settings
+	@. ./runtime/root/settings.env \
 	    && cd language \
 	    && make build
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd host \
 	    && make build
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd runtime \
 	    && make build
 
 .PHONY: clean
-clean:
-	@. ./settings.env \
+clean: settings
+	@. ./runtime/root/settings.env \
 	    && cd language \
 	    && make clean
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd host \
 	    && make clean
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd runtime \
 	    && make clean
 
 .PHONY: test
-test:
-	@. ./settings.env \
+test: settings
+	@. ./runtime/root/settings.env \
 	    && cd language \
 	    && make test
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd host \
 	    && make test
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd runtime \
 	    && make test
 
 .PHONY: uninstall
-uninstall:
-	@. ./settings.env \
+uninstall: settings
+	@. ./runtime/root/settings.env \
 	    && cd language \
 	    && make uninstall
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd host \
 	    && make uninstall
-	@. ./settings.env \
+	@. ./runtime/root/settings.env \
 	    && cd runtime \
 	    && make uninstall
