@@ -1,23 +1,62 @@
 .PHONY: all
-all: build test_audio
+all: install build test
+
+.PHONY: install
+install:
+	@. ./settings.env \
+	    && cd language \
+	    && make install
+	@. ./settings.env \
+	    && cd host \
+	    && make install
+	@. ./settings.env \
+	    && cd runtime \
+	    && make install
 
 .PHONY: build
-build: build_core build_audio
+build:
+	@. ./settings.env \
+	    && cd language \
+	    && make build
+	@. ./settings.env \
+	    && cd host \
+	    && make build
+	@. ./settings.env \
+	    && cd runtime \
+	    && make build
 
-.PHONY: build_core
-build_core:
-	cd core \
-	    && make build; \
-	    cd ..
+.PHONY: clean
+clean:
+	@. ./settings.env \
+	    && cd language \
+	    && make clean
+	@. ./settings.env \
+	    && cd host \
+	    && make clean
+	@. ./settings.env \
+	    && cd runtime \
+	    && make clean
 
-.PHONY: build_audio
-build_audio:
-	cd audio \
-	    && make build; \
-	    cd ..
+.PHONY: test
+test:
+	@. ./settings.env \
+	    && cd language \
+	    && make test
+	@. ./settings.env \
+	    && cd host \
+	    && make test
+	@. ./settings.env \
+	    && cd runtime \
+	    && make test
 
-.PHONY: test_audio
-test_audio:
-	cd audio \
-	    && make test; \
-	    cd ..
+.PHONY: uninstall
+uninstall:
+	@. ./settings.env \
+	    && cd language \
+	    && make uninstall
+	@. ./settings.env \
+	    && cd host \
+	    && make uninstall
+	@. ./settings.env \
+	    && cd runtime \
+	    && make uninstall
