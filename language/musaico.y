@@ -1,6 +1,9 @@
 %{
   #include <stdio.h>
   #include <fcntl.h>
+  #include <malloc.h>
+  #include <stdlib.h>
+  #include <string.h>
   #include <unistd.h>
 
   #include "musaico.h"
@@ -10,11 +13,13 @@
   static int yylex (
           YYSTYPE *lvalp,
           YYLTYPE *llocp,
-          int fd
+          int fd,
+          int *next_char
           );
   static void yyerror (
           YYLTYPE *locp,
           int fd,
+          int *next_char,
           char const *msg
           );
 }
@@ -25,26 +30,26 @@
 %define api.symbol.prefix {MUSAICO_S_}
 %define api.token.prefix {MUSAICO_T_}
 %param {int fd}
+%param {int *next_char}
 
 %start declaration
 
 %define api.value.type union /* Generate YYSTYPE from these types: */
-%token <char *>     BRACE_CLOSE                 "}"
-%token <char *>     BRACE_OPEN                  "{"
-%token <char *>     BRACKET_CLOSE               "]"
-%token <char *>     BRACKET_OPEN                "["
+%token <char>       BRACE_CLOSE                 '}'
+%token <char>       BRACE_OPEN                  '{'
+%token <char>       BRACKET_CLOSE               ']'
+%token <char>       BRACKET_OPEN                '['
 %token <char *>     COMMENT_SINGLE_LINE         // // comment etc...
-%token <char *>     DOT                         "."
-%token <char *>     EQUAL                       "="
+%token <char>       DOT                         '.'
+%token <char>       EQUAL                       '='
 %token <double>     FLOAT                       // [0-9]+(\.[0-9]+)?
 %token <char *>     ID                          // xyz etc
 %token <long>       INT                         // [0-9]+
-%token <char *>     NEWLINE                     "\n"
-%token <char *>     SEMI_COLON                  ";"
+%token <char>       NEWLINE                     '\n'
+%token <char>       SEMI_COLON                  ';'
 %token <char *>     STRING                      // 'xyz' or "xyz" etc
-%token <char *>     TIMES                       "*"
-%token <char *>     WHITESPACE                  // [ \t\r\n]
-%token <char *>     WHITESPACE_NO_NEWLINE       // [ \t\r]
+%token <char>       TIMES                       '*'
+%token <char *>     WHITESPACE                  // [ \t\r]
 
 
 %%
@@ -60,7 +65,7 @@ COMMENT_SINGLE_LINE
 
 blank_line:
 NEWLINE
-| WHITESPACE_NO_NEWLINE NEWLINE
+| WHITESPACE NEWLINE
 ;
 
 expression:
@@ -72,18 +77,25 @@ multiplier_expression
 ;
 
 multiplier_expression:
-INT WHITESPACE TIMES WHITESPACE expression
-| INT WHITESPACE TIMES expression
-| INT TIMES WHITESPACE expression
+INT whitespace TIMES whitespace expression
+| INT whitespace TIMES expression
+| INT TIMES whitespace expression
 | INT TIMES expression
 ;
 
+whitespace:
+WHITESPACE whitespace
+| NEWLINE whitespace
+| WHITESPACE
+| NEWLINE
+;
+
 primitive_expression:
-FLOAT WHITESPACE SEMI_COLON
+FLOAT whitespace SEMI_COLON
 | FLOAT SEMI_COLON
-| INT WHITESPACE SEMI_COLON
+| INT whitespace SEMI_COLON
 | INT SEMI_COLON
-| STRING WHITESPACE SEMI_COLON
+| STRING whitespace SEMI_COLON
 | STRING SEMI_COLON
 ;
 
@@ -99,10 +111,10 @@ BRACKET_OPEN INT BRACKET_CLOSE
 ;
 
 op_binary_with_space:
-op_binary WHITESPACE
+op_binary whitespace
 | op_binary
-| WHITESPACE op_binary WHITESPACE
-| WHITESPACE op_binary
+| whitespace op_binary whitespace
+| whitespace op_binary
 ;
 
 op_binary:
@@ -114,12 +126,12 @@ constructor_header declaration constructor_footer
 ;
 
 constructor_header:
-fully_qualified_id WHITESPACE BRACE_OPEN
+fully_qualified_id whitespace BRACE_OPEN
 | fully_qualified_id BRACE_OPEN
 ;
 
 constructor_footer:
-BRACE_CLOSE WHITESPACE
+BRACE_CLOSE whitespace
 | BRACE_CLOSE
 ;
 
@@ -127,18 +139,244 @@ BRACE_CLOSE WHITESPACE
 %%
 
 
-static int yylex (
-        YYSTYPE *lvalp,
-        YYLTYPE *llocp,
+static int musaico_read_char(
         int fd
         )
 {
-  return 0;
+  char next_char;
+  size_t num_chars_read = read(fd, &next_char, sizeof(char));
+  if (num_chars_read == (size_t) 0) {
+    return (int) EOF;
+  }
+  else if (next_char == EOF) {
+    return (int) EOF;
+  }
+  return (int) next_char;
+}
+
+// TODO write unit tests for yylex!
+static int yylex (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        int fd,
+        int *next_char
+        )
+{
+  if (*next_char < 0) {
+    *next_char = musaico_read_char(fd);
+    if (*next_char == EOF) {
+      return MUSAICO_T_YYEOF;
+    }
+  }
+
+  if (*next_char == '}') {
+    // BRACE_CLOSE
+    *next_char = -1;
+    lvalp->MUSAICO_T_BRACE_CLOSE = '}';
+    return MUSAICO_T_BRACE_CLOSE;
+  } else if (*next_char == '{') {
+    // BRACE_OPEN
+    *next_char = -1;
+    lvalp->MUSAICO_T_BRACE_OPEN = '{';
+    return MUSAICO_T_BRACE_OPEN;
+  } else if (*next_char == ']') {
+    // BRACKET_CLOSE
+    *next_char = -1;
+    lvalp->MUSAICO_T_BRACKET_CLOSE = ']';
+    return MUSAICO_T_BRACKET_CLOSE;
+  } else if (*next_char == '[') {
+    // BRACKET_OPEN
+    *next_char = -1;
+    lvalp->MUSAICO_T_BRACKET_OPEN = '[';
+    return MUSAICO_T_BRACKET_OPEN;
+  } else if (*next_char == '/') {
+    *next_char = musaico_read_char(fd);
+    if (*next_char != '/') {
+      return MUSAICO_T_YYerror; // !!! error
+    }
+    // COMMENT_SINGLE_LINE
+    char buffer[4096];
+    buffer[0] = '/';
+    int b = 1;
+    while (*next_char != '\n'
+           && *next_char != EOF) {
+      if (b >= 4096) {
+        return MUSAICO_T_YYerror; // !!! error;
+      }
+      buffer[b] = *next_char;
+      b ++;
+      *next_char = musaico_read_char(fd);
+    }
+    if (b >= 4096) {
+      return MUSAICO_T_YYerror; // !!! error;
+    }
+    buffer[b] = '\0';
+    // *next_char = '\n'.
+    char * semantics = (char *) malloc((b + 1) * sizeof(char));
+    strcpy(semantics, buffer);
+    lvalp->MUSAICO_T_COMMENT_SINGLE_LINE = semantics;
+    return MUSAICO_T_COMMENT_SINGLE_LINE;
+  } else if (*next_char == '.') {
+    // DOT
+    *next_char = -1;
+    lvalp->MUSAICO_T_DOT = '.';
+    return MUSAICO_T_DOT;
+  } else if (*next_char == '=') {
+    // EQUAL
+    *next_char = -1;
+    lvalp->MUSAICO_T_EQUAL = '=';
+    return MUSAICO_T_EQUAL;
+  } else if (*next_char >= '0'
+             && *next_char <= '9') {
+    // FLOAT
+    // INT
+    yytoken_kind_t token_kind = MUSAICO_T_INT;
+    char buffer[4096];
+    int b = 0;
+    while (*next_char >= '0'
+           && *next_char <= '9') {
+      if (b >= 4096) {
+        return MUSAICO_T_YYerror; // !!! error;
+      }
+      buffer[b] = *next_char;
+      b ++;
+      *next_char = musaico_read_char(fd);
+      if (*next_char == '.') {
+        if (b >= 4096) {
+          return MUSAICO_T_YYerror; // !!! error;
+        }
+        buffer[b] = *next_char;
+        b ++;
+        *next_char = musaico_read_char(fd);
+        if (*next_char < '0'
+            || *next_char > '9') {
+          return MUSAICO_T_YYerror; // !!! error;
+        }
+        if (b >= 4096) {
+          return MUSAICO_T_YYerror; // !!! error;
+        }
+        buffer[b] = *next_char;
+        b ++;
+        token_kind = MUSAICO_T_FLOAT;
+        *next_char = musaico_read_char(fd);
+      }
+    }
+    if (b >= 4096) {
+      return MUSAICO_T_YYerror; // !!! error;
+    }
+    buffer[b] = '\0';
+    // *next_char = (something).
+    if (token_kind == MUSAICO_T_FLOAT) {
+      double semantics = atof(buffer);
+      lvalp->MUSAICO_T_FLOAT = semantics;
+    } else {
+      long semantics = atol(buffer);
+      lvalp->MUSAICO_T_INT = semantics;
+    }
+    return token_kind;
+  } else if (*next_char >= 'A'
+             && *next_char <= 'z') {
+    // ID
+    char buffer[4096];
+    int b = 0;
+    while (*next_char >= 'A'
+           && *next_char <= 'z') {
+      if (b >= 4096) {
+        return MUSAICO_T_YYerror; // !!! error;
+      }
+      buffer[b] = *next_char;
+      b ++;
+      *next_char = musaico_read_char(fd);
+    }
+    if (b >= 4096) {
+      return MUSAICO_T_YYerror; // !!! error;
+    }
+    buffer[b] = '\0';
+    // *next_char = (something).
+    char * semantics = (char *) malloc((b + 1) * sizeof(char));
+    strcpy(semantics, buffer);
+    lvalp->MUSAICO_T_ID = semantics;
+    return MUSAICO_T_ID;
+  } else if (*next_char == '\n') {
+    // NEWLINE
+    *next_char = -1;
+    lvalp->MUSAICO_T_NEWLINE = '\n';
+    return MUSAICO_T_NEWLINE;
+  } else if (*next_char == ';') {
+    // SEMI_COLON
+    *next_char = -1;
+    lvalp->MUSAICO_T_SEMI_COLON = ';';
+    return MUSAICO_T_SEMI_COLON;
+  } else if (*next_char == '"'
+             || *next_char == '\'') {
+    // STRING
+    char buffer[4096];
+    int b = 0;
+    char delimiter = (char) *next_char;
+    int is_backslash = 0;
+    while (is_backslash == 1
+           || *next_char != delimiter) {
+      if (b >= 4096) {
+        return MUSAICO_T_YYerror; // !!! error;
+      }
+      buffer[b] = *next_char;
+      b ++;
+      if (*next_char == '\\') {
+        is_backslash = 1;
+      } else {
+        is_backslash = 0;
+      }
+      *next_char = musaico_read_char(fd);
+    }
+    if (b >= 4096) {
+      return MUSAICO_T_YYerror; // !!! error;
+    }
+    buffer[b] = '\0';
+    *next_char = -1;
+    char * semantics = (char *) malloc((b + 1) * sizeof(char));
+    strcpy(semantics, buffer);
+    lvalp->MUSAICO_T_STRING = semantics;
+    return MUSAICO_T_STRING;
+  } else if (*next_char == '*') {
+    // TIMES
+    *next_char = -1;
+    lvalp->MUSAICO_T_TIMES = '*';
+    return MUSAICO_T_TIMES;
+  } else if (*next_char == ' '
+             || *next_char == '\r'
+             || *next_char == '\t') {
+    // WHITESPACE
+    char buffer[4096];
+    int b = 0;
+    while (*next_char == ' '
+           || *next_char == '\r'
+           || *next_char == '\t') {
+      if (b >= 4096) {
+        return MUSAICO_T_YYerror; // !!! error;
+      }
+      buffer[b] = *next_char;
+      b ++;
+      *next_char = musaico_read_char(fd);
+    }
+    if (b >= 4096) {
+      return MUSAICO_T_YYerror; // !!! error;
+    }
+    buffer[b] = '\0';
+    // *next_char = (something).
+    char * semantics = (char *) malloc((b + 1) * sizeof(char));
+    strcpy(semantics, buffer);
+    lvalp->MUSAICO_T_WHITESPACE = semantics;
+    return MUSAICO_T_WHITESPACE;
+  }
+  else {
+    return MUSAICO_T_YYUNDEF; // !!! error
+  }
 }
 
 static void yyerror (
         YYLTYPE *locp,
         int fd,
+        int *next_char,
         char const *msg
         )
 {
@@ -163,7 +401,8 @@ int musaico_parse(
         int fd
         )
 {
-  int parse_result = yyparse(fd);
+  int next_char = -1;
+  int parse_result = yyparse(fd, &next_char);
   return parse_result;
 }
 
