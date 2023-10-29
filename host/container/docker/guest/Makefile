@@ -56,6 +56,7 @@ clean: check_settings
 
 .PHONY: test
 test: check_settings
+	mkdir -p "$(MUSAICO_RUNTIME)/app/$(MUSAICO_APP_ID)/work"
 	docker run \
 	    -i --tty \
 	    --rm \
@@ -63,6 +64,7 @@ test: check_settings
 	    --env "MUSAICO_DOMAIN=" \
 	    --env "MUSAICO_EMAIL=musaico@localhost" \
 	    --env "MUSAICO_HOST=0.0.0.0" \
+	    --volume "$(MUSAICO_RUNTIME)/app/$(MUSAICO_APP_ID)/work":/musaico/app/work:rw \
 	    "$(MUSAICO_APP_ID):$(MUSAICO_VERSION)" \
 	    make test
 

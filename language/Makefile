@@ -30,7 +30,11 @@ run: check_settings
 .PHONY: test
 test: check_settings
 	@echo "Testing Musaico language!"
-	bison musaico.y
+	mkdir -p ./work
+	bison musaico.y \
+	    --output ./work/musaico.c \
+	    -Werror
+	gcc -c ./work/musaico.c -o ./work/musaico.o
 
 .PHONY: uninstall
 uninstall: check_settings

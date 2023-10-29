@@ -2,15 +2,41 @@
   #include <stdio.h>
 %}
 
+%code provides {
+  int yylex (YYSTYPE *lvalp, YYLTYPE *llocp);
+  void yyerror (YYLTYPE *locp, char const *msg);
+}
+
+%language "C"
+%locations
+%define api.pure full
+%define api.symbol.prefix {MUSAICO_S_}
+%define api.token.prefix {MUSAICO_T_}
+
+%start declaration
+
+%define api.value.type union /* Generate YYSTYPE from these types: */
+%token <char *>     BRACE_CLOSE                 "}"
+%token <char *>     BRACE_OPEN                  "{"
+%token <char *>     COMMENT_SINGLE_LINE
+%token <double>     FLOAT
+%token <char *>     ID
+%token <long>       INT
+%token <char *>     NEWLINE                     "\n"
+%token <char *>     SEMI_COLON                  ";"
+%token <char *>     WHITESPACE
+%token <char *>     WHITESPACE_NO_NEWLINE
+
+
 %%
 declaration:
-%blank_line 
-| %comment
-| %expression
+blank_line 
+| comment
+| expression
 ;
 
 comment:
-'//' COMMENT_SINGLE_LINE
+COMMENT_SINGLE_LINE
 ;
 
 blank_line:
@@ -19,9 +45,9 @@ NEWLINE
 ;
 
 expression:
-ID %op_binary_with_space %expression SEMI_COLON
+ID op_binary_with_space expression SEMI_COLON
 | ID SEMI_COLON
-| %constructor
+| constructor
 ;
 
 op_binary_with_space:
@@ -36,25 +62,34 @@ op_binary:
 ;
 
 constructor:
-%constructor_header %declaration %constructor_footer
+constructor_header declaration constructor_footer
 ;
 
 constructor_header:
-ID WHITESPACE OPEN_BRACE
-| ID OPEN_BRACE
+ID WHITESPACE BRACE_OPEN
+| ID BRACE_OPEN
 ;
 
 constructor_footer:
-CLOSE_BRACE WHITESPACE
-| CLOSE_BRACE
+BRACE_CLOSE WHITESPACE
+| BRACE_CLOSE
 ;
+
+
 %%
 
 
+int yylex (YYSTYPE *lvalp, YYLTYPE *llocp)
+{
+  return 0;
+}
+
+void yyerror (YYLTYPE *locp, char const *msg)
+{
+}
 
 
 /* !!!
-
 
 input:
   %empty
