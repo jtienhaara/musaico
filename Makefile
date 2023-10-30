@@ -65,3 +65,9 @@ test_language: settings install build test
 	    && cd host/container/docker/guest \
 	    && MUSAICO_APP_ID=musaico MUSAICO_APP_DIR=$$MUSAICO_ROOT_DIR/language \
 	           make install build test
+	@echo "The Musaico language parser (such as it is...) can now be executed:"
+	@. ./runtime/root/settings.env \
+	    && export MUSAICO_BIN=$$MUSAICO_RUNTIME/app/musaico/work/musaico \
+	    && ls -l $$MUSAICO_BIN \
+	    && echo "For example: $$MUSAICO_BIN /path/to/my.musaico" \
+	    && echo "         or: $$MUSAICO_BIN $$PWD/language/test.musaico"
