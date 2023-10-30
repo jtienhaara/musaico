@@ -37,6 +37,7 @@ test: check_settings
 	mkdir -p ./work
 	bison musaico.y \
 	    --output ./work/musaico_parse.c \
+	    -Wcounterexamples \
 	    -Werror
 	cp -f \
 	    ./musaico.c \

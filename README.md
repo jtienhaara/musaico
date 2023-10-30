@@ -66,28 +66,39 @@ Each of these types is briefly described below.
 A "vm" type can be used to construct "vm_instance" types.
 
 ```
-anarkube = vm.qemu {  // Constructs a vm_instance called "anarkube".
+// Test file to see if the Musaico language parser works...
+
+anarkube = host.vm.qemu {  // Constructs a vm_instance called "anarkube".
   cpu = 1.0;  // Measured in vcpu, see notes below.
   memory = 4.0;  // Measured in gigabytes (GB / Gi).
-  boot = volumes.os;  // Boot from the first disk in the volumes list.
-  volumes = vm.volumes {
-    os = vm.qemu.disk {  // Construct a disk.
-      source = !!!;  // URL of a qcow2 disk image to load into the disk.
-    }
-    metadata[] = 3 * vm.qemu.disk {  // Construct 3 empty disks.
-      format = vm.volumes.formats.ext4;
+  image = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-disk-kvm.img";  // URL of a qcow2 disk image to load into the disk.
+  volumes {
+    metadata = 3 * host.vm.qemu.disk {  // Construct 3 empty disks.
+      format = host.vm.volumes.formats.ext4;
       size = 1.0;  // Measured in gigabytes (GB / Gi).
     }
-    data[] = 3 * vm.qemu.disk {  // Construct 3 empty disks.
-      format = vm.volumes.formats.ext4;
+    data = 3 * host.vm.qemu.disk {  // Construct 3 empty disks.
+      format = host.vm.volumes.formats.ext4;
       size = 2.0;  // Measured in gigabytes (GB / Gi).
     }
   }
-  networks = vm.networks {
-    !!!;
+  networks {
+    // TODO...
   }
-  init = vm.cloud_init {
-    !!!;
+  guests {
+    kind = host.cluster.kind {
+      guests {
+        nats = host.container.docker {
+          cpu = 0.1;    // CPU request
+          memory = 3.5; // Memory limit
+          image = "nats:2.10.4-alpine3.18";
+          volumes {
+            data = host.container.docker.volumes.host {
+            }
+          }
+        }
+      }
+    }
   }
 }
 ```

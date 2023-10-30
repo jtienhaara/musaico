@@ -29,10 +29,11 @@
 %define api.pure full
 %define api.symbol.prefix {MUSAICO_S_}
 %define api.token.prefix {MUSAICO_T_}
+%define parse.error detailed
 %param {int fd}
 %param {int *next_char}
 
-%start declaration
+%start musaico_syntax
 
 %define api.value.type union /* Generate YYSTYPE from these types: */
 %token <char>       BRACE_CLOSE                 '}'
@@ -53,24 +54,40 @@
 
 
 %%
-declaration:
-blank_line 
-| comment
+musaico_syntax:
+empty expression musaico_syntax
+| empty
+| expression musaico_syntax
 | expression
 ;
 
-comment:
-COMMENT_SINGLE_LINE
+empty:
+empty_whitespace_first
+| empty_comments_first
 ;
 
-blank_line:
-NEWLINE
-| WHITESPACE NEWLINE
+empty_whitespace_first:
+whitespace empty_comments_first
+| whitespace
+;
+
+empty_comments_first:
+comments empty_whitespace_first
+| comments
+;
+
+comments:
+comment comments
+| comment
+;
+
+comment:
+COMMENT_SINGLE_LINE NEWLINE
 ;
 
 expression:
 multiplier_expression
-| fully_qualified_id op_binary_with_space expression SEMI_COLON
+| fully_qualified_id op_binary_with_space expression
 | fully_qualified_id SEMI_COLON
 | constructor
 | primitive_expression
@@ -111,10 +128,10 @@ BRACKET_OPEN INT BRACKET_CLOSE
 ;
 
 op_binary_with_space:
-op_binary whitespace
-| op_binary
-| whitespace op_binary whitespace
+whitespace op_binary whitespace
 | whitespace op_binary
+| op_binary whitespace
+| op_binary
 ;
 
 op_binary:
@@ -122,17 +139,26 @@ EQUAL
 ;
 
 constructor:
-constructor_header declaration constructor_footer
+constructor_header constructor_body constructor_footer
+| constructor_header constructor_footer
 ;
 
 constructor_header:
-fully_qualified_id whitespace BRACE_OPEN
+fully_qualified_id whitespace BRACE_OPEN empty
+| fully_qualified_id whitespace BRACE_OPEN
+| fully_qualified_id BRACE_OPEN empty
 | fully_qualified_id BRACE_OPEN
 ;
 
+constructor_body:
+expression empty constructor_body
+| expression constructor_body
+| expression empty
+| expression
+;
+
 constructor_footer:
-BRACE_CLOSE whitespace
-| BRACE_CLOSE
+BRACE_CLOSE
 ;
 
 
@@ -140,7 +166,9 @@ BRACE_CLOSE whitespace
 
 
 static int musaico_read_char(
-        int fd
+        int fd,
+        char prev_char,
+        YYLTYPE *llocp
         )
 {
   char next_char;
@@ -151,10 +179,39 @@ static int musaico_read_char(
   else if (next_char == EOF) {
     return (int) EOF;
   }
+  llocp->last_column ++;
   return (int) next_char;
 }
 
-// TODO write unit tests for yylex!
+static int is_id_first_char(
+        char id_char
+        )
+{
+  if (id_char >= 'A' && id_char <= 'z') {
+    return 1;
+  } else if (id_char == '_') {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+static int is_id_char(
+        char id_char
+        )
+{
+  if (id_char >= 'A' && id_char <= 'z') {
+    return 1;
+  } else if (id_char == '_') {
+    return 1;
+  } else if (id_char >= '0' && id_char <= '9') {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+// TODO write 100% coverage unit tests for yylex!  Yeesh.
 static int yylex (
         YYSTYPE *lvalp,
         YYLTYPE *llocp,
@@ -162,11 +219,20 @@ static int yylex (
         int *next_char
         )
 {
+  if (llocp->last_line != llocp->first_line
+      || llocp->last_column != llocp->first_column) {
+    llocp->first_line = llocp->last_line;
+    llocp->first_column = llocp->last_column;
+  }
+
   if (*next_char < 0) {
-    *next_char = musaico_read_char(fd);
+    *next_char = musaico_read_char(fd, '\0', llocp);
     if (*next_char == EOF) {
       return MUSAICO_T_YYEOF;
     }
+  } else {
+    llocp->first_column ++;
+    llocp->last_column ++;
   }
 
   if (*next_char == '}') {
@@ -190,7 +256,7 @@ static int yylex (
     lvalp->MUSAICO_T_BRACKET_OPEN = '[';
     return MUSAICO_T_BRACKET_OPEN;
   } else if (*next_char == '/') {
-    *next_char = musaico_read_char(fd);
+    *next_char = musaico_read_char(fd, *next_char, llocp);
     if (*next_char != '/') {
       return MUSAICO_T_YYerror; // !!! error
     }
@@ -205,13 +271,14 @@ static int yylex (
       }
       buffer[b] = *next_char;
       b ++;
-      *next_char = musaico_read_char(fd);
+      *next_char = musaico_read_char(fd, *next_char, llocp);
     }
     if (b >= 4096) {
       return MUSAICO_T_YYerror; // !!! error;
     }
     buffer[b] = '\0';
-    // *next_char = '\n'.
+    // *next_char = '\n';
+    llocp->last_column --;
     char * semantics = (char *) malloc((b + 1) * sizeof(char));
     strcpy(semantics, buffer);
     lvalp->MUSAICO_T_COMMENT_SINGLE_LINE = semantics;
@@ -240,14 +307,14 @@ static int yylex (
       }
       buffer[b] = *next_char;
       b ++;
-      *next_char = musaico_read_char(fd);
+      *next_char = musaico_read_char(fd, *next_char, llocp);
       if (*next_char == '.') {
         if (b >= 4096) {
           return MUSAICO_T_YYerror; // !!! error;
         }
         buffer[b] = *next_char;
         b ++;
-        *next_char = musaico_read_char(fd);
+        *next_char = musaico_read_char(fd, *next_char, llocp);
         if (*next_char < '0'
             || *next_char > '9') {
           return MUSAICO_T_YYerror; // !!! error;
@@ -258,7 +325,7 @@ static int yylex (
         buffer[b] = *next_char;
         b ++;
         token_kind = MUSAICO_T_FLOAT;
-        *next_char = musaico_read_char(fd);
+        *next_char = musaico_read_char(fd, *next_char, llocp);
       }
     }
     if (b >= 4096) {
@@ -266,6 +333,7 @@ static int yylex (
     }
     buffer[b] = '\0';
     // *next_char = (something).
+    llocp->last_column --;
     if (token_kind == MUSAICO_T_FLOAT) {
       double semantics = atof(buffer);
       lvalp->MUSAICO_T_FLOAT = semantics;
@@ -274,31 +342,32 @@ static int yylex (
       lvalp->MUSAICO_T_INT = semantics;
     }
     return token_kind;
-  } else if (*next_char >= 'A'
-             && *next_char <= 'z') {
+  } else if (is_id_first_char(*next_char)) {
     // ID
     char buffer[4096];
     int b = 0;
-    while (*next_char >= 'A'
-           && *next_char <= 'z') {
+    while (is_id_char(*next_char)) {
       if (b >= 4096) {
         return MUSAICO_T_YYerror; // !!! error;
       }
       buffer[b] = *next_char;
       b ++;
-      *next_char = musaico_read_char(fd);
+      *next_char = musaico_read_char(fd, *next_char, llocp);
     }
     if (b >= 4096) {
       return MUSAICO_T_YYerror; // !!! error;
     }
     buffer[b] = '\0';
     // *next_char = (something).
+    llocp->last_column --;
     char * semantics = (char *) malloc((b + 1) * sizeof(char));
     strcpy(semantics, buffer);
     lvalp->MUSAICO_T_ID = semantics;
     return MUSAICO_T_ID;
   } else if (*next_char == '\n') {
     // NEWLINE
+    llocp->last_line ++;
+    llocp->last_column = 1;
     *next_char = -1;
     lvalp->MUSAICO_T_NEWLINE = '\n';
     return MUSAICO_T_NEWLINE;
@@ -314,6 +383,7 @@ static int yylex (
     int b = 0;
     char delimiter = (char) *next_char;
     int is_backslash = 0;
+    *next_char = -1;
     while (is_backslash == 1
            || *next_char != delimiter) {
       if (b >= 4096) {
@@ -321,12 +391,14 @@ static int yylex (
       }
       buffer[b] = *next_char;
       b ++;
-      if (*next_char == '\\') {
+      if (is_backslash == 1) {
+        is_backslash = 0;
+      } else if (*next_char == '\\') {
         is_backslash = 1;
       } else {
         is_backslash = 0;
       }
-      *next_char = musaico_read_char(fd);
+      *next_char = musaico_read_char(fd, *next_char, llocp);
     }
     if (b >= 4096) {
       return MUSAICO_T_YYerror; // !!! error;
@@ -356,13 +428,14 @@ static int yylex (
       }
       buffer[b] = *next_char;
       b ++;
-      *next_char = musaico_read_char(fd);
+      *next_char = musaico_read_char(fd, *next_char, llocp);
     }
     if (b >= 4096) {
       return MUSAICO_T_YYerror; // !!! error;
     }
     buffer[b] = '\0';
     // *next_char = (something).
+    llocp->last_column --;
     char * semantics = (char *) malloc((b + 1) * sizeof(char));
     strcpy(semantics, buffer);
     lvalp->MUSAICO_T_WHITESPACE = semantics;
@@ -380,6 +453,12 @@ static void yyerror (
         char const *msg
         )
 {
+  fprintf(stderr, "ERROR Musaico parser (%d.%d-%d.%d): %s\n",
+          locp->first_line,
+          locp->first_column,
+          locp->last_line,
+          locp->last_column,
+          msg);
 }
 
 

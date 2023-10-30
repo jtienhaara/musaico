@@ -19,13 +19,14 @@ anarkube = host.vm.qemu {  // Constructs a vm_instance called "anarkube".
   }
   guests {
     kind = host.cluster.kind {
-    guests {
-      nats = host.container.docker {
-        cpu = 0.1;    // CPU request
-        memory = 3.5; // Memory limit
-        image = "nats:2.10.4-alpine3.18"
-        volumes {
-          data = host.container.docker.volumes.host {
+      guests {
+        nats = host.container.docker {
+          cpu = 0.1;    // CPU request
+          memory = 3.5; // Memory limit
+          image = "nats:2.10.4-alpine3.18";
+          volumes {
+            data = host.container.docker.volumes.host {
+            }
           }
         }
       }
