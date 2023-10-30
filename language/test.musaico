@@ -20,7 +20,7 @@ anarkube = host.vm.qemu {  // Constructs a vm_instance called "anarkube".
   guests {
     kind = host.cluster.kind {
       guests {
-        nats = host.container.docker {
+        nats = host.container.docker {  // NATS server
           cpu = 0.1;    // CPU request
           memory = 3.5; // Memory limit
           image = "nats:2.10.4-alpine3.18";
@@ -29,7 +29,12 @@ anarkube = host.vm.qemu {  // Constructs a vm_instance called "anarkube".
             }
           }
         }
+        audio = app.audio {  // Musaico audio test app
+        }
       }
     }
   }
+}
+
+anarkube_nodes[] = 3 * anarkube { // Constructs 3 running VMs of type anarkube.
 }
