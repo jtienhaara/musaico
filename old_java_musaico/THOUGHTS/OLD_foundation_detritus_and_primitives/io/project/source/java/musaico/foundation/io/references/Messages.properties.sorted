@@ -1,0 +1,3 @@
+Cannot\ create\ SimpleSoftReference\ with\ null\ id\ (with\ references\ [%references%] = Cannot create SimpleSoftReference with null id (with references [%references%]
+Cannot\ create\ UnicastHardReference\ to\ null\ object\ (with\ references\ [%references%] = Cannot create UnicastHardReference to null object (with references [%references%]
+Cannot\ create\ UnicastHardReference\ to\ object\ [%object%]\ with\ null\ references = Cannot create UnicastHardReference to object [%object%] with null references

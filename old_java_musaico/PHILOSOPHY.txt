@@ -1,0 +1,38 @@
+A Co-Operating system is designed to encourage co-operation:
+
+  - between a software developer and other software developers
+  - between a software system and other software systems
+  - between a software user and other software users
+  - and each mixed with the others (between a software developer
+    and software users and vice-versa; between a software system
+    and sotware users and vice-versa; between a software system
+    and software developers and vice-versa).
+
+The Musaico Co-Operating System, being Free Software, incorporates additional
+design goals:
+
+  - To encourage the adoption of Free software;
+  - to encourage the philosophy of Free software.
+
+To these ends, Musaico should make it easy for non-Free software users
+and developers to enter the world of Free software.  But the experience
+should ideally be so far superior to the experiences non-Free software
+users and developers are used to that many users and developers will
+embrace the philosophy of Freedom.
+
+As a corollary, Musaico is designed specifically NOT to limit the
+freedoms of users or developers working with non-Free software.
+To this end the maintainers of Musaico shall endeavour to support
+integration with non-Free software systems, without restricting
+or limiting that integration in any way, while demonstrating and
+espousing the benefits of their Free software counterparts.
+
+The build system of Musaico, clunky and ugly and difficult to maintain,
+is an example of what happens when a door is closed in the face of
+a software developer who wants to maximize Freedom without cutting
+off access to non-Free tools.  A major software system Free build tool
+with no support for a major non-Free compiler is a perfect example
+of how to turn away newcomers to the world of Free software.
+
+Musaico is Free software.  It is also a Co-operating system.
+Freedom and Co-operation shall be maintained in balance and harmony.

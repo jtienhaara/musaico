@@ -1,0 +1,18 @@
+Make all filters generic
+
+even number filters
+
+E.g.
+
+GreaterThanOrEqualToZero<NUMBER extends Number>
+{
+    public static final GreaterThanOrEqualToZero<Number> FILTER =
+        new GreaterThanOrEqualToZero<Number> ();
+}
+
+Give the user of the filter choice: they can use a specific one
+if they want (GreaterThanOrEqualToZero<Long>), or they can use
+the default generic one (GreaterThanOrEqualToZero.FILTER).
+
+The contracts generally all use the generic ones because they
+dpn't know anything about parameter specifics etc.

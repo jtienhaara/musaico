@@ -1,0 +1,25 @@
+
+CastBigDecimalToBigInteger.java,653
+public class CastBigDecimalToBigInteger53,1308
+    private static final long serialVersionUID CastBigDecimalToBigInteger.serialVersionUID58,1489
+    private static final String serialVersionHash CastBigDecimalToBigInteger.serialVersionHash59,1549
+    public static final Domain<BigDecimal> DOMAIN CastBigDecimalToBigInteger.DOMAIN65,1762
+    public static final Typing.ValueMustBeInDomain<BigDecimal> CONTRACT CastBigDecimalToBigInteger.CONTRACT87,2417
+    public CastBigDecimalToBigInteger CastBigDecimalToBigInteger.CastBigDecimalToBigInteger96,2656
+    public final Value<BigInteger> evaluate CastBigDecimalToBigInteger.evaluate110,2959
+
+CastOperationToString.java,403
+public class CastOperationToString50,1303
+    private static final long serialVersionUID CastOperationToString.serialVersionUID55,1474
+    private static final String serialVersionHash CastOperationToString.serialVersionHash56,1534
+    public CastOperationToString CastOperationToString.CastOperationToString65,1737
+    public final Value<String> evaluate CastOperationToString.evaluate80,2096
+
+CastStringToOperation.java,600
+public class CastStringToOperation62,1733
+    private static final long serialVersionUID CastStringToOperation.serialVersionUID67,1905
+    private static final String serialVersionHash CastStringToOperation.serialVersionHash68,1965
+    private static final ObjectContracts classContracts CastStringToOperation.classContracts73,2145
+    private final TypingEnvironment environment;CastStringToOperation.environment78,2332
+    public CastStringToOperation CastStringToOperation.CastStringToOperation90,2672
+    public final Value<Operation> evaluate CastStringToOperation.evaluate112,3287

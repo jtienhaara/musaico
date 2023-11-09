@@ -1,0 +1,13 @@
+- A Processor is a StateMachine.
+  - InputTransition takes a Transaction off the stack, determines whether
+    the Processor can execute it, and either puts it back on the stack,
+    or executes it.
+- Every StateMachine can have a parent.  parent () : ZeroOrOne<StateMachine>.
+  - So the input StateMachine to a Transaction's logic has its
+    parent pointing to the Transaction StateMachine.
+  - Ditto for the logic.
+  - The world/context, though, does not point to the Transaction as its parent.
+- OR the StateMachine could have Arc(s) to represent its relations
+  to other StateMachines.
+- Either way, there is structure outside the core Graph.
+  The Graph doesn't need to be modified, only the StateMachine.

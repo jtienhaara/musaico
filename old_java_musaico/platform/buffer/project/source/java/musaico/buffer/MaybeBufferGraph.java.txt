@@ -1,0 +1,33 @@
+ *
+ * <p>
+ * BufferSpaces are related via a graph (nodes representing BufferSpaces,
+ * directed arcs representing relations).  Each directed arc represents
+ * the ability for a caller to copy a Buffer from the target BufferSpace
+ * to the source ("this") BufferSpace.  This ability is not reciprocal
+ * (unless a directed arc exists in the opposite direction).
+ * </p>
+ *
+ * <p>
+ * For example, in the following graph, each user space allows copying
+ * to and from one kernel.  Kernel # 2 allows Buffers to be copied from
+ * kernel # 1, but the reciprocal is not allowed.  No user may copy Buffers
+ * to or from any other user.
+ * </p>
+ *
+ * <pre>
+ *     user_space_1   user_space_2   user_space_3
+ *        ^   |          ^   |          ^   |
+ *         \   \         |   |         /   /
+ *          \   \        |   |        /   /  Any user space to/from kernel 1
+ *           \   \       |   |       /   /
+ *            \   v      |   v      /   v
+ *            k e r n e l _ s p a c e _ 1
+ *                         ^
+ *                         |                 Kernel 1 to kernel 2 only
+ *                         |
+ *                   kernel_space_2
+ *                   |   ^    |   ^
+ *                   |   |    |   |          Any user space to/from kernel 2
+ *                   v   |    v   |
+ *             user_space_4  user_space_5
+ * </pre>

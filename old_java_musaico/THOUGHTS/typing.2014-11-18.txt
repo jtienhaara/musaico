@@ -1,0 +1,27 @@
+Existential types
+=================
+Universally qualified types:
+
+For all ELEMENT : ArrayList<ELEMENT> { add ( ELEMENT ); get ( int ): ELEMENT; }
+
+
+Existential types:
+
+There exists BYTECODE : VM<BYTECODE> { get () : BYTECODE; run ( BYTECODE ); }
+Then run ( VM<BYTECODE> vm ) { BYTECODE bytes = vm.get (); vm.run ( bytes ); }
+
+Not quite it...
+
+
+
+Parameterized types
+===================
+Tags are parameterized types, though perhaps a lot more general.
+
+
+
+Monotypes and Polytypes
+=======================
+Monotype = int, String, ...
+
+Polytype = ??????

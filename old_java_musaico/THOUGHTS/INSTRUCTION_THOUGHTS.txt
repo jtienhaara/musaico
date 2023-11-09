@@ -1,0 +1,43 @@
+Every kernel can define sets of Instructions and Registers which
+can be used by user Processes executing locally in the kernel
+or in other kernels.
+
+The base Musaico system is based around 3 kernels:
+
+                   JavaScript
+                   /        \
+               Java -------- C
+
+Each sends Instructions to the other kernels, and reads results
+from the other kernels' Registers.
+
+But other languages can also be incorporated, by creating Instruction
+sets in those other languages, and adding libraries which allow
+the other languages to write to Registers in the Musaico core
+languages.
+
+                   JavaScript
+                   /        \
+               Java -------- C
+              /               \---- Haskell
+          Groovy              |
+                            Python
+
+JavaScript might read and write JSON-encoded Instructions and
+Registers to Java or C webservers, whereas Java and C might
+communicate via some format (even JSON) over direct socket
+connection, all on localhost.
+
+Then Java kernel which allows Groovy instructions might start
+up a Groovy "CPU" or Processor at startup, and send and receive
+Instructions and Registers over socket connection to the locally
+running process.
+
+This would also allow scaling to larger-than-personal-systems,
+since chains or arbitrary graphs could also be configured on
+a local network.
+
+Which begs the question...  How do Musaico Processors find out
+about each other?  Restart each other?  Etc?
+
+And where's the boundary line between a kernel and a Processor?

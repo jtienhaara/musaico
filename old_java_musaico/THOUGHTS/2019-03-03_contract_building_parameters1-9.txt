@@ -1,0 +1,13 @@
+throws Parameter1.MustNotBeNull.Violation,
+Parameter2.MustBeGreaterThanN.Violation
+
+this.advocate.check ( Parameter1.MustNotBeNull.CONTRACT,
+                      Parameter2.MustBeGreaterThanN.builder ().n ( 42 ).build () );
+
+public interface ContractBuilder<CONTRACT, VIOLATION>
+{
+  public abstract CONTRACT build ();
+  public abstract VIOLATION violation ( CONTRACT, evidence, etc );
+}
+
+Constructor...

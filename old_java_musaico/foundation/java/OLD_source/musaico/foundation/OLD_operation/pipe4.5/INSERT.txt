@@ -1,0 +1,177 @@
+insert ( input, input_index, insert_at_indices, elements_to_insert )
+    when insert_at_indices is empty
+        then return input
+    otherwise
+        when head ( insert_at_indices ) lessThanOrEqualTo ( input_index )
+            then elements_to_insert,
+                 insert ( input, input_index,
+                          tail ( insert_at_indices ), elements_to_insert )
+        otherwise
+            range ( input, input_index, Bounds.CLOSED,
+                           head ( insert_at_indices ), Bounds.OPEN ),
+            insert ( input, head ( insert_at_indices ),
+                            insert_at_indices, elements_to_insert )
+
+The builder automatically decides how many elements to pull
+out e.g. Countable or Cyclical, and when to cut off induction
+because the caller doesn't want any more elements anyway, or because
+the output is now infinite.
+
+
+
+
+difference ( input1, input2, same, different )
+    when input1 is empty
+        when input2 is empty
+            return different
+        otherwise
+            when same contains head ( input2 )
+                return difference ( input1, tail ( input2 ),
+                                    { same, head ( input2 ) },
+                                    different )
+            otherwise
+                return difference ( input1, tail ( input2 ),
+                                    same,
+                                    { different, input2 } )
+    otherwise
+        when input2 is empty
+            when same contains head ( input1 )
+                return difference ( tail ( input1 ), input2,
+                                    { same, head ( input1 ) },
+                                    different )
+            otherwise
+                return difference ( tail ( input1 ), input2,
+                                    same,
+                                    { different, input1 } )
+        otherwise
+            when input2 contains head ( input1 )
+                when input1 contains head ( input2 )
+                    difference ( tail ( input1 ), tail ( input2 ),
+                                 { same, head ( input1 ), head ( input2 ) },
+                                 different )
+                otherwise
+                    when same contains head ( input2 )
+                        difference ( tail ( input1 ), tail ( input2 ),
+                                     { same, head ( input1 ),
+                                       head ( input2 ) },
+                                     different )
+                    otherwise
+                        difference ( tail ( input1 ), tail ( input2 ),
+                                     { same, head ( input1 ) },
+                                     { different, head ( input2 ) } )
+            otherwise
+                when input1 contains head ( input2 )
+                    difference ( tail ( input1 ), tail ( input2 ),
+                                 { same, head ( input2 ) },
+                                 { different, head ( input1 ) } )
+                otherwise
+                    when same contains head ( input2 )
+                        difference ( tail ( input1 ), tail ( input2 ),
+                                     { same, head ( input2 ) },
+                                     { different, head ( input1 ) } )
+                    otherwise
+                        difference ( tail ( input1 ), tail ( input2 ),
+                                     same,
+                                     { different, head ( input1 ),
+                                                  head ( input2 ) } )
+
+
+Instead of Pipe.length ( Context ), if we have Pipe.position ( Context )
+then we can easily read ( ... ) head and tail, and recurse as much as we like.
+
+Still a lot of error handling to do, but better than what we've got so far...
+
+
+
+Cursor<VALUE>
+    private final Pipe<VALUE> pipe;
+    private final Context context;
+    // MUTABLE:
+    private long index; 
+    public VALUE head ()
+    {
+        VALUE [] head = this.pipe.type ( context ).array ( 1L );
+        final int num_read =
+            this.pipe.read ( head, 0, 1,
+                             this.index, this.pipe.stream (), this.context );
+        if ( num_read == 0 )
+        {
+            violation...;
+        }
+
+        return head [ 0 ];
+    }
+
+    public Cursor<VALUE> tail ()
+    {
+        // Not exacty functional programming...
+        this.index ++;
+        return this;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+Term = [ element 0, 1, 2, 3, ... ]
+Pipe = [ stream finite(countable), cycle, other, error, ... ]
+Application = [ pipe input, insert_at, inserts, output, ... ]
+
+3-dimensional "matrix" (whatever that construct is called... tensor???)
+
+Actually Pipe is an artificial construct
+Really it's just:
+
+Term = [ element 0, 1, 2, 3, ... ]
+Application = [ Term input, insert_at, inserts, output, ... ]
+
+where Term can be Countable, Cyclical, Acyclical, Error, ...
+
+Insert:
+            0  1  2  3  4  5  6  ...
+Input     [                          ]
+Insert at [                          ]
+Inserts   [                          ]
+Output    [                          ]
+
+Or more aptly:
+
+            0  1  2  3  4  ...        Input          Output
+Insert at [                    ]  0 [        ]   0 [        ]
+Inserts   [                    ]  1 [        ]   1 [        ]
+                                  2 [        ] = 2 [        ]
+                                  3 [        ]   3 [        ]
+                                  4 [        ]   4 [        ]
+                                ... [        ] ... [        ]
+
+
+Insert_at iterator w: Insert_at[0], Insert_at[1], ...
+Inserts iterator x:   Inserts[0], Inserts[1], ..., etc
+Input iterator y:     Input[0], Input[1], ...
+Output iterator z:    Output[0], Output[1], ...
+Induction:            w >= insert_at.length : input[0..N]
+                        | insert_at[w] <= y : inserts [0..N], w ++
+                                            | input[y], y ++
+N.b. [0..N] can be infinite.
+
+
+Stream { Term, long index }
+induction ( Stream input, Stream [] parameters, Stream output )
+  ??? returns the stream from which to pull the next element???
+Then the caller of induction can decide whether a Term needs to be split
+or left intact.
+
+??? too slow???
+
+induction ( Stream input, Stream [] parameters, Stream output ) : Stream
+
+Stream.head ()
+(combine Cursor & current List concept of streams)
+

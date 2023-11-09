@@ -1,0 +1,19 @@
+2017-11-17
+- Distribution is a type, defined something like:
+
+  type distribution {
+      software system;
+      package [] packages;
+  }
+
+  So you can declare one with something like:
+
+  distribution my_distro = {
+      system = musaico;
+      packages = {
+          musaico/excel, musaico/tomcat, musaico/pdf
+      };
+  };
+
+  Something along the lines of a Docker container (maybe distribution
+  is an extension of a container type).

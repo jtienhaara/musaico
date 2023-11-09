@@ -1,0 +1,182 @@
+All of this is meant to get around the lack of stack and
+heap.  Maybe we should just have a stack and a heap instead
+of all this crazy Index stuff???
+
+  * application does system call x ()
+  * system call pushes context and parameters onto stack
+    for the process
+  * kernel executes call, reading input from the input
+    for the process, sending output to the output for
+    the process, and sending error to the error for
+    the process
+  * system call pops the context and parameters off the
+    stack for the process
+
+In this world, the input and output and error would
+not be buffers!  They would be Records from the object system.
+
+Obviously there is a bit of a dependency problem with this
+idea since services should be more general than just Musaico
+kernel services...
+
+No, it's not a dependency problem.  The service module simply
+does not provide streamed input and output -- that's up to
+the implementation layer, using either context and/or parameters
+to pull the input and output stream(s) off the stack.
+
+================================================================
+
+
+
+Another possibility:
+
+IndexType implements Type
+
+Put a Field of type IndexType at the beginning of the buffer
+
+Then to maintain it:
+
+  Index lookup = buffer.get ( 0L ).value ( Index.class );
+  lookup.insert ( position_of_field_that_just_got_added_to_the_buffer );
+  // ^^^ pushes back all the markers that are AFTER that position.
+
+The Markers point to the ENDs of the regions.  For example, suppose
+each dash in the following line is a Field in a Buffer:
+
+  |---------------------------------------|
+      ^      ^                 ^          ^
+      |      |                 |          |
+    context  |                 |       output,
+          parameters        input       error
+
+Then there are:
+
+  * 4 context Fields (including the one at the context marker)
+  * 7 parameter Fields
+  * 18 input Fields
+  * 11 output Fields
+  * 0 error Fields
+
+Inserting would do the following:
+
+  * At start+0: Add a context Field, push back all Markers.
+  * At start+3: Add a context Field, push back all Markers.
+  * At start+4: Add a parameters Field, push back p,i,o,e but not c.
+  * At start+6: Add a parameters Field, push back p,i,o,e but not c.
+  * At start+7: Add an input Field, push back i,o,e but not c,p.
+
+
+Perhaps when adding a Field of type IndexType to a Buffer, the Buffer
+knows to extract the Index, store it locally, and give it to its
+Region so that the Region can also look up Markers.
+
+This would be somewhat hidden behaviour from the perspective of
+Buffer implementers, but it would also allow buffer indexes to
+be created automagically from application code (rather than requiring
+kernel tweaks or special calls).
+
+
+
+================================================================
+
+
+
+Perhaps IndexedRegion should be a wrapper for an ordinary Region.
+
+  IndexedRegion
+  - Region wrappedRegion
+  - Index lookup
+
+Then Buffer can privately manipulate the Index directly (e.g. whenever a
+RecordStart or RecordEnd or other Marker Field is added), but
+anybody would be able to use the IndexedRegion to lookup positions.
+
+(Not allowing the user of the Buffer to manipulate its Index would
+be wise!)
+
+IndexedRegion would then wrap the step() call, resolving Markers
+(as per the code at the bottom, see below) before passing the
+resolved Position to step from down to the wrappedRegion.
+
+  public Position step ( Position from, long offset )
+  {
+    ...code from down below...
+    return this.wrappedRegion.step ( resolved_position, offset );
+  }
+
+
+public interface Index
+  + lookup ( Marker ): Position
+
+public interface IndexWriter
+  + index (): Index
+  + mark ( Marker, Position ): IndexWriter
+
+public interface IndexedRegion
+  extends Index, Region
+
+
+
+================================================================
+
+
+
+public class ServiceBuffers
+{
+    Reference CONTEXT = new BlaBlaReference ( "/service/buffers/context" );
+    Reference PARAMETERS = new BlaBlaReference ( "/service/buffers/parameters" );
+    Reference INPUT = new BlaBlaReference ( "/service/buffers/input" );
+    Reference OUTPUT = new BlaBlaReference ( "/service/buffers/output" );
+    Reference ERROR = new BlaBlaReference ( "/service/buffers/error" );
+
+    public abstract Region context ();
+    public abstract Region parameters ();
+    public abstract Region input ();
+    public abstract Region output ();
+    public abstract Region error ();
+}
+
+context () {
+    buffer_region = this.buffer.region ();
+    context_start = new RecordStart ( buffer_region, ServiceBuffers.CONTEXT );
+    context_end = new RecordEnd ( buffer_region, ServiceBuffers.CONTEXT );
+    return new RecordRegion ( buffer_region, context_start, context_end );
+}
+
+initially:
+this.index ().mark ( context_start, new NoSuchPosition () );
+this.index ().mark ( context_end, new NoSuchPosition () );
+
+when context start changes:
+this.index ().mark ( context_start, new_position );
+
+when context end changes:
+this.index ().mark ( context_end, new_position );
+
+public interface Index
+{
+    public abstract Index mark ( Marker, Position );
+    public abstract Position marker ( Marker );
+    public abstract Region region ();
+}
+
+
+public XYZRegion ( ..., Index )
+{
+    ...
+    step ( Position, long )
+    {
+        int infinite_loop_preventer = 0;
+        while ( position instanceof Marker )
+        {
+            position = this.index ().marker ( (Marker) position );
+            infinite_loop_preventer ++;
+            if ( infinite_loop_preventer > 25 )
+            {
+                throw new BlaBlaBlaException ( ... );
+            }
+        }
+
+        ...
+    }
+}

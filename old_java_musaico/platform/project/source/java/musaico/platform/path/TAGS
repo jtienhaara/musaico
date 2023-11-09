@@ -1,0 +1,33 @@
+
+ValidPathString.java,420
+public class ValidPathString54,1266
+    private static final long serialVersionUID ValidPathString.serialVersionUID58,1412
+    private static final String serialVersionHash ValidPathString.serialVersionHash59,1472
+    public static final ValidPathString DOMAIN ValidPathString.DOMAIN65,1708
+    public boolean isValid ValidPathString.isValid73,1894
+    public String toString ValidPathString.toString108,2619
+
+Path.java,1397
+public class Path62,1616
+    private static final long serialVersionUID Path.serialVersionUID66,1735
+    private static final String serialVersionHash Path.serialVersionHash67,1795
+    public static final Pattern ESCAPED_CHARACTERS Path.ESCAPED_CHARACTERS73,2015
+    public static final String ESCAPE_REPLACEMENT Path.ESCAPE_REPLACEMENT78,2208
+    private static final ObjectContracts classContracts Path.classContracts82,2343
+    private final ObjectContracts objectContracts;Path.objectContracts87,2523
+    private final String [] path;Path.path91,2620
+    private final boolean isAbsolute;Path.isAbsolute95,2748
+        throws ParametersMustNotBeNull.Violation,Path.Violation109,3086
+        throws ParametersMustNotBeNull.Violation,Path.Violation191,5588
+        throws ParametersMustNotBeNull.Violation,Path.Violation229,6924
+    public Path child Path.child258,7884
+    public int depth Path.depth285,8562
+    public boolean equals Path.equals294,8693
+    public int hashCode Path.hashCode337,9671
+    public boolean isAbsolute Path.isAbsolute357,10080
+    public String leafName Path.leafName371,10384
+    public Path name Path.name399,10938
+    public String [] names Path.names425,11514
+    public Path parent Path.parent443,11994
+    public Path parentNamespace Path.parentNamespace468,12601
+    public String toString Path.toString477,12737

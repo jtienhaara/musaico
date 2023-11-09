@@ -1,0 +1,92 @@
+Primitives
+  Types:
+    Boolean
+    BigDecimal
+    BigInteger
+    Byte
+    byte[]
+    Char
+    Double
+    Float
+    InputStream
+    InputWriter
+    Integer
+    Long
+    OutputStream
+    OutputWriter
+    String
+
+Common
+  Types: (???TypeClasses???)
+    Binary
+    Buffer
+    DateTime
+    Hash
+    Mutex
+    Number
+    Region
+    Text
+  TypeClasses:
+    Input
+        + Operation region():Region
+        + Operation read(
+    IO
+      + Operation startTransaction(INPUT/OUTPUT/BOTH):
+    Output
+  Tags:
+    Length:
+      LengthRange
+      MaxLength
+      MinLength
+    Numeric:
+      Even
+      Integral
+      Negative
+      NonNegative
+      NonPositive
+      Odd
+      Positive
+    Text:
+      Empty
+      EndsWith[TAG]
+      Excludes[TAG]
+      Includes[TAG]
+      NonEmpty
+      NonWhitespace
+      Partitioned:
+        Paragraph
+        Sentence
+        SentenceFragment
+        Word
+      Path
+      RegularExpression
+      StartsWith[TAG]
+      TextLengthRange
+      TextMaxLength
+      TextMinLength
+      Whitespace
+
+IO
+  Types:
+    Application
+    Database
+    Email
+    Filesystem
+    Network
+    OperatingSystem
+    User
+
+Structures
+  Types:
+    Graph
+    Machine <-- or a Tag???
+  TypeClasses:
+    Parser
+      + constant[Machine]
+      + operation(Input, Output):Output
+
+Formats
+  Types:
+    JSON
+    Mosaic
+    XML (n.b.: DOM)

@@ -1,0 +1,27 @@
+ebnf-description: {ebnf-rule}
+ebnf-rule: whitespacelhswhitespace":"rhswhitespace
+whitespace: {" "|"	"|"
+"|""}
+lhs: lower-case{["-"]lower-case|["-"]digit}
+lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+About to parse:
+lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+upper-case: "A"|"B"|"C"|"D"|"E"|"F"|"G"|"H"|"I"|"J"|"K"|"L"|"M"|"N"|"O"|"P"|"Q"|"R"|"S"|"T"|"U"|"V"|"W"|"X"|"Y"|"Z"
+digit: "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
+other-character: "-"|"_"|"\""|"#"|"&"|"'"|"("|")"|"+"|","|"."|"/"|":"|";"|"<"|"="|">"
+character: lower-case|upper-case|digit|other-character
+empty-symbol: "()"
+lhs: lower-case{["-"]lower-case|["-"]digit}
+option: "["rhs"]"
+repetition: "{"rhs"}"
+sequence: empty-symbol|{character|lhs|option|repetition}
+rhs: sequence{"|"sequence}
+ebnf-rule: lhs":"{" "}rhs
+ebnf-description: {ebnf-rule}
+
+Parsing:
+
+lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+upper-case: "A"|"B"|"C"|"D"|"E"|"F"|"G"|"H"|"I"|"J"|"K"|"L"|"M"|"N"|"O"|"P"|"Q"|"R"|"S"|"T"|"U"|"V"|"W"|"X"|"Y"|"Z"
+digit: "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
+other-character: "-"|"_"|"\""|"#"|"&"|"'"|"("|")"|"+"|","|"."|"/"|":"|"

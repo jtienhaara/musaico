@@ -1,0 +1,10 @@
+     TypingEnvironment---- quick lookup of type by raw class
+               |      \--- quick lookup of caster from type to type
+          TypeSystem -- Tag []
+          ____|________________
+          |                   |
+         Type -- Tag[]      ...child type systems...
+  ________|_________
+ |        |         |
+Storage  Raw      Casters TO other Types
+class    classes

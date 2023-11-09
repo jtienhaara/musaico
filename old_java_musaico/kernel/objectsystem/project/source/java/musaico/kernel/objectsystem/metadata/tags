@@ -1,0 +1,63 @@
+SimpleMetadata	SimpleMetadata.java	80
+SimpleMetadata.Map	SimpleMetadata.java	84
+SimpleMetadata.SimpleMetadata	SimpleMetadata.java	/^    public SimpleMetadata ($/
+SimpleMetadata.all	SimpleMetadata.java	/^    public Field [] all ()$/
+SimpleMetadata.attribute	SimpleMetadata.java	/^    public Field attribute ($/
+SimpleMetadata.attributes	SimpleMetadata.java	84
+SimpleMetadata.getSortedMetadata	SimpleMetadata.java	/^    protected static Field [] getSortedMetadata ($/
+SimpleMetadata.hash	SimpleMetadata.java	/^    public Hash hash ()$/
+SimpleMetadata.objectSystemType	SimpleMetadata.java	/^    public ObjectSystemTypeIdentifier objectSystem/
+SimpleMetadata.recordType	SimpleMetadata.java	/^    public RecordTypeIdentifier recordType ()$/
+SimpleMetadata.region	SimpleMetadata.java	/^    public Region region ()$/
+SimpleMetadata.sizeFieldsFree	SimpleMetadata.java	/^    public Size sizeFieldsFree ()$/
+SimpleMetadata.sizeFieldsUsed	SimpleMetadata.java	/^    public Size sizeFieldsUsed ()$/
+SimpleMetadata.sizeRecordsFree	SimpleMetadata.java	/^    public Size sizeRecordsFree ()$/
+SimpleMetadata.sizeRecordsUsed	SimpleMetadata.java	/^    public Size sizeRecordsUsed ()$/
+SimpleMetadata.space	SimpleMetadata.java	/^    public Space space ()$/
+SimpleMetadata.timeAccessed	SimpleMetadata.java	/^    public Time timeAccessed ()$/
+SimpleMetadata.timeCreated	SimpleMetadata.java	/^    public Time timeCreated ()$/
+SimpleMetadata.timeDeleted	SimpleMetadata.java	/^    public Time timeDeleted ()$/
+SimpleMetadata.timeDirtied	SimpleMetadata.java	/^    public Time timeDirtied ()$/
+SimpleMetadata.timeModified	SimpleMetadata.java	/^    public Time timeModified ()$/
+SimpleMetadataBuilder	SimpleMetadataBuilder.java	76
+SimpleMetadataBuilder.Map	SimpleMetadataBuilder.java	87
+SimpleMetadataBuilder.Map	SimpleMetadataBuilder.java	91
+SimpleMetadataBuilder.SimpleMetadataBuilder	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder ($/
+SimpleMetadataBuilder.all	SimpleMetadataBuilder.java	/^    public Field [] all ()$/
+SimpleMetadataBuilder.attribute	SimpleMetadataBuilder.java	/^    public Field attribute ($/
+SimpleMetadataBuilder.attribute	SimpleMetadataBuilder.java	/^    public Field attribute ($/
+SimpleMetadataBuilder.attribute	SimpleMetadataBuilder.java	/^                              Field attribute ($/
+SimpleMetadataBuilder.attributes	SimpleMetadataBuilder.java	91
+SimpleMetadataBuilder.build	SimpleMetadataBuilder.java	/^    public Metadata build ()$/
+SimpleMetadataBuilder.defaults	SimpleMetadataBuilder.java	87
+SimpleMetadataBuilder.environment	SimpleMetadataBuilder.java	83
+SimpleMetadataBuilder.hash	SimpleMetadataBuilder.java	/^    public Hash hash ()$/
+SimpleMetadataBuilder.hash	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder hash ($/
+SimpleMetadataBuilder.lock	SimpleMetadataBuilder.java	80
+SimpleMetadataBuilder.objectSystemType	SimpleMetadataBuilder.java	/^    public ObjectSystemTypeIdentifier objectSystem/
+SimpleMetadataBuilder.objectSystemType	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder objectSystemType /
+SimpleMetadataBuilder.recordType	SimpleMetadataBuilder.java	/^    public RecordTypeIdentifier recordType ()$/
+SimpleMetadataBuilder.recordType	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder recordType ($/
+SimpleMetadataBuilder.region	SimpleMetadataBuilder.java	/^    public Region region ()$/
+SimpleMetadataBuilder.region	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder region ($/
+SimpleMetadataBuilder.remove	SimpleMetadataBuilder.java	/^    public Field remove ($/
+SimpleMetadataBuilder.sizeFieldsFree	SimpleMetadataBuilder.java	/^    public Size sizeFieldsFree ()$/
+SimpleMetadataBuilder.sizeFieldsFree	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder sizeFieldsFree ($/
+SimpleMetadataBuilder.sizeFieldsUsed	SimpleMetadataBuilder.java	/^    public Size sizeFieldsUsed ()$/
+SimpleMetadataBuilder.sizeFieldsUsed	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder sizeFieldsUsed ($/
+SimpleMetadataBuilder.sizeRecordsFree	SimpleMetadataBuilder.java	/^    public Size sizeRecordsFree ()$/
+SimpleMetadataBuilder.sizeRecordsFree	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder sizeRecordsFree (/
+SimpleMetadataBuilder.sizeRecordsUsed	SimpleMetadataBuilder.java	/^    public Size sizeRecordsUsed ()$/
+SimpleMetadataBuilder.sizeRecordsUsed	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder sizeRecordsUsed (/
+SimpleMetadataBuilder.space	SimpleMetadataBuilder.java	/^    public Space space ()$/
+SimpleMetadataBuilder.space	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder space ($/
+SimpleMetadataBuilder.timeAccessed	SimpleMetadataBuilder.java	/^    public Time timeAccessed ()$/
+SimpleMetadataBuilder.timeAccessed	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder timeAccessed ($/
+SimpleMetadataBuilder.timeCreated	SimpleMetadataBuilder.java	/^    public Time timeCreated ()$/
+SimpleMetadataBuilder.timeCreated	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder timeCreated ($/
+SimpleMetadataBuilder.timeDeleted	SimpleMetadataBuilder.java	/^    public Time timeDeleted ()$/
+SimpleMetadataBuilder.timeDeleted	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder timeDeleted ($/
+SimpleMetadataBuilder.timeDirtied	SimpleMetadataBuilder.java	/^    public Time timeDirtied ()$/
+SimpleMetadataBuilder.timeDirtied	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder timeDirtied ($/
+SimpleMetadataBuilder.timeModified	SimpleMetadataBuilder.java	/^    public Time timeModified ()$/
+SimpleMetadataBuilder.timeModified	SimpleMetadataBuilder.java	/^    public SimpleMetadataBuilder timeModified ($/

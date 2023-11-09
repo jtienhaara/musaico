@@ -1,0 +1,73 @@
+2020-12-15 bootstrapping wiring
+
+- Small core written in & ported across base languages:
+  - Java
+  - C
+  - JavaScript
+  - Swift
+  - maybe others, for specific targets
+    (though maybe these should be basically wrappers
+    for C, to expose primitives in each language):
+    - Go - Kubernetes community
+    - Rust?
+    - Python - various communities including AI/BI
+    - Lua - embedded (games, NGINX)
+    - Tcl - because it's awesome
+    - R for statistics, BI
+
+- Foundation layer exposes both Musaico wiring
+  and the underlying language (C, Java, JavaScript, ...)
+- Platform layer exposes libraries and packages
+  (servlet API "library", Tomcat "package", Docker images, ...)
+- Co-operating system layer exposes operating systems,
+  orchestration layers (Linux, Kubernetes, ...)
+- Application layer exposes lower level layers depending
+  on security policy -- so that an application developer
+  can write C code or interact with the servlet API
+  or create a Dockerfile or call make or mvn or use
+  kubectl and so on, if they have clearance to do so.
+
+                                          Layer
+            -----------------------------------------------------------------
+Concern     Foundation      Platform        Kernel          Application
+----------- --------------- --------------- --------------- -----------------
+Authent.
+Authorisat.
+Messaging   Function calls                  Network calls
+Compute     Threads/events                  Processes/jobs
+Storage     Streams/O/JDBC  SQL/CSQL        Files/PVCs
+Monitoring  Log/trace/metr.
+Lifecycle   main/run/hooks                  Exec/kill/kubec.
+
+- Maybe another layer, the co-operating system layer,
+  handles messaging between the layers.
+
+- Bootstrapping all of this requires a flexible format
+  for creating Schematics.
+- Need to be able to write a Schematic that contains
+  layer-specific code as well as generic wiring connections,
+  and be able to lex, parse, compile, link, load and
+  execute that Schematic.
+- Of course also need policies to prevent performing
+  anything malicious or accidentally bad at each step
+  (especially but not only the execute step).
+
+- So maybe:
+  - 1 Schematic to read in a wiring document, pass that
+    document through 0 to 1 child Schematics, and output
+    the resuling Schematic document.
+  - That would be the bootstrapper.  Then everything
+    else can be written in the document format, not
+    in the host native language.
+- Then the platform-agnostic Schematic documents would
+  include:
+  - Lexer
+  - Parser
+  - Compiler
+  - Linker
+  - Loader
+  - Executor
+- Of course, Schematics must be able to layer themselves,
+  so that we could create 1 unified compiler Schematic
+  that includes all of the platform-agnostic Schematics
+  listed above.

@@ -1,0 +1,28 @@
+From the object system we just want to get back the BufferPages
+(physical memory pages) so we can copy to/from the user Buffer
+for read/write.
+
+Segment.java should have a method something like pages ( Region )
+which returns all the pages for the specified Region.
+
+Then the caller can fill in whatever is already swapped in, stepping
+through the Pages, and create a PageFault for each non-BufferPage.
+
+The Segment.pageFault () method should be non-blocking.  At some
+later time the PageFault will be filled in with status (page swapped
+in, failure, etc).  The PageFault should maybe have a timeout, and
+the Segment will return failure if the caller waits too long.
+
+The ONode operation can then read/write all available data, and while
+copying the data from the already available pages, the segment
+queues up the page fault requests.
+
+Once the ONode runs out of BufferPages to read from/write to, it
+registers itself as a listener to every PageFault it created, and
+goes to sleep.
+
+When any of the PageFaults is complete, it signals all listeners.
+When the ONode wakes up, it reads/writes what it can from/to the
+resolved page(s), then sleeps on the rest of them.
+
+The Segment's PagedArea should have a scheduler to do the page faults.

@@ -1,0 +1,27 @@
+Table:
+======================
++ tags: Tag []
+Name    Arc     Target
+----------------------
+String  Table2  Table3
+...
+
+Tag {
+  id: String
+  value: Object []
+  stringRepresentation: String []
+}
+
+An arc table has 1 or more "input" table entries, each with an arc to an
+output node.  The output node can have state graph, and the arc can have
+a transition graph.
+
+A node can have "component" entries in its table, making it a structure.
+A node can have a "value" tag.
+A node with a "value" tag but no structure is a literal.
+A node with no "value" tag and no structure is value-equivalent to null or none.
+
+An arc can have "input" entries in its table, making it a sub-graph.
+An arc can have a "filter" tag.
+An arc with a "filter" tag but no sub-graph is a conditional arc.
+An arc with no "filter" tag and no sub-graph is an automatic arc.

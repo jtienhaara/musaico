@@ -1,0 +1,5 @@
+Internationalized	SimpleInternationalized.java	63
+LocalizationException	LocalizationException.java	50
+LocalizationException.LocalizationException	LocalizationException.java	/^    public LocalizationException ($/
+LocalizationException.LocalizationException	LocalizationException.java	/^    public LocalizationException ($/
+Localized	SimpleLocalized.java	58

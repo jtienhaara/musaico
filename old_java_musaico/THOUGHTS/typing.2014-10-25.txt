@@ -1,0 +1,22 @@
+From Template.java (2012-11-25):
+====
+Instance gets renamed to Term.
+
+Variable is derived from Term.  It has no value?!?  Or something...
+
+A Buffer can be a set of instructions for use as a Function.
+
+A stream has a Type.  A stream of Strings might have a Text[1..n] Type,
+    while a stream which inputs or outputs an object of a specific
+    Type would have that Type.  An input and an output stream cannot
+    be connected if they do not have the same Type.  Two streams of
+    the same Type can be concatenated into a stream of Type X[n].
+    Two streams of different Types can be concatenated into a stream
+    of Type [X, Y].
+
+A Function reads from 0 or more input streams and writes to 0 or more output
+  streams.  Its Type is comprised of the set of in and out stream Types.
+  If an input stream has type X then feeding it from an output stream
+  of type X[n] means all input streams have to have type ABC[n] and
+  the function is executed [n] times, once for each set of input parameters.
+====

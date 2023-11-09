@@ -1,0 +1,13 @@
+Cannot\ create\ a\ StringLabel\ with\ a\ null\ String = Cannot create a StringLabel with a null String
+Cannot\ set\ null\ source\ node\ for\ SimpleArc\ [%this%] = Cannot set null source node for SimpleArc [%this%]
+Cannot\ set\ null\ target\ node\ for\ SimpleArc\ [%this%] = Cannot set null target node for SimpleArc [%this%]
+Cannot\ traverse\ arc\ [%this%]\ with\ a\ null\ traversal = Cannot traverse arc [%this%] with a null traversal
+Graph\ for\ machine\ [%this%]\ has\ no\ entry\ transition = Graph for machine [%this%] has no entry transition
+Machine\ [%this%]\ has\ not\ been\ initialized\ by\ calling\ transition\ ()\ into\ the\ starting\ state = Machine [%this%] has not been initialized by calling transition () into the starting state
+Machine\ [%this%]\ has\ not\ been\ initialized\ by\ calling\ transition\ ()\ into\ the\ starting\ state = Machine [%this%] has not been initialized by calling transition () into the starting state
+No\ graph\ specified\ for\ SimpleMachine\ constructor = No graph specified for SimpleMachine constructor
+No\ source\ node\ specified\ for\ SimpleArc\ [%this%] = No source node specified for SimpleArc [%this%]
+No\ target\ node\ specified\ for\ SimpleArc\ [%this%] = No target node specified for SimpleArc [%this%]
+Null\ label\ for\ event\ [%event%]\ passed\ to\ machine\ [%this%]\ .fire\ ( = Null label for event [%event%] passed to machine [%this%] .fire (
+SimpleGraph\ cannot\ have\ a\ null\ name = SimpleGraph cannot have a null name
+SimpleNode\ cannot\ have\ a\ null\ name = SimpleNode cannot have a null name

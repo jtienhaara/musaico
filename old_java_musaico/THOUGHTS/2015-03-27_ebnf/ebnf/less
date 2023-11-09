@@ -1,0 +1,1136 @@
+!!! VISIT ebnf-description: {ebnf-rule}
+!!! ebnf-description: {ebnf-rule} @ 0
+!!! VISIT ebnf-rule: lhs":"rhs
+!!! ebnf-rule: lhs":"rhs @ 0
+!!! VISIT lhs: lower-case{["-"]lower-case|["-"]digit}
+!!! lhs: lower-case{["-"]lower-case|["-"]digit} @ 0
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 0
+!!! VISIT "a"
+!!! "a" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 0
+!!!     FAIL
+                    lower-case: "a"|"b...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 0
+!!!     CONTINUE
+test_parser
+At position:    1
+Next character: 'l'
+Most recent node stack:
+    "l"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+                   lower-case: "a"|"b"...
+                    ^
+
+==============
+!!! VISIT {["-"]lower-case|["-"]digit}
+!!! {["-"]lower-case|["-"]digit} @ 1
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 1
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 1
+!!! VISIT ["-"]
+!!! ["-"] @ 1
+!!! VISIT "-"
+!!! "-" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 1
+!!! VISIT "a"
+!!! "a" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 1
+!!!     FAIL
+                   lower-case: "a"|"b"...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 1
+!!!     CONTINUE
+test_parser
+At position:    2
+Next character: 'o'
+Most recent node stack:
+    "o"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+                  lower-case: "a"|"b"|...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 2
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 2
+!!! VISIT ["-"]
+!!! ["-"] @ 2
+!!! VISIT "-"
+!!! "-" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 2
+!!! VISIT "a"
+!!! "a" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "p"
+!!! "p" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "q"
+!!! "q" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "r"
+!!! "r" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "s"
+!!! "s" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "t"
+!!! "t" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "u"
+!!! "u" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "v"
+!!! "v" @ 2
+!!!     FAIL
+                  lower-case: "a"|"b"|...
+                    ^
+!!! VISIT "w"
+!!! "w" @ 2
+!!!     CONTINUE
+test_parser
+At position:    3
+Next character: 'w'
+Most recent node stack:
+    "w"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+                 lower-case: "a"|"b"|"...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 3
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 3
+!!! VISIT ["-"]
+!!! ["-"] @ 3
+!!! VISIT "-"
+!!! "-" @ 3
+!!!     FAIL
+                 lower-case: "a"|"b"|"...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 3
+!!! VISIT "a"
+!!! "a" @ 3
+!!!     FAIL
+                 lower-case: "a"|"b"|"...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 3
+!!!     FAIL
+                 lower-case: "a"|"b"|"...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 3
+!!!     FAIL
+                 lower-case: "a"|"b"|"...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 3
+!!!     FAIL
+                 lower-case: "a"|"b"|"...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 3
+!!!     CONTINUE
+test_parser
+At position:    4
+Next character: 'e'
+Most recent node stack:
+    "e"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+                lower-case: "a"|"b"|"c...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 4
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 4
+!!! VISIT ["-"]
+!!! ["-"] @ 4
+!!! VISIT "-"
+!!! "-" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 4
+!!! VISIT "a"
+!!! "a" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "p"
+!!! "p" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "q"
+!!! "q" @ 4
+!!!     FAIL
+                lower-case: "a"|"b"|"c...
+                    ^
+!!! VISIT "r"
+!!! "r" @ 4
+!!!     CONTINUE
+test_parser
+At position:    5
+Next character: 'r'
+Most recent node stack:
+    "r"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+               lower-case: "a"|"b"|"c"...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 5
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 5
+!!! VISIT ["-"]
+!!! ["-"] @ 5
+!!! VISIT "-"
+!!! "-" @ 5
+!!!     CONTINUE
+test_parser
+At position:    6
+Next character: '-'
+Most recent node stack:
+    "-"
+    ["-"]
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+              lower-case: "a"|"b"|"c"|...
+                    ^
+
+==============
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 6
+!!! VISIT "a"
+!!! "a" @ 6
+!!!     FAIL
+              lower-case: "a"|"b"|"c"|...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 6
+!!!     FAIL
+              lower-case: "a"|"b"|"c"|...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 6
+!!!     CONTINUE
+test_parser
+At position:    7
+Next character: 'c'
+Most recent node stack:
+    "c"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+             lower-case: "a"|"b"|"c"|"...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 7
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 7
+!!! VISIT ["-"]
+!!! ["-"] @ 7
+!!! VISIT "-"
+!!! "-" @ 7
+!!!     FAIL
+             lower-case: "a"|"b"|"c"|"...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 7
+!!! VISIT "a"
+!!! "a" @ 7
+!!!     CONTINUE
+test_parser
+At position:    8
+Next character: 'a'
+Most recent node stack:
+    "a"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 8
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 8
+!!! VISIT ["-"]
+!!! ["-"] @ 8
+!!! VISIT "-"
+!!! "-" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 8
+!!! VISIT "a"
+!!! "a" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "p"
+!!! "p" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "q"
+!!! "q" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "r"
+!!! "r" @ 8
+!!!     FAIL
+            lower-case: "a"|"b"|"c"|"d...
+                    ^
+!!! VISIT "s"
+!!! "s" @ 8
+!!!     CONTINUE
+test_parser
+At position:    9
+Next character: 's'
+Most recent node stack:
+    "s"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 9
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 9
+!!! VISIT ["-"]
+!!! ["-"] @ 9
+!!! VISIT "-"
+!!! "-" @ 9
+!!!     FAIL
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 9
+!!! VISIT "a"
+!!! "a" @ 9
+!!!     FAIL
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 9
+!!!     FAIL
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 9
+!!!     FAIL
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 9
+!!!     FAIL
+           lower-case: "a"|"b"|"c"|"d"...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 9
+!!!     CONTINUE
+test_parser
+At position:    10
+Next character: 'e'
+Most recent node stack:
+    "e"
+    lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|...
+    ["-"]lower-case
+    ["-"]lower-case|["-"]digit
+    {["-"]lower-case|["-"]digit}
+    lhs: lower-case{["-"]lower-case|["-"]digit}
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+
+==============
+!!! VISIT ["-"]lower-case|["-"]digit
+!!! ["-"]lower-case|["-"]digit @ 10
+!!! VISIT ["-"]lower-case
+!!! ["-"]lower-case @ 10
+!!! VISIT ["-"]
+!!! ["-"] @ 10
+!!! VISIT "-"
+!!! "-" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 10
+!!! VISIT "a"
+!!! "a" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "p"
+!!! "p" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "q"
+!!! "q" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "r"
+!!! "r" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "s"
+!!! "s" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "t"
+!!! "t" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "u"
+!!! "u" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "v"
+!!! "v" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "w"
+!!! "w" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "x"
+!!! "x" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "y"
+!!! "y" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "z"
+!!! "z" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT ["-"]digit
+!!! ["-"]digit @ 10
+!!! VISIT ["-"]
+!!! ["-"] @ 10
+!!! VISIT "-"
+!!! "-" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT digit: "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
+!!! digit: "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9" @ 10
+!!! VISIT "0"
+!!! "0" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "1"
+!!! "1" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "2"
+!!! "2" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "3"
+!!! "3" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "4"
+!!! "4" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "5"
+!!! "5" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "6"
+!!! "6" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "7"
+!!! "7" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "8"
+!!! "8" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT "9"
+!!! "9" @ 10
+!!!     FAIL
+          lower-case: "a"|"b"|"c"|"d"|...
+                    ^
+!!! VISIT ":"
+!!! ":" @ 10
+!!!     CONTINUE
+test_parser
+At position:    11
+Next character: ':'
+Most recent node stack:
+    ":"
+    ebnf-rule: lhs":"rhs
+    ebnf-description: {ebnf-rule}
+
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+
+==============
+!!! VISIT rhs: sequence{"|"sequence}
+!!! rhs: sequence{"|"sequence} @ 11
+!!! VISIT sequence: ()|whitespace{character|lhs|option|repetition}
+!!! sequence: ()|whitespace{character|lhs|option|repetition} @ 11
+!!! VISIT ()
+!!! () @ 11
+!!! VISIT {"|"sequence}
+!!! {"|"sequence} @ 11
+!!! VISIT "|"sequence
+!!! "|"sequence @ 11
+!!! VISIT "|"
+!!! "|" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT ebnf-rule: lhs":"rhs
+!!! ebnf-rule: lhs":"rhs @ 11
+!!! VISIT lhs: lower-case{["-"]lower-case|["-"]digit}
+!!! lhs: lower-case{["-"]lower-case|["-"]digit} @ 11
+!!! VISIT lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z"
+!!! lower-case: "a"|"b"|"c"|"d"|"e"|"f"|"g"|"h"|"i"|"j"|"k"|"l"|"m"|"n"|"o"|"p"|"q"|"r"|"s"|"t"|"u"|"v"|"w"|"x"|"y"|"z" @ 11
+!!! VISIT "a"
+!!! "a" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "b"
+!!! "b" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "c"
+!!! "c" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "d"
+!!! "d" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "e"
+!!! "e" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "f"
+!!! "f" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "g"
+!!! "g" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "h"
+!!! "h" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "i"
+!!! "i" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "j"
+!!! "j" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "k"
+!!! "k" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "l"
+!!! "l" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "m"
+!!! "m" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "n"
+!!! "n" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "o"
+!!! "o" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "p"
+!!! "p" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "q"
+!!! "q" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "r"
+!!! "r" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "s"
+!!! "s" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "t"
+!!! "t" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "u"
+!!! "u" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "v"
+!!! "v" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "w"
+!!! "w" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "x"
+!!! "x" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "y"
+!!! "y" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^
+!!! VISIT "z"
+!!! "z" @ 11
+!!!     FAIL
+         lower-case: "a"|"b"|"c"|"d"|"...
+                    ^

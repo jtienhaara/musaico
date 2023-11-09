@@ -1,0 +1,29 @@
+Something more abstract and generic than symbol types.
+
+Maybe something that, when you feed Type(s) into it, it spits
+out symbol types.
+
+  publi class TypeClass {
+    public AbstractFoo [] requirements () { ... }
+  }
+
+  public abstract class Foo {
+    public TypeClass typeClass () { ... }
+  }
+
+  public class Foo1 extends Foo {
+    public SymbolID<?> [] requiredSymbolIDs ( Type ) { ... }
+  }
+
+  public class Foo2 extends Foo {
+    public SymbolID<?> [] requiredSymbolIDs ( Type, Type ) { ... }
+  }
+
+  public class Foo3 extends Foo {
+    public SymbolID<?> [] requiredSymbolIDs ( Type, Type, Type ) { ... }
+  }
+
+  ...etc...
+
+Maybe TypeClass should also cover multiple Types, since Point is
+tied to the hip of Measure.

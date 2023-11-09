@@ -1,0 +1,305 @@
+Constraint	Constraint.java	56
+ConstraintException	ConstraintException.java	103
+ConstraintException.ConstraintException	ConstraintException.java	/^    public ConstraintException ($/
+ConstraintException.ConstraintException	ConstraintException.java	/^    public ConstraintException ($/
+ConstraintException.ConstraintException	ConstraintException.java	/^    public ConstraintException ($/
+ConstraintException.constraint	ConstraintException.java	/^    public Constraint constraint ()$/
+ConstraintException.instance	ConstraintException.java	/^    public Serializable instance ()$/
+Instance	Instance.java	48
+Instance.Conditional	Instance.java	156
+Instance.Conditional	Instance.java	194
+Instance.Conditional	Instance.java	236
+Instance.abstract	Instance.java	234
+InstanceBuilder	InstanceBuilder.java	46
+InstanceBuilder.NONE	InstanceBuilder.java	50
+NoInstanceBuilder	NoInstanceBuilder.java	49
+NoInstanceBuilder.NoInstanceBuilder	NoInstanceBuilder.java	/^    NoInstanceBuilder ()$/
+NoInstanceBuilder.add	NoInstanceBuilder.java	/^    public InstanceBuilder add ($/
+NoInstanceBuilder.addTags	NoInstanceBuilder.java	/^    public InstanceBuilder addTags ($/
+NoInstanceBuilder.build	NoInstanceBuilder.java	/^    public Instance build ()$/
+NoInstanceBuilder.copy	NoInstanceBuilder.java	/^    public InstanceBuilder copy ($/
+NoInstanceBuilder.environment	NoInstanceBuilder.java	/^    public TypingEnvironment environment ()$/
+NoInstanceBuilder.remove	NoInstanceBuilder.java	/^    public InstanceBuilder remove ($/
+NoInstanceBuilder.removeTags	NoInstanceBuilder.java	/^    public InstanceBuilder removeTags ($/
+NoInstanceBuilder.tags	NoInstanceBuilder.java	/^    public Tag [] tags ()$/
+NoInstanceBuilder.type	NoInstanceBuilder.java	/^    public Type<Object> type ()$/
+NoInstanceBuilder.validate	NoInstanceBuilder.java	/^    public void validate ()$/
+NoInstanceBuilder.value	NoInstanceBuilder.java	/^    public Object value ()$/
+NoTypeCastersRegistry	NoTypeCastersRegistry.java	54
+NoTypeCastersRegistry.NoTypeCastersRegistry	NoTypeCastersRegistry.java	/^    NoTypeCastersRegistry ()$/
+NoTypeCastersRegistry.TypeCaster	NoTypeCastersRegistry.java	90
+NoTypeCastersRegistry.TypeCaster	NoTypeCastersRegistry.java	135
+NoTypeCastersRegistry.from	NoTypeCastersRegistry.java	/^                      TypeCastersFrom<FROM> from (/
+NoTypeCastersRegistry.get	NoTypeCastersRegistry.java	/^            TypeCaster<FROM,TO> get ($/
+NoTypeCastersRegistry.public	NoTypeCastersRegistry.java	88
+NoTypeCastersRegistry.public	NoTypeCastersRegistry.java	102
+NoTypeCastersRegistry.put	NoTypeCastersRegistry.java	/^            TypeCastersRegistry put ($/
+NoTypeCastersRegistry.to	NoTypeCastersRegistry.java	/^                      TypeCastersTo<TO> to ($/
+NoTypeCastersRegistry.typeCasters	NoTypeCastersRegistry.java	/^    public TypeCaster<Object,Object> [] typeCaster/
+NoTypeSystem	NoTypeSystem.java	46
+NoTypeSystem.NoTypeSystem	NoTypeSystem.java	/^    protected NoTypeSystem ()$/
+NoTypeSystem.contains	NoTypeSystem.java	/^    public boolean contains ($/
+NoTypeSystem.environment	NoTypeSystem.java	/^    public final TypingEnvironment environment ()$/
+NoTypeSystem.public	NoTypeSystem.java	92
+NoTypeSystem.public	NoTypeSystem.java	132
+NoTypeSystem.tags	NoTypeSystem.java	/^    public final Tag [] tags ()$/
+NoTypeSystem.type	NoTypeSystem.java	/^            Type<STORAGE_VALUE> type ($/
+NoTypeSystem.typeSystemParent	NoTypeSystem.java	/^    public final TypeSystem typeSystemParent ()$/
+NoTypeSystem.types	NoTypeSystem.java	/^    public final Type<Object> [] types ()$/
+NoTypeSystem.typesRegistry	NoTypeSystem.java	/^    public final TypesRegistry typesRegistry ()$/
+NoTypeSystem.validate	NoTypeSystem.java	/^                           TypeSystem validate ($/
+NoTypesRegistry	NoTypesRegistry.java	57
+NoTypesRegistry.NoTypesRegistry	NoTypesRegistry.java	/^    NoTypesRegistry ()$/
+NoTypesRegistry.public	NoTypesRegistry.java	104
+NoTypesRegistry.put	NoTypesRegistry.java	/^    public TypesRegistry put ($/
+NoTypesRegistry.rawClasses	NoTypesRegistry.java	/^    public Class<?> [] rawClasses ()$/
+NoTypesRegistry.type	NoTypesRegistry.java	/^                           Type<STORAGE_VALUE> typ/
+NoTypesRegistry.typeSystem	NoTypesRegistry.java	/^    public TypeSystem typeSystem ($/
+NoTypesRegistry.typeSystems	NoTypesRegistry.java	/^    public TypeSystem [] typeSystems ()$/
+NoTypesRegistry.types	NoTypesRegistry.java	/^    public Type<Object> [] types ()$/
+NoTypingEnvironment	NoTypingEnvironment.java	57
+NoTypingEnvironment.Conditional	NoTypingEnvironment.java	76
+NoTypingEnvironment.Conditional	NoTypingEnvironment.java	102
+NoTypingEnvironment.Conditional	NoTypingEnvironment.java	125
+NoTypingEnvironment.Conditional	NoTypingEnvironment.java	149
+NoTypingEnvironment.Conditional	NoTypingEnvironment.java	173
+NoTypingEnvironment.NoTypingEnvironment	NoTypingEnvironment.java	/^    protected NoTypingEnvironment ()$/
+NoTypingEnvironment.cast	NoTypingEnvironment.java	/^                cast ($/
+NoTypingEnvironment.duplicate	NoTypingEnvironment.java	/^            duplicate ($/
+NoTypingEnvironment.final	NoTypingEnvironment.java	123
+NoTypingEnvironment.final	NoTypingEnvironment.java	147
+NoTypingEnvironment.final	NoTypingEnvironment.java	171
+NoTypingEnvironment.final	NoTypingEnvironment.java	241
+NoTypingEnvironment.prepare	NoTypingEnvironment.java	/^                prepare ($/
+NoTypingEnvironment.prepare	NoTypingEnvironment.java	/^                prepare ($/
+NoTypingEnvironment.prepare	NoTypingEnvironment.java	/^                prepare ($/
+NoTypingEnvironment.public	NoTypingEnvironment.java	74
+NoTypingEnvironment.public	NoTypingEnvironment.java	255
+NoTypingEnvironment.register	NoTypingEnvironment.java	/^    public final TypingEnvironment register ($/
+NoTypingEnvironment.root	NoTypingEnvironment.java	/^    public final TypeSystem root ()$/
+NoTypingEnvironment.tags	NoTypingEnvironment.java	/^    public Tag [] tags ()$/
+NoTypingEnvironment.tags	NoTypingEnvironment.java	/^    public Tag [] tags ($/
+NoTypingEnvironment.type	NoTypingEnvironment.java	/^            Type<STORAGE_VALUE> type ($/
+NoTypingEnvironment.typeSystem	NoTypingEnvironment.java	/^            TypeSystem typeSystem ($/
+NoTypingEnvironment.types	NoTypingEnvironment.java	/^    public final Type<Object> [] types ()$/
+Serializable	NoTypeCaster.java	/^    implements Serializable$/
+SimpleType	SimpleType.java	54
+SimpleType.Conditional	SimpleType.java	404
+SimpleType.Conditional	SimpleType.java	494
+SimpleType.SimpleType	SimpleType.java	/^    protected SimpleType ($/
+SimpleType.check	SimpleType.java	/^    public void check($/
+SimpleType.equals	SimpleType.java	/^    public boolean equals ($/
+SimpleType.hashCode	SimpleType.java	/^    public int hashCode ()$/
+SimpleType.isa	SimpleType.java	/^    public boolean isa ($/
+SimpleType.name	SimpleType.java	58
+SimpleType.name	SimpleType.java	/^    public String name ()$/
+SimpleType.none	SimpleType.java	67
+SimpleType.none	SimpleType.java	/^    public STORAGE_VALUE none ()$/
+SimpleType.public	SimpleType.java	403
+SimpleType.public	SimpleType.java	493
+SimpleType.rawClasses	SimpleType.java	74
+SimpleType.rawClasses	SimpleType.java	/^    public Class<? extends STORAGE_VALUE> [] rawCl/
+SimpleType.storageClass	SimpleType.java	62
+SimpleType.storageClass	SimpleType.java	/^    public Class<STORAGE_VALUE> storageClass ()$/
+SimpleType.tags	SimpleType.java	78
+SimpleType.tags	SimpleType.java	/^    public final Tag [] tags ()$/
+SimpleType.toString	SimpleType.java	/^    public String toString ()$/
+SimpleType.typeCasterFromThisType	SimpleType.java	/^            typeCasterFromThisType ($/
+SimpleType.typeCasterToThisType	SimpleType.java	/^            typeCasterToThisType ($/
+SimpleType.typeCastersFromThisType	SimpleType.java	84
+SimpleType.typeCastersFromThisType	SimpleType.java	/^    public TypeCaster<? extends STORAGE_VALUE, ?> /
+SimpleType.typeCastersToThisType	SimpleType.java	90
+SimpleType.typeCastersToThisType	SimpleType.java	/^    public TypeCaster<?, ? extends STORAGE_VALUE> /
+SimpleTypeBuilder	SimpleTypeBuilder.java	59
+SimpleTypeBuilder.SimpleTypeBuilder	SimpleTypeBuilder.java	/^    public SimpleTypeBuilder ($/
+SimpleTypeBuilder.addRawClass	SimpleTypeBuilder.java	/^    public SimpleTypeBuilder addRawClass ($/
+SimpleTypeBuilder.addTag	SimpleTypeBuilder.java	/^    public TypeBuilder<STORAGE_VALUE> addTag ($/
+SimpleTypeBuilder.addTypeCasterFrom	SimpleTypeBuilder.java	/^    public TypeBuilder<STORAGE_VALUE> addTypeCaste/
+SimpleTypeBuilder.addTypeCasterTo	SimpleTypeBuilder.java	/^    public TypeBuilder<STORAGE_VALUE> addTypeCaste/
+SimpleTypeBuilder.build	SimpleTypeBuilder.java	/^    public Type<STORAGE_VALUE> build ()$/
+SimpleTypeBuilder.chainFrom	SimpleTypeBuilder.java	/^        TypeBuilder<STORAGE_VALUE> chainFrom ($/
+SimpleTypeBuilder.chainTo	SimpleTypeBuilder.java	/^        TypeBuilder<STORAGE_VALUE> chainTo ($/
+SimpleTypeBuilder.lock	SimpleTypeBuilder.java	63
+SimpleTypeBuilder.name	SimpleTypeBuilder.java	67
+SimpleTypeBuilder.name	SimpleTypeBuilder.java	/^    public String name ()$/
+SimpleTypeBuilder.noTypeCasterFrom	SimpleTypeBuilder.java	/^        TypeBuilder noTypeCasterFrom ($/
+SimpleTypeBuilder.noTypeCasterTo	SimpleTypeBuilder.java	/^        TypeBuilder noTypeCasterTo ($/
+SimpleTypeBuilder.none	SimpleTypeBuilder.java	80
+SimpleTypeBuilder.none	SimpleTypeBuilder.java	/^    public STORAGE_VALUE none ()$/
+SimpleTypeBuilder.public	SimpleTypeBuilder.java	264
+SimpleTypeBuilder.public	SimpleTypeBuilder.java	313
+SimpleTypeBuilder.public	SimpleTypeBuilder.java	382
+SimpleTypeBuilder.public	SimpleTypeBuilder.java	404
+SimpleTypeBuilder.rawClasses	SimpleTypeBuilder.java	76
+SimpleTypeBuilder.rawClasses	SimpleTypeBuilder.java	/^    public Class<? extends STORAGE_VALUE> [] rawCl/
+SimpleTypeBuilder.storageClass	SimpleTypeBuilder.java	70
+SimpleTypeBuilder.storageClass	SimpleTypeBuilder.java	/^    public Class<STORAGE_VALUE> storageClass ()$/
+SimpleTypeBuilder.tags	SimpleTypeBuilder.java	85
+SimpleTypeBuilder.tags	SimpleTypeBuilder.java	/^    public Tag [] tags ()$/
+SimpleTypeBuilder.toString	SimpleTypeBuilder.java	/^    public String toString ()$/
+SimpleTypeBuilder.typeCastersFrom	SimpleTypeBuilder.java	89
+SimpleTypeBuilder.typeCastersFrom	SimpleTypeBuilder.java	/^    public TypeCaster<? extends STORAGE_VALUE, ?> /
+SimpleTypeBuilder.typeCastersTo	SimpleTypeBuilder.java	94
+SimpleTypeBuilder.typeCastersTo	SimpleTypeBuilder.java	/^    public TypeCaster<?, ? extends STORAGE_VALUE> /
+SimpleTypeCastersFrom	SimpleTypeCastersFrom.java	56
+SimpleTypeCastersFrom.Map	SimpleTypeCastersFrom.java	67
+SimpleTypeCastersFrom.SimpleTypeCastersFrom	SimpleTypeCastersFrom.java	/^    public SimpleTypeCastersFrom ($/
+SimpleTypeCastersFrom.TypeCaster	SimpleTypeCastersFrom.java	98
+SimpleTypeCastersFrom.TypeCaster	SimpleTypeCastersFrom.java	208
+SimpleTypeCastersFrom.fromType	SimpleTypeCastersFrom.java	63
+SimpleTypeCastersFrom.lock	SimpleTypeCastersFrom.java	60
+SimpleTypeCastersFrom.register	SimpleTypeCastersFrom.java	/^        TypeCastersFrom register ($/
+SimpleTypeCastersFrom.to	SimpleTypeCastersFrom.java	/^        TypeCaster<STORAGE_VALUE,TO> to ($/
+SimpleTypeCastersFrom.type	SimpleTypeCastersFrom.java	/^    public Type<STORAGE_VALUE> type ()$/
+SimpleTypeCastersFrom.typeCasters	SimpleTypeCastersFrom.java	68
+SimpleTypeCastersFrom.typeCasters	SimpleTypeCastersFrom.java	/^    public TypeCaster<STORAGE_VALUE,Object> [] typ/
+SimpleTypeCastersRegistry	SimpleTypeCastersRegistry.java	63
+SimpleTypeCastersRegistry.List	SimpleTypeCastersRegistry.java	78
+SimpleTypeCastersRegistry.Map	SimpleTypeCastersRegistry.java	70
+SimpleTypeCastersRegistry.Map	SimpleTypeCastersRegistry.java	74
+SimpleTypeCastersRegistry.SimpleTypeCastersRegistry	SimpleTypeCastersRegistry.java	/^    public SimpleTypeCastersRegistry ()$/
+SimpleTypeCastersRegistry.TypeCaster	SimpleTypeCastersRegistry.java	127
+SimpleTypeCastersRegistry.TypeCaster	SimpleTypeCastersRegistry.java	232
+SimpleTypeCastersRegistry.from	SimpleTypeCastersRegistry.java	70
+SimpleTypeCastersRegistry.from	SimpleTypeCastersRegistry.java	/^                      TypeCastersFrom<FROM> from (/
+SimpleTypeCastersRegistry.get	SimpleTypeCastersRegistry.java	/^            TypeCaster<FROM,TO> get ($/
+SimpleTypeCastersRegistry.lock	SimpleTypeCastersRegistry.java	67
+SimpleTypeCastersRegistry.public	SimpleTypeCastersRegistry.java	125
+SimpleTypeCastersRegistry.public	SimpleTypeCastersRegistry.java	148
+SimpleTypeCastersRegistry.put	SimpleTypeCastersRegistry.java	/^            TypeCastersRegistry put ($/
+SimpleTypeCastersRegistry.to	SimpleTypeCastersRegistry.java	74
+SimpleTypeCastersRegistry.to	SimpleTypeCastersRegistry.java	/^                      TypeCastersTo<TO> to ($/
+SimpleTypeCastersRegistry.typeCasters	SimpleTypeCastersRegistry.java	78
+SimpleTypeCastersRegistry.typeCasters	SimpleTypeCastersRegistry.java	/^    public TypeCaster<Object,Object> [] typeCaster/
+SimpleTypeCastersTo	SimpleTypeCastersTo.java	56
+SimpleTypeCastersTo.Map	SimpleTypeCastersTo.java	67
+SimpleTypeCastersTo.SimpleTypeCastersTo	SimpleTypeCastersTo.java	/^    public SimpleTypeCastersTo ($/
+SimpleTypeCastersTo.TypeCaster	SimpleTypeCastersTo.java	98
+SimpleTypeCastersTo.TypeCaster	SimpleTypeCastersTo.java	208
+SimpleTypeCastersTo.from	SimpleTypeCastersTo.java	/^        TypeCaster<FROM,STORAGE_VALUE> from ($/
+SimpleTypeCastersTo.lock	SimpleTypeCastersTo.java	60
+SimpleTypeCastersTo.register	SimpleTypeCastersTo.java	/^        TypeCastersTo register ($/
+SimpleTypeCastersTo.toType	SimpleTypeCastersTo.java	63
+SimpleTypeCastersTo.type	SimpleTypeCastersTo.java	/^    public Type<STORAGE_VALUE> type ()$/
+SimpleTypeCastersTo.typeCasters	SimpleTypeCastersTo.java	68
+SimpleTypeCastersTo.typeCasters	SimpleTypeCastersTo.java	/^    public TypeCaster<Object,STORAGE_VALUE> [] typ/
+SimpleTypeSystem	SimpleTypeSystem.java	49
+SimpleTypeSystem.SimpleTypeSystem	SimpleTypeSystem.java	/^    public SimpleTypeSystem ($/
+SimpleTypeSystem.SimpleTypeSystem	SimpleTypeSystem.java	/^    public SimpleTypeSystem ($/
+SimpleTypeSystem.contains	SimpleTypeSystem.java	/^    public boolean contains ($/
+SimpleTypeSystem.environment	SimpleTypeSystem.java	54
+SimpleTypeSystem.environment	SimpleTypeSystem.java	/^    public TypingEnvironment environment ()$/
+SimpleTypeSystem.tags	SimpleTypeSystem.java	62
+SimpleTypeSystem.tags	SimpleTypeSystem.java	/^    public Tag [] tags ()$/
+SimpleTypeSystem.typeSystemParent	SimpleTypeSystem.java	57
+SimpleTypeSystem.typeSystemParent	SimpleTypeSystem.java	/^    public TypeSystem typeSystemParent ()$/
+SimpleTypeSystem.types	SimpleTypeSystem.java	65
+SimpleTypeSystem.types	SimpleTypeSystem.java	/^    public Type<Object> [] types ()$/
+SimpleTypeSystemBuilder	SimpleTypeSystemBuilder.java	48
+SimpleTypeSystemBuilder.SimpleTypeSystemBuilder	SimpleTypeSystemBuilder.java	/^    public SimpleTypeSystemBuilder ($/
+SimpleTypeSystemBuilder.add	SimpleTypeSystemBuilder.java	/^    public TypeSystemBuilder add ($/
+SimpleTypeSystemBuilder.add	SimpleTypeSystemBuilder.java	/^    public TypeSystemBuilder add ($/
+SimpleTypeSystemBuilder.build	SimpleTypeSystemBuilder.java	/^    public SimpleTypeSystem build ()$/
+SimpleTypeSystemBuilder.environment	SimpleTypeSystemBuilder.java	56
+SimpleTypeSystemBuilder.environment	SimpleTypeSystemBuilder.java	/^    public TypingEnvironment environment ()$/
+SimpleTypeSystemBuilder.lock	SimpleTypeSystemBuilder.java	52
+SimpleTypeSystemBuilder.prepare	SimpleTypeSystemBuilder.java	/^            TypeBuilder<STORAGE_VALUE> prepare ($/
+SimpleTypeSystemBuilder.remove	SimpleTypeSystemBuilder.java	/^    public TypeSystemBuilder remove ($/
+SimpleTypeSystemBuilder.remove	SimpleTypeSystemBuilder.java	/^    public TypeSystemBuilder remove ($/
+SimpleTypeSystemBuilder.tags	SimpleTypeSystemBuilder.java	64
+SimpleTypeSystemBuilder.tags	SimpleTypeSystemBuilder.java	/^    public Tag [] tags ()$/
+SimpleTypeSystemBuilder.typeSystemParent	SimpleTypeSystemBuilder.java	59
+SimpleTypeSystemBuilder.typeSystemParent	SimpleTypeSystemBuilder.java	/^    public TypeSystem typeSystemParent ()$/
+SimpleTypeSystemBuilder.types	SimpleTypeSystemBuilder.java	67
+SimpleTypeSystemBuilder.types	SimpleTypeSystemBuilder.java	/^    public Type<Object> [] types ()$/
+SimpleTypeSystemBuilder.validate	SimpleTypeSystemBuilder.java	/^            TypeSystemBuilder validate ($/
+SimpleTypesRegistry	SimpleTypesRegistry.java	65
+SimpleTypesRegistry.SimpleTypesRegistry	SimpleTypesRegistry.java	/^    public SimpleTypesRegistry ()$/
+SimpleTypesRegistry.lock	SimpleTypesRegistry.java	69
+SimpleTypesRegistry.public	SimpleTypesRegistry.java	175
+SimpleTypesRegistry.put	SimpleTypesRegistry.java	/^    public TypesRegistry put ($/
+SimpleTypesRegistry.rawClasses	SimpleTypesRegistry.java	/^    public Class<?> [] rawClasses ()$/
+SimpleTypesRegistry.registry	SimpleTypesRegistry.java	76
+SimpleTypesRegistry.type	SimpleTypesRegistry.java	/^                           Type<STORAGE_VALUE> typ/
+SimpleTypesRegistry.typeSystem	SimpleTypesRegistry.java	/^    public TypeSystem typeSystem ($/
+SimpleTypesRegistry.typeSystems	SimpleTypesRegistry.java	80
+SimpleTypesRegistry.typeSystems	SimpleTypesRegistry.java	/^    public TypeSystem [] typeSystems ()$/
+SimpleTypesRegistry.types	SimpleTypesRegistry.java	/^    public Type<Object> [] types ()$/
+Tag	Tag.java	59
+Type	Type.java	51
+Type.Conditional	Type.java	212
+Type.Conditional	Type.java	265
+Type.NONE	Type.java	56
+Type.abstract	Type.java	211
+Type.abstract	Type.java	264
+TypeBuilder	TypeBuilder.java	51
+TypeBuilder.Violation	TypeBuilder.java	69
+TypeBuilder.Violation	TypeBuilder.java	70
+TypeBuilder.Violation	TypeBuilder.java	84
+TypeBuilder.Violation	TypeBuilder.java	85
+TypeBuilder.Violation	TypeBuilder.java	103
+TypeBuilder.Violation	TypeBuilder.java	104
+TypeBuilder.Violation	TypeBuilder.java	105
+TypeBuilder.Violation	TypeBuilder.java	123
+TypeBuilder.Violation	TypeBuilder.java	124
+TypeBuilder.Violation	TypeBuilder.java	125
+TypeBuilder.Violation	TypeBuilder.java	198
+TypeBuilder.Violation	TypeBuilder.java	199
+TypeBuilder.Violation	TypeBuilder.java	200
+TypeBuilder.Violation	TypeBuilder.java	201
+TypeBuilder.Violation	TypeBuilder.java	261
+TypeBuilder.Violation	TypeBuilder.java	262
+TypeBuilder.Violation	TypeBuilder.java	263
+TypeBuilder.Violation	TypeBuilder.java	264
+TypeBuilder.Violation	TypeBuilder.java	327
+TypeBuilder.Violation	TypeBuilder.java	328
+TypeBuilder.Violation	TypeBuilder.java	329
+TypeBuilder.Violation	TypeBuilder.java	370
+TypeBuilder.Violation	TypeBuilder.java	371
+TypeBuilder.Violation	TypeBuilder.java	372
+TypeBuilder.abstract	TypeBuilder.java	190
+TypeBuilder.abstract	TypeBuilder.java	253
+TypeBuilder.abstract	TypeBuilder.java	320
+TypeBuilder.abstract	TypeBuilder.java	363
+TypeCastException	TypeCastException.java	110
+TypeCastException.TypeCastException	TypeCastException.java	/^    public TypeCastException ($/
+TypeCastException.TypeCastException	TypeCastException.java	/^    public TypeCastException ($/
+TypeCastException.TypeCastException	TypeCastException.java	/^    public TypeCastException ($/
+TypeCaster	AbstractTypeCaster.java	46
+TypeCaster	PassThroughTypeCaster.java	48
+TypeCaster	ChainCaster.java	58
+TypeCastersFrom	TypeCastersFrom.java	56
+TypeCastersFrom.TypeCaster	TypeCastersFrom.java	90
+TypeCastersFrom.TypeCaster	TypeCastersFrom.java	115
+TypeCastersRegistry	TypeCastersRegistry.java	56
+TypeCastersRegistry.NONE	TypeCastersRegistry.java	60
+TypeCastersRegistry.TypeCaster	TypeCastersRegistry.java	114
+TypeCastersRegistry.TypeCaster	TypeCastersRegistry.java	191
+TypeCastersRegistry.abstract	TypeCastersRegistry.java	112
+TypeCastersRegistry.abstract	TypeCastersRegistry.java	157
+TypeCastersTo	TypeCastersTo.java	56
+TypeCastersTo.TypeCaster	TypeCastersTo.java	90
+TypeCastersTo.TypeCaster	TypeCastersTo.java	115
+TypeException	TypeException.java	104
+TypeException.TypeException	TypeException.java	/^    public TypeException ($/
+TypeException.TypeException	TypeException.java	/^    public TypeException ($/
+TypeException.TypeException	TypeException.java	/^    public TypeException ($/
+TypeSystem	TypeSystem.java	56
+TypeSystem.NONE	TypeSystem.java	60
+TypeSystemBuilder	TypeSystemBuilder.java	46
+TypesRegistry	TypesRegistry.java	57
+TypesRegistry.NONE	TypesRegistry.java	61
+TypesRegistry.abstract	TypesRegistry.java	130
+TypingEnvironment	TypingEnvironment.java	55
+TypingEnvironment.Conditional	TypingEnvironment.java	126
+TypingEnvironment.Conditional	TypingEnvironment.java	152
+TypingEnvironment.Conditional	TypingEnvironment.java	193
+TypingEnvironment.Conditional	TypingEnvironment.java	243
+TypingEnvironment.Conditional	TypingEnvironment.java	278
+TypingEnvironment.NONE	TypingEnvironment.java	59
+TypingEnvironment.abstract	TypingEnvironment.java	124
+TypingEnvironment.abstract	TypingEnvironment.java	150
+TypingEnvironment.abstract	TypingEnvironment.java	191
+TypingEnvironment.abstract	TypingEnvironment.java	241
+TypingEnvironment.abstract	TypingEnvironment.java	386
+TypingEnvironment.abstract	TypingEnvironment.java	415

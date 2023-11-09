@@ -1,0 +1,25 @@
+
+Filter.java,180
+public interface Filter<Filter47,1105
+    public static enum StateFilter.State53,1235
+        KEPT,Filter.State.KEPT56,1335
+        DISCARDED;Filter.State.DISCARDED59,1404
+
+CompositeFilter.java,58
+public interface CompositeFilter<CompositeFilter42,1034
+
+AbstractCompositeFilter.java,429
+public abstract class AbstractCompositeFilter<AbstractCompositeFilter50,1279
+    private static final ObjectContracts classContracts AbstractCompositeFilter.classContracts54,1473
+    private Filter<GRAIN> [] filters;AbstractCompositeFilter.filters59,1651
+    public Filter<GRAIN> [] filters AbstractCompositeFilter.filters93,2817
+    protected final Filter<GRAIN> [] myFilters AbstractCompositeFilter.myFilters110,3409
+
+FilterOp.java,469
+public class FilterOp<FilterOp52,1328
+    private static final long serialVersionUID FilterOp.serialVersionUID57,1517
+    private static final String serialVersionHash FilterOp.serialVersionHash58,1577
+    private static final ObjectContracts classContracts FilterOp.classContracts63,1757
+    private final Filter<GRAIN> filter;FilterOp.filter69,1987
+    public FilterOp FilterOp.FilterOp94,2953
+    public Value<GRAIN> evaluate FilterOp.evaluate114,3483

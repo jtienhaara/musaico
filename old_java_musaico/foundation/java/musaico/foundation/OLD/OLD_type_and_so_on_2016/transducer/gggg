@@ -1,0 +1,43 @@
+new StateGraphBuilder ( ... )
+    .on ( ...input value... )
+    .automatically ()
+
+        .output ( ...output value... )
+        .register ( ...register... )
+            .readToInput ()
+            .readToOutput ()
+            .swap ( ...register... )
+            .jump () --> replaces logic
+            .push () --> logic
+            .pop () --> logic
+            .write ( ...value... )
+            .writeFromInput ()
+            .writeFromOutput ()
+
+        .to ( ...state... )
+        .toEntry ()
+        .toExit ()
++++++++++++++++++++++++++++++++++++++
+
+    .from ( state value )
+    .fromEntry ()
+
+    .on ( tape, value/domain/contract )
+    .automatically ()
+
+    .output ( tape, value/graph/machine )
+    .swap ( tape1, tape2 ) --> swaps whole tape state machines
+    .copy ( from_tape, to_tape ) --> copies whole tape state machine
+    .clear ( tape ) --> sets tape to empty state machine builder
+    .swapState ( tape1, tape2 ) --> swaps current state between tape builders
+    .copyState ( from_tape, to_tape ) --> adds from state to to tape builder
+    .removeState ( tape ) --> not sure how to do this (what will new state be?)
+    .jump ( tape ) --> replaces logic
+    .push ( tape )
+    .pop ( tape )
+
+    .to ( state value )
+    .toExit ()
+
+Tapes:
+input, output, registers, stack, ... ???

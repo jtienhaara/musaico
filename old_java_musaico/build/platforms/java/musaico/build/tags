@@ -1,0 +1,92 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ADDRESS	MODULE.java	/^    private static final String ADDRESS = "http:\/\/www.musaico.org";$/;"	f	class:MODULE	file:
+CONTACT	MODULE.java	/^    private static final String CONTACT =$/;"	f	class:MODULE	file:
+COPYRIGHT	MODULE.java	/^    private static final String COPYRIGHT =$/;"	f	class:MODULE	file:
+DESCRIPTION	MODULE.java	/^    private static final String DESCRIPTION =$/;"	f	class:MODULE	file:
+HASH	MODULE.java	/^    private static final String HASH =$/;"	f	class:MODULE	file:
+LICENSE	MODULE.java	/^    private static final License LICENSE = License.BSD;$/;"	f	class:MODULE	file:
+MODULE	MODULE.java	/^    private MODULE ()$/;"	m	class:MODULE	file:
+MODULE	MODULE.java	/^    public static final MODULE MODULE = new MODULE ();$/;"	f	class:MODULE
+MODULE	MODULE.java	/^public final class MODULE$/;"	c
+ModuleSerialVersionHashGenerator	ModuleSerialVersionHashGenerator.java	/^public class ModuleSerialVersionHashGenerator$/;"	c
+NoSerialVersionHashException	NoSerialVersionHashException.java	/^    public NoSerialVersionHashException ( String message,$/;"	m	class:NoSerialVersionHashException
+NoSerialVersionHashException	NoSerialVersionHashException.java	/^    public NoSerialVersionHashException ($/;"	m	class:NoSerialVersionHashException
+NoSerialVersionHashException	NoSerialVersionHashException.java	/^public class NoSerialVersionHashException$/;"	c
+NotConcreteClassException	NotConcreteClassException.java	/^    public NotConcreteClassException ( String message,$/;"	m	class:NotConcreteClassException
+NotConcreteClassException	NotConcreteClassException.java	/^    public NotConcreteClassException ($/;"	m	class:NotConcreteClassException
+NotConcreteClassException	NotConcreteClassException.java	/^public class NotConcreteClassException$/;"	c
+NotSerializableException	NotSerializableException.java	/^    public NotSerializableException ( String message,$/;"	m	class:NotSerializableException
+NotSerializableException	NotSerializableException.java	/^    public NotSerializableException ($/;"	m	class:NotSerializableException
+NotSerializableException	NotSerializableException.java	/^public class NotSerializableException$/;"	c
+PARENT_MODULE	ModuleSerialVersionHashGenerator.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:ModuleSerialVersionHashGenerator
+PARENT_MODULE	NoSerialVersionHashException.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:NoSerialVersionHashException
+PARENT_MODULE	NotConcreteClassException.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:NotConcreteClassException
+PARENT_MODULE	NotSerializableException.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:NotSerializableException
+PARENT_MODULE	SerialHasher.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:SerialHasher
+PARENT_MODULE	SerialVersionHashGenerator.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:SerialVersionHashGenerator
+PARENT_MODULE	Serializer.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:Serializer
+PARENT_MODULE	SerializingException.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:SerializingException
+PARENT_MODULE	SourceHasher.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:SourceHasher
+PARENT_MODULE	TestSerializable.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:TestSerializable
+PARENT_MODULE	TestSerializableClass.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:TestSerializableClass
+PARENT_MODULE	TestSerializableModule.java	/^    public static final MODULE PARENT_MODULE = MODULE.MODULE;$/;"	f	class:TestSerializableModule
+SerialHasher	SerialHasher.java	/^public class SerialHasher$/;"	c
+SerialVersionHashGenerator	SerialVersionHashGenerator.java	/^public class SerialVersionHashGenerator$/;"	c
+Serializer	Serializer.java	/^public class Serializer$/;"	c
+SerializingException	SerializingException.java	/^    public SerializingException ( String message,$/;"	m	class:SerializingException
+SerializingException	SerializingException.java	/^    public SerializingException ($/;"	m	class:SerializingException
+SerializingException	SerializingException.java	/^public class SerializingException$/;"	c
+SourceHasher	SourceHasher.java	/^public class SourceHasher$/;"	c
+TestSerializable	TestSerializable.java	/^public class TestSerializable$/;"	c
+TestSerializableClass	TestSerializableClass.java	/^public class TestSerializableClass$/;"	c
+TestSerializableModule	TestSerializableModule.java	/^public class TestSerializableModule$/;"	c
+VERSION	MODULE.java	/^    static final long VERSION = 20170316L;$/;"	f	class:MODULE
+address	MODULE.java	/^    public final String address ()$/;"	m	class:MODULE
+bytesToHexString	SerialVersionHashGenerator.java	/^    public String bytesToHexString ($/;"	m	class:SerialVersionHashGenerator
+checkSerialVersionHashField	ModuleSerialVersionHashGenerator.java	/^    protected void checkSerialVersionHashField ($/;"	m	class:ModuleSerialVersionHashGenerator
+checkSerialVersionHashField	SerialVersionHashGenerator.java	/^    protected void checkSerialVersionHashField ($/;"	m	class:SerialVersionHashGenerator
+contact	MODULE.java	/^    public final String contact ()$/;"	m	class:MODULE
+copyright	MODULE.java	/^    public final String copyright ()$/;"	m	class:MODULE
+description	MODULE.java	/^    public final String description ()$/;"	m	class:MODULE
+filterClasses	SerialVersionHashGenerator.java	/^    public Class<?> [] filterClasses ($/;"	m	class:SerialVersionHashGenerator
+hash	MODULE.java	/^    public final String hash ()$/;"	m	class:MODULE
+hash	SerialHasher.java	/^    public byte [] hash ($/;"	m	class:SerialHasher
+hash	SerialVersionHashGenerator.java	/^    public byte [] hash ($/;"	m	class:SerialVersionHashGenerator
+hash	SourceHasher.java	/^    public byte [] hash ($/;"	m	class:SourceHasher
+hashObject63Bit	SerialVersionHashGenerator.java	/^    public long hashObject63Bit ($/;"	m	class:SerialVersionHashGenerator
+hashObjectBytes	SerialVersionHashGenerator.java	/^    public byte [] hashObjectBytes ($/;"	m	class:SerialVersionHashGenerator
+hashObjectHexString	SerialVersionHashGenerator.java	/^    public String hashObjectHexString ($/;"	m	class:SerialVersionHashGenerator
+hashSourceBytes	SerialVersionHashGenerator.java	/^    public byte [] hashSourceBytes ($/;"	m	class:SerialVersionHashGenerator
+license	MODULE.java	/^    public final License license ()$/;"	m	class:MODULE
+main	ModuleSerialVersionHashGenerator.java	/^    public static void main ($/;"	m	class:ModuleSerialVersionHashGenerator
+main	SerialVersionHashGenerator.java	/^    public static void main ($/;"	m	class:SerialVersionHashGenerator
+main	TestSerializable.java	/^    public static void main ($/;"	m	class:TestSerializable
+main	TestSerializableClass.java	/^    public static void main ($/;"	m	class:TestSerializableClass
+main	TestSerializableModule.java	/^    public static void main ($/;"	m	class:TestSerializableModule
+musaico.build	MODULE.java	/^package musaico.build;$/;"	p
+musaico.build	ModuleSerialVersionHashGenerator.java	/^package musaico.build;$/;"	p
+musaico.build	NoSerialVersionHashException.java	/^package musaico.build;$/;"	p
+musaico.build	NotConcreteClassException.java	/^package musaico.build;$/;"	p
+musaico.build	NotSerializableException.java	/^package musaico.build;$/;"	p
+musaico.build	SerialHasher.java	/^package musaico.build;$/;"	p
+musaico.build	SerialVersionHashGenerator.java	/^package musaico.build;$/;"	p
+musaico.build	Serializer.java	/^package musaico.build;$/;"	p
+musaico.build	SerializingException.java	/^package musaico.build;$/;"	p
+musaico.build	SourceHasher.java	/^package musaico.build;$/;"	p
+musaico.build	TestSerializable.java	/^package musaico.build;$/;"	p
+musaico.build	TestSerializableClass.java	/^package musaico.build;$/;"	p
+musaico.build	TestSerializableModule.java	/^package musaico.build;$/;"	p
+serialVersionUID	MODULE.java	/^    private static final long serialVersionUID = VERSION;$/;"	f	class:MODULE	file:
+serialVersionUID	NoSerialVersionHashException.java	/^    private static final long serialVersionUID = MODULE.VERSION;$/;"	f	class:NoSerialVersionHashException	file:
+serialVersionUID	NotConcreteClassException.java	/^    private static final long serialVersionUID = MODULE.VERSION;$/;"	f	class:NotConcreteClassException	file:
+serialVersionUID	NotSerializableException.java	/^    private static final long serialVersionUID = MODULE.VERSION;$/;"	f	class:NotSerializableException	file:
+serialVersionUID	SerializingException.java	/^    private static final long serialVersionUID = MODULE.VERSION;$/;"	f	class:SerializingException	file:
+serialize	Serializer.java	/^    public void serialize ($/;"	m	class:Serializer
+sourceFilename	SerialVersionHashGenerator.java	/^    public String sourceFilename ($/;"	m	class:SerialVersionHashGenerator
+sourceFilenames	SerialVersionHashGenerator.java	/^    private final Map<Class<?>, String> sourceFilenames =$/;"	f	class:SerialVersionHashGenerator	file:
+version	MODULE.java	/^    public final long version ()$/;"	m	class:MODULE

@@ -1,0 +1,189 @@
+
+ContractViolation.java,43
+public interface ContractViolation48,1176
+
+ContractUncheckedViolation.java,1280
+public abstract class ContractUncheckedViolation49,1169
+    private final Contract<?, ?> contract;ContractUncheckedViolation.contract54,1321
+    private final Serializable objectUnderContract;ContractUncheckedViolation.objectUnderContract58,1491
+    private final Serializable inspectableData;ContractUncheckedViolation.inspectableData63,1706
+    public ContractUncheckedViolation ContractUncheckedViolation.ContractUncheckedViolation88,2760
+    public Contract<?, ?> contract ContractUncheckedViolation.contract114,3796
+    public Serializable objectUnderContract ContractUncheckedViolation.objectUnderContract123,3974
+    public Serializable inspectableData ContractUncheckedViolation.inspectableData132,4168
+    protected static final boolean containsNullOrNonSerializableElement ContractUncheckedViolation.containsNullOrNonSerializableElement144,4452
+    public boolean equals ContractUncheckedViolation.equals182,5499
+    public int hashCode ContractUncheckedViolation.hashCode220,6454
+    public static String violationToMessage ContractUncheckedViolation.violationToMessage254,7804
+    static String inspectableToString ContractUncheckedViolation.inspectableToString284,8749
+    public String toString ContractUncheckedViolation.toString330,9929
+
+ContractCheckedViolation.java,913
+public abstract class ContractCheckedViolation47,1124
+    private final Contract<?, ?> contract;ContractCheckedViolation.contract52,1267
+    private final Serializable objectUnderContract;ContractCheckedViolation.objectUnderContract56,1437
+    private final Serializable inspectableData;ContractCheckedViolation.inspectableData61,1652
+    public ContractCheckedViolation ContractCheckedViolation.ContractCheckedViolation86,2704
+    public Contract<?, ?> contract ContractCheckedViolation.contract113,3873
+    public Serializable objectUnderContract ContractCheckedViolation.objectUnderContract122,4051
+    public Serializable inspectableData ContractCheckedViolation.inspectableData131,4245
+    public boolean equals ContractCheckedViolation.equals141,4423
+    public int hashCode ContractCheckedViolation.hashCode179,5374
+    public String toString ContractCheckedViolation.toString192,5646
+
+AbstractContract.java,112
+    implements Contract<Contract53,1315
+    implements Contract<INSPECTABLE, VIOLATION>, Serializable53,1315
+
+Obligation.java,117
+    extends Contract<Contract53,1367
+    extends Contract<INSPECTABLE, OBLIGATION_VIOLATION>, Serializable53,1367
+
+NoObligation.java,433
+public class NoObligation47,1112
+    private static final long serialVersionUID NoObligation.serialVersionUID52,1352
+    private static final String serialVersionHash NoObligation.serialVersionHash53,1411
+    public void enforce NoObligation.enforce61,1644
+    public boolean equals NoObligation.equals75,1989
+    public int hashCode NoObligation.hashCode96,2365
+    public String toString NoObligation.toString106,2494
+
+ObligationUncheckedViolation.java,365
+public class ObligationUncheckedViolation49,1280
+    private static final long serialVersionUID ObligationUncheckedViolation.serialVersionUID53,1434
+    private static final String serialVersionHash ObligationUncheckedViolation.serialVersionHash54,1494
+    public ObligationUncheckedViolation ObligationUncheckedViolation.ObligationUncheckedViolation80,2639
+
+ObligationCheckedViolation.java,353
+public class ObligationCheckedViolation49,1268
+    private static final long serialVersionUID ObligationCheckedViolation.serialVersionUID53,1418
+    private static final String serialVersionHash ObligationCheckedViolation.serialVersionHash54,1478
+    public ObligationCheckedViolation ObligationCheckedViolation.ObligationCheckedViolation80,2621
+
+Guarantee.java,116
+    extends Contract<Contract54,1383
+    extends Contract<INSPECTABLE, GUARANTEE_VIOLATION>, Serializable54,1383
+
+NoGuarantee.java,260
+public class NoGuarantee47,1111
+    private static final long serialVersionUID NoGuarantee.serialVersionUID52,1347
+    private static final String serialVersionHash NoGuarantee.serialVersionHash53,1406
+    public void enforce NoGuarantee.enforce61,1639
+
+GuaranteeUncheckedViolation.java,359
+public class GuaranteeUncheckedViolation50,1294
+    private static final long serialVersionUID GuaranteeUncheckedViolation.serialVersionUID54,1447
+    private static final String serialVersionHash GuaranteeUncheckedViolation.serialVersionHash55,1507
+    public GuaranteeUncheckedViolation GuaranteeUncheckedViolation.GuaranteeUncheckedViolation79,2572
+
+GuaranteeCheckedViolation.java,347
+public class GuaranteeCheckedViolation50,1282
+    private static final long serialVersionUID GuaranteeCheckedViolation.serialVersionUID54,1431
+    private static final String serialVersionHash GuaranteeCheckedViolation.serialVersionHash55,1491
+    public GuaranteeCheckedViolation GuaranteeCheckedViolation.GuaranteeCheckedViolation79,2556
+
+Arbiter.java,78
+public interface Arbiter50,1287
+    public abstractArbiter.abstract90,2622
+
+Domain.java,105
+public interface Domain<Domain53,1285
+    public static final Domain<Object> NONE Domain.NONE57,1406
+
+ArrayDomain.java,50
+public interface ArrayDomain<ArrayDomain50,1187
+
+NoDomain.java,414
+public class NoDomain52,1203
+    private static final long serialVersionUID NoDomain.serialVersionUID56,1342
+    private static final String serialVersionHash NoDomain.serialVersionHash57,1402
+    public final boolean isValid NoDomain.isValid65,1613
+    public boolean equals NoDomain.equals77,1850
+    public int hashCode NoDomain.hashCode98,2226
+    public String toString NoDomain.toString108,2355
+
+DomainObligation.java,156
+    implements Obligation<Obligation56,1471
+    implements Obligation<INSPECTABLE, DOMAIN_OBLIGATION_VIOLATION>, Serializable56,1471
+    public 76,2130
+
+NoDomainObligation.java,623
+public class NoDomainObligation<NoDomainObligation47,1130
+    private static final long serialVersionUID NoDomainObligation.serialVersionUID52,1367
+    private static final String serialVersionHash NoDomainObligation.serialVersionHash53,1427
+    public NoDomainObligation NoDomainObligation.NoDomainObligation65,1788
+    public final DomainObligationCheckedViolation createViolation NoDomainObligation.createViolation77,2098
+    public boolean equals NoDomainObligation.equals92,2744
+    public int hashCode NoDomainObligation.hashCode113,3120
+    public String toString NoDomainObligation.toString123,3249
+
+DomainObligationUncheckedViolation.java,401
+public class DomainObligationUncheckedViolation50,1317
+    private static final long serialVersionUID DomainObligationUncheckedViolation.serialVersionUID54,1479
+    private static final String serialVersionHash DomainObligationUncheckedViolation.serialVersionHash55,1539
+    public DomainObligationUncheckedViolation DomainObligationUncheckedViolation.DomainObligationUncheckedViolation81,2716
+
+DomainObligationCheckedViolation.java,389
+public class DomainObligationCheckedViolation50,1305
+    private static final long serialVersionUID DomainObligationCheckedViolation.serialVersionUID54,1463
+    private static final String serialVersionHash DomainObligationCheckedViolation.serialVersionHash55,1523
+    public DomainObligationCheckedViolation DomainObligationCheckedViolation.DomainObligationCheckedViolation81,2698
+
+DomainGuarantee.java,152
+    implements Guarantee<Guarantee56,1469
+    implements Guarantee<INSPECTABLE, DOMAIN_GUARANTEE_VIOLATION>, Serializable56,1469
+    public 76,2122
+
+NoDomainGuarantee.java,611
+public class NoDomainGuarantee<NoDomainGuarantee47,1129
+    private static final long serialVersionUID NoDomainGuarantee.serialVersionUID52,1363
+    private static final String serialVersionHash NoDomainGuarantee.serialVersionHash53,1423
+    public NoDomainGuarantee NoDomainGuarantee.NoDomainGuarantee65,1784
+    public final DomainGuaranteeCheckedViolation createViolation NoDomainGuarantee.createViolation77,2090
+    public boolean equals NoDomainGuarantee.equals92,2729
+    public int hashCode NoDomainGuarantee.hashCode113,3105
+    public String toString NoDomainGuarantee.toString123,3234
+
+DomainGuaranteeUncheckedViolation.java,395
+public class DomainGuaranteeUncheckedViolation50,1332
+    private static final long serialVersionUID DomainGuaranteeUncheckedViolation.serialVersionUID54,1492
+    private static final String serialVersionHash DomainGuaranteeUncheckedViolation.serialVersionHash55,1552
+    public DomainGuaranteeUncheckedViolation DomainGuaranteeUncheckedViolation.DomainGuaranteeUncheckedViolation80,2693
+
+DomainGuaranteeCheckedViolation.java,383
+public class DomainGuaranteeCheckedViolation50,1320
+    private static final long serialVersionUID DomainGuaranteeCheckedViolation.serialVersionUID54,1476
+    private static final String serialVersionHash DomainGuaranteeCheckedViolation.serialVersionHash55,1536
+    public DomainGuaranteeCheckedViolation DomainGuaranteeCheckedViolation.DomainGuaranteeCheckedViolation80,2677
+
+ArbiterThrowsAllViolations.java,511
+public final class ArbiterThrowsAllViolations48,1146
+    private static final long serialVersionUID ArbiterThrowsAllViolations.serialVersionUID51,1217
+    private static final String serialVersionHash ArbiterThrowsAllViolations.serialVersionHash52,1277
+    public boolean isContractInspectionEnabled ArbiterThrowsAllViolations.isContractInspectionEnabled60,1493
+    public finalArbiterThrowsAllViolations.final70,1738
+                           void inspect ArbiterThrowsAllViolations.inspect72,1821
+
+Contracts.java,666
+public class Contracts42,1036
+    private static final Object lock Contracts.lock45,1113
+    private static Arbiter arbiter Contracts.arbiter52,1449
+    public static final boolean isContractInspectionEnabled Contracts.isContractInspectionEnabled64,1806
+    static finalContracts.final113,3628
+        void check Contracts.check115,3711
+    public Arbiter arbiter Contracts.arbiter146,4605
+    public static final Arbiter setArbiter Contracts.setArbiter165,5057
+    public static Serializable [] makeArrayOfSerializables Contracts.makeArrayOfSerializables202,6023
+    public static Serializable makeSerializable Contracts.makeSerializable233,6933
+
+ObjectContracts.java,507
+public class ObjectContracts53,1271
+    private static final long serialVersionUID ObjectContracts.serialVersionUID57,1401
+    private static final String serialVersionHash ObjectContracts.serialVersionHash58,1461
+    private final Serializable patron;ObjectContracts.patron64,1683
+    public ObjectContracts ObjectContracts.ObjectContracts78,2152
+    public finalObjectContracts.final120,3851
+        void check ObjectContracts.check122,3934
+        void check ObjectContracts.check143,4588
+
+Contract.java,0

@@ -1,0 +1,58 @@
+SecurityRule
++ request ( Permissions ) : Permissions
+
+Permissions
++ subject () : Credentials
++ object () : Identifier (?) Reference (?)
++ context () : Context
++ capabilities () : Capability []
++ isAllowed ( Credentials, Identifier/Reference/etc, Context,
+              Capability ... ) : boolean
++ isAllowed ( Permissions ) : boolean
+
+SecurityPolicy : SecurityRule
+
+SecurityPolicyBuilder
++ addRule ( SecurityRule ) : SecurityPolicyBuilder
++ removeRule ( SecurityRule ) : SecurityPolicyBuilder
++ build () : SecurityPolicy
+
+Grant : SecurityRule
++ permissions () : Permissions
+
+Revoke : SecurityRule
++ permissions () : Permissions
+
+Capability
++ id () : Identifier
+
+CapabilityWithParameters
++ parameters () : CapabilityParameter []
+
+CapabilityParameter
++ id () : Identifier
++ value () : Serializable
+
+Context
+
+KernelContext : Context
++ process () : Process
++ user () : User
++ executableONode () : ONode (or OEntry???)
++ moduleID () : ModuleID
+
+Credentials
++ id () : Identifier
+
+UserCredentials : Credentials
++ id () : UserID
++ groupIDs () : GroupID []
+
+ModuleCredentials : Credentials
++ id () : ModuleID
+
+ONodeCapabilities
++ READ : Capability
++ WRITE : Capability
+
+etc

@@ -1,0 +1,64 @@
+public interface Statement<X>
+{
+    public Maybe<X> execute ();
+}
+
+public interface Transaction<X>
+    extends Statement<X> // execute () just executes the children IF begun
+            // hmmmm maybe it should do begin () and prepare (), too
+            // how does it affect its parent?
+{
+    public Transaction<X> begin ();
+    public Transaction<X> add ( Statement<X> );
+public Transaction<X> executeTransaction ();
+    public Transaction<X> prepare ();
+    public Maybe<X> rollback ();
+    public Maybe<X> commit ();
+}
+
+
+
+public Countable<Transaction<Machine<I, S, T>>> transition ( Transaction<Machine> parent, INPUT ... inputs );
+
+or
+
+public Countable<Transaction<STATE>> transition ( Transaction<STATE>, INPUT ... inputs );
+
+for ( Transaction<STATE> transaction : machine.transition ( parent_transaction, inputs ) )
+{
+    final STATE state = transaction.begin ().executeTransaction ()
+}
+
+
+
+public interface Statement<X>
+{
+    public Maybe<X> execute ();
+}
+
+public interface Transaction<X>
+    extends Statement<X>, Maybe<X>
+{
+    public Transaction<X> begin ();
+    public Transaction<X> add ( Statement<X> );
+
+    @Override
+    public Transaction<X> execute ();
+
+    public Transaction<X> orRollback ();
+
+    public Transaction<X> prepare ();
+    public Transaction<X> commit ();
+
+    public boolean isRolledBack ();
+    public boolean isCommitted ();
+}
+
+transaction.begin ().add ( statement );
+
+X x = transaction.execute ().orRollback ().prepare ().commit ().orNull ();
+if ( transaction.isCommitted () ) { return x; }
+// else keep trying other transactions...
+
+
+transactions are higher level than machines.

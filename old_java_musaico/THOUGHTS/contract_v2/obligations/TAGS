@@ -1,0 +1,517 @@
+
+ParameterN.java,4352
+public class ParameterN70,1954
+    private static final long serialVersionUID ParameterN.serialVersionUID77,2196
+    private static final String serialVersionHash ParameterN.serialVersionHash78,2256
+    protected ParameterN ParameterN.ParameterN87,2443
+        extends DomainObligation<ParameterN.DomainObligation96,2752
+    private static final ThreadLocal<DomainObligation<?, ?>> currentDomainObligation ParameterN.currentDomainObligation144,4426
+    private static final ThreadLocal<Serializable> currentObjectUnderContract ParameterN.currentObjectUnderContract146,4565
+    private static final ThreadLocal<Serializable> currentInspectableData ParameterN.currentInspectableData148,4687
+    public static class ViolationParameterN.Violation153,4887
+        protected Violation ParameterN.Violation.Violation159,5073
+        extends ParameterN.Obligation<ParameterN.Obligation172,5439
+    public static class MustBeGreaterThanZero<ParameterN.MustBeGreaterThanZero189,5828
+        protected MustBeGreaterThanZero ParameterN.MustBeGreaterThanZero.MustBeGreaterThanZero195,6072
+    public static class MustBeGreaterThanOrEqualToZero<ParameterN.MustBeGreaterThanOrEqualToZero203,6277
+        protected MustBeGreaterThanOrEqualToZero ParameterN.MustBeGreaterThanOrEqualToZero.MustBeGreaterThanOrEqualToZero209,6530
+    public static class MustBeLessThanZero<ParameterN.MustBeLessThanZero217,6741
+        protected MustBeLessThanZero ParameterN.MustBeLessThanZero.MustBeLessThanZero223,6982
+    public static class MustBeLessThanOrEqualToZero<ParameterN.MustBeLessThanOrEqualToZero231,7178
+        protected MustBeLessThanOrEqualToZero ParameterN.MustBeLessThanOrEqualToZero.MustBeLessThanOrEqualToZero237,7428
+        extends ParameterN.Obligation<ParameterN.Obligation246,7737
+    public static class MustContain<ParameterN.MustContain266,8387
+        public MustContain ParameterN.MustContain.MustContain272,8647
+    public static class MustExclude<ParameterN.MustExclude282,8925
+        public MustExclude ParameterN.MustExclude.MustExclude288,9185
+    public static class MustContainNoDuplicates<ParameterN.MustContainNoDuplicates298,9459
+        protected MustContainNoDuplicates ParameterN.MustContainNoDuplicates.MustContainNoDuplicates304,9731
+    public static class MustContainNoNulls<ParameterN.MustContainNoNulls312,9918
+        protected MustContainNoNulls ParameterN.MustContainNoNulls.MustContainNoNulls318,10185
+    public static class MustExcludeClasses<ParameterN.MustExcludeClasses326,10378
+        public MustExcludeClasses ParameterN.MustExcludeClasses.MustExcludeClasses332,10645
+    public static class DependsOnParameterN.DependsOn344,10947
+        public static class This<ParameterN.DependsOn.This348,11096
+            public This ParameterN.DependsOn.This.This354,11369
+        public static class Parameter1<ParameterN.DependsOn.Parameter1364,11686
+            public Parameter1 ParameterN.DependsOn.Parameter1.Parameter1370,11965
+        public static class Parameter2<ParameterN.DependsOn.Parameter2380,12300
+            public Parameter2 ParameterN.DependsOn.Parameter2.Parameter2386,12579
+        public static class Parameter3<ParameterN.DependsOn.Parameter3396,12914
+            public Parameter3 ParameterN.DependsOn.Parameter3.Parameter3402,13193
+        public static class Parameter4<ParameterN.DependsOn.Parameter4412,13528
+            public Parameter4 ParameterN.DependsOn.Parameter4.Parameter4418,13807
+        public static class Parameter5<ParameterN.DependsOn.Parameter5428,14142
+            public Parameter5 ParameterN.DependsOn.Parameter5.Parameter5434,14421
+        public static class Parameter6<ParameterN.DependsOn.Parameter6444,14756
+            public Parameter6 ParameterN.DependsOn.Parameter6.Parameter6450,15035
+        public static class Parameter7<ParameterN.DependsOn.Parameter7460,15370
+            public Parameter7 ParameterN.DependsOn.Parameter7.Parameter7466,15649
+        public static class Parameter8<ParameterN.DependsOn.Parameter8476,15984
+            public Parameter8 ParameterN.DependsOn.Parameter8.Parameter8482,16263
+        public static class Parameter9<ParameterN.DependsOn.Parameter9492,16598
+            public Parameter9 ParameterN.DependsOn.Parameter9.Parameter9498,16877
+
+Parameter1.java,2882
+public class Parameter162,1592
+    private static final long serialVersionUID Parameter1.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter1.serialVersionHash70,1894
+    protected Parameter1 Parameter1.Parameter179,2081
+    public static class MustBe<Parameter1.MustBe85,2174
+        public MustBe Parameter1.MustBe.MustBe91,2406
+        public static class DomainViolationParameter1.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter1.MustBeGreaterThanZero110,2836
+        public static class ViolationParameter1.MustBeGreaterThanZero.Violation119,3180
+    public static class MustBeGreaterThanOrEqualToZeroParameter1.MustBeGreaterThanOrEqualToZero129,3466
+        public static class ViolationParameter1.MustBeGreaterThanOrEqualToZero.Violation138,3855
+    public static class MustBeLessThanZeroParameter1.MustBeLessThanZero148,4129
+        public static class ViolationParameter1.MustBeLessThanZero.Violation157,4458
+    public static class MustBeLessThanOrEqualToZeroParameter1.MustBeLessThanOrEqualToZero167,4741
+        public static class ViolationParameter1.MustBeLessThanOrEqualToZero.Violation176,5115
+    public static class MustBeInBounds<Parameter1.MustBeInBounds186,5390
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter1.MustBeInBounds.over193,5722
+        public MustBeInBounds Parameter1.MustBeInBounds.MustBeInBounds203,6239
+        public static class ViolationParameter1.MustBeInBounds.Violation212,6535
+    public static class MustContainParameter1.MustContain222,6813
+        public MustContain Parameter1.MustContain.MustContain228,7023
+        public static class ViolationParameter1.MustContain.Violation235,7189
+    public static class MustExcludeParameter1.MustExclude245,7467
+        public MustExclude Parameter1.MustExclude.MustExclude251,7677
+        public static class ViolationParameter1.MustExclude.Violation258,7843
+    public static class MustContainNoDuplicatesParameter1.MustContainNoDuplicates268,8117
+        public static class ViolationParameter1.MustContainNoDuplicates.Violation277,8471
+    public static class MustContainNoNullsParameter1.MustContainNoNulls287,8740
+        public static class ViolationParameter1.MustContainNoNulls.Violation296,9069
+    public static class MustExcludeClassesParameter1.MustExcludeClasses306,9354
+        public MustExcludeClasses Parameter1.MustExcludeClasses.MustExcludeClasses312,9585
+        public static class ViolationParameter1.MustExcludeClasses.Violation319,9765
+    public static class DependsOnParameter1.DependsOn331,10043
+        public static class ThisParameter1.DependsOn.This335,10196
+            public This Parameter1.DependsOn.This.This341,10425
+            public static class ViolationParameter1.DependsOn.This.Violation348,10589
+
+Parameter2.java,3141
+public class Parameter262,1592
+    private static final long serialVersionUID Parameter2.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter2.serialVersionHash70,1894
+    protected Parameter2 Parameter2.Parameter279,2081
+    public static class MustBe<Parameter2.MustBe85,2174
+        public MustBe Parameter2.MustBe.MustBe91,2406
+        public static class DomainViolationParameter2.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter2.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter2.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter2.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter2.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter2.MustBeLessThanZero146,4127
+        public static class ViolationParameter2.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter2.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter2.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter2.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter2.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter2.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter2.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter2.MustContain220,6811
+        public MustContain Parameter2.MustContain.MustContain226,7021
+        public static class ViolationParameter2.MustContain.Violation233,7187
+    public static class MustExcludeParameter2.MustExclude243,7465
+        public MustExclude Parameter2.MustExclude.MustExclude249,7675
+        public static class ViolationParameter2.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter2.MustContainNoDuplicates266,8115
+        public static class ViolationParameter2.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter2.MustContainNoNulls285,8738
+        public static class ViolationParameter2.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter2.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter2.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter2.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter2.DependsOn329,10041
+        public static class ThisParameter2.DependsOn.This333,10194
+            public This Parameter2.DependsOn.This.This339,10423
+            public static class ViolationParameter2.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter2.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter2.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter2.DependsOn.Parameter1.Violation369,11358
+
+Parameter3.java,3400
+public class Parameter363,1593
+    private static final long serialVersionUID Parameter3.serialVersionUID70,1835
+    private static final String serialVersionHash Parameter3.serialVersionHash71,1895
+    protected Parameter3 Parameter3.Parameter380,2082
+    public static class MustBe<Parameter3.MustBe86,2175
+        public MustBe Parameter3.MustBe.MustBe92,2407
+        public static class DomainViolationParameter3.MustBe.DomainViolation99,2552
+    public static class MustBeGreaterThanZeroParameter3.MustBeGreaterThanZero109,2835
+        public static class ViolationParameter3.MustBeGreaterThanZero.Violation118,3179
+    public static class MustBeGreaterThanOrEqualToZeroParameter3.MustBeGreaterThanOrEqualToZero128,3465
+        public static class ViolationParameter3.MustBeGreaterThanOrEqualToZero.Violation137,3854
+    public static class MustBeLessThanZeroParameter3.MustBeLessThanZero147,4128
+        public static class ViolationParameter3.MustBeLessThanZero.Violation156,4457
+    public static class MustBeLessThanOrEqualToZeroParameter3.MustBeLessThanOrEqualToZero166,4740
+        public static class ViolationParameter3.MustBeLessThanOrEqualToZero.Violation175,5114
+    public static class MustBeInBounds<Parameter3.MustBeInBounds185,5389
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter3.MustBeInBounds.over192,5721
+        public MustBeInBounds Parameter3.MustBeInBounds.MustBeInBounds202,6238
+        public static class ViolationParameter3.MustBeInBounds.Violation211,6534
+    public static class MustContainParameter3.MustContain221,6812
+        public MustContain Parameter3.MustContain.MustContain227,7022
+        public static class ViolationParameter3.MustContain.Violation234,7188
+    public static class MustExcludeParameter3.MustExclude244,7466
+        public MustExclude Parameter3.MustExclude.MustExclude250,7676
+        public static class ViolationParameter3.MustExclude.Violation257,7842
+    public static class MustContainNoDuplicatesParameter3.MustContainNoDuplicates267,8116
+        public static class ViolationParameter3.MustContainNoDuplicates.Violation276,8470
+    public static class MustContainNoNullsParameter3.MustContainNoNulls286,8739
+        public static class ViolationParameter3.MustContainNoNulls.Violation295,9068
+    public static class MustExcludeClassesParameter3.MustExcludeClasses305,9353
+        public MustExcludeClasses Parameter3.MustExcludeClasses.MustExcludeClasses311,9584
+        public static class ViolationParameter3.MustExcludeClasses.Violation318,9764
+    public static class DependsOnParameter3.DependsOn330,10042
+        public static class ThisParameter3.DependsOn.This334,10195
+            public This Parameter3.DependsOn.This.This340,10424
+            public static class ViolationParameter3.DependsOn.This.Violation347,10588
+        public static class Parameter1Parameter3.DependsOn.Parameter1357,10930
+            public Parameter1 Parameter3.DependsOn.Parameter1.Parameter1363,11177
+            public static class ViolationParameter3.DependsOn.Parameter1.Violation370,11359
+        public static class Parameter2Parameter3.DependsOn.Parameter2380,11701
+            public Parameter2 Parameter3.DependsOn.Parameter2.Parameter2386,11948
+            public static class ViolationParameter3.DependsOn.Parameter2.Violation393,12130
+
+Parameter4.java,3659
+public class Parameter462,1592
+    private static final long serialVersionUID Parameter4.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter4.serialVersionHash70,1894
+    protected Parameter4 Parameter4.Parameter479,2081
+    public static class MustBe<Parameter4.MustBe85,2174
+        public MustBe Parameter4.MustBe.MustBe91,2406
+        public static class DomainViolationParameter4.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter4.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter4.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter4.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter4.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter4.MustBeLessThanZero146,4127
+        public static class ViolationParameter4.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter4.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter4.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter4.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter4.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter4.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter4.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter4.MustContain220,6811
+        public MustContain Parameter4.MustContain.MustContain226,7021
+        public static class ViolationParameter4.MustContain.Violation233,7187
+    public static class MustExcludeParameter4.MustExclude243,7465
+        public MustExclude Parameter4.MustExclude.MustExclude249,7675
+        public static class ViolationParameter4.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter4.MustContainNoDuplicates266,8115
+        public static class ViolationParameter4.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter4.MustContainNoNulls285,8738
+        public static class ViolationParameter4.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter4.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter4.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter4.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter4.DependsOn329,10041
+        public static class ThisParameter4.DependsOn.This333,10194
+            public This Parameter4.DependsOn.This.This339,10423
+            public static class ViolationParameter4.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter4.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter4.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter4.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter4.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter4.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter4.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter4.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter4.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter4.DependsOn.Parameter3.Violation415,12900
+
+Parameter5.java,3918
+public class Parameter562,1592
+    private static final long serialVersionUID Parameter5.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter5.serialVersionHash70,1894
+    protected Parameter5 Parameter5.Parameter579,2081
+    public static class MustBe<Parameter5.MustBe85,2174
+        public MustBe Parameter5.MustBe.MustBe91,2406
+        public static class DomainViolationParameter5.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter5.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter5.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter5.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter5.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter5.MustBeLessThanZero146,4127
+        public static class ViolationParameter5.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter5.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter5.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter5.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter5.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter5.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter5.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter5.MustContain220,6811
+        public MustContain Parameter5.MustContain.MustContain226,7021
+        public static class ViolationParameter5.MustContain.Violation233,7187
+    public static class MustExcludeParameter5.MustExclude243,7465
+        public MustExclude Parameter5.MustExclude.MustExclude249,7675
+        public static class ViolationParameter5.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter5.MustContainNoDuplicates266,8115
+        public static class ViolationParameter5.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter5.MustContainNoNulls285,8738
+        public static class ViolationParameter5.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter5.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter5.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter5.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter5.DependsOn329,10041
+        public static class ThisParameter5.DependsOn.This333,10194
+            public This Parameter5.DependsOn.This.This339,10423
+            public static class ViolationParameter5.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter5.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter5.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter5.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter5.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter5.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter5.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter5.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter5.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter5.DependsOn.Parameter3.Violation415,12900
+        public static class Parameter4Parameter5.DependsOn.Parameter4425,13242
+            public Parameter4 Parameter5.DependsOn.Parameter4.Parameter4431,13489
+            public static class ViolationParameter5.DependsOn.Parameter4.Violation438,13671
+
+Parameter6.java,4177
+public class Parameter662,1592
+    private static final long serialVersionUID Parameter6.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter6.serialVersionHash70,1894
+    protected Parameter6 Parameter6.Parameter679,2081
+    public static class MustBe<Parameter6.MustBe85,2174
+        public MustBe Parameter6.MustBe.MustBe91,2406
+        public static class DomainViolationParameter6.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter6.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter6.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter6.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter6.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter6.MustBeLessThanZero146,4127
+        public static class ViolationParameter6.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter6.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter6.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter6.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter6.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter6.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter6.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter6.MustContain220,6811
+        public MustContain Parameter6.MustContain.MustContain226,7021
+        public static class ViolationParameter6.MustContain.Violation233,7187
+    public static class MustExcludeParameter6.MustExclude243,7465
+        public MustExclude Parameter6.MustExclude.MustExclude249,7675
+        public static class ViolationParameter6.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter6.MustContainNoDuplicates266,8115
+        public static class ViolationParameter6.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter6.MustContainNoNulls285,8738
+        public static class ViolationParameter6.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter6.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter6.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter6.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter6.DependsOn329,10041
+        public static class ThisParameter6.DependsOn.This333,10194
+            public This Parameter6.DependsOn.This.This339,10423
+            public static class ViolationParameter6.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter6.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter6.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter6.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter6.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter6.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter6.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter6.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter6.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter6.DependsOn.Parameter3.Violation415,12900
+        public static class Parameter4Parameter6.DependsOn.Parameter4425,13242
+            public Parameter4 Parameter6.DependsOn.Parameter4.Parameter4431,13489
+            public static class ViolationParameter6.DependsOn.Parameter4.Violation438,13671
+        public static class Parameter5Parameter6.DependsOn.Parameter5448,14013
+            public Parameter5 Parameter6.DependsOn.Parameter5.Parameter5454,14260
+            public static class ViolationParameter6.DependsOn.Parameter5.Violation461,14442
+
+Parameter7.java,4436
+public class Parameter762,1592
+    private static final long serialVersionUID Parameter7.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter7.serialVersionHash70,1894
+    protected Parameter7 Parameter7.Parameter779,2081
+    public static class MustBe<Parameter7.MustBe85,2174
+        public MustBe Parameter7.MustBe.MustBe91,2406
+        public static class DomainViolationParameter7.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter7.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter7.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter7.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter7.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter7.MustBeLessThanZero146,4127
+        public static class ViolationParameter7.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter7.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter7.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter7.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter7.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter7.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter7.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter7.MustContain220,6811
+        public MustContain Parameter7.MustContain.MustContain226,7021
+        public static class ViolationParameter7.MustContain.Violation233,7187
+    public static class MustExcludeParameter7.MustExclude243,7465
+        public MustExclude Parameter7.MustExclude.MustExclude249,7675
+        public static class ViolationParameter7.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter7.MustContainNoDuplicates266,8115
+        public static class ViolationParameter7.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter7.MustContainNoNulls285,8738
+        public static class ViolationParameter7.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter7.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter7.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter7.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter7.DependsOn329,10041
+        public static class ThisParameter7.DependsOn.This333,10194
+            public This Parameter7.DependsOn.This.This339,10423
+            public static class ViolationParameter7.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter7.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter7.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter7.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter7.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter7.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter7.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter7.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter7.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter7.DependsOn.Parameter3.Violation415,12900
+        public static class Parameter4Parameter7.DependsOn.Parameter4425,13242
+            public Parameter4 Parameter7.DependsOn.Parameter4.Parameter4431,13489
+            public static class ViolationParameter7.DependsOn.Parameter4.Violation438,13671
+        public static class Parameter5Parameter7.DependsOn.Parameter5448,14013
+            public Parameter5 Parameter7.DependsOn.Parameter5.Parameter5454,14260
+            public static class ViolationParameter7.DependsOn.Parameter5.Violation461,14442
+        public static class Parameter6Parameter7.DependsOn.Parameter6471,14784
+            public Parameter6 Parameter7.DependsOn.Parameter6.Parameter6477,15031
+            public static class ViolationParameter7.DependsOn.Parameter6.Violation484,15213
+
+Parameter8.java,4695
+public class Parameter862,1592
+    private static final long serialVersionUID Parameter8.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter8.serialVersionHash70,1894
+    protected Parameter8 Parameter8.Parameter879,2081
+    public static class MustBe<Parameter8.MustBe85,2174
+        public MustBe Parameter8.MustBe.MustBe91,2406
+        public static class DomainViolationParameter8.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter8.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter8.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter8.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter8.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter8.MustBeLessThanZero146,4127
+        public static class ViolationParameter8.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter8.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter8.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter8.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter8.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter8.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter8.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter8.MustContain220,6811
+        public MustContain Parameter8.MustContain.MustContain226,7021
+        public static class ViolationParameter8.MustContain.Violation233,7187
+    public static class MustExcludeParameter8.MustExclude243,7465
+        public MustExclude Parameter8.MustExclude.MustExclude249,7675
+        public static class ViolationParameter8.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter8.MustContainNoDuplicates266,8115
+        public static class ViolationParameter8.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter8.MustContainNoNulls285,8738
+        public static class ViolationParameter8.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter8.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter8.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter8.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter8.DependsOn329,10041
+        public static class ThisParameter8.DependsOn.This333,10194
+            public This Parameter8.DependsOn.This.This339,10423
+            public static class ViolationParameter8.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter8.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter8.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter8.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter8.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter8.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter8.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter8.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter8.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter8.DependsOn.Parameter3.Violation415,12900
+        public static class Parameter4Parameter8.DependsOn.Parameter4425,13242
+            public Parameter4 Parameter8.DependsOn.Parameter4.Parameter4431,13489
+            public static class ViolationParameter8.DependsOn.Parameter4.Violation438,13671
+        public static class Parameter5Parameter8.DependsOn.Parameter5448,14013
+            public Parameter5 Parameter8.DependsOn.Parameter5.Parameter5454,14260
+            public static class ViolationParameter8.DependsOn.Parameter5.Violation461,14442
+        public static class Parameter6Parameter8.DependsOn.Parameter6471,14784
+            public Parameter6 Parameter8.DependsOn.Parameter6.Parameter6477,15031
+            public static class ViolationParameter8.DependsOn.Parameter6.Violation484,15213
+        public static class Parameter7Parameter8.DependsOn.Parameter7494,15555
+            public Parameter7 Parameter8.DependsOn.Parameter7.Parameter7500,15802
+            public static class ViolationParameter8.DependsOn.Parameter7.Violation507,15984
+
+Parameter9.java,4954
+public class Parameter962,1592
+    private static final long serialVersionUID Parameter9.serialVersionUID69,1834
+    private static final String serialVersionHash Parameter9.serialVersionHash70,1894
+    protected Parameter9 Parameter9.Parameter979,2081
+    public static class MustBe<Parameter9.MustBe85,2174
+        public MustBe Parameter9.MustBe.MustBe91,2406
+        public static class DomainViolationParameter9.MustBe.DomainViolation98,2551
+    public static class MustBeGreaterThanZeroParameter9.MustBeGreaterThanZero108,2834
+        public static class ViolationParameter9.MustBeGreaterThanZero.Violation117,3178
+    public static class MustBeGreaterThanOrEqualToZeroParameter9.MustBeGreaterThanOrEqualToZero127,3464
+        public static class ViolationParameter9.MustBeGreaterThanOrEqualToZero.Violation136,3853
+    public static class MustBeLessThanZeroParameter9.MustBeLessThanZero146,4127
+        public static class ViolationParameter9.MustBeLessThanZero.Violation155,4456
+    public static class MustBeLessThanOrEqualToZeroParameter9.MustBeLessThanOrEqualToZero165,4739
+        public static class ViolationParameter9.MustBeLessThanOrEqualToZero.Violation174,5113
+    public static class MustBeInBounds<Parameter9.MustBeInBounds184,5388
+            MustBeInBounds<NATURALLY_ORDERED> over Parameter9.MustBeInBounds.over191,5720
+        public MustBeInBounds Parameter9.MustBeInBounds.MustBeInBounds201,6237
+        public static class ViolationParameter9.MustBeInBounds.Violation210,6533
+    public static class MustContainParameter9.MustContain220,6811
+        public MustContain Parameter9.MustContain.MustContain226,7021
+        public static class ViolationParameter9.MustContain.Violation233,7187
+    public static class MustExcludeParameter9.MustExclude243,7465
+        public MustExclude Parameter9.MustExclude.MustExclude249,7675
+        public static class ViolationParameter9.MustExclude.Violation256,7841
+    public static class MustContainNoDuplicatesParameter9.MustContainNoDuplicates266,8115
+        public static class ViolationParameter9.MustContainNoDuplicates.Violation275,8469
+    public static class MustContainNoNullsParameter9.MustContainNoNulls285,8738
+        public static class ViolationParameter9.MustContainNoNulls.Violation294,9067
+    public static class MustExcludeClassesParameter9.MustExcludeClasses304,9352
+        public MustExcludeClasses Parameter9.MustExcludeClasses.MustExcludeClasses310,9583
+        public static class ViolationParameter9.MustExcludeClasses.Violation317,9763
+    public static class DependsOnParameter9.DependsOn329,10041
+        public static class ThisParameter9.DependsOn.This333,10194
+            public This Parameter9.DependsOn.This.This339,10423
+            public static class ViolationParameter9.DependsOn.This.Violation346,10587
+        public static class Parameter1Parameter9.DependsOn.Parameter1356,10929
+            public Parameter1 Parameter9.DependsOn.Parameter1.Parameter1362,11176
+            public static class ViolationParameter9.DependsOn.Parameter1.Violation369,11358
+        public static class Parameter2Parameter9.DependsOn.Parameter2379,11700
+            public Parameter2 Parameter9.DependsOn.Parameter2.Parameter2385,11947
+            public static class ViolationParameter9.DependsOn.Parameter2.Violation392,12129
+        public static class Parameter3Parameter9.DependsOn.Parameter3402,12471
+            public Parameter3 Parameter9.DependsOn.Parameter3.Parameter3408,12718
+            public static class ViolationParameter9.DependsOn.Parameter3.Violation415,12900
+        public static class Parameter4Parameter9.DependsOn.Parameter4425,13242
+            public Parameter4 Parameter9.DependsOn.Parameter4.Parameter4431,13489
+            public static class ViolationParameter9.DependsOn.Parameter4.Violation438,13671
+        public static class Parameter5Parameter9.DependsOn.Parameter5448,14013
+            public Parameter5 Parameter9.DependsOn.Parameter5.Parameter5454,14260
+            public static class ViolationParameter9.DependsOn.Parameter5.Violation461,14442
+        public static class Parameter6Parameter9.DependsOn.Parameter6471,14784
+            public Parameter6 Parameter9.DependsOn.Parameter6.Parameter6477,15031
+            public static class ViolationParameter9.DependsOn.Parameter6.Violation484,15213
+        public static class Parameter7Parameter9.DependsOn.Parameter7494,15555
+            public Parameter7 Parameter9.DependsOn.Parameter7.Parameter7500,15802
+            public static class ViolationParameter9.DependsOn.Parameter7.Violation507,15984
+        public static class Parameter8Parameter9.DependsOn.Parameter8517,16326
+            public Parameter8 Parameter9.DependsOn.Parameter8.Parameter8523,16573
+            public static class ViolationParameter9.DependsOn.Parameter8.Violation530,16755
+
+ParametersMustNotBeNull.java,593
+public class ParametersMustNotBeNull61,1580
+    private static final long serialVersionUID ParametersMustNotBeNull.serialVersionUID66,1851
+    private static final String serialVersionHash ParametersMustNotBeNull.serialVersionHash67,1911
+    public static final ParametersMustNotBeNull CONTRACT ParametersMustNotBeNull.CONTRACT72,2084
+    protected ParametersMustNotBeNull ParametersMustNotBeNull.ParametersMustNotBeNull82,2360
+    public static class ViolationParametersMustNotBeNull.Violation120,3535
+        public Violation ParametersMustNotBeNull.Violation.Violation132,3871
+
+Test1.java,139
+public class Test15,103
+    private final ObjectContracts contracts Test1.contracts7,124
+    public static void main Test1.main23,623

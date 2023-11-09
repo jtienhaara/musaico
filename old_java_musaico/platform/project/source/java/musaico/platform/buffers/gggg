@@ -1,0 +1,23 @@
+buffer.set ( BufferPositions.FIRST_FREE_FIELD, my_field );
+buffer.set ( BufferPositions.LAST_FREE_FIELD, my_field );
+
+
+Region target_region = buffer.region ( BufferFilters.FREE );
+Region source_region = buffer.region ( BufferFilters.ALLOCATED );
+buffer.copy ( source_buffer, source_region, target_region );
+
+
+Filter filter = new FilterByFieldName ( "foobar" );
+!!!
+
+
+
+If, for some particular branch of Buffer implementations, every Field
+is just a value, and its position is its name, then all we have to do is:
+
+Position position_i_want = new FieldID ( "my_field" );
+Field field_i_want = buffer.get ( position_i_want );
+
+Or:
+
+Field field_i_want = buffer.get ( new FieldID ( "my_field" ) );

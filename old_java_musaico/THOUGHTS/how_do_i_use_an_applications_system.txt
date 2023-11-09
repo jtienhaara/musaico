@@ -1,0 +1,96 @@
+Copyright (c) 2010 Johann Tienhaara
+
+
+How do I use an applications system?
+
+An applications system is designed such that developers working on a particular platform (C, Java, JavaScript, Python, and so on) can interact with the Drivers for the applications system kernel.
+
+  Application
+      |
+    Kernel
+    /  |  \
+    Drivers
+
+An application built atop an applications system can follow the model-view-controller pattern.
+
+  Application (controller)
+            |
+          Kernel
+         /      \
+       Model    View
+     drivers    drivers
+
+In this case, the application provides the business logic, while the drivers provide access to the model and view.
+
+For example, a storefront application might be implemented as follows:
+
+     Store front (controller)
+                |
+    Applications system kernel
+          /     |    \
+  Database  Business  GUI
+  driver    rules     driver
+            driver
+
+The applications system probably provides the database driver and the GUI driver.  For example, a PostgreSQL database driver and an HTML rendering driver for a C platform kernel might be bundled with the applications system.
+
+The business rules driver would necessarily be custom, and would be compiled into the kernel, or loaded as a module at runtime.  Distribution of the business rules driver would follow the licensing rules of the driver layer of the applications system (which might be restrictive, in the case of compiling the kernel, or flexible, in the case of linking in modules at runtime).
+
+Finally, the application itself would provide the logic to map from the database layer to the business rules to the GUI.  It would be distributable under any licensing terms whatsoever.
+
+This approach of dividing up an application into model, business rules, controller and view, straddling the kernel itself and the user space layer, might be seen as cumbersome at first.  There are many layers to build, simply in order to construct a web store front.
+
+However all is not as it might seem.
+
+First of all, two components come pre-built and pre-tested.  The model (database interface) and view (GUI construction) layers typically come with the applications system itself.  This means that the only work being performed by developers of a web store front is the work that is custom to the store front.
+
+Secondly, the partitioning provides advantages to both the lone developer and the team.
+
+The team can partition its work, so that developers and analysts and so on versed in one particular area can focus on their specialty.  For example, the business analysts, who understand the needs of the organization driving the new web store front, and can translate those needs into designs, can focus on building business rules: how the cart mechanism works, how interactions with credit card companies will happen, how interactions with shipping (couriers, post office, and so on) will occur, and all the math tying all of it together.  Meanwhile, the user interface designers, who know how to design easy-to-use web storefronts, can work with developers to build and test the application / controller layer.  The two groups can actually work independently for long stretches of time, since the business rules group can test its code independently from any user interface, and the application / controller group can build and test its code with stubbed-out
+business rules.  The team thus maximizes both parallelism and proficiencies.
+
+Surprisingly, the individual benefits, too.  An individual building a web storefront is faced with an immense task, and one that, more often than not, results in failure.  Partitioning the work into components allows the developer to try and tweak ideas in one area without adversely affecting the other.  Version 1.0 can take longer in the partitioned world than creating version 1.0 as a monolithic application.  But ultimately the code is much more likely to actually work the first time around; and even if it doesn't, the cost of replacing the system is reduced by 50%, since each half of the application can be replaced without touching the other half.
+
+Both teams and individuals also have the option of starting with a controller developed in the "rapid application development" paradigm, optionally followed by a full-blow application controller.
+
+Applications systems provide "shells" which allow fast development of small or prototype applications.
+
+This means that the controller layer of an application -- which maps from the model to the view and vice-versa -- can be developed quickly in a shell language.
+
+If desired, the shell implementation can later be replaced with a full-blow application controller, for performance, or flexibility, and so on.  If and when this decision is made, none of the underlying kernel drivers (database, business rules, GUI) need change at all.  The shell script (controller) is simply ported to the platform language (C, Java, JavaScript, and so on).
+
+
+What about distributed applications?
+
+Many applications are necessarily distributed.  In fact, most of the applications being built in the world today are designed with the premise that different layers of the applications will be distributed across multiple physical or virtual machines.
+
+An applications system allows an application developer to work on one single platform (or at least one platform at a time), knowing all the while that there will be another layer, tier or component of the application working on another platform, possibly on another physical or virtual machine.
+
+Work on the components of a distributed application can happen in parallel, since the developers on one platform need not know anything about the other platform(s) involved.  All interactions between platforms in a distributed application occur via messages between the applications systems.
+
+For example, a web storefront application in JavaScript displaying the tickets for a one-man-Lord-of-the-Rings play might receive an asynchronous message from the webserver layer, informing it that the show has been extended by one week, and more tickets are available.
+
+In this case, the JavaScript application need not care anything about what platform the webserver component is implemented in, or even if it is implemented in a platform at all.  A test driver could, for example, provide the news to the JavaScript layer via asynchronous message, and it would change state accordingly.
+
+Meanwhile, the webserver layer also need not know anything about the JavaScript layer.  In fact, during development, it might be built to interact with another component based on the same platform, or with another test driver.
+
+In any case, the integration testing between layers becomes a phase which can be isolated from the rest of the development project, so that only when both components (JavaScript and webserver) are ready do they begin interacting.  With well designed interfaces and carefully tested components, integration testing can become a manageable exercise.  Of course, even without such novelties, integration testing becomes easier by virtue of the fact that each component can intercept the messages flying back and forth, and the project teams can point fingers at each other for sending garbage messages more quickly than they would in a "web application framework" world where everything is built in one big monolithic mess.
+
+
+But what will happen to my applications built atop applications systems?
+
+There is always a danger of adopting a new development environment or framework.  What if that environment is gone 5 years from now?  How will I support my application?
+
+Unlike some frameworks, an applications system is designed to minimize the amount of lock-in to application developers.
+
+An application developed atop an applications system uses well-specified drivers to perform its work.  This means that the dependencies of the application are relatively easy to identify.
+
+An application developed atop an applications system is also tied to its platform more so than to its applications system.  For example, an application developed in Java is still a Java application; an application developed in C is still a C application; and an application developed in JavaScript is still a JavaScript application.
+
+This means that the application relies on its standard platform for the bulk of its custom duties, and only interacts with the applications system when there is some reusable module that can be leveraged to do work for the application.
+
+Thus the dependencies of an application built atop an applications system are well defined; and the custom code is entirely independent.
+
+Replacing the applications system is a matter of replacing the dependency interactions.  This means that an application can be ported from one applications system to another; or the applications system layer can be removed altogether -- both with no more cost than the cost of removing particular libraries from the application.
+
+Meanwhile, how many application frameworks can say the same thing?  How much embedded code do you have in your HTML?  How many layers of glue and transaction management do you absolutely depend on to maintain your web storefront?  Hmmmm?  Good luck migrating your application to another framework, or removing its dependencies altogether...!

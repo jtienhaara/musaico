@@ -1,0 +1,77 @@
+blocking1.pipe ( AND )
+blocking2.pipe ( AND )
+blocking3.pipe ( AND )
+
+       AND.apply ( blocking1.finalvalue )
+.orNone ().apply ( blocking2.finalvalue )
+.orNone ().apply ( blocking3.finalvalue )
+.orNone ().apply ( logicalconclusion )
+
+ANDbuilder.apply ( blocking1.finalvalue )
+.orNone ().apply ( blocking2.finalvalue )
+.orNone ().apply ( blocking3.finalvalue )
+.orNone ().apply ( build )
+
+CurriedOperation<V>
+{
+  public !!! bla
+}
+CurriedOperationBuilder<V>
+{
+  private final Operation<V, CurriedOperation<V>> operationToCurry;
+  private final List<V> inputs;
+
+
+
+
+CurriedOperation<V>
+  implements Term<V>, Operation<V, V>
+{
+  public CurriedOperation ( Term initial_value, Operation<V, V> operation );
+  public Term!!!!!!!!!!!!gaaaaa<V> apply ( Term<V> input )
+  {
+    return new CurriedOperation<V> ( 
+  }
+
+  public Term<O> pipe ( Operation<V, O> operation )
+  {
+  }
+}
+
+CurriedOperation<P, I1, I2, O, NI, NO>
+  extends Operation<I2, CurriedOperation<I1, I2, NI, NO>>
+{
+    public abstract Term<I1> curriedTerm ();
+    public abstract CurriedOperation<?, P, I1, !!!> previousOperation ();
+}
+
+final Term<X> anded = new And<V> ().apply ( v1 ).apply ( v2 ).apply ( v3 )
+    .curriedTerm ();
+
+
+
+
+
+
+
+and ( x ): and[x](x)
+
+public interface Logic<X>
+extends Operation<X, Logic<X>>
+{
+    public Term<X> apply ();
+
+    @Override
+    public Term<Logic<X>> apply ( Term<X> );
+}
+
+final Term<X> output = logic.apply ( in1 ).orNone ()
+                             .apply ( in2 ).orNone ()
+                             .apply ( in3 ).orNone ()
+                             .apply ();
+
+
+public interface Logic<X>
+extends Operation<Term<X>, X>
+
+final Term<X> = new And<X> ().apply ( new Many<Term<X>> ( in1, in2, in3 ) );

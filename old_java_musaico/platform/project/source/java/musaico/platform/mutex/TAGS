@@ -1,0 +1,226 @@
+
+Mutex.java,2965
+public class Mutex129,3765
+    private static final long serialVersionUID Mutex.serialVersionUID133,3889
+    private static final String serialVersionHash Mutex.serialVersionHash134,3949
+    private static final ObjectContracts classContracts Mutex.classContracts139,4128
+    public static final Mutex NONE;Mutex.NONE144,4291
+    public static enum CapabilitiesMutex.Capabilities160,4737
+        MUTEX_LOCK_CREATE,Mutex.Capabilities.MUTEX_LOCK_CREATE163,4809
+        MUTEX_LOCK,Mutex.Capabilities.MUTEX_LOCK164,4836
+        MUTEX_UNLOCK,Mutex.Capabilities.MUTEX_UNLOCK165,4856
+        MUTEX_LOCK_DESTROY;Mutex.Capabilities.MUTEX_LOCK_DESTROY166,4878
+    public static final Capability ALL_MUTEX_LOCK_CAPABILITIES Mutex.ALL_MUTEX_LOCK_CAPABILITIES169,4914
+    private final Serializable lock Mutex.lock177,5289
+    private final ObjectContracts contracts;Mutex.contracts180,5407
+    private final MutexLockMustBeEligible mutexLockMustBeEligibleContract;Mutex.mutexLockMustBeEligibleContract184,5550
+    private final MutexLockMustBeCompeting mutexLockMustBeCompetingContract;Mutex.mutexLockMustBeCompetingContract188,5715
+    private final MutexLockMustBeLockOwner mutexLockMustBeLockOwnerContract;Mutex.mutexLockMustBeLockOwnerContract192,5884
+    private final MutexLockMustNotBeLockOwner mutexLockMustNotBeLockOwnerContract;Mutex.mutexLockMustNotBeLockOwnerContract196,6057
+    private final SecurityPolicy security;Mutex.security201,6310
+    private final String id;Mutex.id206,6517
+    private final List<MutexLock> competingPhilosophers Mutex.competingPhilosophers210,6681
+    private MutexLock eatingPhilosopher Mutex.eatingPhilosopher216,6963
+    public Mutex Mutex.Mutex233,7439
+        throws ParametersMustNotBeNull.Violation,Mutex.Violation279,9088
+               MutexLockMustBeEligible.Violation,Mutex.Violation280,9138
+    public boolean isLocked Mutex.isLocked361,12299
+    public boolean isLockedByCurrentThread Mutex.isLockedByCurrentThread396,13397
+        throws ParametersMustNotBeNull.Violation,Mutex.Violation428,14390
+               MutexMustBeUnlocked.Violation,Mutex.Violation429,14440
+               MutexLockMustBeCompeting.Violation,Mutex.Violation430,14486
+    public Conditional<Mutex.Conditional477,16435
+    public Conditional<MutexLock, MutexMustBeLocked.Violation> lockOwner Mutex.lockOwner477,16435
+    protected MutexLock [] philosophers Mutex.philosophers517,17840
+        throws MutexLockMustBeCompeting.Violation,Mutex.Violation549,18856
+               MutexLockMustNotBeLockOwner.Violation,Mutex.Violation550,18907
+               ParametersMustNotBeNull.Violation,Mutex.Violation551,18961
+    public SecurityPolicy security Mutex.security586,20198
+    public String toString Mutex.toString596,20350
+        throws MutexLockMustBeLockOwner.Violation,Mutex.Violation616,20960
+               ParametersMustNotBeNull.Violation,Mutex.Violation617,21011
+
+Dibs.java,411
+public class Dibs41,1001
+    private static final long serialVersionUID Dibs.serialVersionUID45,1120
+    private static final String serialVersionHash Dibs.serialVersionHash46,1180
+    public static final Dibs NONE Dibs.NONE51,1315
+    private final Fork fork;Dibs.fork54,1377
+    public Dibs Dibs.Dibs56,1407
+    public Fork fork Dibs.fork64,1511
+    public String toString Dibs.toString70,1575
+
+Fork.java,1667
+public class Fork53,1399
+    private static final long serialVersionUID Fork.serialVersionUID57,1518
+    private static final String serialVersionHash Fork.serialVersionHash58,1578
+    private static final ObjectContracts classContracts Fork.classContracts63,1757
+    public static final Fork NONE Fork.NONE68,1925
+    private final ObjectContracts contracts;Fork.contracts75,2253
+    private final Mutex mutex;Fork.mutex77,2299
+    private final MutexLock left;Fork.left79,2331
+    private final MutexLock right;Fork.right81,2366
+    private final Dibs dibs;Fork.dibs83,2402
+    private boolean isDirty;Fork.isDirty85,2432
+    public static class LeftMustNotEqualRightFork.LeftMustNotEqualRight95,2664
+        public static class ViolationFork.LeftMustNotEqualRight.Violation105,2992
+        throws ParametersMustNotBeNull.Violation,Fork.Violation120,3398
+               Parameter2.MustContainNoNulls.Violation,Fork.Violation121,3448
+    public Mutex mutex Fork.mutex215,6245
+    public boolean dirty Fork.dirty221,6312
+    public void dirty Fork.dirty227,6383
+    public MutexLock left Fork.left235,6513
+    public static class MutexLockMustBeBesideThisForkFork.MutexLockMustBeBesideThisFork249,6787
+        public MutexLockMustBeBesideThisFork Fork.MutexLockMustBeBesideThisFork.MutexLockMustBeBesideThisFork256,7007
+        public static class ViolationFork.MutexLockMustBeBesideThisFork.Violation261,7132
+        throws ParametersMustNotBeNull.Violation,Fork.Violation289,8117
+    public Dibs dibs Fork.dibs308,8700
+    public MutexLock right Fork.right314,8764
+    public String toString Fork.toString320,8835
+
+MutexLock.java,3538
+public class MutexLock114,3396
+    private static final long serialVersionUID MutexLock.serialVersionUID118,3535
+    private static final String serialVersionHash MutexLock.serialVersionHash119,3595
+    public static final String LOCAL_SYSTEM_ID MutexLock.LOCAL_SYSTEM_ID124,3753
+    private static final ObjectContracts classContracts MutexLock.classContracts128,3900
+    public static final MutexLock NONE MutexLock.NONE132,4080
+    public static final MutexLock NONE2 MutexLock.NONE2136,4209
+    public static final long DEFAULT_TIMEOUT_IN_MILLISECONDS MutexLock.DEFAULT_TIMEOUT_IN_MILLISECONDS142,4372
+    private final ObjectContracts contracts;MutexLock.contracts146,4508
+    private final ForkMustNotBeNeededByMutexLock forkMustNotBeNeededByMutexLockContract;MutexLock.forkMustNotBeNeededByMutexLockContract152,4764
+    private final ForkMustBeNeededByMutexLock forkMustBeNeededByMutexLockContract;MutexLock.forkMustBeNeededByMutexLockContract158,5080
+    private final SecurityContext securityContext;MutexLock.securityContext163,5327
+    private final SecurityPolicy security;MutexLock.security167,5492
+    private final Serializable lock MutexLock.lock170,5589
+    private final Mutex [] mutexes;MutexLock.mutexes173,5719
+    private final Set<Fork> neededForks MutexLock.neededForks180,6033
+    private final List<Fork> dirtyForks MutexLock.dirtyForks185,6305
+    private final List<Dibs> receivedDibs MutexLock.receivedDibs192,6691
+    private final Set<Fork> cleanForks MutexLock.cleanForks196,6899
+    private final Set<Dibs> myDibs MutexLock.myDibs200,7061
+    private boolean isHungry MutexLock.isHungry205,7233
+    private boolean isEating MutexLock.isEating211,7552
+    private final String systemID;MutexLock.systemID217,7818
+    private final long threadNum;MutexLock.threadNum221,7954
+    private final String name;MutexLock.name225,8088
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation257,9542
+               Parameter3.MustContainNoNulls.Violation,MutexLock.Violation258,9592
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation319,12305
+               Parameter6.MustContainNoNulls.Violation,MutexLock.Violation320,12355
+    private MutexLock MutexLock.MutexLock379,14474
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation421,15772
+    private Set<MutexLock> applyRules MutexLock.applyRules460,17242
+    public void close MutexLock.close581,20830
+    protected void finalize MutexLock.finalize600,21184
+    protected boolean isEating MutexLock.isEating722,24597
+        throws Parameter2.MustBeGreaterThanZero.Violation,MutexLock.Violation818,27756
+               SecurityViolation,MutexLock.SecurityViolation819,27815
+    public Mutex [] mutexes MutexLock.mutexes978,33885
+    public String name MutexLock.name995,34323
+        throws ParametersMustNotBeNull.ViolationMutexLock.Violation1048,35720
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation1085,36680
+    protected SecurityContext securityContext MutexLock.securityContext1115,37618
+    public String systemID MutexLock.systemID1130,37952
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation1155,38649
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation1190,39745
+    public long threadNum MutexLock.threadNum1223,40829
+    public String toString MutexLock.toString1232,40959
+        throws ParametersMustNotBeNull.Violation,MutexLock.Violation1259,41763
+
+MutexMustBeLocked.java,533
+public class MutexMustBeLocked57,1414
+    private static final long serialVersionUID MutexMustBeLocked.serialVersionUID62,1659
+    private static final String serialVersionHash MutexMustBeLocked.serialVersionHash63,1718
+    public static final MutexMustBeLocked CONTRACT MutexMustBeLocked.CONTRACT68,1891
+    protected MutexMustBeLocked MutexMustBeLocked.MutexMustBeLocked78,2149
+    public static class ViolationMutexMustBeLocked.Violation109,2905
+        public Violation MutexMustBeLocked.Violation.Violation121,3229
+
+MutexMustBeUnlocked.java,553
+public class MutexMustBeUnlocked57,1414
+    private static final long serialVersionUID MutexMustBeUnlocked.serialVersionUID62,1665
+    private static final String serialVersionHash MutexMustBeUnlocked.serialVersionHash63,1724
+    public static final MutexMustBeUnlocked CONTRACT MutexMustBeUnlocked.CONTRACT68,1897
+    protected MutexMustBeUnlocked MutexMustBeUnlocked.MutexMustBeUnlocked78,2161
+    public static class ViolationMutexMustBeUnlocked.Violation109,2927
+        public Violation MutexMustBeUnlocked.Violation.Violation121,3255
+
+MutexMustBeLockedByCurrentThread.java,688
+public class MutexMustBeLockedByCurrentThread126,3896
+    private static final long serialVersionUID MutexMustBeLockedByCurrentThread.serialVersionUID131,4186
+    private static final String serialVersionHash MutexMustBeLockedByCurrentThread.serialVersionHash132,4245
+    public static final MutexMustBeLockedByCurrentThread CONTRACT MutexMustBeLockedByCurrentThread.CONTRACT137,4418
+    protected MutexMustBeLockedByCurrentThread MutexMustBeLockedByCurrentThread.MutexMustBeLockedByCurrentThread147,4721
+    public static class ViolationMutexMustBeLockedByCurrentThread.Violation178,5582
+        public Violation MutexMustBeLockedByCurrentThread.Violation.Violation190,5936
+
+MutexLockMustBeEligible.java,635
+public class MutexLockMustBeEligible66,1743
+    private static final long serialVersionUID MutexLockMustBeEligible.serialVersionUID71,2014
+    private static final String serialVersionHash MutexLockMustBeEligible.serialVersionHash72,2073
+    private static final ObjectContracts classContracts MutexLockMustBeEligible.classContracts77,2240
+    private final Mutex mutex;MutexLockMustBeEligible.mutex82,2439
+    public Mutex mutex MutexLockMustBeEligible.mutex143,4268
+    public static class ViolationMutexLockMustBeEligible.Violation154,4434
+        public Violation MutexLockMustBeEligible.Violation.Violation166,4770
+
+MutexLockMustBeCompeting.java,643
+public class MutexLockMustBeCompeting68,1855
+    private static final long serialVersionUID MutexLockMustBeCompeting.serialVersionUID73,2129
+    private static final String serialVersionHash MutexLockMustBeCompeting.serialVersionHash74,2188
+    private static final ObjectContracts classContracts MutexLockMustBeCompeting.classContracts79,2355
+    private final Mutex mutex;MutexLockMustBeCompeting.mutex84,2545
+    public Mutex mutex MutexLockMustBeCompeting.mutex145,4346
+    public static class ViolationMutexLockMustBeCompeting.Violation156,4513
+        public Violation MutexLockMustBeCompeting.Violation.Violation168,4851
+
+MutexLockMustBeLockOwner.java,643
+public class MutexLockMustBeLockOwner68,1841
+    private static final long serialVersionUID MutexLockMustBeLockOwner.serialVersionUID73,2115
+    private static final String serialVersionHash MutexLockMustBeLockOwner.serialVersionHash74,2174
+    private static final ObjectContracts classContracts MutexLockMustBeLockOwner.classContracts79,2341
+    private final Mutex mutex;MutexLockMustBeLockOwner.mutex85,2552
+    public Mutex mutex MutexLockMustBeLockOwner.mutex144,4248
+    public static class ViolationMutexLockMustBeLockOwner.Violation155,4415
+        public Violation MutexLockMustBeLockOwner.Violation.Violation167,4753
+
+MutexLockMustNotBeLockOwner.java,667
+public class MutexLockMustNotBeLockOwner66,1733
+    private static final long serialVersionUID MutexLockMustNotBeLockOwner.serialVersionUID71,2016
+    private static final String serialVersionHash MutexLockMustNotBeLockOwner.serialVersionHash72,2075
+    private static final ObjectContracts classContracts MutexLockMustNotBeLockOwner.classContracts77,2242
+    private final Mutex mutex;MutexLockMustNotBeLockOwner.mutex83,2460
+    public Mutex mutex MutexLockMustNotBeLockOwner.mutex141,4167
+    public static class ViolationMutexLockMustNotBeLockOwner.Violation152,4337
+        public Violation MutexLockMustNotBeLockOwner.Violation.Violation164,4681
+
+ForkMustNotBeNeededByMutexLock.java,715
+public class ForkMustNotBeNeededByMutexLock67,1792
+    private static final long serialVersionUID ForkMustNotBeNeededByMutexLock.serialVersionUID72,2074
+    private static final String serialVersionHash ForkMustNotBeNeededByMutexLock.serialVersionHash73,2133
+    private static final ObjectContracts classContracts ForkMustNotBeNeededByMutexLock.classContracts78,2300
+    private final MutexLock mutexLock;ForkMustNotBeNeededByMutexLock.mutexLock84,2522
+    public MutexLock mutexLock ForkMustNotBeNeededByMutexLock.mutexLock135,4035
+    public static class ViolationForkMustNotBeNeededByMutexLock.Violation146,4220
+        public Violation ForkMustNotBeNeededByMutexLock.Violation.Violation158,4570
+
+ForkMustBeNeededByMutexLock.java,691
+public class ForkMustBeNeededByMutexLock67,1777
+    private static final long serialVersionUID ForkMustBeNeededByMutexLock.serialVersionUID72,2050
+    private static final String serialVersionHash ForkMustBeNeededByMutexLock.serialVersionHash73,2109
+    private static final ObjectContracts classContracts ForkMustBeNeededByMutexLock.classContracts78,2276
+    private final MutexLock mutexLock;ForkMustBeNeededByMutexLock.mutexLock84,2495
+    public MutexLock mutexLock ForkMustBeNeededByMutexLock.mutexLock135,4011
+    public static class ViolationForkMustBeNeededByMutexLock.Violation146,4193
+        public Violation ForkMustBeNeededByMutexLock.Violation.Violation158,4537
+
+Test.java,431
+public class Test13,294
+    private static final Mutex [] mutexes;Test.mutexes16,338
+    private static int numTimedOutThreads Test.numTimedOutThreads37,874
+    private final boolean isNestedMutexThread;Test.isNestedMutexThread40,923
+    private final boolean isBlowupThread;Test.isBlowupThread41,970
+    public Test Test.Test44,1014
+    public void run Test.run55,1277
+    public static void main Test.main167,5322

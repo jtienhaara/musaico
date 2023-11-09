@@ -1,0 +1,108 @@
+<html>
+<body>
+  <p>
+    Swappers provide the swapping functionality of an PagedArea,
+    so that a Segment can swap in and out its individual Pages.
+  </p>
+
+  <p>
+    When resources are stretched, Musaico may decide to
+    swap out Pages to persistent storage, and retrieve
+    them again only when needed.
+  </p>
+
+  <p>
+    Some implementations may have multiple levels of
+    swap space, so that Pages can be swapped from one
+    region of "slow" memory to another region of "fast"
+    memory and back again, or from one region of "slow"
+    persistent storage to another region of "fast"
+    persistent storage, and so on.
+  </p>
+
+  <p>
+    For example:
+  </p>
+
+  <pre>
+      +--------+                   +--------+
+      | Object |                   | Buffer |                   +-------+
+      | cache  | <- in swap out -> | memory | <- in swap out -> | ONode |
+      |  Page  |                   |  Page  |                   | Page  |
+      +--------+                   +--------+                   +-------+
+          |                            |                            |
+          v                            v                            v
+       Object                        Buffer                       ONode
+                                       |
+                                       v
+                                     Field...
+  </pre>
+
+  <p>
+    Typically the Segment has some mix of swapped-in and swapped-out
+    Pages.  For example:
+  </p>
+
+  <pre>
+                 +---------+
+                 | Segment |
+                 +---------+
+                      |
+            __________|__________
+           /          |          \
+      +--------+  +--------+  +--------+
+      | Object |  | Buffer |  | ONode  |
+      | cache  |  | memory |  | Page C |
+      | Page A |  | Page B |  +--------+
+      +--------+  +--------+
+  </pre>
+
+  <p>
+    Thus when a caller gets back a BufferPage, they can access
+    the fields directly.  But when they get back an ONodePage, for
+    example, they request the Segment to swap in the page.
+  </p>
+
+  <p>
+    When the Segment handles a PageFault, it requests the Swapper
+    of its PagedArea to swap in or out the appropriate Page.
+  </p>
+
+  <p>
+    The various swapping implementations for in-memory swapping
+    are provided here.  Note that swapping between memory and
+    persistent pages are the responsibility of other Musaico modules
+    (such as the OSystem module).
+  </p>
+
+
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009, 2011 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

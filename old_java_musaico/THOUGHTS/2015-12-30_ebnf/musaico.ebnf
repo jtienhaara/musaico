@@ -1,0 +1,15 @@
+musaico:                  [header],musaico-body
+musaico-body:             {expression}
+expression:               (prefix-expression|parenthesized-expression|infix-expression|postfix-expression)
+prefix-expression:        prefix-operator,operand
+parenthesized-expression: "(",expression,")"
+infix-expression:         operand,infix-operator,operand
+postfix-expression:       operand,postfix-operator
+operand:                  (literal|...)
+literal:                  (text-literal|number-literal|boolean-literal???...)
+prefix-operator:          ("!"|...)
+infix-operator:           ("+="|"-="|"*="|"/="|"+"|"-"|"/"|"*"|"<="|"<"|">="|">"|"^"|"%"|"&"|"&&"|"|"|"||"|"="|...)
+postfix-operator:         ("++"|"--")
+text-literal:             (single-quotes-text-literal|double-quotes-text-literal)
+single-quotes-text-literal: "'",single-quoted-text,"'"
+double-quotes-text-literal: "'",double-quoted-text,"'"

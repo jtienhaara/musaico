@@ -1,0 +1,78 @@
+<html>
+<body>
+  <p>
+    An object system representing an Excel spreadsheet, built on
+    top of the Apache (tm) POI (tm) library.
+  </p>
+
+  <p>
+    The records and objects in a Microsoft (tm) Excel (tm) workbook
+    are structured as follows:
+  </p>
+
+  <pre>
+             SuperBlock _______________
+                 |                     |_____________________________
+                 |                       |            |              |
+                 |                       | [1]        | [1]          | [1]
+                 |           MissingCellPolicy    DataFormat  CreationHelper
+                 |               (field)            (field)   (helper methods,
+                 |         = RETURN_NULL_AND_BLANK  see POI    creates
+                 |         | RETURN_BLANK_AS_NULL   Builtin-   rich text,
+                 |         | CREATE_NULL_AS_BLANK   Formats    hyperlinks, ...)
+                 |
+                 | [1]
+        Root Workbook (object)
+                    |
+             _______|______________________________________________
+             |             |             |                 |            |
+            /|\ [0..n]    /|\ [0..n]    /|\ [0..n]        /|\ [0..n]    |
+       Sheet (object)  Font (object)  CellStyle (object) Name (object)  |
+             |                                                          |
+       ______|___________________________________                       |
+       |                        |                |                      |
+       | [0..1]                 | [1]            | [0..n]               |
+      PrintArea (object)  HiddenState (field)  Row (object)             |
+                                                                        |
+                          ______________________________________________|
+                         |                    |
+                        /|\ [0..n]            | [1]
+                      PictureData (object)   Hidden? (field)
+  </pre>
+
+  <p>
+    See also
+    <a href="http://poi.apache.org/">
+      The Apache POI project
+    </a>.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2011 Johann Tienhaara <jtienhaara@yahoo.com>
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

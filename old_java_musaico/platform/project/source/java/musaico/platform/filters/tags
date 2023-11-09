@@ -1,0 +1,17 @@
+AbstractCompositeFilter	AbstractCompositeFilter.java	50
+AbstractCompositeFilter.classContracts	AbstractCompositeFilter.java	54
+AbstractCompositeFilter.filters	AbstractCompositeFilter.java	59
+AbstractCompositeFilter.filters	AbstractCompositeFilter.java	/^    public Filter<GRAIN> [] filters ()$/
+AbstractCompositeFilter.myFilters	AbstractCompositeFilter.java	/^    protected final Filter<GRAIN> [] myFilters ()$/
+CompositeFilter	CompositeFilter.java	42
+Filter	Filter.java	47
+Filter.State	Filter.java	53
+Filter.State.DISCARDED	Filter.java	59
+Filter.State.KEPT	Filter.java	56
+FilterOp	FilterOp.java	52
+FilterOp.FilterOp	FilterOp.java	/^    public FilterOp ($/
+FilterOp.classContracts	FilterOp.java	63
+FilterOp.evaluate	FilterOp.java	/^    public Value<GRAIN> evaluate ($/
+FilterOp.filter	FilterOp.java	69
+FilterOp.serialVersionHash	FilterOp.java	58
+FilterOp.serialVersionUID	FilterOp.java	57

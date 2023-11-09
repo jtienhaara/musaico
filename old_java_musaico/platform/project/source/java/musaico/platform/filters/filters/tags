@@ -1,0 +1,21 @@
+And	And.java	52
+And.objectContracts	And.java	63
+And.serialVersionHash	And.java	58
+And.serialVersionUID	And.java	57
+And.toString	And.java	/^    public String toString ()$/
+Not	Not.java	51
+Not.@SuppressWarnings	Not.java	/^    @SuppressWarnings({"rawtypes", \/\/ Java forces /
+Not.objectContracts	Not.java	62
+Not.serialVersionHash	Not.java	57
+Not.serialVersionUID	Not.java	56
+Not.toString	Not.java	/^    public String toString ()$/
+Or	Or.java	52
+Or.objectContracts	Or.java	63
+Or.serialVersionHash	Or.java	58
+Or.serialVersionUID	Or.java	57
+Or.toString	Or.java	/^    public String toString ()$/
+Xor	Xor.java	52
+Xor.objectContracts	Xor.java	63
+Xor.serialVersionHash	Xor.java	58
+Xor.serialVersionUID	Xor.java	57
+Xor.toString	Xor.java	/^    public String toString ()$/

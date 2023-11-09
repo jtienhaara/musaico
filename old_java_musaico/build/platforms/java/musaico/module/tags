@@ -1,0 +1,78 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AbstractGPLCompatibleFreeLicense	AbstractGPLCompatibleFreeLicense.java	/^public abstract class AbstractGPLCompatibleFreeLicense$/;"	c
+AbstractMusaicoModule	AbstractMusaicoModule.java	/^public abstract class AbstractMusaicoModule$/;"	c
+AbstractNonGPLCompatibleFreeLicense	AbstractNonGPLCompatibleFreeLicense.java	/^public abstract class AbstractNonGPLCompatibleFreeLicense$/;"	c
+AbstractProprietaryLicense	AbstractProprietaryLicense.java	/^public abstract class AbstractProprietaryLicense$/;"	c
+BSD	License.java	/^    public static final BSDLicense BSD = new BSDLicense ();$/;"	f	interface:License
+BSDLicense	BSDLicense.java	/^public class BSDLicense$/;"	c
+Compatibility	Compatibility.java	/^    private Compatibility ($/;"	m	class:Compatibility	file:
+Compatibility	Compatibility.java	/^public enum Compatibility$/;"	g
+FULL	Compatibility.java	/^    FULL ( true ),$/;"	e	enum:Compatibility	file:
+GPL3	License.java	/^    public static final GPL3License GPL3 = new GPL3License ();$/;"	f	interface:License
+GPL3License	GPL3License.java	/^public class GPL3License$/;"	c
+License	License.java	/^public interface License$/;"	i
+MusaicoModule	MusaicoModule.java	/^public interface MusaicoModule$/;"	i
+NONE	Compatibility.java	/^    NONE ( false );$/;"	e	enum:Compatibility	file:
+address	MusaicoModule.java	/^    public abstract String address ();$/;"	m	interface:MusaicoModule
+and	Compatibility.java	/^    public Compatibility and ($/;"	m	class:Compatibility
+body	BSDLicense.java	/^    public final String body ()$/;"	m	class:BSDLicense
+body	GPL3License.java	/^    public final String body ()$/;"	m	class:GPL3License
+body	License.java	/^    public abstract String body ();$/;"	m	interface:License
+compatibility	AbstractGPLCompatibleFreeLicense.java	/^    public final Compatibility compatibility ($/;"	m	class:AbstractGPLCompatibleFreeLicense
+compatibility	AbstractNonGPLCompatibleFreeLicense.java	/^    public Compatibility compatibility ($/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+compatibility	AbstractProprietaryLicense.java	/^    public Compatibility compatibility ($/;"	m	class:AbstractProprietaryLicense
+compatibility	License.java	/^    public abstract Compatibility compatibility ($/;"	m	interface:License
+compatibilityNonGPLCompatibleFree	AbstractNonGPLCompatibleFreeLicense.java	/^    protected Compatibility compatibilityNonGPLCompatibleFree ($/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+compatibilityProprietary	AbstractProprietaryLicense.java	/^    protected Compatibility compatibilityProprietary ($/;"	m	class:AbstractProprietaryLicense
+contact	MusaicoModule.java	/^    public abstract String contact ();$/;"	m	interface:MusaicoModule
+copyright	MusaicoModule.java	/^    public abstract String copyright ();$/;"	m	interface:MusaicoModule
+description	MusaicoModule.java	/^    public abstract String description ();$/;"	m	interface:MusaicoModule
+equals	AbstractGPLCompatibleFreeLicense.java	/^    public final boolean equals ($/;"	m	class:AbstractGPLCompatibleFreeLicense
+equals	AbstractMusaicoModule.java	/^    public final boolean equals ($/;"	m	class:AbstractMusaicoModule
+equals	AbstractNonGPLCompatibleFreeLicense.java	/^    public final boolean equals ($/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+equals	AbstractProprietaryLicense.java	/^    public final boolean equals ($/;"	m	class:AbstractProprietaryLicense
+equalsLicense	AbstractGPLCompatibleFreeLicense.java	/^    protected boolean equalsLicense ($/;"	m	class:AbstractGPLCompatibleFreeLicense
+equalsLicense	AbstractNonGPLCompatibleFreeLicense.java	/^    protected boolean equalsLicense ($/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+equalsLicense	AbstractProprietaryLicense.java	/^    protected boolean equalsLicense ($/;"	m	class:AbstractProprietaryLicense
+hash	MusaicoModule.java	/^    public abstract String hash ();$/;"	m	interface:MusaicoModule
+hashCode	AbstractGPLCompatibleFreeLicense.java	/^    public final int hashCode ()$/;"	m	class:AbstractGPLCompatibleFreeLicense
+hashCode	AbstractMusaicoModule.java	/^    public final int hashCode ()$/;"	m	class:AbstractMusaicoModule
+hashCode	AbstractNonGPLCompatibleFreeLicense.java	/^    public final int hashCode ()$/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+hashCode	AbstractProprietaryLicense.java	/^    public final int hashCode ()$/;"	m	class:AbstractProprietaryLicense
+isDistributableTogether	Compatibility.java	/^    private final boolean isDistributableTogether;$/;"	f	class:Compatibility	file:
+isDistributableTogether	Compatibility.java	/^    public boolean isDistributableTogether ()$/;"	m	class:Compatibility
+license	MusaicoModule.java	/^    public abstract License license ();$/;"	m	interface:MusaicoModule
+musaico.module	AbstractGPLCompatibleFreeLicense.java	/^package musaico.module;$/;"	p
+musaico.module	AbstractMusaicoModule.java	/^package musaico.module;$/;"	p
+musaico.module	AbstractNonGPLCompatibleFreeLicense.java	/^package musaico.module;$/;"	p
+musaico.module	AbstractProprietaryLicense.java	/^package musaico.module;$/;"	p
+musaico.module	BSDLicense.java	/^package musaico.module;$/;"	p
+musaico.module	Compatibility.java	/^package musaico.module;$/;"	p
+musaico.module	GPL3License.java	/^package musaico.module;$/;"	p
+musaico.module	License.java	/^package musaico.module;$/;"	p
+musaico.module	MusaicoModule.java	/^package musaico.module;$/;"	p
+name	AbstractGPLCompatibleFreeLicense.java	/^    public String name ()$/;"	m	class:AbstractGPLCompatibleFreeLicense
+name	AbstractMusaicoModule.java	/^    public final String name ()$/;"	m	class:AbstractMusaicoModule
+name	AbstractNonGPLCompatibleFreeLicense.java	/^    public String name ()$/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+name	AbstractProprietaryLicense.java	/^    public String name ()$/;"	m	class:AbstractProprietaryLicense
+name	License.java	/^    public abstract String name ();$/;"	m	interface:License
+name	MusaicoModule.java	/^    public abstract String name ();$/;"	m	interface:MusaicoModule
+not	Compatibility.java	/^    public Compatibility not ()$/;"	m	class:Compatibility
+or	Compatibility.java	/^    public Compatibility or ($/;"	m	class:Compatibility
+serialVersionUID	AbstractGPLCompatibleFreeLicense.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:AbstractGPLCompatibleFreeLicense	file:
+serialVersionUID	AbstractMusaicoModule.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:AbstractMusaicoModule	file:
+serialVersionUID	AbstractNonGPLCompatibleFreeLicense.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:AbstractNonGPLCompatibleFreeLicense	file:
+serialVersionUID	AbstractProprietaryLicense.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:AbstractProprietaryLicense	file:
+serialVersionUID	BSDLicense.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:BSDLicense	file:
+serialVersionUID	GPL3License.java	/^    private static final long serialVersionUID = 1L;$/;"	f	class:GPL3License	file:
+toString	AbstractGPLCompatibleFreeLicense.java	/^    public final String toString ()$/;"	m	class:AbstractGPLCompatibleFreeLicense
+toString	AbstractMusaicoModule.java	/^    public final String toString ()$/;"	m	class:AbstractMusaicoModule
+toString	AbstractNonGPLCompatibleFreeLicense.java	/^    public final String toString ()$/;"	m	class:AbstractNonGPLCompatibleFreeLicense
+toString	AbstractProprietaryLicense.java	/^    public final String toString ()$/;"	m	class:AbstractProprietaryLicense
+version	MusaicoModule.java	/^    public abstract long version ();$/;"	m	interface:MusaicoModule
+xor	Compatibility.java	/^    public final Compatibility xor ($/;"	m	class:Compatibility

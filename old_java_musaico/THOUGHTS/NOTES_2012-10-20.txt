@@ -1,0 +1,10 @@
+BufferTypeSystemBuilder builder = new BufferTypeSystemBuilder ();
+
+BufferType address_type = builder.prepare ( "address" )
+    // Automagically creates a class and "none" value.
+    .optionalField ( String.class, "POBox" ) // Type castable to String.
+    .requiredFields ( String.class, "street", 1, 3 ) // 1 - 3 "street" fields.
+    .requiredField ( String.class, "city" )
+    .requiredField ( ???.class, "province", "state" ) // Either of 2 names.
+    .requiredField ( env.type ( "country" ).rawClasses (), "country" )
+    .castsTo ( String.class, new CastBufferToString () );

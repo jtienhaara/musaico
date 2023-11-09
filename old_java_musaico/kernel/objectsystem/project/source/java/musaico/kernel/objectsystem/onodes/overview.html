@@ -1,0 +1,95 @@
+<html>
+<body>
+  <p>
+    Specialized ONode interfaces, such as FlatONode (fields only),
+    ObjectONode (hierarchical) and Relation.
+  </p>
+
+  <p>
+    These ONode types mirror the different types of files
+    in a UNIX-like operating system (file, directory, symbolic
+    link, and so on).
+  </p>
+
+  <p>
+    Each specialized ONode interface may provide additional
+    methods and/or constraints on the behaviour of its
+    methods beyond what the generic ONode provides.
+  </p>
+
+  <p>
+    For example, an object system describing cars might
+    provide an ONode class for "car" which implements the
+    hierarchical ObjectoNode interface, so that a car can
+    have 4 wheels; ONode class for "wheel" which
+    implements the FlatONode interface, so that a wheel
+    can have size attributes; ONode class for the
+    car's radio, which provides a Relation to radion stations
+    possibly in other object systems; and so on.  While the
+    "car" ONode class must implement ObjectONode, it
+    need not implement the FlatONode interface which
+    "wheel" implements, and vice-versa.
+  </p>
+    
+
+  <p>
+    Typical object systems are able to read and write all of
+    the main specialized ONode types:
+  </p>
+
+  <ul>
+    <li> FlatONodes: ONodes with only fields, no hierarchy of
+         child ONodes. </li>
+    <li> ObjectONodes: ONodes which may contain fields and/or
+         child ONode. </li>
+    <li> Relations: ONodes which refer to other ONodes, such
+         as symbolic links, and possibly other Relation extensions
+         (for example, joins, transaction umbrellas, and so on).
+  </ul>
+
+  <p>
+    The Relation ONode type is quite flexible, allowing the
+    object system to recognize only that there is a Relation
+    in the hierarchy, while the Relation's "magic number"
+    (type of relation) specifies the kernel factory which
+    will create the specific Relation-derived instance.
+  </p>
+
+  <p>
+    For example, if the "foobar" object system type is
+    released in year X, and 2 years later a new Relation
+    called "RandomTraversal" is added to the Musaico kernel,
+    then any "foobar" object system can take advantage of
+    the new RandomTraversal relation, without the need for
+    recompiling.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2010, 2011 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

@@ -1,0 +1,5 @@
+Pages have boundaries, but we need to be able to search in between those
+boundaries.  Ideally we should be able to fault on a single Field's Position,
+so that the page faulter doesn't have to worry about page boundaries.
+So if the boundaries lie at positions 0, 1024, 2048, ... and field
+# 17 is requested, we return the page with region 0-1023.

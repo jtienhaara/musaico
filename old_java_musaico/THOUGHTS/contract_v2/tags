@@ -1,0 +1,133 @@
+Arbiter	Arbiter.java	50
+Arbiter.abstract	Arbiter.java	90
+ArbiterThrowsAllViolations	ArbiterThrowsAllViolations.java	48
+ArbiterThrowsAllViolations.final	ArbiterThrowsAllViolations.java	70
+ArbiterThrowsAllViolations.inspect	ArbiterThrowsAllViolations.java	/^                           void inspect ($/
+ArbiterThrowsAllViolations.isContractInspectionEnabled	ArbiterThrowsAllViolations.java	/^    public boolean isContractInspectionEnabled ()$/
+ArbiterThrowsAllViolations.serialVersionHash	ArbiterThrowsAllViolations.java	52
+ArbiterThrowsAllViolations.serialVersionUID	ArbiterThrowsAllViolations.java	51
+ArrayDomain	ArrayDomain.java	50
+Contract	AbstractContract.java	53
+Contract	Obligation.java	53
+Contract	Guarantee.java	54
+ContractCheckedViolation	ContractCheckedViolation.java	47
+ContractCheckedViolation.ContractCheckedViolation	ContractCheckedViolation.java	/^    public ContractCheckedViolation ($/
+ContractCheckedViolation.contract	ContractCheckedViolation.java	52
+ContractCheckedViolation.contract	ContractCheckedViolation.java	/^    public Contract<?, ?> contract ()$/
+ContractCheckedViolation.equals	ContractCheckedViolation.java	/^    public boolean equals ($/
+ContractCheckedViolation.hashCode	ContractCheckedViolation.java	/^    public int hashCode ()$/
+ContractCheckedViolation.inspectableData	ContractCheckedViolation.java	61
+ContractCheckedViolation.inspectableData	ContractCheckedViolation.java	/^    public Serializable inspectableData ()$/
+ContractCheckedViolation.objectUnderContract	ContractCheckedViolation.java	56
+ContractCheckedViolation.objectUnderContract	ContractCheckedViolation.java	/^    public Serializable objectUnderContract ()$/
+ContractCheckedViolation.toString	ContractCheckedViolation.java	/^    public String toString ()$/
+ContractUncheckedViolation	ContractUncheckedViolation.java	49
+ContractUncheckedViolation.ContractUncheckedViolation	ContractUncheckedViolation.java	/^    public ContractUncheckedViolation ($/
+ContractUncheckedViolation.containsNullOrNonSerializableElement	ContractUncheckedViolation.java	/^    protected static final boolean containsNullOrN/
+ContractUncheckedViolation.contract	ContractUncheckedViolation.java	54
+ContractUncheckedViolation.contract	ContractUncheckedViolation.java	/^    public Contract<?, ?> contract ()$/
+ContractUncheckedViolation.equals	ContractUncheckedViolation.java	/^    public boolean equals ($/
+ContractUncheckedViolation.hashCode	ContractUncheckedViolation.java	/^    public int hashCode ()$/
+ContractUncheckedViolation.inspectableData	ContractUncheckedViolation.java	63
+ContractUncheckedViolation.inspectableData	ContractUncheckedViolation.java	/^    public Serializable inspectableData ()$/
+ContractUncheckedViolation.inspectableToString	ContractUncheckedViolation.java	/^    static String inspectableToString ($/
+ContractUncheckedViolation.objectUnderContract	ContractUncheckedViolation.java	58
+ContractUncheckedViolation.objectUnderContract	ContractUncheckedViolation.java	/^    public Serializable objectUnderContract ()$/
+ContractUncheckedViolation.toString	ContractUncheckedViolation.java	/^    public String toString ()$/
+ContractUncheckedViolation.violationToMessage	ContractUncheckedViolation.java	/^    public static String violationToMessage ($/
+ContractViolation	ContractViolation.java	48
+Contracts	Contracts.java	42
+Contracts.arbiter	Contracts.java	52
+Contracts.arbiter	Contracts.java	/^    public Arbiter arbiter ()$/
+Contracts.check	Contracts.java	/^        void check ($/
+Contracts.final	Contracts.java	113
+Contracts.isContractInspectionEnabled	Contracts.java	/^    public static final boolean isContractInspecti/
+Contracts.lock	Contracts.java	45
+Contracts.makeArrayOfSerializables	Contracts.java	/^    public static Serializable [] makeArrayOfSeria/
+Contracts.makeSerializable	Contracts.java	/^    public static Serializable makeSerializable ($/
+Contracts.setArbiter	Contracts.java	/^    public static final Arbiter setArbiter ($/
+Domain	Domain.java	53
+Domain.NONE	Domain.java	57
+DomainGuaranteeCheckedViolation	DomainGuaranteeCheckedViolation.java	50
+DomainGuaranteeCheckedViolation.DomainGuaranteeCheckedViolation	DomainGuaranteeCheckedViolation.java	/^    public DomainGuaranteeCheckedViolation ($/
+DomainGuaranteeCheckedViolation.serialVersionHash	DomainGuaranteeCheckedViolation.java	55
+DomainGuaranteeCheckedViolation.serialVersionUID	DomainGuaranteeCheckedViolation.java	54
+DomainGuaranteeUncheckedViolation	DomainGuaranteeUncheckedViolation.java	50
+DomainGuaranteeUncheckedViolation.DomainGuaranteeUncheckedViolation	DomainGuaranteeUncheckedViolation.java	/^    public DomainGuaranteeUncheckedViolation ($/
+DomainGuaranteeUncheckedViolation.serialVersionHash	DomainGuaranteeUncheckedViolation.java	55
+DomainGuaranteeUncheckedViolation.serialVersionUID	DomainGuaranteeUncheckedViolation.java	54
+DomainObligationCheckedViolation	DomainObligationCheckedViolation.java	50
+DomainObligationCheckedViolation.DomainObligationCheckedViolation	DomainObligationCheckedViolation.java	/^    public DomainObligationCheckedViolation ($/
+DomainObligationCheckedViolation.serialVersionHash	DomainObligationCheckedViolation.java	55
+DomainObligationCheckedViolation.serialVersionUID	DomainObligationCheckedViolation.java	54
+DomainObligationUncheckedViolation	DomainObligationUncheckedViolation.java	50
+DomainObligationUncheckedViolation.DomainObligationUncheckedViolation	DomainObligationUncheckedViolation.java	/^    public DomainObligationUncheckedViolation ($/
+DomainObligationUncheckedViolation.serialVersionHash	DomainObligationUncheckedViolation.java	55
+DomainObligationUncheckedViolation.serialVersionUID	DomainObligationUncheckedViolation.java	54
+Guarantee	DomainGuarantee.java	56
+GuaranteeCheckedViolation	GuaranteeCheckedViolation.java	50
+GuaranteeCheckedViolation.GuaranteeCheckedViolation	GuaranteeCheckedViolation.java	/^    public GuaranteeCheckedViolation ($/
+GuaranteeCheckedViolation.serialVersionHash	GuaranteeCheckedViolation.java	55
+GuaranteeCheckedViolation.serialVersionUID	GuaranteeCheckedViolation.java	54
+GuaranteeUncheckedViolation	GuaranteeUncheckedViolation.java	50
+GuaranteeUncheckedViolation.GuaranteeUncheckedViolation	GuaranteeUncheckedViolation.java	/^    public GuaranteeUncheckedViolation ($/
+GuaranteeUncheckedViolation.serialVersionHash	GuaranteeUncheckedViolation.java	55
+GuaranteeUncheckedViolation.serialVersionUID	GuaranteeUncheckedViolation.java	54
+NoDomain	NoDomain.java	52
+NoDomain.equals	NoDomain.java	/^    public boolean equals ($/
+NoDomain.hashCode	NoDomain.java	/^    public int hashCode ()$/
+NoDomain.isValid	NoDomain.java	/^    public final boolean isValid ($/
+NoDomain.serialVersionHash	NoDomain.java	57
+NoDomain.serialVersionUID	NoDomain.java	56
+NoDomain.toString	NoDomain.java	/^    public String toString ()$/
+NoDomainGuarantee	NoDomainGuarantee.java	47
+NoDomainGuarantee.NoDomainGuarantee	NoDomainGuarantee.java	/^    public NoDomainGuarantee ($/
+NoDomainGuarantee.createViolation	NoDomainGuarantee.java	/^    public final DomainGuaranteeCheckedViolation c/
+NoDomainGuarantee.equals	NoDomainGuarantee.java	/^    public boolean equals ($/
+NoDomainGuarantee.hashCode	NoDomainGuarantee.java	/^    public int hashCode ()$/
+NoDomainGuarantee.serialVersionHash	NoDomainGuarantee.java	53
+NoDomainGuarantee.serialVersionUID	NoDomainGuarantee.java	52
+NoDomainGuarantee.toString	NoDomainGuarantee.java	/^    public String toString ()$/
+NoDomainObligation	NoDomainObligation.java	47
+NoDomainObligation.NoDomainObligation	NoDomainObligation.java	/^    public NoDomainObligation ($/
+NoDomainObligation.createViolation	NoDomainObligation.java	/^    public final DomainObligationCheckedViolation /
+NoDomainObligation.equals	NoDomainObligation.java	/^    public boolean equals ($/
+NoDomainObligation.hashCode	NoDomainObligation.java	/^    public int hashCode ()$/
+NoDomainObligation.serialVersionHash	NoDomainObligation.java	53
+NoDomainObligation.serialVersionUID	NoDomainObligation.java	52
+NoDomainObligation.toString	NoDomainObligation.java	/^    public String toString ()$/
+NoGuarantee	NoGuarantee.java	47
+NoGuarantee.enforce	NoGuarantee.java	/^    public void enforce ($/
+NoGuarantee.serialVersionHash	NoGuarantee.java	53
+NoGuarantee.serialVersionUID	NoGuarantee.java	52
+NoObligation	NoObligation.java	47
+NoObligation.enforce	NoObligation.java	/^    public void enforce ($/
+NoObligation.equals	NoObligation.java	/^    public boolean equals ($/
+NoObligation.hashCode	NoObligation.java	/^    public int hashCode ()$/
+NoObligation.serialVersionHash	NoObligation.java	53
+NoObligation.serialVersionUID	NoObligation.java	52
+NoObligation.toString	NoObligation.java	/^    public String toString ()$/
+ObjectContracts	ObjectContracts.java	53
+ObjectContracts.ObjectContracts	ObjectContracts.java	/^    public ObjectContracts ($/
+ObjectContracts.check	ObjectContracts.java	/^        void check ($/
+ObjectContracts.check	ObjectContracts.java	/^        void check ($/
+ObjectContracts.final	ObjectContracts.java	120
+ObjectContracts.patron	ObjectContracts.java	64
+ObjectContracts.serialVersionHash	ObjectContracts.java	58
+ObjectContracts.serialVersionUID	ObjectContracts.java	57
+Obligation	DomainObligation.java	56
+ObligationCheckedViolation	ObligationCheckedViolation.java	49
+ObligationCheckedViolation.ObligationCheckedViolation	ObligationCheckedViolation.java	/^    public ObligationCheckedViolation ($/
+ObligationCheckedViolation.serialVersionHash	ObligationCheckedViolation.java	54
+ObligationCheckedViolation.serialVersionUID	ObligationCheckedViolation.java	53
+ObligationUncheckedViolation	ObligationUncheckedViolation.java	49
+ObligationUncheckedViolation.ObligationUncheckedViolation	ObligationUncheckedViolation.java	/^    public ObligationUncheckedViolation ($/
+ObligationUncheckedViolation.serialVersionHash	ObligationUncheckedViolation.java	54
+ObligationUncheckedViolation.serialVersionUID	ObligationUncheckedViolation.java	53
+Serializable	AbstractContract.java	/^    implements Contract<INSPECTABLE, VIOLATION>, S/
+Serializable	Obligation.java	53
+Serializable	Guarantee.java	54
+Serializable	DomainObligation.java	56
+Serializable	DomainGuarantee.java	56
+public	DomainObligation.java	76
+public	DomainGuarantee.java	76

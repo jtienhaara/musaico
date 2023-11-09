@@ -1,0 +1,594 @@
+- ignore the Transitions in input arcs
+- input arcs x transition arcs:
+
+  i0 --- t0
+  1 input induces 0 or 1 transitions
+  entry --- i0t0 --- exit
+
+     /-- t0
+  i0 --- t1
+     \-- t2
+  1 input induces whichever transition it can, in order: t0, t1, t2.
+  0 or 1 transitions.
+  entry --- iot0 -[success]- exit
+                 -[failure]- i0t1 -[success]- exit
+                                  -[failure]- i0t2 --- exit
+  
+
+  i0 \
+  i1 --- t0
+  i2 /
+  X inputs, 1 will be chosen to induce the 1 transition, in order: i0, i1, i2.
+  0 or 1 transitions.
+  entry --- iot0 -[success]- exit
+                 -[failure]- i1t0 -[success]- exit
+                                  -[failure]- i2t0 --- exit
+
+  i0 \ / t0
+  i1 --- t1
+  i2 / \ t2
+  X inputs to X transitions.  Treated as X 1-1 concurrent transitions.
+  0..X transitions.  State machine must be split into X.
+  entry --- i0t0 --- exit
+  entry --- i1t1 --- exit
+  entry --- i2t2 --- exit
+
+      /- t0
+  i0 --- t1
+  i1 /\- t2
+  X inputs into Y tranasitions, Y > X.
+  Split the machine into X, induce whichever X transitions it can, in order:
+  i0->t0? -Y-> i1-Y->t1? -Y-> (i0,i1) into (t0,t1)
+                         -N-> i1-->t2? -Y-> (i0,i1) into (t0,t2)
+                                       -N-> i0->t1? -Y-> i1->t0? -Y-> i0i1-t1t0
+                                                                 -N-> no trans
+                                                    -N-> i0->t2? -Y-> i1->t0?
+etc
+  0 or 1 transitions.
+
+  i0 \
+  i1 --- t0
+  i2 /
+  X inputs, 1 will be chosen to induce the 1 transition, in order: i0, i1, i2.
+  0 or 1 transitions.
+
+
+
+A graph of StateMachines is formed.
+
+Initially there is one StateMachine.
+
+    SM0
+
+On any input that would output 1 state machine, we go back to the same SM0.
+
+    SM0--+
+      ^  |
+      |  |
+      +--+
+
+But on any input that would output Y state machines (Y > 1), we enter a
+new state of StateMachines:
+
+    SM0 ----> ( SM0, SM1, SM2, ..., SMY )
+
+But of course each StateMachine has its own copy of the input machine,
+so that it can process inputs in parallel.  However, the individual
+input machines are related, as we will see.
+
+The state of StateMachines must not remain here; at some point it
+must return to one single SM0, otherwise the inputs have failed.
+
+A reduction in StateMachines happens whenever two or more StateMachines
+enter the same state.
+
+    ( SM0, SM1, SM2, ..., SMY ) --> ( SM0, SM3, SM7, SM11 )
+
+Reductions must keep happening until the StateMachines have been reduced
+to 1, otherwise the inputs failed.
+
+    ( SM0, SM3, SM7, SM11 ) --> SM0
+
+
+The Graph is undoubtedly not idempotent.  However it might not be
+too complicated.  Maybe the Graph looks like:
+
+           +------------+                       +----------------+
+           |            |                       |                |
+           |       {1 output?}                  |           {Y outputs?}
+           V            |                       V                |
+    One<StateMachine> --+--{Y outputs?}--> Many<StateMachine> --+
+               ^        |                     |        |
+               |        +---> Error <---------+   {1 output?}
+               |                                       |
+               +---------------------------------------+
+
+
+
+Processor
++ process ( Graph<Value<?>, Transition> subject,
+            Graph<Value<?>, Transition> input ) : Graph<Value<?>, Transition>
+
+AbstractProcessor
++ process ( subject, input ) : output
+  {
+    final StateMachine subject_machine = new StateMachine ( subject );
+    final StateMachine input_machine = new StateMachine ( input );
+    final StateGraphBuilder<Value<?>, Transition> output_builder = ... ();
+
+    Countable<StateMachine> machines = new One<StateMachine> ( ..., subject...)
+    while ( input_machine.state () != input.exit () )
+    {
+      final Value<?> last_input = input_machine.state ();
+      final Value<Arc<Value<?>, Transition>> arcs_value =
+        input.arcs ( last_input );
+      if ( ! ( arcs_value instanceof Countable ) )
+      {
+        ...error out...
+      }
+
+      final Countable<Arc<Value<?>, Transition>> arcs =
+        (Countable<Arc<Value<?>, Transition>>) arcs_value;
+
+      machines = apply ( machines, arcs );
+
+      final Iterator<StateMachine> machine_iterator = machines.iterator ();
+      final Iterator<Arc<...>> arc_iterator = arcs.iterator ();
+
+      if ( machines.length () == arcs.length () )
+      {
+        while ( machines_iterator.hasNext () )
+        {
+          final StateMachine machine = machines.next ();
+          final Arc<...> arc = arcs.next ();
+
+          final Value<?> input_value = arc.to ();
+
+          final Value<?> output = this.process ( machine, input_value );
+
+          output_builder.from ( last_output );
+          output_builder.to ( output );
+        }
+      }
+      else if ( machines.length () < arcs.length () )
+      {
+      }
+      else // ( machines.lengt () > arcs.length () )
+      {
+      }
+    }
+
+    
+  }
+
+
+
+
+
+Transition
++ transition ( StateMachine input ) : Graph<Value<?>, Transition> ouput
+
+InputMachine or IOMachine or InputOutputMachine or StreamMachine etc.
++ input () : StateMachine
++ output () : StateGraphBuilder
+
+Processor
++ process ( String name,
+            Graph<Value<?>, Transition> machine_graph,
+            Graph<Value<?>, Transition> input ) : Graph<Value<?>, Transition>
+
+AbstractProcessor
++ oneTransition ( IOMachine process ) : Value<IOMachine>
++ merge ( List<IOMachine> input_processes ) : List<IOMachine>
+  {
+    final List<IOMachine> output_processes =
+        new ArrayList<IOMachine> ( input_processes );
+    for ( int p0 = 0; p0 < output_processes.size (); p0 ++ )
+    {
+        final IOMachine process0 = output_processes.get ( p0 );
+
+        List<Integer> merges = new ArrayList<Integer> ();
+        for ( int p1 = p0 + 1; p1 < output_processes.size (); p1 ++ )
+        {
+            final IOMachine process1 = output_processes.get ( p1 );
+            if ( process0.machine ().state () == process1.machine ().state () )
+            {
+                merges.add ( p1 );
+            }
+        }
+
+        if ( merges.size () == 0 )
+        {
+            // Leave the output processes as they are.
+            continue;
+        }
+
+        for ( int merge : merges )
+        {
+            // Merge processes.
+            IOMachine merged = this.merge ( process0,
+                                            output_processes.get ( merge ) );
+            output_machines.remove ( p0 );
+            output_machines.add ( p0, merged );
+        }
+
+        for ( int merge : merges )
+        {
+            // Remove the later merged process(es) from the list.
+            output_machines.remove ( merge );
+        }
+    }
+
+    return output_machines;
+  }
++ merge ( IOMachine process0,
+          IOMachine process1 ) : IOMachine
+  {
+    final StateMachine input = process0.input ();
+!!!
+    final StateMachine machine = process0.machine ();
+
+    final StateGraphBuilder output0 = process0.output ();
+    final StateGraphBuilder output1 = process1.output ();
+    output0.addAll ( output1 );
+
+    final IOMachine merged_process 
+  }
++ process ( String name,
+            Graph<Value<?>, Transition> machine_graph,
+            Graph<Value<?>, Transition> input ) : Graph<Value<?>, Transition>
+  {
+    final IOMachine start_process =
+        new IOMachine ( machine_graph,
+                        new StateMachine ( input ),
+                        new StateGraphBuilder ( name ) );
+    Value<IOMachine> processes =
+        new One<IOMachine> ( IOMachine.class, start_process );
+
+    boolean is_all_processing_finished = false;
+    while ( ! is_all_processing_finished )
+    {
+        final List<IOMachine> unmerged_processes =
+            new ArrayList<IOMachine> ();
+        is_all_processing_finished = true;
+        for ( IOMachine process : processes )
+        {
+            final Value<IOMachine> output_processes =
+                this.oneTransition ( process );
+            for ( IOMachine output_process : output_processes )
+            {
+                unmerged_processes.add ( output_process );
+
+                if ( is_all_processing_finished )
+                {
+                    if ( output_process.machine ().state ()
+                         != output_process.machine ().graph ().exit () )
+                    {
+                        is_all_processing_finished = false;
+                    }
+                    else if ( output_process.input ().state ()
+                              != output_process.input ().graph ().exit () )
+                    {
+                        is_all_processing_finished = false;
+                    }
+                }
+            }
+        }
+
+        final List<IOMachine> merged_processes =
+            this.merge ( unmerged_processes );
+
+        final ValueBuilder<IOMachine> builder =
+            new ValueBuilder<IOMachine> ( merged_processes );
+
+        processes = builder.build ();
+    }
+
+    int count = 0;
+    IOMachine final_process = null;
+    for ( IOMachine process : processes )
+    {
+       count ++;
+       if ( final_process == null )
+       {
+           final_process = process;
+       }
+    }
+
+    if ( count != 1 )
+    {
+        ...error...
+    }
+
+    if ( final_process.machine ().state ()
+         != final_process.machine ().graph ().exit () )
+    {
+        ...error...
+    }
+    else if ( final_process.input ().state ()
+              != final_process.input ().graph ().exit () )
+    {
+        ...error...
+    }
+
+    final StateGraphBuilder output_builder = final_process.output ();
+    final Graph<Value<?>, Transition> output =
+        output_builder.build ();
+
+    return output;
+  }
+
+SingleProcessor
++ oneTransition ( IOMachine ) : Value<IOMachine>
+
+MultiProcessor
++ oneTransition ( IOMachine ) : Value<IOMachine>
+
+
+
+
+
+
+
+
+
+Process
++ builder () : StateGraphBuilder
++ input () : Value<Arc<Value<?>, Transition>>
++ machine () : StateMachine
++ numInputs () : long
++ output () : Value<Arc<Value<?>, Transition>> // Always the same length as input ().
++ transition () : Value<Process>
+
+Processor
++ process ( String name,
+            Graph<Value<?>, Transition> machine_graph,
+            Graph<Value<?>, Transition> input ) : Graph<Value<?>, Transition>
+
+AbstractProcessor
+# abstract oneTransition ( Process ) : Value<Process>
++ process ( String name,
+            Graph<Value<?>, Transition> machine_graph,
+            Graph<Value<?>, Transition> input ) : Graph<Value<?>, Transition>
+  {
+    final Process start_process = new Process ( name, machine_graph, input );
+    Value<Process> processes =
+        new One<Process> ( Process.class, start_process );
+
+    boolean is_all_processing_finished = false;
+    while ( ! is_all_processing_finished )
+    {
+        final List<Process> unmerged_processes = new ArrayList<Process> ();
+        is_all_processing_finished = true;
+        for ( Process process : proceses )
+        {
+            final Value<Process> transitioned_processes =
+                this.oneTransition ( process );
+            for ( Process transitioned_process : transitioned_processes )
+            {
+                unmerged_processes.add ( transitioned_process );
+
+                if ( is_all_processing_finished )
+                {
+                    if ( transitioned_process.machine ().state ()
+                         != transitioned_process.machine ().graph ().exit ()
+                         && transitioned_process.numInputs () > 0L )
+                    {
+                        is_all_processing_finished = false;
+                    }
+                }
+            }
+        }
+
+        final List<Process> merged_processes =
+            this.merge ( unmerged_processes );
+
+        final ValueBuilder<Process> builder =
+            new ValueBuilder<Process> ( merged_processes );
+
+        processes = builder.build ();
+    }
+
+    int count = 0;
+    Process final_process = null;
+    for ( Process process : processes )
+    {
+       count ++;
+       if ( final_process == null )
+       {
+           final_process = process;
+       }
+    }
+
+    if ( count != 1 )
+    {
+        ...error...
+    }
+
+    if ( final_process.machine ().state ()
+         != final_process.machine ().graph ().exit ()
+         || final_process.numInputs () > 0L )
+    {
+        ...error...
+    }
+
+    final StateGraphBuilder output_builder = final_process.builder ();
+    final Graph<Value<?>, Transition> output =
+        output_builder.build ();
+
+    return output;
+  }
+# merge ( List<Process> unmerged_processes )
+  {
+      final List<Process> merged_processes =
+          new ArrayList<Process> ( unmerged_processes );
+      for ( int p0 = 0; p0 < merged_processes.size (); p0 ++ )
+      {
+          Process process0 = merged_processes.get ( p0 );
+          for ( int p1 = p0 + 1; p1 < merged_processes.size (); p1 ++ )
+          {
+              final Process process1 = merged_processes.get ( p1 );
+              if ( this.isMergeable ( process0, process1 ) )
+              {
+                  final Process merged_process =
+                      this.merge ( process0, process1 );
+                  merged_processes.remove ( p0 );
+                  merged_processes.add ( p0, merged_process );
+                  merged_processes.remove ( p1 );
+
+                  process0 = merged_process;
+              }
+          }
+      }
+  }
+# isMergeable ( Process process0, Process process1 ) : boolean
+  {
+      if ( process0.machine ().state () == process1.machine ().state () )
+      {
+          return true;
+      }
+      else
+      {
+          return false;
+      }
+  }
+# merge ( Process process0, Process process1 ) : Process
+  {
+    // Merge the input arcs
+    final Value<Arc<Value<?>, Transition>> input0 = process0.input ();
+    final Value<Arc<Value<?>, Transition>> input1 = process1.input ();
+    final ValueBuilder<Arc<Value<?>, Transition>> merged_input_builder =
+        new ValueBuilder<Arc<Value<?>, Transition>> ( input0 );
+    for ( Arc<Value<?>, Transition> arc1 : input1 )
+    {
+        boolean is_arc_needed = true;
+        for ( Arc<Value<?>, Transition> arc0 : input0 )
+        {
+            if ( arc1 == arc0 )
+            {
+                is_arc_needed = false;
+            }
+        }
+
+        if ( ! is_arc_needed )
+        {
+            continue;
+        }
+
+        merged_input_builder.add ( arc1 );
+    }
+    final Value<Arc<Value<?>, Transition>> merged_input =
+        merged_input_builder.build ();
+
+    // Merge the output graph
+    final StateGraphBuilder output_builder0 = process0.builder ();
+    final StateGraphBuilder output_builder1 = process1.builder ();
+    final StateGraphBuilder merged_output_builder =
+        output_builder0.addAll ( output_builder1 );
+
+    // Merge the output arcs
+    final Value<Arc<Value<?>, Transition>> output0 = process0.output ();
+    final Value<Arc<Value<?>, Transition>> output1 = process1.output ();
+    final ValueBuilder<Arc<Value<?>, Transition>> merged_output_builder =
+        new ValueBuilder<Arc<Value<?>, Transition>> ( output0 );
+    for ( Arc<Value<?>, Transition> arc1 : output1 )
+    {
+        boolean is_arc_needed = true;
+        for ( Arc<Value<?>, Transition> arc0 : output0 )
+        {
+            if ( arc1 == arc0 )
+            {
+                is_arc_needed = false;
+            }
+        }
+
+        if ( ! is_arc_needed )
+        {
+            continue;
+        }
+
+        merged_output_builder.add ( arc1 );
+    }
+    final Value<Arc<Value<?>, Transition>> merged_output =
+        merged_output_builder.build ();
+
+    final Process merged_process = new Process ( process0.machine (),
+                                                 merged_input,
+                                                 merged_output_builder,
+                                                 merged_output );
+
+    return merged_process;
+  }
+
+SingleProcessor
+# abstract oneTransition ( Process process ) : Value<Process>
+  {
+      final Value<?> state = process.machine ().state ();
+      final Value<Arc<Value<?>, Transition>> transition_arcs =
+          process.machine ().graph ().arcs ( state );
+      for ( Arc<Value<?>, Transition> input_arc : process.input )
+      {
+          final Value<?> input = input_arc.to ();
+          for ( Arc<Value<?>, Transition> transition_arc : transition_arcs )
+          {
+              final Transition transition = transition_arc.arc ();
+              if ( transition.filter ( input ).isKept () )
+              {
+                  !!!;
+              }
+          }
+      }
+  }
+
+
+
+
+
+
+
+           +------------+                       +----------------+
+           |            |                       |                |
+           |       {1 output?}                  |           {Y outputs?}
+           V            |                       V                |
+     One<ProcessStep> --+--{Y outputs?}--> Many<ProcessStep> ----+
+               ^        |                     |        |
+               |        +---> Error <---------+   {1 output?}
+               |                                       |
+               +---------------------------------------+
+
+Process
++ input () : Graph<Value<?>, Transition>
++ logic () : Graph<Value<?>, Transition>
++ output () : StateGraphBuilder
++ steps () : StateGraphBuilder
++ machine () : StateMachine
+
+ProcessStep
++ process () : Process
++ input () : Countable<Arc<Value<?>, Transition>>
++ logic () : Countable<Arc<Value<?>, Transition>>
++ output () : Countable<Arc<Value<?>, Transition>>
+
+implementations:
+Transform (1 input x 1 logic)
+Switch (M inputs x N logics, M < N, M >= 1)
+Merge (M inputs x 1 logic, M > 1)
+Choose (M inputs x N logics, M > N, N > 1)
+Concurrent (N inputs x N logics, N > 1)
+
+Processor
++ processes () : StateGraphBuilder // transitions do scheduling at input time T
+
+
+
+
+Process extends Graph<ProcessStep, AutomaticTransition>
+
+compile ( logic, input ) : Process
+
+Processor
++ processes () : Graph<Process, Transition>
++ step ()
+
+MultiProcessor extends Processor
++ processors () : Graph<Processor, AutomaticTransition>

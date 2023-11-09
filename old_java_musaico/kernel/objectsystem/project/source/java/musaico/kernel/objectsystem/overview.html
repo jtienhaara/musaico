@@ -1,0 +1,134 @@
+<html>
+<body>
+  <p>
+    The object system layer.
+  </p>
+
+  <p>
+    The object system in Musaico corresponds roughly to the
+    file system in UNIX.
+  </p>
+
+  <p>
+    An object system is a hierarchical organization of documents,
+    organized into:
+  </p>
+
+  <ul>
+    <li> Flat records (like files), which are sets or sequences of
+         Fields, with no hierarchy. </li>
+    <li> Object records (like directories), which are records which
+         may contain child documents (such as child records,
+         child objects, child symbolic links, and so on). </li>
+    <li> Service providers (like special files), which handle
+         requests.  Drivers are service providers.  An
+         object's public methods might be organized into a
+         service provider, and its protected methods into another,
+         and so on. </li>
+    <li> Relations (like links), which provide mechanisms for
+         linking and joining documents.  Symbolic links and unions
+         are examples of Relations. </li>
+  </ul>
+
+  <p>
+    Documents are laid out in the object system using UNIX-like
+    paths.  For example, the flat record referred to by the path
+    <code>/reports/2009-07-19</code> might contain Fields encompassing
+    some sort of statistics; while the parent object </code>/reports</code>
+    might contain numerous records, and perhaps also a service
+    provider to generate new report records, <code>/reports/generate</code>.
+  </p>
+
+  <p>
+    Parts of the object system are used to store the application
+    system itself.  For example, the following objects might be
+    provided:
+  </p>
+
+  <ul>
+    <li> <code>/dev</code>
+         The root of the Driver objects. </li>
+    <li> <code>/memory</code>
+         Data for the memory management layer, including direct
+         access to Pages and swap space.  Typically access to
+         this object system is severely restricted. </li>
+    <li> <code>/session</code>
+         The login session states for all logged in users.  Typically
+         access to this object system is severely restricted. </li>
+    <li> <code>/proc</code>
+         Data for the currently running processes.  Typically access
+         to these is severely restricted. </li>
+    <li> <code>/usr</code>
+         Programs and data for programs which can be glued together
+         into applications. </li>
+    <li> <code>/home</code>
+         The private data for each user is stored here.  Typically
+         only the user can access his/her own home object. </li>
+  </ul>
+
+  <p>
+    However these object systems are all optional, and many
+    more can be added.
+  </p>
+
+  <p>
+    In Musaico, an object system is represented by its SuperBlock.
+    A class of object systems which behave in a certain way is
+    represented by an ObjectSystemFactory, equivalent to the
+    file_system_type in a UNIX-like operating system.
+  </p>
+
+  <p>
+    For example, a class of object systems which tries to minimize
+    reads and writes to/from its backing driver (perhaps because
+    it is optimized for network-based drivers) might be called
+    the LazyObjectSystemFactory.  On the other hand another class of
+    object systems which never caches any data, but always writes
+    it directly to the backing driver (perhaps because it is
+    optimized for drivers which are faster than Musaico's cache)
+    might be called the DirectObjectSystemFactory.  Several instances
+    of each object system factory might be present in a running
+    system:
+  </p>
+
+  <pre>
+        LazyObjectSystemFactory     DirectObjectSystemFactory
+                   |                            |
+           ________|________               _____|_____
+          |                 |             |           |
+      /home/abcbooks    /sessions      /proc         /dev
+      SuperBlock        SuperBlock     SuperBlock    SuperBlock
+           |                |              |              |
+           V                V              V              V
+      /dev/http    /dev/sql/remotehost KernelProcDriver KernelDriversDriver
+  </pre>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009, 2011 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

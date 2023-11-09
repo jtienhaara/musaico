@@ -1,0 +1,19 @@
+CastBigDecimalToBigInteger	CastBigDecimalToBigInteger.java	53
+CastBigDecimalToBigInteger.CONTRACT	CastBigDecimalToBigInteger.java	87
+CastBigDecimalToBigInteger.CastBigDecimalToBigInteger	CastBigDecimalToBigInteger.java	/^    public CastBigDecimalToBigInteger ()$/
+CastBigDecimalToBigInteger.DOMAIN	CastBigDecimalToBigInteger.java	65
+CastBigDecimalToBigInteger.evaluate	CastBigDecimalToBigInteger.java	/^    public final Value<BigInteger> evaluate ($/
+CastBigDecimalToBigInteger.serialVersionHash	CastBigDecimalToBigInteger.java	59
+CastBigDecimalToBigInteger.serialVersionUID	CastBigDecimalToBigInteger.java	58
+CastOperationToString	CastOperationToString.java	50
+CastOperationToString.CastOperationToString	CastOperationToString.java	/^    public CastOperationToString ()$/
+CastOperationToString.evaluate	CastOperationToString.java	/^    public final Value<String> evaluate ($/
+CastOperationToString.serialVersionHash	CastOperationToString.java	56
+CastOperationToString.serialVersionUID	CastOperationToString.java	55
+CastStringToOperation	CastStringToOperation.java	62
+CastStringToOperation.CastStringToOperation	CastStringToOperation.java	/^    public CastStringToOperation ($/
+CastStringToOperation.classContracts	CastStringToOperation.java	73
+CastStringToOperation.environment	CastStringToOperation.java	78
+CastStringToOperation.evaluate	CastStringToOperation.java	/^    public final Value<Operation> evaluate ($/
+CastStringToOperation.serialVersionHash	CastStringToOperation.java	68
+CastStringToOperation.serialVersionUID	CastStringToOperation.java	67

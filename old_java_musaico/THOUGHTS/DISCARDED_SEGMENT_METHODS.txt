@@ -1,0 +1,45 @@
+
+
+    /**
+     * <p>
+     * Makes a page from a Segment writable.
+     * </p>
+     *
+     * <p>
+     * The page was previously read-only.
+     * </p>
+     *
+     * <p>
+     * Depending on the permissions of the segment (such as
+     * copy-on-write), this may induce creating a brand new
+     * PagedArea, copied from the existing one, so that
+     * local writes can be made without affecting other
+     * read-only or copy-on-write users of the original PagedArea.
+     * </p>
+     *
+     * @param credentials Who is executing the operation on
+     *                    this Segment, such as user
+     *                    credentials or module credentials
+     *                    and so on.  Must not be null.
+     *
+     * @param page The page to make writable.  Must not be null.
+     *             Must belong to this segment's paged area.
+     *
+     * @throws I18nIllegalArgumentException If any of the parameter(s)
+     *                                      specified is invalid
+     *                                      (see above).
+     *
+     * @throws SegmentOperationException If the operation is not
+     *                                   permitted by this Segment,
+     *                                   or if anything goes horribly wrong.
+     *
+     * @throws SegmentSecurityException If the specified credentials
+     *                                  may not perform this operation
+     *                                  on this Segment.
+     */
+    public abstract void makePageWritable (
+                                           Credentials credentials,
+                                           Page page
+                                           )
+        throws I18nIllegalArgumentException,
+               SegmentOperationException;

@@ -1,0 +1,64 @@
+SecurityMechanism<ROLE extends Role, PERMISSION extends Permission>
++ roles () : Roles<ROLE>
++ permissions () : Permissions<PERMISSION>
+
+SecurityRule<ROLE extends Role, PERMISSION extends Permission>
++ request ( Credentials<ROLE>, Permissions<PERMISSION> ) : Permissions<PERMISSION>
+
+SecurityPolicy<ROLE, PERMISSION> : SecurityRule<ROLE, PERMISSION>
+
+SecurityPolicyBuilder<ROLE, PERMISSION>
++ addRule ( SecurityRule<R, P> ) : SecurityPolicyBuilder<R, P>
++ removeRule ( SecurityRule<R, P> ) : SecurityPolicyBuilder<R, P>
++ build () : SecurityPolicy<R, P>
+
+Grant<ROLE extends Role, PERMISSION extends Permission>
++ credentials () : Credentials<ROLE>
++ permission () : PERMISSION
+
+Revoke<ROLE extends Role, PERMISSION extends Permission>
++ credentials () : Credentials<ROLE>
++ permission () : PERMISSION
+
+Role
++ id () : String
+
+Permission
++ id () : String
+
+Credentials<ROLE extends Role>
++ id () : String
+
+UserRole : Role
+
+GroupRole : Role
+
+ModuleRole : Role
+
+UserCredentials : Credentials<UserRole>
++ user () : User
+maybe password, session info???
+
+GroupCredentials : Credentials<GroupRole>
++ group () : Group
+
+ModuleCredentials : Credentials<ModuleRole>
++ moduleID () : ModuleID
+
+Permissions<PERMISSION extends Permission>
++ isPermitted ( PERMISSION ) : boolean
++ contains ( Permissions<PERMISSION> ) : boolean
++ builder () : PermissionsBuilder<PERMISSION>
+
+PermissionsBuilder<PERMISSION extends Permission>
++ add ( PERMISSION ) : PermissionsBuilder<PERMISSION>
++ remove ( PERMISSION ) : PermissionsBuilder<PERMISSION>
++ build () : Permissions<PERMISSION>
+
+ReadPermission : Permission
+
+WritePermission : Permission
+
+ExecutePermission : Permission
+
+etc

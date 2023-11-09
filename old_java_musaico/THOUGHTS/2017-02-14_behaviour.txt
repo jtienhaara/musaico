@@ -1,0 +1,15 @@
+pipeline.on ( Blocking.BEHAVIOUR ).await ( BigDecimal.TEN );
+
+Blocking.BEHAVIOUR = new Blocking ( ... );
+Blocking implements Behaviour<BlockingControl>
+BlockingControl implements BehaviourControl
+BlockingPipeline<VALUE, BUILT> extends BlockingControl implements BehaviourPipeline<VALUE, BUILT, Blocking>
+
+pipeline.on ( Behaviour<CONTROL> ) : BEHAVIOUR extends BehaviourPipeline<VALUE, BUILT, CONTROL>
+
+BehaviourPipeline<VALUE, BUILT, CONTROL>.always () : CONTROL extends BehaviourControl & BehaviourPipeline<VALUE, BUILT, CONTROL>
+
+
+pipeline.on ( Blocking.BEHAVIOUR ) : BEHAVIOUR extends BehaviourPipeline<VALUE, BUILT, BlockingControl>
+
+BehaviourPipeline<VALUE, BUILT, BlockingControl>.always () : BlockingPipeline<VALUE, BUILT>

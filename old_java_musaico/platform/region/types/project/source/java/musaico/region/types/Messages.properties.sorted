@@ -1,0 +1,5 @@
+Cannot\ cast\ from\ Reference\ [%from%]\ to\ Long:\ not\ a\ SoftReference<Long>",\ e = Cannot cast from Reference [%from%] to Long: not a SoftReference<Long>", e
+Cannot\ cast\ from\ Reference\ [%from%]\ to\ String:\ must\ be\ a\ SoftReference<String>",\ e = Cannot cast from Reference [%from%] to String: must be a SoftReference<String>", e
+Unknown\ start\ marker\ '[%first_position_string%]'\ in\ String\ '[%from%]'\ while\ casting\ to\ Position = Unknown start marker '[%first_position_string%]' in String '[%from%]' while casting to Position
+Unknown\ start\ position\ '"				\ +\ first_position_string				%]'\ in\ String\ '"				\ +\ from				%]'\ while\ casting\ to\ Position = Unknown start position '"				 + first_position_string				%]' in String '"				 + from				%]' while casting to Position
+Un-parseable\ position\ '"					\ +\ from					%]'\ token:\ '"					\ +\ last_token					%]' = Un-parseable position '"					 + from					%]' token: '"					 + last_token					%]'

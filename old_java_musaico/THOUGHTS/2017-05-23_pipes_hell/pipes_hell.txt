@@ -1,0 +1,33 @@
+2017-05-23
+final Pipe<String,String> pipe1 = new Insert<String> ( 5L, "foo" );
+final Pipe<Integer,String> pipe2 = new CastIntegerToString ();
+final Pipe<String,String> pipe3 = new Intersection<String> ( pipe1, pipe2 );
+
+final Context<String> context = new Context<String> ();
+context.stream ( pipe1, pipe3, new MySpecialStream<String,String> () );
+context.input ( pipe1, my_string_input_term );
+context.input ( pip2, my_integer_pipe );
+while ( pipe3.apply ( context ).hasValue () )
+{
+    // Keep applying.
+}
+
+final Term<String> final_result = context.output ();
+
+
+context.stream ( pipe2, pipe3 ) -> Maybe<Stream<String, String>>
+context.streamOrDefault ( pipe2, pipe3 ) -> creates Buffer if not already exists
+
+
+
+OpenPipe
+ClosedPipe
+Disconnected1
+Disconnected2
+
+=====================================================================
+
+2017-05-23
+
+Graph<NODE, ARC>
+Context = Graph<Pipe<?, ?, ?>, Stream<?, ?>>

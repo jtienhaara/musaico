@@ -1,0 +1,17 @@
+
+LocalizationException.java,215
+public class LocalizationException50,1273
+    public LocalizationException LocalizationException.LocalizationException60,1477
+    public LocalizationException LocalizationException.LocalizationException74,1770
+
+SimpleLocalized.java,44
+    implements Localized<Localized58,1480
+
+SimpleInternationalized.java,60
+    implements Internationalized<Internationalized63,1622
+
+Localizer.java,0
+
+Internationalized.java,0
+
+Localized.java,0

@@ -1,0 +1,145 @@
+
+NaturalOrderComparator.java,331
+public class NaturalOrderComparator<NaturalOrderComparator44,1074
+    private static final long serialVersionUID NaturalOrderComparator.serialVersionUID48,1299
+    private static final String serialVersionHash NaturalOrderComparator.serialVersionHash49,1359
+        public int compare NaturalOrderComparator.compare57,1574
+
+GreaterThanZero.java,491
+public class GreaterThanZero58,1285
+    private static final long serialVersionUID GreaterThanZero.serialVersionUID62,1431
+    private static final String serialVersionHash GreaterThanZero.serialVersionHash63,1491
+    public static final GreaterThanZero DOMAIN GreaterThanZero.DOMAIN68,1648
+    protected GreaterThanZero GreaterThanZero.GreaterThanZero72,1731
+    public boolean isValid GreaterThanZero.isValid81,1881
+    public String toString GreaterThanZero.toString178,4134
+
+GreaterThanOrEqualToZero.java,581
+public class GreaterThanOrEqualToZero58,1297
+    private static final long serialVersionUID GreaterThanOrEqualToZero.serialVersionUID62,1452
+    private static final String serialVersionHash GreaterThanOrEqualToZero.serialVersionHash63,1512
+    public static final GreaterThanOrEqualToZero DOMAIN GreaterThanOrEqualToZero.DOMAIN68,1678
+    protected GreaterThanOrEqualToZero GreaterThanOrEqualToZero.GreaterThanOrEqualToZero72,1779
+    public boolean isValid GreaterThanOrEqualToZero.isValid81,1938
+    public String toString GreaterThanOrEqualToZero.toString178,4196
+
+LessThanZero.java,461
+public class LessThanZero58,1282
+    private static final long serialVersionUID LessThanZero.serialVersionUID62,1425
+    private static final String serialVersionHash LessThanZero.serialVersionHash63,1485
+    public static final LessThanZero DOMAIN LessThanZero.DOMAIN68,1639
+    protected LessThanZero LessThanZero.LessThanZero72,1716
+    public boolean isValid LessThanZero.isValid81,1863
+    public String toString LessThanZero.toString178,4116
+
+LessThanOrEqualToZero.java,551
+public class LessThanOrEqualToZero58,1294
+    private static final long serialVersionUID LessThanOrEqualToZero.serialVersionUID62,1446
+    private static final String serialVersionHash LessThanOrEqualToZero.serialVersionHash63,1506
+    public static final LessThanOrEqualToZero DOMAIN LessThanOrEqualToZero.DOMAIN68,1669
+    protected LessThanOrEqualToZero LessThanOrEqualToZero.LessThanOrEqualToZero72,1764
+    public boolean isValid LessThanOrEqualToZero.isValid81,1920
+    public String toString LessThanOrEqualToZero.toString178,4178
+
+BoundedDomain.java,697
+public class BoundedDomain<BoundedDomain58,1296
+    private static final long serialVersionUID BoundedDomain.serialVersionUID62,1465
+    private static final String serialVersionHash BoundedDomain.serialVersionHash63,1525
+    private final Comparator<BOUNDED> comparator;BoundedDomain.comparator69,1741
+    private final BOUNDED minimum;BoundedDomain.minimum73,1925
+    private final BOUNDED maximum;BoundedDomain.maximum77,2091
+        BoundedDomain<NATURALLY_ORDERED> over BoundedDomain.over99,2885
+    public BoundedDomain BoundedDomain.BoundedDomain132,4253
+    public boolean isValid BoundedDomain.isValid162,5303
+    public String toString BoundedDomain.toString191,5918
+
+ContainsElements.java,496
+public class ContainsElements62,1389
+    private static final long serialVersionUID ContainsElements.serialVersionUID66,1565
+    private static final String serialVersionHash ContainsElements.serialVersionHash67,1625
+    private final Serializable [] elements;ContainsElements.elements73,1829
+    public ContainsElements ContainsElements.ContainsElements85,2153
+    public boolean isValid ContainsElements.isValid105,2753
+    public String toString ContainsElements.toString185,4907
+
+ExcludesElements.java,496
+public class ExcludesElements62,1396
+    private static final long serialVersionUID ExcludesElements.serialVersionUID66,1572
+    private static final String serialVersionHash ExcludesElements.serialVersionHash67,1632
+    private final Serializable [] elements;ExcludesElements.elements73,1836
+    public ExcludesElements ExcludesElements.ExcludesElements85,2182
+    public boolean isValid ExcludesElements.isValid105,2782
+    public String toString ExcludesElements.toString185,4932
+
+ExcludesSpecificClasses.java,654
+public class ExcludesSpecificClasses65,1491
+    private static final long serialVersionUID ExcludesSpecificClasses.serialVersionUID69,1674
+    private static final String serialVersionHash ExcludesSpecificClasses.serialVersionHash70,1734
+    private final Class<?> [] excludedClasses;ExcludesSpecificClasses.excludedClasses76,1940
+    public ExcludesSpecificClasses ExcludesSpecificClasses.ExcludesSpecificClasses94,2467
+    private String classesToString ExcludesSpecificClasses.classesToString134,3599
+    public boolean isValid ExcludesSpecificClasses.isValid174,4560
+    public String toString ExcludesSpecificClasses.toString236,6219
+
+NoDuplicates.java,461
+public class NoDuplicates62,1389
+    private static final long serialVersionUID NoDuplicates.serialVersionUID66,1561
+    private static final String serialVersionHash NoDuplicates.serialVersionHash67,1621
+    public static final NoDuplicates DOMAIN NoDuplicates.DOMAIN72,1775
+    protected NoDuplicates NoDuplicates.NoDuplicates76,1852
+    public boolean isValid NoDuplicates.isValid85,1999
+    public String toString NoDuplicates.toString172,4396
+
+NoNulls.java,411
+public class NoNulls60,1336
+    private static final long serialVersionUID NoNulls.serialVersionUID64,1503
+    private static final String serialVersionHash NoNulls.serialVersionHash65,1563
+    public static final NoNulls DOMAIN NoNulls.DOMAIN70,1712
+    protected NoNulls NoNulls.NoNulls74,1779
+    public boolean isValid NoNulls.isValid83,1921
+    public String toString NoNulls.toString130,3020
+
+CoDependentDomain.java,658
+public class CoDependentDomain65,1721
+    private static final long serialVersionUID CoDependentDomain.serialVersionUID69,1908
+    private static final String serialVersionHash CoDependentDomain.serialVersionHash70,1968
+    private final Domain<? extends Object> [] domains;CoDependentDomain.domains78,2311
+    @SuppressWarnings(CoDependentDomain.@SuppressWarnings101,3270
+    public boolean isValid CoDependentDomain.isValid174,5244
+    private Domain<? extends Object> findDomain CoDependentDomain.findDomain268,8261
+        boolean isMember CoDependentDomain.isMember291,8964
+    public String toString CoDependentDomain.toString323,9718
+
+AllDomains.java,2652
+public class AllDomains52,1224
+    private static final long serialVersionUID AllDomains.serialVersionUID56,1349
+    private static final String serialVersionHash AllDomains.serialVersionHash57,1409
+    protected AllDomains AllDomains.AllDomains66,1596
+    public static class GreaterThanZeroAllDomains.GreaterThanZero72,1706
+    private final GreaterThanZero greaterThanZero AllDomains.greaterThanZero77,1970
+    public static class GreaterThanOrEqualToZeroAllDomains.GreaterThanOrEqualToZero82,2133
+    private final GreaterThanOrEqualToZero greaterThanOrEqualToZero AllDomains.greaterThanOrEqualToZero87,2415
+    public static class LessThanZeroAllDomains.LessThanZero91,2592
+    private final LessThanZero lessThanZero AllDomains.lessThanZero96,2850
+    public static class LessThanOrEqualToZeroAllDomains.LessThanOrEqualToZero101,3001
+    private final LessThanOrEqualToZero lessThanOrEqualToZero AllDomains.lessThanOrEqualToZero106,3277
+    public static class BoundedDomain<AllDomains.BoundedDomain111,3447
+            BoundedDomain<NATURALLY_ORDERED> over AllDomains.BoundedDomain.over116,3756
+        public BoundedDomain AllDomains.BoundedDomain.BoundedDomain126,4267
+    private final BoundedDomain<Integer> boundedDomain AllDomains.boundedDomain135,4611
+    public static class ContainsElementsAllDomains.ContainsElements140,4776
+        public ContainsElements AllDomains.ContainsElements.ContainsElements144,4978
+    private final ContainsElements containsElements AllDomains.containsElements150,5160
+    public static class ExcludesElementsAllDomains.ExcludesElements155,5330
+        public ExcludesElements AllDomains.ExcludesElements.ExcludesElements159,5532
+    private final ExcludesElements excludesElements AllDomains.excludesElements165,5714
+    public static class ExcludesSpecificClassesAllDomains.ExcludesSpecificClasses170,5891
+        public ExcludesSpecificClasses AllDomains.ExcludesSpecificClasses.ExcludesSpecificClasses174,6107
+    private final ExcludesSpecificClasses excludesSpecificClasses AllDomains.excludesSpecificClasses180,6308
+    public static class NoDuplicatesAllDomains.NoDuplicates185,6511
+    private final NoDuplicates noDuplicates AllDomains.noDuplicates190,6769
+    public static class NoNullsAllDomains.NoNulls195,6906
+    private final NoNulls noNulls AllDomains.noNulls200,7154
+    public static class CoDependentDomainAllDomains.CoDependentDomain205,7286
+        public CoDependentDomain AllDomains.CoDependentDomain.CoDependentDomain209,7490
+    private final CoDependentDomain coDependentDomain AllDomains.coDependentDomain215,7668

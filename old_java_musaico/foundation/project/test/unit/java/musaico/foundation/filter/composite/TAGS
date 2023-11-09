@@ -1,0 +1,11 @@
+
+AndTests.java,529
+public class AndTests66,1811
+    private final Filter<String> DISCARD_ALL AndTests.DISCARD_ALL68,1835
+    private final Filter<String> KEEP_ALL AndTests.KEEP_ALL87,2354
+    @SuppressWarnings(AndTests.@SuppressWarnings111,2980
+    @SuppressWarnings(AndTests.@SuppressWarnings138,3766
+    @SuppressWarnings(AndTests.@SuppressWarnings179,5003
+    @SuppressWarnings(AndTests.@SuppressWarnings211,5922
+    @SuppressWarnings(AndTests.@SuppressWarnings258,7502
+    @SuppressWarnings(AndTests.@SuppressWarnings335,10444

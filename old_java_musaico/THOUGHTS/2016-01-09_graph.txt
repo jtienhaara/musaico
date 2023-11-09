@@ -1,0 +1,59 @@
+- Every Value is a node
+- Every Type is a node
+- Every Namespace (including every Type)
+  has one arc for every Type of symbol in
+  its namespace.
+  Each type-of-symbol node has one arc
+  for every named symbol of that Type.
+- An Operation is an arc (or a series of
+  arcs) from a Value input to a Value output.
+  With multiple parameters, an Operation
+  becomes an arc from a Value input1 to
+  a value input2 to ... to a Value output.
+- Each arc has a Filter<Value<?>>.
+- So if you send the following inputs to a Type:
+      ConstraintType, "minimum"
+  Then you might traverse the arc to the node
+  of all that Type's Constraints, then from that
+  node to the specific Constraint called "minimum",
+  resulting in a Value<Constraint> or something
+  along those lines.
+- But if you were to pass the same two inputs
+  to an Operation "equals" ( Value1, Value2 ),
+  You might get back a Value<Boolean>.
+- Or if you pass the same two inputs to an
+  Operation "filter out everything that is not
+  a String", you might get a result of
+  Value<String>.
+- And so on.
+- Before passing an input to a node, of course, the outputs
+  can be checked AND the inputs can also be filtered
+  to make sure they are suitable.
+
+
+
+- Possibility: a Type<X> is just a Countable<Filter<X>>.
+- The "any" type is No<Filter<Object>>.
+- The "any" kind is No<Filter<Type<?>>>.
+- Then each arc has a Type<X>, rather than just a Filter<X>.
+  So each arc has a graph all its own.
+  But it's still simple to tell whether a specific object
+  can traverse the arc.
+
+
+
+- For speed and memory efficiency, it might be wise to treat
+  each import concept (such as Namespace and Type) as a
+  complete graph table.
+- Example graph table for Type "Text":
+  Source node name  Arc name          Arc type          Target node name
+  ========================================================================
+  Start             constructors      Type<Operation...>Constructors
+  Start             operations        Type<Operation...>Operations
+  Start             subTypers         Type<SubTyper>    SubTypers
+  Start             tags              Type<Tag>         Tags
+  Constructors      Text(String)      Type<String>      graph: Value<String>
+  Constructors      Text()            Type<Void> ???    graph: Value<String>
+  Operations        append(String)    Type<SymbolName>  append(String)
+  append(String)    text_to_append    Type<String>      Value<String>
+etc

@@ -1,0 +1,102 @@
+
+Time.java,386
+public interface Time91,2163
+    public static final long NANOSECONDS_PER_SECOND Time.NANOSECONDS_PER_SECOND95,2279
+    public static final long MAX_NANOSECONDS Time.MAX_NANOSECONDS99,2468
+    public static final long MIN_NANOSECONDS Time.MIN_NANOSECONDS103,2679
+    public static final Time NEVER Time.NEVER108,2863
+    public static final Time FOREVER Time.FOREVER113,3072
+
+ImpossibleTime.java,950
+public class ImpossibleTime75,2026
+    private static final long serialVersionUID ImpossibleTime.serialVersionUID79,2161
+    private static final String serialVersionHash ImpossibleTime.serialVersionHash80,2221
+    private final long seconds;ImpossibleTime.seconds85,2393
+    private final long nanoseconds;ImpossibleTime.nanoseconds88,2489
+    public ImpossibleTime ImpossibleTime.ImpossibleTime109,3136
+    public int compareTo ImpossibleTime.compareTo122,3426
+    public boolean equals ImpossibleTime.equals172,4694
+    public int hashCode ImpossibleTime.hashCode197,5190
+    public long seconds ImpossibleTime.seconds209,5453
+    public long nanoseconds ImpossibleTime.nanoseconds218,5594
+    public long milliseconds ImpossibleTime.milliseconds228,5758
+    public Time add ImpossibleTime.add250,6327
+    public Time subtract ImpossibleTime.subtract264,6654
+    public String toString ImpossibleTime.toString278,6985
+
+RelativeTime.java,1254
+public class RelativeTime75,2050
+    private static final long serialVersionUID RelativeTime.serialVersionUID79,2183
+    private static final String serialVersionHash RelativeTime.serialVersionHash80,2243
+    private static final ObjectContracts classContracts RelativeTime.classContracts85,2430
+    private final long seconds;RelativeTime.seconds90,2587
+    private final long nanoseconds;RelativeTime.nanoseconds93,2683
+        throws Parameter1.MustBeGreaterThanZero.Violation,RelativeTime.Violation111,3312
+    public RelativeTime RelativeTime.RelativeTime150,4494
+        throws Parameter2.DependsOn.Parameter1.Violation,RelativeTime.Violation190,5886
+    public int compareTo RelativeTime.compareTo210,6742
+    public boolean equals RelativeTime.equals265,8116
+    public int hashCode RelativeTime.hashCode290,8610
+    public long seconds RelativeTime.seconds302,8873
+    public long nanoseconds RelativeTime.nanoseconds311,9014
+    public long milliseconds RelativeTime.milliseconds321,9178
+    public Time add RelativeTime.add333,9463
+    public RelativeTime negate RelativeTime.negate385,11276
+    public Time subtract RelativeTime.subtract395,11508
+    public String toString RelativeTime.toString451,13503
+
+AbsoluteTime.java,1781
+public abstract class AbsoluteTime60,1445
+    private static final long serialVersionUID AbsoluteTime.serialVersionUID64,1587
+    private static final String serialVersionHash AbsoluteTime.serialVersionHash65,1647
+    private static final ObjectContracts classContracts AbsoluteTime.classContracts70,1834
+    private final long seconds;AbsoluteTime.seconds75,2010
+    private final long nanoseconds;AbsoluteTime.nanoseconds78,2106
+    public static AbsoluteTime [] convert AbsoluteTime.convert151,3847
+    public AbsoluteTime AbsoluteTime.AbsoluteTime207,5561
+    public AbsoluteTime AbsoluteTime.AbsoluteTime228,6107
+        throws Parameter2.DependsOn.Parameter1.Violation,AbsoluteTime.Violation268,7451
+    public Time add AbsoluteTime.add289,8346
+    public Calendar calendar AbsoluteTime.calendar346,10374
+    public Calendar calendar AbsoluteTime.calendar368,10936
+    public Calendar calendar AbsoluteTime.calendar393,11609
+    public CalendarTime calendarTime AbsoluteTime.calendarTime416,12212
+    public CalendarTime calendarTime AbsoluteTime.calendarTime435,12742
+    public CalendarTime calendarTime AbsoluteTime.calendarTime457,13388
+    public CalendarTime calendarTime AbsoluteTime.calendarTime477,14007
+    public int compareTo AbsoluteTime.compareTo491,14426
+    public Date date AbsoluteTime.date592,17386
+    public boolean equals AbsoluteTime.equals607,17671
+    public int hashCode AbsoluteTime.hashCode633,18177
+    public long seconds AbsoluteTime.seconds646,18452
+    public long nanoseconds AbsoluteTime.nanoseconds656,18605
+    public long milliseconds AbsoluteTime.milliseconds666,18767
+    public Time subtract AbsoluteTime.subtract679,19091
+    public String toString AbsoluteTime.toString733,21137
+
+LocalTime.java,691
+public class LocalTime79,2181
+    private static final long serialVersionUID LocalTime.serialVersionUID84,2330
+    private static final String serialVersionHash LocalTime.serialVersionHash85,2390
+    private static final ObjectContracts classContracts LocalTime.classContracts90,2577
+    public static final LocalTime now LocalTime.now106,2954
+    public LocalTime LocalTime.LocalTime119,3181
+    public LocalTime LocalTime.LocalTime132,3414
+    public LocalTime LocalTime.LocalTime153,3941
+        throws Parameter2.DependsOn.Parameter1.Violation,LocalTime.Violation188,5087
+    public Time add LocalTime.add199,5355
+    public Time subtract LocalTime.subtract247,6871
+
+CalendarTime.java,795
+public class CalendarTime77,2089
+    private static final long serialVersionUID CalendarTime.serialVersionUID81,2213
+    private static final String serialVersionHash CalendarTime.serialVersionHash82,2273
+    private static final ObjectContracts classContracts CalendarTime.classContracts87,2460
+    private final Serializable lock CalendarTime.lock92,2632
+    private final Calendar calendar;CalendarTime.calendar96,2801
+    private final TimeZone timezone;CalendarTime.timezone100,2932
+    private final Locale locale;CalendarTime.locale104,3061
+    public Time add CalendarTime.add234,6978
+    @SuppressWarnings(CalendarTime.@SuppressWarnings300,9507
+    protected CalendarTime create CalendarTime.create317,9897
+    public Time subtract CalendarTime.subtract337,10466

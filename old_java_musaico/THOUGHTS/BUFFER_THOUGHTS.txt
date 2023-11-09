@@ -1,0 +1,118 @@
+Filter my_filter = new FilterByFieldID ( buffer, "FooBar" );
+Region filtered_region = buffer.region ().filter ( my_filter );
+Position position;
+for ( position = filtered_region.start ();
+      ! ( position instanceof NoSuchPosition );
+      position = filtered_region.step ( position, 1L ) )
+{
+    Field field = buffer.get ( position );
+}
+
+Filter free_fields_filter = new FilterFreeFields ( buffer );
+Region free_fields = buffer.region ().filter ( free_fields_filter );
+
+Filter allocated_fields_filter = new FilterAllocatedFields ( buffer );
+Region allocated_fields = buffer.region ().filter ( allocated_fields_filter );
+Filter foobar_filter = new FilterByFieldID ( buffer, "FooBar" );
+Region allocated_fields_named_foobar =
+    allocated_fields.filter ( foobar_filter );
+
+Filter not_free_fields_filter =
+    new FilterNot ( buffer, new FilterFreeFields ( buffer ) );
+Region not_free_fields = buffer.region ().filter ( not_free_fields );
+
+
+Filter
++ filter ( Position ) : FilterState = FilterState.KEEP or DISCARD
+
+BufferFilter extends Filter
++ buffer () : Buffer
+
+Field foobar =
+    BufferTools.field ( new FilterFieldID ( buffer, "FooBar" ) );
+Field second_foobar =
+    BufferTools.field ( new FilterFieldID ( buffer, "FooBar" ), 1L );
+Position append = BufferTools.position ( new FilterFreeFields ( buffer ) );
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+buffer.set ( buffer.filter ( new FilterFreeFields () ).start (), my_field );
+buffer.set ( buffer.filter ( new FilterFreeFields () ).end (),   my_field );
+
+buffer.set ( BufferTools.firstFreeField ( buffer ), my_field );
+BufferTools.append ( buffer, my_field );
+
+
+BufferPositions: FilteredPosition FIRST_FREE_FIELD, + getFilterClass ()
+buffer.set ( BufferPositions.FIRST_FREE_FIELD, my_field );
+--> resolving BufferPositions.FIRST_FREE_FIELD:
+    Position position_in_buffer = buffer.region ().step ( position, 0L );
+    = FilteredPosition.getFilterClass ().newInstance ( buffer ).start ()
+
+
+Region source_region = source_buffer.filter ( BufferFilters.ALLOCATED );
+Region target_region = target_buffer.filter ( BufferFilters.FREE );
+target_buffer.copy ( source_buffer, source_region, target_region );
+
+
+--> creating a filter = different from searching for a FilteredPosition
+--> the Buffer never stores any filters; it only calculates a filtered
+    Region when it is asked to.
+
+
+Filter filter = new FilterByFieldID ( "foobar" );
+Region all_fields_with_id_foobar = buffer.filter ( filter );
+Position position;
+for ( position = all_fields_with_id_foobar.start ();
+      ! ( position instanceof NoSuchPosition );
+      position = all_fields_with_id_foobar.step ( position, 1L ) )
+{
+    Field foobar = buffer.get ( position );
+}
+
+
+Field field = buffer.get ( buffer.filter ( new FilterByFieldID ( "foobar" ) ).start () );
+
+^^^^^^^^^^^^^ Keep above ideas -- use regions more
+
+
+VVVVVVV Ignore below ideas -- keep Fields as ID+value
+
+
+
+
+
+If, for some particular branch of Buffer implementations, every Field
+is just a value, and its position is its name, then all we have to do is:
+
+Position position_i_want = new FieldID ( "my_field" );
+Field field_i_want = buffer.get ( position_i_want );
+
+Or:
+
+Field field_i_want = buffer.get ( new FieldID ( "my_field" ) );
+
+Or:
+
+Position source_position = region.step ( old_position, 1L );
+Field source_field = source_buffer.get ( source_position );
+target_buffer.set ( source_position, source_field );
+
+
+Of course not all Buffers are organized by field IDs...
+This also means that the Region has to know what the order
+of Field IDs is.  How can it know this for arbitrary field IDs???
+
+For example, when we do Region.step ( Position, 1L ), what
+do we get back???
+
+Maybe we get back some kind of EmptyFieldID position.
+
+But if we do Region.step ( new FieldID ( "my_field", 0L ) ),
+that can be used to change the Buffer's internal Region.
+(Meanwhile does the Region itself change?!?)
+
+Dangerous stuff...  need to think through carefully before
+touching anything!

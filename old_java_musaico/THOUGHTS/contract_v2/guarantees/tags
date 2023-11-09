@@ -1,0 +1,18 @@
+ReturnNeverNull	ReturnNeverNull.java	60
+ReturnNeverNull.CONTRACT	ReturnNeverNull.java	71
+ReturnNeverNull.ReturnNeverNull	ReturnNeverNull.java	/^    protected ReturnNeverNull ()$/
+ReturnNeverNull.Violation	ReturnNeverNull.java	110
+ReturnNeverNull.Violation.Violation	ReturnNeverNull.java	/^        public Violation ($/
+ReturnNeverNull.serialVersionHash	ReturnNeverNull.java	66
+ReturnNeverNull.serialVersionUID	ReturnNeverNull.java	65
+TimeoutGuarantee	TimeoutGuarantee.java	64
+TimeoutGuarantee.Violation	TimeoutGuarantee.java	267
+TimeoutGuarantee.Violation.Violation	TimeoutGuarantee.java	/^        public Violation ($/
+TimeoutGuarantee.contracts	TimeoutGuarantee.java	82
+TimeoutGuarantee.serialVersionHash	TimeoutGuarantee.java	70
+TimeoutGuarantee.serialVersionUID	TimeoutGuarantee.java	69
+TimeoutGuarantee.startTimeInNanoseconds	TimeoutGuarantee.java	76
+TimeoutGuarantee.startTimeInNanoseconds	TimeoutGuarantee.java	/^    public long startTimeInNanoseconds ()$/
+TimeoutGuarantee.timeoutInNanoseconds	TimeoutGuarantee.java	79
+TimeoutGuarantee.timeoutInNanoseconds	TimeoutGuarantee.java	/^    public long timeoutInNanoseconds ()$/
+TimeoutGuarantee.toString	TimeoutGuarantee.java	/^    public String toString ()$/

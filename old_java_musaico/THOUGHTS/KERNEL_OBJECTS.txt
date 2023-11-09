@@ -1,0 +1,14 @@
+Identifier --|> Reference
++ parentNamespace () : Namespace
+
+Namespace --|> Identifier
+// We can't store the children because that would make
+// Serialization crazy.  We don't need them anyway, and
+// we certainly don't want to keep them up to date!
+
+
+
+this.module.kernelObjects ().create ( credentials, id, onode );
+ONode onode = this.module.kernelObjects ().retrieve ( credentials, id );
+this.module.kernelObjects ().update ( credentials, id, onode );
+this.module.kernelObjects ().delete ( credentials, id );

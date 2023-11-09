@@ -1,0 +1,56 @@
+2017-09-15
+
+Pipeline / Sink and fork () and join ():
+
+(MAYBE also add negate () or something similar???)
+
+Multiple dimensions to a Pipeline:
+
+- Original thought: data / time / concurrency
+
+- Order (join: A then B then C; fork: any order of A,B,C).
+- Logic (join: A and B and C; fork: A or B or C). <-- conjunction / disjunction
+- Concurrency (join: evaluate A then B then C; fork: any order)
+  BUT maybe this is the same as Order above, just applied to execution
+  rather than data.
+
+                Data                          Execution
+                ----------------------------- -----------------------------
+                a ().b ().c ()                a ().b ().c ()
+                a () --> A,                   a () --> A,
+                b () --> B,                   b () --> B,
+                c () --> C                    c () --> C
+Order
+    join ()     A then B then C               Exec a () b () c () sequentially
+    fork ()     Any order of A,B,C            Exec a () b () c () concurrently
+Logic
+    join ()     Intersection of A B C         a () && b () && c () --> A B C
+    fork ()     Union of A B C                a () || b () || c () --> 1 output
+
+
+Maybe:
+Pipeline<XYZ>.data () :              Sink<STREAM>
+  or maybe Sink<XYZ>.data () :       Sink<STREAM>
+Pipeline<XYZ>.execute () :           Sink<PIPELINE>
+  or maybe Sink<XYZ>.execute () :    Sink<STREAM>
+
+Sink<XYZ>.data ().edit ().append ( foo ).end ().output () -> output A
+Sink<XYZ>.execute ().edit ().append ( another_pipeline ).end ().output ()
+    .output () -> output A.
+
+Maybe there's no real need for fork () / join (), just use edit ()
+and where () on data () / execute ().
+
+Might even want to change it to:
+
+element () : PIPELINE where Edit works on individual ELEMENTs
+execute () : Sink<PIPELINE> to edit, filter, etc how and when
+             the Pipeline does its work
+stream ()  : PIPELINE where Edit works on the entire POOL
+
+Then when () would be unncessary, only would need edit (), select () where (),
+orderBy ().
+
+Hmmm, still some things fork () and join () provide that the Edit
+class really doesn't (a () && b () vs. a () then b () vs. a () || b ()
+vs. a () concurrently with b (), and so on).

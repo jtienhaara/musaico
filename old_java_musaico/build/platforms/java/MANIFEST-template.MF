@@ -1,0 +1,7 @@
+Application-Name: [% package %]
+Specification-Title: [% package %]
+Specification-Version: [% version %]
+Specification-Vendor: Copyright (c) 2009-2012 Johann Tienhaara
+Implementation-Title: [% package %]
+Implementation-Version: [% version %]
+Implementation-Vendor: Copyright (c) 2009-2012 Johann Tienhaara

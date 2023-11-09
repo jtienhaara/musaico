@@ -1,0 +1,53 @@
+maybe VALUE becomes Reducibility<VALUE>:
+ Maybe<Reducibility<Foo>> reducibility = type.reduce ().all ().from ( input );
+ Reducibility<Foo> reducibility        = term.reduce ().all ().reducibility ();
+whereas BUILT stays the same:
+ Operation<Foo, Foo> reduce            = type.reduce ().all ().build ();
+ Term<Foo> term                        = term.reduce ().all ().build ();
+maybe also can somehow use filter ( ) etc?
+Reducibility<Foo> locked =
+       term.reduce ().edit ().insert ( ... password_lock ... ).reducibility ();
+
+Type<Foo> type;
+Operation<Foo, Foo> reduce = type.reduce ().all ().build ();
+Term<Foo> term;
+Term<Foo> term2 = term.reduce ().all ().build ();
+Multiplicity<Foo> value = term.reduce ().all ().value ();
+Term<Foo> term3 = type.reduce ().all ().from ( input );
+
+Reducibility<Foo> reduction1;
+Reducibility<Foo> reduction2 = reduction1.reduce ();
+final Irreducible<Foo> irreducible;
+Multiplicity<Foo> value2 = irreducible.value ();
+
+
+Reduce<Foo, Operation<Foo, Foo>> reduce1 = type.reduce ().all ();
+Operation<Foo, Foo> reduce2 = reduce1.build ();
+
+Reduce<Foo, Term<Foo>> reduce3 = term.reduce ().all ();
+Term<Foo> term4 = reduce3.build ();
+Reducibility<Foo> reduced = reduce3.reducibility ();
+
+
+
+OR (older):
+
+Type<Foo> type;
+Operation<Foo, Foo> reduce = type.reduce ().all ().build ();
+Term<Foo> term;
+Term<Foo> reduced = term.reduce ().all ().build ();
+Multiplicity<Foo> value = term.reduce ().all ().value ();
+Term<Foo> reduced2 = type.reduce ().all ().from ( input );
+
+Reducibility<Foo> reduction1;
+Reducibility<Foo> reduction2 = reduction1.once ();
+Irreducible<Foo> irreducible = reduction1.all ();
+Term<Foo> reduced3 = reduction1.value ();
+
+
+<REDUCE extends Reduce<Foo, Operation<Foo, Foo>, REDUCE>>
+  REDUCE reduce1 = type.reduce ().all ();
+Operation<Foo, Foo> reduce2 = reduce1.build ();
+
+Reducibility<Foo> reduce3 = term.reduce ().all ();
+Term<Foo> reduced4 = reduce3.build ();

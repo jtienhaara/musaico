@@ -1,0 +1,543 @@
+Aspects 2
+
+Aspect-oriented programming using Tags and Operations.
+
+
+Type player
+PlayerGetFirstName ( Player )
+    : String
+PlayerSetFirstName ( Player )
+    : Operation ( String )
+    : Player
+
+Tag secure
+private final SecurityPolicy security
+refines every operation
+e.g.
+PlayerGetFirstName ( Player ) : String
+  --> SecureOperation<PlayerGetFirstName> ( Player )
+      : Operation ( SecurityContext )
+      : String
+PlayerSetFirstName ( Player )
+      : Operation ( String )
+      : Player
+  --> SecureOperation<PlayerSetFirstName> ( Player )
+      : Operation ( String )
+      : Operation ( SecurityContext )
+      : Player
+
+
+// Either one security policy for all Players, or each Player has their own.
+final SecurityPolicy my_security_policy = ...;
+final TypingEnvironment system = ...;
+final Tag secure = new SecureTag ( my_security_policy );
+final Type<Player> player_type =
+    system.createType ( Player.class,
+                        new Tag [] { secure },
+                        system.rootKind (),
+                        Player.NONE )
+          .orThrowChecked ();
+final Instance<Player> player =
+    player_type.newInstance ( new Player ( "Johann" ) );
+
+final Operation<SecurityContext, String> secure_getter =
+    player.call ( new PlayerGetFirstName () );
+
+final Credentials my_credentials = ...;
+final SecurityContext my_security_context =
+    secure.context ( my_credentials,
+                     secure.capabilities ( new PlayerGetFirstName () ) );
+final String first_name =
+    player.call ( new PlayerGetFirstName () ).evaluate ( my_security_context );
+
+
+
+
+
+final Tag mutex = new 
+
+
+
+
+
+
+
+Or maybe like casting between typing environments -- which uses:
+
+    Cast<INPUT, OUTPUT> -->
+        Export<INPUT> | Cast<INPUT, OUTPUT> | Import<OUTPUT>
+
+Maybe something like:
+
+    PlayerGetFirstName<Player, String> -->
+        GetSecurityPolicy<Player, SecurityPolicy>
+        SecurityContext<Capability[], SecurityContext> (peeks at Credentials)
+        RequestPermissions<SecurityPolicy, Operation<SecurityContext, Permissions>>
+        If permitted then PlayerGetFirstName<Player, String>
+
+Of course this requires Credentials to be placed on some kind of stack.
+
+
+
+--------------------------------------------------------
+
+final Type<Player> insecure_player_type =
+    system.createType ( Player.class,
+                        new Tag [ 0 ],
+                        system.rootKind (),
+                        Player.NONE );
+final Tag secure_player_tag
+    = new Secure<Player> ( Player.class, Player.NONE );
+      --> Refines all methods to return nothing,
+          creates a new method for each: INPUT --> SecurityContext --> OUTPUT
+          SecureOperation : Curry2<INPUT, SecurityContext, OUTPUT>
+              calls the insecure operation IF the security policy of this tag
+              gives permission for SecureOperationCapability ( op ),
+              otherwise returns Novalue with the insecure operation's NONE
+final Type<Player> secure_player_type
+    = insecure_player_type.sub ( secure_player_tag );
+
+final Player johann = new Player ( ... );
+
+final Instance<Player> insecure_player =
+    insecure_player_type.scalar ( johann );
+System.out.println ( "First name: "
+                     + insecure_player.call ( new PlayerGetFirstName () ) );
+
+final Instance<Player> secure_player =
+    secure_player_type.scalar ( johann );
+System.out.println ( "First name: "
+                     + secure_player.call ( new SecureOperation<PlayerGetFirstName> ( new PlayerGetFirstName (), my_security_context ) ) );
+
+
+
+
+
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+public class SecureValue<X>
+    extends NoValue<X>
+{
+    public static final Capability DIRECT_ACCESS = ...;
+
+    private final SecurityPolicy security;
+    private final Value<X> value;
+
+    public SecurityPolicy security ()
+    {
+        return this.security;
+    }
+
+    public Value<X> secure ( SecurityContext context )
+    {
+        try
+        {
+            this.security.request ( context )
+                .orThrowChecked ()
+                .unlessPermittedThrowChecked ( DIRECT_ACCESS );
+        }
+        catch ( SecurityViolation security_violation )
+        {
+            final Typing.Violation violation = ...wrap security_violation...;
+            return new NoValue<X> ( this.value.expectedClass (),
+                                    violation,
+                                    this.value.none () );
+        }
+
+        // Secure, go ahead.
+        return this.value;
+    }
+}
+
+public class Secure<SECURE>
+    extends Curry2<SECURE, SecurityContext, SECURE>
+{
+    @Override
+    public Value<SECURE, Typing.Violation> evaluate (
+                                                     Value<SECURE, Typing.Violation> value,
+                                                     Value<SecurityContext, Typing.Violation> v_security_context
+                                                     )
+    {
+        if ( value instanceof SecureValue )
+        {
+            final SecurityContext security_context =
+                v_security_context.orNone (); // No Partials.
+            SecureValue<SECURE> v_secure = (SecureValue<SECURE>) value;
+            final Value<SECURE> v_unlocked =
+                v_secure.secure ( security_context );
+            return v_unlocked;
+        }
+
+        return value;
+    }
+}
+
+
+Then to perform a secure operation, do something like:
+
+    final SecurityContext context = ...;
+    final String first_name =
+        player.call ( String.class, "",
+                      new Secure<Player> ( context ),
+                      new PlayerGetFirstName () ) );
+
+
+------------------------------------------------------------------
+
+Maybe every Value<V> has a method:
+
+    public abstract Value<V> context ( Class<CONTEXT> context_type,
+                                       CONTEXT context );
+
+Normal values like NoValue<V>, Scalar<V>, Vector<V> and so on just
+return themselves, ignoring the context.
+
+public class Contextualized<V>
+    extends NoValue<V>
+{
+    private final Map<Class, Object> context;
+
+    public <CONTEXT> CONTEXT context ( Class<CONTEXT> context_type,
+                                       CONTEXT none )
+    {
+        
+        final CONTEXT item = this.context.get ( context_type );
+        if ( item == null )
+        {
+            return none;
+        }
+        else
+        {
+            return item;
+        }
+    }
+
+    public <CONTEXT> Contextualized<V> context ( Class<CONTEXT> context_type,
+                                                 CONTEXT item )
+    {
+        final Contextualized<V> contextualized =
+            new Contextualized<V> ( this, context_type, item );
+        return contextualized;
+}
+
+
+
+
+
+
+
+
+
+
+
+---------------------------------------------------------
+
+public class Unsatisfier<INPUT, OUTPUT>
+    extends AbstractOperation<INPUT, OUTPUT>
+{
+    final Set<Requirement<?>> requirements =
+        new HashSet<Requirement<?>> ();
+    private final Operation<INPUT, OUTPUT> operation;
+
+    public final Unsatisfier ( Operation<INPUT, OUTPUT> operation )
+    {
+        super ( output_type, output_type.valueClass (), output_type.none () );
+        this.operation = operation;
+    }
+
+    public void requires ( Requirement<?> requirement )
+    {
+        if ( this.requirements.contains ( requirement ) )
+        {
+            // Set once, no overwriting for security purposes.
+            return;
+        }
+
+        this.requirements.add ( requirement );
+    }
+
+    @Override   
+    public Unsatisfied<OUTPUT> evaluate (
+                                         Value<INPUT, Typing.Violation> input
+                                         )
+    {
+        final Unsatisfied<OUTPUT> unsatisfied =
+            new Unsatisfied<OUTPUT> ( this.operation,
+                                      input,
+                                      this.requirements );
+
+        return unsatisfied;
+    }
+}
+
+
+public abstract class Requirement<REQUIREMENT>
+    extends AbstractTag
+{
+    private final Class<REQUIREMENT> requirementClass;
+
+    public Requirement ( String id, Class<REQUIREMENT> requirement_class )
+    {
+        super ( id );
+
+        this.requirementClass = requirement_class;
+    }
+
+    @Override
+    public <INPUT extends Object, OUTPUT extends Object>
+        Operation<INPUT, OUTPUT> refine (
+                                         Operation<INPUT, OUTPUT> operation
+                                         )
+    {
+        return this.refineOperationWithRequirement ( operation );
+    }
+
+    public <INPUT extends Object, OUTPUT extends Object>
+        Operation<INPUT, OUTPUT> refineOperationWithRequirement (
+                                                                 Operation<INPUT, OUTPUT> operation
+                                                                 )
+    {
+        if ( operation instanceof Satisfier )
+        {
+            return operation;
+        }
+
+        final Unsatisfier<INPUT, OUTPUT> unsatisfier;
+        if ( operation instanceof Unsatisfier )
+        {
+            unsatisfier = (Unsatisfier<INPUT, OUTPUT>) operation;
+        }
+        else
+        {
+            unsatisfier = new Unsatisfier<INPUT, OUTPUT> ( operation );
+        }
+
+        unsatisfier.requires ( this );
+    }
+
+    public Class<REQUIREMENT> requirementClass ()
+    {
+        return this.requirementClass;
+    }
+
+    public abstract void checkOperationRequirement ( Operation<?, ?> operation,
+                                                     REQUIREMENT required_value )
+        throws Typing.Violation;
+}
+
+public class Unsatisfied<INPUT extends Object, VALUE extends Object>
+    extends NoValue<VALUE, Typing.Violation>
+{
+    private final Serializable lock = new String ();
+    private final Operation<?, VALUE> operation;
+    private final Value<INPUT> input;
+    private final HashMap<Class<?>, Requirement<?>> unsatisfiedRequirements;
+    private Value<VALUE> value = null;  // Operation has not yet been invoked.
+
+    public final Unsatisfied (
+                              Operation<INPUT, VALUE> operation,
+                              Value<INPUT> input,
+                              Set<Requirement<?>> requirements
+                              )
+    {
+        super ( operation.expectedClass (),
+                new Typing.Violation ( ...something about requirements not being met... ),
+                operation.none () );
+        this.operation = operation;
+        this.input = input;
+        this.unsatisfiedRequirements =
+            new HashMap<Class<?>, Requirement<?>> ();
+        for ( Requirement<?> requirement : requirements )
+        {
+            this.unsatisfiedRequirements.put ( requirement.getRequirementClass (),
+                                               requirement );
+        }
+    }
+
+    public <REQUIREMENT>
+        Value<VALUE> satisfy ( Class<REQUIREMENT> requirement_class,
+                               REQUIREMENT required_value )
+    {
+        final Requirement<REQUIREMENT> requirement;
+        synchronized ( this.lock )
+        {
+            requirement =
+                this.unsatisfiedRequirements.get ( requirement_class );
+        }
+
+        if ( requirement != null )
+        {
+            try
+            {
+                requirement.checkOperationRequirement ( this.operation,
+                                                        required_value );
+                synchronized ( this.lock )
+                {
+                    this.unsatisfiedRequirements.remove ( requirement_class );
+                }
+            }
+            catch ( Typing.Violation violation )
+            {
+                return new NoValue<VALUE> ( this.operation.expectedClass (),
+                                            violation,
+                                            this.operation.none () );
+            }
+        }
+
+        synchronized ( this.lock )
+        {
+            if ( this.unsatisfiedRequirements.size () == 0 )
+            {
+                if ( this.value == null )
+                {
+                    this.value = this.operation.evaluate ( this.input );
+                }
+
+                return this.value;
+            }
+            else
+            {
+                // Either the requirement was not satisfied by the
+                // required value provided, or there are still
+                // more requirements to satisfy.
+                return this;
+            }
+        }
+    }
+}
+
+public class Satisfier<VALUE, REQUIREMENT>
+    extends AbstractOperation<VALUE, VALUE>
+{
+    private final Class<REQUIREMENT> requirementClass;
+    private final REQUIREMENT requiredValue;
+
+    public Satisfier ( Type<VALUE> type, Class<REQUIREMENT> requirement_class,
+                       REQUIREMENT required_value )
+    {
+        super ( this.getClass ().getSimpleName (),
+                type.typeClass (),
+                type.none () );
+
+        this.requirementClass = requirement_class;
+        this.requiredValue = required_value;
+    }
+
+    @Override
+    public Unsatisfied<VALUE> evaluate (
+                                        Value<VALUE, Typing.Violation> input
+                                        )
+    {
+        if ( ! ( input instanceof Unsatisfied ) )
+        {
+            // Wasted Satisfier call, no requirement.
+            return ;
+        }
+
+        final Unsatisfied<VALUE> unsatisfied =
+            (Unsatisfied<VALUE>) input;
+
+        final Value<VALUE> output =
+            unsatisfied.satisfy ( this.requirementClass, this.requiredValue );
+
+        return output;
+    }
+}
+
+
+
+public class Secure
+    extends Requirement<SecurityContext>
+{
+    private final SecurityPolicy security;
+
+    public Secure ( SecurityPolicy security )
+    {
+        super ( this.getClass ().getSimpleName (),
+                SecurityContext.class );
+
+        this.security = security;
+    }
+
+    public void checkOperationRequirement ( Operation<?, ?> operation,
+                                            SecurityContext security_context )
+        throws Typing.Violation
+    {
+        final Capability capability = new OperationCapability ( operation );
+        try
+        {
+            this.security.request ( security_context )
+                .orThrowChecked ()
+                .unlessPermittedThrowChecked ( capability );
+        }
+        catch ( SecurityViolation security_violation )
+        {
+            throw new Typing.Violation ( security_violation );
+        }
+    }
+}
+
+
+
+final Player johann = ...;
+final Type player_type = system.createType ( Player.class,
+                                             new Tag [ 0 ],
+                                             system.rootKind (),
+                                             Player.NONE );
+final Instance<Player> insecure_player =
+    player_type.scalar ( johann );
+final Instance<Player> secure_player =
+    player_type.sub ( new Secure () ).scalar ( johann );
+
+final String insecure_first_name =
+    insecure_player.call ( new PlayerGetFirstName () );
+
+final SecurityContext my_security_context = new SecurityContext ( ... );
+final Satisfier<Player, SecurityContext> login =
+    new Satisfier<Player> ( player_type,
+                            SecurityContext.class,
+                            my_security_context );
+final String secure_first_name =
+    secure_player.call ( String.class, "",
+                         login,
+                         new PlayerGetFirstName () ) );
+
+final Mutex mutex = new Mutex ( player, security );
+final Instance<Player> mutex_secure_player =
+    player_type.sub ( new MutexTag ( mutex ), new Secure () ).scalar ( johann );
+
+final Satisfier<Player, MutexLock> lock_mutex =
+    new MutexLocker<Player> ( mutex );
+final Operation<String, String> unlock_mutex =
+    new MutexUnlocker<String> ( mutex );
+final String mutex_secure_first_name1 =
+    mutex_secure_player.call ( String.class, "",
+                               login,
+                               lock_mutex,
+                               new PlayerGetFirstName (),
+                               unlock_mutex ) );
+
+
+
+
+
+Secure should really only unsatisfy specific operations - like Read.
+Otherwise PlayerGetFirstName will end up returning a Unsatisfied<String>.
+
+
+
+
+Secure:
+Read --> Unsatisfier(Read)
+value() --> Unsatisfied(Value)
+call(Read) --> Unsatisfied(Value)
+*somehow* call(SecurityRequest | Read) --> Value
+
+Mutex:
+Read --> Unsatisfier(Read)
+call(Read) --> Unsatisfied(Value)
+call(Read | UnlockMutex) --> Unsatisfied(Value)
+call(LockMutex | Read) --> Unsatisfied(Value)
+*somehow* call(LockMutex | Read | UnlockMutex) --> Value

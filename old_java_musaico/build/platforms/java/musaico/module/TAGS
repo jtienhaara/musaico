@@ -1,0 +1,95 @@
+
+Compatibility.java,2099
+public enum Compatibility63,2173
+    FULL Compatibility.FULL67,2334
+    FULL ( true Compatibility.true67,2334
+    NONE Compatibility.NONE71,2464
+    NONE ( false Compatibility.false71,2464
+    private Compatibility.private76,2576
+    private final Compatibility.final76,2576
+    private final boolean Compatibility.boolean76,2576
+    private final boolean isDistributableTogether;Compatibility.isDistributableTogether76,2576
+    private Compatibility.private84,2729
+    private Compatibility Compatibility.Compatibility84,2729
+                           boolean Compatibility.boolean85,2757
+                           boolean is_distributable_togetherCompatibility.is_distributable_together85,2757
+    public Compatibility.public118,3694
+    public Compatibility Compatibility.Compatibility118,3694
+    public Compatibility and Compatibility.and118,3694
+                              Compatibility Compatibility.Compatibility119,3725
+                              Compatibility thatCompatibility.that119,3725
+    public Compatibility.public144,4398
+    public boolean Compatibility.boolean144,4398
+    public boolean isDistributableTogether Compatibility.isDistributableTogether144,4398
+    public Compatibility.public165,4857
+    public Compatibility Compatibility.Compatibility165,4857
+    public Compatibility not Compatibility.not165,4857
+    public Compatibility.public204,5841
+    public Compatibility Compatibility.Compatibility204,5841
+    public Compatibility or Compatibility.or204,5841
+                             Compatibility Compatibility.Compatibility205,5871
+                             Compatibility thatCompatibility.that205,5871
+    public Compatibility.public250,7054
+    public final Compatibility.final250,7054
+    public final Compatibility Compatibility.Compatibility250,7054
+    public final Compatibility xor Compatibility.xor250,7054
+                                    Compatibility Compatibility.Compatibility251,7091
+                                    Compatibility thatCompatibility.that251,7091
+
+License.java,156
+public interface License72,2245
+    public static final BSDLicense BSD License.BSD76,2330
+    public static final GPL3License GPL3 License.GPL379,2416
+
+MusaicoModule.java,39
+public interface MusaicoModule60,1867
+
+AbstractGPLCompatibleFreeLicense.java,683
+public abstract class AbstractGPLCompatibleFreeLicense70,2164
+    private static final long serialVersionUID AbstractGPLCompatibleFreeLicense.serialVersionUID73,2258
+    public final Compatibility compatibility AbstractGPLCompatibleFreeLicense.compatibility83,2488
+    public final boolean equals AbstractGPLCompatibleFreeLicense.equals112,3370
+    protected boolean equalsLicense AbstractGPLCompatibleFreeLicense.equalsLicense148,4483
+    public final int hashCode AbstractGPLCompatibleFreeLicense.hashCode160,4740
+    public String name AbstractGPLCompatibleFreeLicense.name172,4986
+    public final String toString AbstractGPLCompatibleFreeLicense.toString182,5146
+
+AbstractNonGPLCompatibleFreeLicense.java,843
+public abstract class AbstractNonGPLCompatibleFreeLicense70,2166
+    private static final long serialVersionUID AbstractNonGPLCompatibleFreeLicense.serialVersionUID73,2263
+    public Compatibility compatibility AbstractNonGPLCompatibleFreeLicense.compatibility83,2496
+    protected Compatibility compatibilityNonGPLCompatibleFree AbstractNonGPLCompatibleFreeLicense.compatibilityNonGPLCompatibleFree125,3923
+    public final boolean equals AbstractNonGPLCompatibleFreeLicense.equals144,4421
+    protected boolean equalsLicense AbstractNonGPLCompatibleFreeLicense.equalsLicense180,5552
+    public final int hashCode AbstractNonGPLCompatibleFreeLicense.hashCode192,5812
+    public String name AbstractNonGPLCompatibleFreeLicense.name204,6058
+    public final String toString AbstractNonGPLCompatibleFreeLicense.toString214,6218
+
+AbstractProprietaryLicense.java,744
+public abstract class AbstractProprietaryLicense70,2166
+    private static final long serialVersionUID AbstractProprietaryLicense.serialVersionUID73,2254
+    public Compatibility compatibility AbstractProprietaryLicense.compatibility83,2478
+    protected Compatibility compatibilityProprietary AbstractProprietaryLicense.compatibilityProprietary124,3777
+    public final boolean equals AbstractProprietaryLicense.equals143,4239
+    protected boolean equalsLicense AbstractProprietaryLicense.equalsLicense179,5316
+    public final int hashCode AbstractProprietaryLicense.hashCode191,5567
+    public String name AbstractProprietaryLicense.name203,5813
+    public final String toString AbstractProprietaryLicense.toString213,5973
+
+BSDLicense.java,170
+public class BSDLicense66,2093
+    private static final long serialVersionUID BSDLicense.serialVersionUID70,2192
+    public final String body BSDLicense.body76,2318
+
+GPL3License.java,173
+public class GPL3License66,2095
+    private static final long serialVersionUID GPL3License.serialVersionUID70,2195
+    public final String body GPL3License.body76,2321
+
+AbstractMusaicoModule.java,428
+public abstract class AbstractMusaicoModule61,1898
+    private static final long serialVersionUID AbstractMusaicoModule.serialVersionUID64,1987
+    public final boolean equals AbstractMusaicoModule.equals71,2126
+    public final int hashCode AbstractMusaicoModule.hashCode111,3335
+    public final String name AbstractMusaicoModule.name121,3501
+    public final String toString AbstractMusaicoModule.toString134,3740

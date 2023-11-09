@@ -1,0 +1,8 @@
+Cannot\ add\ null\ subscription\ to\ Hub\ [%hub%]",\ "hub",\ this = Cannot add null subscription to Hub [%hub%]", "hub", this
+Cannot\ add\ subscription\ [%subscription%]\ event\ class\ [%event_class%]\ with\ null\ subscriber\ to\ Hub\ [%hub%]",\ "subscription",\ subscription,\ "event_class",\ event_class,\ "hub",\ this = Cannot add subscription [%subscription%] event class [%event_class%] with null subscriber to Hub [%hub%]", "subscription", subscription, "event_class", event_class, "hub", this
+Cannot\ add\ subscription\ [%subscription%]\ with\ null\ event\ class\ to\ Hub\ [%hub%]",\ "subscription",\ subscription,\ "hub",\ this = Cannot add subscription [%subscription%] with null event class to Hub [%hub%]", "subscription", subscription, "hub", this
+Cannot\ remove\ null\ subscription\ from\ hub\ [%hub%]",\ "hub",\ this = Cannot remove null subscription from hub [%hub%]", "hub", this
+Cannot\ remove\ subscription\ [%subscription%]\ with\ null\ event\ class\ from\ hub\ [%hub%]",\ "subscription",\ subscription,\ "hub",\ this = Cannot remove subscription [%subscription%] with null event class from hub [%hub%]", "subscription", subscription, "hub", this
+Cannot\ remove\ subscription\ [%subscription%]\ with\ null\ subscriber\ from\ hub\ [%hub%]",\ "subscription",\ subscription,\ "hub",\ this = Cannot remove subscription [%subscription%] with null subscriber from hub [%hub%]", "subscription", subscription, "hub", this
+Hub\ [%hub%]\ cannot\ handle\ event\ [%event%]\ with\ null\ event\ class",\ "hub",\ this,\ "event",\ event = Hub [%hub%] cannot handle event [%event%] with null event class", "hub", this, "event", event
+Hub\ [%hub%]\ cannothandle\ null\ event",\ "hub",\ this = Hub [%hub%] cannothandle null event", "hub", this

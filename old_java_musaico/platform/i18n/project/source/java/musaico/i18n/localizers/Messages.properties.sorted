@@ -1,0 +1,9 @@
+Cannot\ create\ a\ AbstractLocalizer\ withnull\ loader(resource_bundle_name\ \=\ [%resource_bundle_name%]\ source\ \=\ [%source%] = Cannot create a AbstractLocalizer withnull loader(resource_bundle_name = [%resource_bundle_name%] source = [%source%]
+Cannot\ create\ a\ AbstractLocalizer\ withnull\ resource_bundle_name(loader\ \=\ [%loader%]\ source\ \=\ [%source%] = Cannot create a AbstractLocalizer withnull resource_bundle_name(loader = [%loader%] source = [%source%]
+Cannot\ create\ a\ AbstractLocalizer\ withnull\ source(resource_bundle_name\ \=\ [%resource_bundle_name%]\ loader\ \=\ [%loader%] = Cannot create a AbstractLocalizer withnull source(resource_bundle_name = [%resource_bundle_name%] loader = [%loader%]
+Failed\ to\ load\ resource\ bundle = Failed to load resource bundle
+Failed\ to\ load\ resource\ bundle\ for\ locale\ [%locale,\ e%] = Failed to load resource bundle for locale [%locale, e%]
+Failed\ to\ retrieve\ localized\ output\ for\ input\ [%international_input%]\ locale\ [%locale,\ e%] = Failed to retrieve localized output for input [%international_input%] locale [%locale, e%]
+Interrupted\ while\ waiting\ for\ resource\ bundle\ [%this.resourceBundleName%]\ locale\ [%locale%]\ to\ be\ loaded\ in\ another\ thread = Interrupted while waiting for resource bundle [%this.resourceBundleName%] locale [%locale%] to be loaded in another thread
+No\ localized\ [%international_input%]\ for\ locale\ [%locale%] = No localized [%international_input%] for locale [%locale%]
+\ throw\ new\ NoSuchElementException\ ( =  throw new NoSuchElementException (

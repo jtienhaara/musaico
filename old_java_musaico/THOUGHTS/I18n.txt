@@ -1,0 +1,10 @@
+public interface Internationalization
+{
+    public <INTERNATIONALIZED extends Object>
+        Instance<INTERNATIONALIZED> internationalize ( INTERNATIONALIZED value );
+}
+
+
+value () returns the i18n value
+value ( String.class, new Localized ( Locale.FRENCH ) ) returns a l10n value
+etc.

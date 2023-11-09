@@ -1,0 +1,19 @@
+2016-01-01
+- Rename "ObjectContracts" to "Advocate", and "TrackingContracts"
+  to "TrackingAdvocate".
+- Add helpful information to Contracts and Violations:
+    - Contract.description () : String
+      Human-readable (one locale only) text to explain the nature
+      and use of the contract.
+    - Violation.explanation () : String
+      A detailed explanation of how the contract was violation,
+      including the contract description, as well as some extra
+      information such as where the violation happened
+      (e.g. one stack frame above a method call for a violated obligation,
+      or the stack frame of the method call for a violated guarantee).
+- Think about whether there is any place for "quality" Values
+  (Inaccurate, Imprecise, with accuracy () : Value<BigDecimal>
+  or precision () : Value<BigDecimal> and so on, or maybe just
+  plain old quality () : Value<BigDecimal> -- using composition
+  such as Imprecise<Inaccurate<XYZ>> to get access to both types
+  of quality).

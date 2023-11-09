@@ -1,0 +1,21 @@
+Standard - Box
+Standard - Text
+Standard - ZigZagLine
+UML - Activity
+UML - Actor
+UML - Association
+UML - Branch
+UML - Class
+UML - Classicon
+UML - Component
+UML - Fork
+UML - Generalization
+UML - LargePackage
+UML - Lifeline
+UML - Message
+UML - Node
+UML - Object
+UML - SmallPackage
+UML - State
+UML - State Term
+UML - Transition

@@ -1,0 +1,101 @@
+package ebnf;
+
+import java.io.Serializable;
+
+public abstract class AbstractNode
+    implements Node, Serializable
+{
+
+    public AbstractNode (
+                         )
+    {
+        this.name = name;
+    }
+
+    public final String name ()
+    {
+        returm this.name;
+    }
+
+    @Override
+    public final NodeVisitor.VisitStatus accept (
+                                                 NodeVisitor visitor
+                                                 )
+    {
+        NodeVisitor.VisitStatus status = visitor.visit ( this );
+
+        if ( status == NodeVisitor.VisitStatus.POP )
+        {
+            return status;
+        }
+        else if ( status == NodeVisitor.VisitStatus.ABORT )
+        {
+            return status;
+        }
+
+        for ( Node node : this.sequence )
+        {
+            status = node.accept ( visitor );
+
+            if ( status == NodeVisitor.VisitStatus.POP )
+            {
+                break;
+            }
+            else if ( status == NodeVisitor.VisitStatus.ABORT )
+            {
+                return status;
+            }
+        }
+
+        return status;
+    }
+
+    public String end ()
+    {
+        return this.end;
+    }
+
+    public String separator ()
+    {
+        return this.separator;
+    }
+
+    public Node [] sequence ()
+    {
+        final Node [] sequence = new Node [ this.sequence.length ];
+        System.arraycopy ( this.sequence, 0,
+                           sequence, 0, this.sequence.length );
+
+        return sequence;
+    }
+
+    public String start ()
+    {
+        return this.start;
+    }
+
+    @Override
+    public String toString ()
+    {
+        final StringBuilder sbuf = new StringBuilder ();
+        sbuf.append ( this.start );
+        boolean is_first = true;
+        for ( Node node : this.sequence )
+        {
+            if ( is_first )
+            {
+                is_first = false;
+            }
+            else
+            {
+                sbuf.append ( this.separator );
+            }
+
+            sbuf.append ( "" + node );
+        }
+
+        sbuf.append ( this.end );
+
+        return sbuf.toString ();
+    }
+}

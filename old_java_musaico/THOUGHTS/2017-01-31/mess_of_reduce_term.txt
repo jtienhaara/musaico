@@ -1,0 +1,32 @@
+pipeline.on ( Blocking.XYZ )
+          .await ( BigDecimal.TEN )
+        .otherwise ()
+          .reduceAll ()
+
+on ( ... ) : to specialized BlockingPipeline
+reduceAll ()
+
+async ( ... ) : back to this
+await ( BigDecimal ) : back to this
+otherwise () : back to original type of Pipeline
+
+on ( PipelineFactory<CONDITIONAL> ) : CONDITIONAL
+
+CONDITIONAL extends ConditionalPipeline<CONDITIONAL, PIPELINE>
+
+ConditionalPipeline<CONDITIONAL extends ConditionalPipeline<CONDITIONAL, PIPELINE>, PIPELINE extends Pipeline<bla bla bla>>
+{
+  otherwise () : PIPELINE
+  when ( Filter<Reducibility> ) : CONDITIONAL
+}
+
+
+
+
+
+
+Reducibility
+{
+  doSpecial ( Operation, Term ) : Reducibility
+  crap
+

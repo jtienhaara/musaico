@@ -1,0 +1,149 @@
+Asynchronous requests & responses:
+Every "do something" operation (read(), write(), etc) returns
+a request which can then be queried for result / failure result /
+throw exception, and for synhronous behaviour call waitFor ().
+See MemoryRequest for example usage.
+
+Then read(), for example, would return MemoryRequest<Region> rather
+than Region, and would not ever block.  The system call could
+receive the MemoryRequest response and block accordingly, but
+it might be better to just translate & pass back essentially the
+same type of object to user space -- and let the user space
+system decide whether or not to block.
+
+
+
+
+
+Documentosys:
+
+                    Document (object)
+                            |
+             _______________|_______________
+           /|\ [1]         /|\ [1]         /|\ [0..n]
+    "children" (object)  "styles" (o) * "text" (field) ( [0..n]
+          |                 |         * "style" (SymbolicLink) [0..n]
+         /|\ [0..n]        /|\ [0..n] * "reference" (SymbolicLink) [0..n]
+       Document (object)  Style (obj) * "bookmark" (marker field) [0..n]
+                                      * LayoutMarker (field) [0..n]
+                                          examples: SoftPageBoundary,
+                                          HardPageBoundary, ChapterStart,
+                                          SectionStart, and so on.
+                                      * "meta" (object) [1]
+                                          can contain meta-Documents
+                                          such as notes, review comments,
+                                          author, copyright notice, and
+                                          so on.
+                                      * "media" (object) [1]
+                                          can contain Images and (depending
+                                          on the derived object system)
+                                          possibly other media formats.
+
+
+Tableosys:
+
+                     Table (object)
+                           |
+           ________________|________________
+          |                |                |
+          | [1]            | [1]            | [1]
+      "rows" (object)  "columns" (object)  "cells" (object)
+          |                |                |
+         /|\ [0..n]       /|\ [0..n]       /|\ [0..n]
+        Row (object)    Column (object)   Cell (object)
+          |                |                    |
+         /|\ [0..n]       /|\ [0..n]        depends (see below)...
+    Cell (hard link)   Cell (hard link)
+
+    The content of a Cell object depends on the object
+    system.  For example, a table from a database most
+    likely only contains fields, no child objects.  A
+    table from a spreadsheet, on the other hand, most
+    likely contains a Document.
+
+
+Seriesosys:
+
+                    Series (object)
+                         |___________
+                         |           \
+                        /|\ [0..n]    \ [1]
+                   Frame (object)    "frame_rate" (field)
+
+    The content of the Frame object depends on the
+    object system.  For example, a Video might contain
+    an Image and an Audio in each Frame, whereas an
+    Audio might contain 2 or 6 or N Samples in each
+    Frame (one per track).
+
+    The frame_rate is typically expressed in frames per second,
+    but other units can conceivably be used instead of seconds.
+
+
+Imageosys:
+
+                      Table (object)
+                           /_\
+                            |
+                      Image (object)
+                   Each Cell contains:
+
+                      Colour (object)
+                            |
+                           /|\
+            Typically "red", "green", "blue", "opacity"/"alpha" fields
+
+
+Audiosys:
+
+                      Series (object)
+                            /_\
+                             |
+                      Audio (object) --------------> "samples_per_frame",
+                   Each Frame contains:        [1]   "num_channels"
+
+                     * "audio" (field) [one per channel/track]
+                     * AudioFilterLink / AudioEffectLink (relations) [0..n]
+                     * Bookmark (marker field) [0..n]
+
+    "audio" is a byte[] field with (samples_per_frame) samples.
+    There are (num_channels) "audio" fields per Frame.
+
+
+Videosys:
+
+                      Audio (object) (see audiosys)
+                            /_\
+                             |
+                      Video (object) --------------> "frame_width",
+                   Each Frame contains:        [1]   "frame_height"
+
+                     * "image" (object) [1] Initially a black image,
+                       always "frame_width" x "frame_height" table size.
+                     * VideoFilterLink / VideoEffectLink (relations) [0..n]
+                     * Bookmark (marker field) [0..n]
+
+
+
+
+Example object systems:
+
+Excelosys:
+
+              Document (object) (see documentosys)
+                            /_\
+                             |
+                      Workbook (object)
+                             |
+                             |
+                            /|\ [0..n]
+                       Sheet (object) -----|> Table (see tableosys)
+                     Each Cell contains:
+                   * Document (object) [0..1] (see documentosys)
+
+    Additions to documentosys:
+    * "formula" (flat record) [0..1] can be placed wherever PlainText and so on
+      can be placed.
+
+Maybe Excelosys doesn't exist.  Maybe Excel is just a driver
+after all...

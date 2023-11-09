@@ -1,0 +1,40 @@
+swap ().sequence ( ... )    .sequence ( ... )
+    or .set ( ... )      or .set ( ... )
+    or .range ( ... )    or .range ( ... )
+    or .filter ( ... )   or .filter ( ... )
+
+====================================================
+
+F0 homotopic to F1 if continuous function:
+H ( 0, t ) = starting point for all 0 <= t <= 1
+H ( 1, t ) = end point      for all 0 <= t <= 1
+H ( x, 0 ) = F0 ( x )       for all 0 <= x <= 1
+H ( x, 1 ) = F1 ( x )       for all 0 <= x <= 1
+
+tensor rank 0 -> scalar
+            1 -> vector (e.g. 3-vector)
+            2 -> matrix (e.g. 3 x 3 matrix)
+            3 -> (e.g. 3 x 3 x 3 hyper-matrix)
+
+====================================================
+
+move (), remove (), replace (), swap () : EditVarious<...>
+
+split ()
+input -> unmatching, matching
+
+move () unmatching: output as-is until we hit the move index.
+        matching: output at the move index.  Once empty, finish unmatching.
+
+remove () unmatching: output as-is.
+          matching: skip.
+
+replace () unmatching: output as-is.
+           matching: replace each term with the replacement.
+
+swap () unmatching 1:
+            unmatching 2: output as-is.
+            matching 2: freeze index 2 until index 1 hits a match.
+        matching 1:
+            unmatching 2: freeze index 1 until index 2 hits a match.
+            matching 2: swap terms.

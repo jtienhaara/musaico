@@ -1,0 +1,107 @@
+AbsoluteTime	AbsoluteTime.java	77
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.Violation	AbsoluteTime.java	314
+AbsoluteTime.add	AbsoluteTime.java	/^    public Time add ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ()$/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.classContracts	AbsoluteTime.java	87
+AbsoluteTime.compareTo	AbsoluteTime.java	/^    public int compareTo ($/
+AbsoluteTime.convert	AbsoluteTime.java	/^    public static AbsoluteTime [] convert ($/
+AbsoluteTime.date	AbsoluteTime.java	/^    public Date date ()$/
+AbsoluteTime.equals	AbsoluteTime.java	/^    public boolean equals ($/
+AbsoluteTime.hashCode	AbsoluteTime.java	/^    public int hashCode ()$/
+AbsoluteTime.milliseconds	AbsoluteTime.java	/^    public long milliseconds ()$/
+AbsoluteTime.nanoseconds	AbsoluteTime.java	95
+AbsoluteTime.nanoseconds	AbsoluteTime.java	/^    public long nanoseconds ()$/
+AbsoluteTime.now	AbsoluteTime.java	/^    public static final AbsoluteTime now ()$/
+AbsoluteTime.seconds	AbsoluteTime.java	92
+AbsoluteTime.seconds	AbsoluteTime.java	/^    public long seconds ()$/
+AbsoluteTime.secondsAndNanoseconds	AbsoluteTime.java	/^    public BigInteger secondsAndNanoseconds ()$/
+AbsoluteTime.serialVersionHash	AbsoluteTime.java	82
+AbsoluteTime.serialVersionUID	AbsoluteTime.java	81
+AbsoluteTime.subtract	AbsoluteTime.java	/^    public Time subtract ($/
+AbsoluteTime.toString	AbsoluteTime.java	/^    public String toString ()$/
+AbstractCalendarTime	AbstractCalendarTime.java	88
+AbstractCalendarTime.@SuppressWarnings	AbstractCalendarTime.java	/^    @SuppressWarnings("unchecked") \/\/ Calendar.clo/
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	143
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	144
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	188
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	189
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	233
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	234
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	284
+AbstractCalendarTime.Violation	AbstractCalendarTime.java	285
+AbstractCalendarTime.add	AbstractCalendarTime.java	/^    public Time add ($/
+AbstractCalendarTime.calendar	AbstractCalendarTime.java	107
+AbstractCalendarTime.classContracts	AbstractCalendarTime.java	98
+AbstractCalendarTime.lock	AbstractCalendarTime.java	103
+AbstractCalendarTime.serialVersionHash	AbstractCalendarTime.java	93
+AbstractCalendarTime.serialVersionUID	AbstractCalendarTime.java	92
+AbstractCalendarTime.subtract	AbstractCalendarTime.java	/^    public Time subtract ($/
+CompositeRelativeTime	CompositeRelativeTime.java	57
+CompositeRelativeTime.addOffsetTo	CompositeRelativeTime.java	/^    protected void addOffsetTo ($/
+CompositeRelativeTime.classContracts	CompositeRelativeTime.java	68
+CompositeRelativeTime.negate	CompositeRelativeTime.java	/^    public CompositeRelativeTime negate ()$/
+CompositeRelativeTime.relativeTimes	CompositeRelativeTime.java	73
+CompositeRelativeTime.serialVersionHash	CompositeRelativeTime.java	63
+CompositeRelativeTime.serialVersionUID	CompositeRelativeTime.java	62
+CompositeRelativeTime.subtractOffsetFrom	CompositeRelativeTime.java	/^    protected void subtractOffsetFrom ($/
+CompositeRelativeTime.toString	CompositeRelativeTime.java	/^    public String toString ()$/
+Days	Days.java	57
+Days.SECONDS_PER_DAY	Days.java	69
+Days.addOffsetTo	Days.java	/^    protected void addOffsetTo ($/
+Days.days	Days.java	73
+Days.negate	Days.java	/^    public AbstractCalendarTime negate ()$/
+Days.serialVersionHash	Days.java	63
+Days.serialVersionUID	Days.java	62
+Days.subtractOffsetFrom	Days.java	/^    protected void subtractOffsetFrom ($/
+Days.toString	Days.java	/^    public String toString ()$/
+ImpossibleTime	ImpossibleTime.java	75
+ImpossibleTime.ImpossibleTime	ImpossibleTime.java	/^    public ImpossibleTime ($/
+ImpossibleTime.add	ImpossibleTime.java	/^    public Time add ($/
+ImpossibleTime.compareTo	ImpossibleTime.java	/^    public int compareTo ($/
+ImpossibleTime.equals	ImpossibleTime.java	/^    public boolean equals ($/
+ImpossibleTime.hashCode	ImpossibleTime.java	/^    public int hashCode ()$/
+ImpossibleTime.milliseconds	ImpossibleTime.java	/^    public long milliseconds ()$/
+ImpossibleTime.nanoseconds	ImpossibleTime.java	88
+ImpossibleTime.nanoseconds	ImpossibleTime.java	/^    public long nanoseconds ()$/
+ImpossibleTime.seconds	ImpossibleTime.java	85
+ImpossibleTime.seconds	ImpossibleTime.java	/^    public long seconds ()$/
+ImpossibleTime.secondsAndNanoseconds	ImpossibleTime.java	/^    public BigInteger secondsAndNanoseconds ()$/
+ImpossibleTime.serialVersionHash	ImpossibleTime.java	80
+ImpossibleTime.serialVersionUID	ImpossibleTime.java	79
+ImpossibleTime.subtract	ImpossibleTime.java	/^    public Time subtract ($/
+ImpossibleTime.toString	ImpossibleTime.java	/^    public String toString ()$/
+RelativeTime	RelativeTime.java	77
+RelativeTime.RelativeTime	RelativeTime.java	/^    public RelativeTime ($/
+RelativeTime.RelativeTime	RelativeTime.java	/^    public RelativeTime ($/
+RelativeTime.Violation	RelativeTime.java	113
+RelativeTime.Violation	RelativeTime.java	192
+RelativeTime.add	RelativeTime.java	/^    public Time add ($/
+RelativeTime.classContracts	RelativeTime.java	87
+RelativeTime.compareTo	RelativeTime.java	/^    public int compareTo ($/
+RelativeTime.equals	RelativeTime.java	/^    public boolean equals ($/
+RelativeTime.hashCode	RelativeTime.java	/^    public int hashCode ()$/
+RelativeTime.milliseconds	RelativeTime.java	/^    public long milliseconds ()$/
+RelativeTime.nanoseconds	RelativeTime.java	95
+RelativeTime.nanoseconds	RelativeTime.java	/^    public long nanoseconds ()$/
+RelativeTime.negate	RelativeTime.java	/^    public RelativeTime negate ()$/
+RelativeTime.seconds	RelativeTime.java	92
+RelativeTime.seconds	RelativeTime.java	/^    public long seconds ()$/
+RelativeTime.secondsAndNanoseconds	RelativeTime.java	/^    public BigInteger secondsAndNanoseconds ()$/
+RelativeTime.serialVersionHash	RelativeTime.java	82
+RelativeTime.serialVersionUID	RelativeTime.java	81
+RelativeTime.subtract	RelativeTime.java	/^    public Time subtract ($/
+RelativeTime.toString	RelativeTime.java	/^    public String toString ()$/
+Time	Time.java	93
+Time.BIG_NANOSECONDS_PER_SECOND	Time.java	100
+Time.FOREVER	Time.java	119
+Time.MAX_NANOSECONDS	Time.java	105
+Time.MIN_NANOSECONDS	Time.java	109
+Time.NANOSECONDS_PER_SECOND	Time.java	97
+Time.NEVER	Time.java	114

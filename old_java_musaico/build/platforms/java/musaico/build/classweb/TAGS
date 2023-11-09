@@ -1,0 +1,821 @@
+
+MODULE.java,1065
+public final class MODULE38,573
+    private static final String ADDRESS MODULE.ADDRESS46,884
+    private static final String CONTACT MODULE.CONTACT57,1508
+    private static final String COPYRIGHT MODULE.COPYRIGHT61,1667
+    private static final String DESCRIPTION MODULE.DESCRIPTION65,1856
+    private static final String HASH MODULE.HASH69,2058
+    private static final License LICENSE MODULE.LICENSE75,2294
+    static final long VERSION MODULE.VERSION82,2659
+    private static final long serialVersionUID MODULE.serialVersionUID85,2704
+    public static final MODULE MODULE MODULE.MODULE95,2978
+    private MODULE MODULE.MODULE103,3111
+    public final String address MODULE.address112,3227
+    public final String contact MODULE.contact122,3380
+    public final String copyright MODULE.copyright132,3535
+    public final String description MODULE.description142,3696
+    public final String hash MODULE.hash152,3854
+    public final License license MODULE.license162,4001
+    public final long version MODULE.version172,4155
+
+MemberFilter.java,691
+public interface MemberFilter24,498
+    public static final MODULE PARENT_MODULE MemberFilter.PARENT_MODULE27,601
+    public static final MemberFilter NONE MemberFilter.NONE31,706
+    public static final MemberFilter PUBLIC MemberFilter.PUBLIC35,836
+    public static final MemberFilter PROTECTED MemberFilter.PROTECTED39,988
+    public static final MemberFilter PRIVATE MemberFilter.PRIVATE43,1144
+    public static final MemberFilter PUBLIC_CONSTANT MemberFilter.PUBLIC_CONSTANT47,1311
+    public static final MemberFilter PROTECTED_CONSTANT MemberFilter.PROTECTED_CONSTANT53,1581
+    public static final MemberFilter PRIVATE_CONSTANT MemberFilter.PRIVATE_CONSTANT59,1855
+
+MemberListProcessor.java,131
+public interface MemberListProcessor25,593
+    public static final MODULE PARENT_MODULE MemberListProcessor.PARENT_MODULE28,703
+
+ModifierFilter.java,581
+public class ModifierFilter28,635
+    public static final MODULE PARENT_MODULE ModifierFilter.PARENT_MODULE32,791
+    private static final long serialVersionUID ModifierFilter.serialVersionUID35,916
+    private final int modifiers;ModifierFilter.modifiers40,1087
+    public ModifierFilter ModifierFilter.ModifierFilter51,1398
+    public boolean matches ModifierFilter.matches62,1638
+    public boolean matches ModifierFilter.matches82,2171
+    public final boolean equals ModifierFilter.equals101,2636
+    public final int hashCode ModifierFilter.hashCode131,3234
+
+NoMemberFilter.java,327
+public class NoMemberFilter26,547
+    public static final MODULE PARENT_MODULE NoMemberFilter.PARENT_MODULE30,690
+    private static final long serialVersionUID NoMemberFilter.serialVersionUID33,815
+    NoMemberFilter NoMemberFilter.NoMemberFilter43,1046
+    public final boolean matches NoMemberFilter.matches51,1184
+
+AlphaConstructorComparator.java,306
+public class AlphaConstructorComparator27,619
+    public static final MODULE PARENT_MODULE AlphaConstructorComparator.PARENT_MODULE31,785
+    private static final long serialVersionUID AlphaConstructorComparator.serialVersionUID34,910
+    public int compare AlphaConstructorComparator.compare37,977
+
+AlphaFieldComparator.java,282
+public class AlphaFieldComparator26,537
+    public static final MODULE PARENT_MODULE AlphaFieldComparator.PARENT_MODULE30,691
+    private static final long serialVersionUID AlphaFieldComparator.serialVersionUID33,816
+    public int compare AlphaFieldComparator.compare36,883
+
+AlphaMethodComparator.java,286
+public class AlphaMethodComparator26,538
+    public static final MODULE PARENT_MODULE AlphaMethodComparator.PARENT_MODULE30,694
+    private static final long serialVersionUID AlphaMethodComparator.serialVersionUID33,819
+    public int compare AlphaMethodComparator.compare36,886
+
+CompositeMemberComparator.java,527
+public class CompositeMemberComparator<CompositeMemberComparator27,605
+    public static final MODULE PARENT_MODULE CompositeMemberComparator.PARENT_MODULE31,788
+    private static final long serialVersionUID CompositeMemberComparator.serialVersionUID34,913
+    private final Comparator<MEMBER> [] comparators;CompositeMemberComparator.comparators38,1025
+    public CompositeMemberComparator CompositeMemberComparator.CompositeMemberComparator47,1307
+    public int compare CompositeMemberComparator.compare54,1511
+
+StaticMemberComparator.java,314
+public class StaticMemberComparator<StaticMemberComparator26,525
+    public static final MODULE PARENT_MODULE StaticMemberComparator.PARENT_MODULE30,705
+    private static final long serialVersionUID StaticMemberComparator.serialVersionUID33,830
+    public int compare StaticMemberComparator.compare36,897
+
+MemberOrder.java,1084
+public class MemberOrder<MemberOrder26,546
+    public static final MODULE PARENT_MODULE MemberOrder.PARENT_MODULE30,716
+    private static final long serialVersionUID MemberOrder.serialVersionUID33,841
+    public static final MemberOrder<Field> PUBLIC_CONSTANTS MemberOrder.PUBLIC_CONSTANTS37,976
+    public static final MemberOrder<Constructor> PUBLIC_CONSTRUCTORS MemberOrder.PUBLIC_CONSTRUCTORS44,1353
+    public static final MemberOrder<Method> PUBLIC_METHODS MemberOrder.PUBLIC_METHODS52,1822
+    public static final MemberOrder<Field> PUBLIC_ATTRIBUTES MemberOrder.PUBLIC_ATTRIBUTES64,2312
+    private final Class<MEMBER> memberType;MemberOrder.memberType71,2608
+    private final MemberFilter memberFilter;MemberOrder.memberFilter74,2721
+    private final Comparator<MEMBER> memberOrder;MemberOrder.memberOrder77,2839
+    public MemberOrder MemberOrder.MemberOrder82,3082
+    public List<Member> process MemberOrder.process97,3529
+    public final boolean equals MemberOrder.equals129,4430
+    public final int hashCode MemberOrder.hashCode159,5173
+
+MemberPrinter.java,794
+public class MemberPrinter26,544
+    public static final MODULE PARENT_MODULE MemberPrinter.PARENT_MODULE30,693
+    private static final long serialVersionUID MemberPrinter.serialVersionUID33,818
+    private final StringBuilder sbuf;MemberPrinter.sbuf37,927
+    public MemberPrinter MemberPrinter.MemberPrinter45,1110
+    public List<Member> process MemberPrinter.process56,1350
+    public void printConstructor MemberPrinter.printConstructor103,2739
+    public void printMethod MemberPrinter.printMethod171,4548
+    public void printField MemberPrinter.printField241,6383
+    public String getPrefixes MemberPrinter.getPrefixes268,7124
+    public String getVisibility MemberPrinter.getVisibility287,7596
+    public String getPostfixes MemberPrinter.getPostfixes313,8161
+
+Order.java,520
+public class Order27,585
+    public static final MODULE PARENT_MODULE Order.PARENT_MODULE31,726
+    private static final long serialVersionUID Order.serialVersionUID34,851
+    public static final Order DEFAULT Order.DEFAULT38,987
+    private final MemberListProcessor [] memberListProcessors;Order.memberListProcessors46,1302
+    public Order Order.Order61,1954
+    public List<Member> process Order.process75,2423
+    public MemberListProcessor [] memberListProcessors Order.memberListProcessors101,3284
+
+ClassDetail.java,681
+public interface ClassDetail<ClassDetail14,247
+    public static final MODULE PARENT_MODULE ClassDetail.PARENT_MODULE18,411
+    public static final ClassEnumeratedValues ENUMERATED_VALUES ClassDetail.ENUMERATED_VALUES22,536
+    public static final ClassInheritance INHERITANCE ClassDetail.INHERITANCE26,712
+    public static final ClassMembers MEMBERS ClassDetail.MEMBERS31,892
+    public static final ClassName NAME ClassDetail.NAME35,1027
+    public static final ClassPackage PACKAGE ClassDetail.PACKAGE39,1138
+    public static final ClassStereotype STEREOTYPE ClassDetail.STEREOTYPE44,1318
+    public static final ClassDetail<?> [] ALL ClassDetail.ALL49,1440
+
+ClassDetailPrinter.java,149
+public interface ClassDetailPrinter<ClassDetailPrinter19,384
+    public static final MODULE PARENT_MODULE ClassDetailPrinter.PARENT_MODULE22,516
+
+ClassDecoration.java,756
+public class ClassDecoration20,358
+    public static final MODULE PARENT_MODULE ClassDecoration.PARENT_MODULE24,509
+    private static final long serialVersionUID ClassDecoration.serialVersionUID27,634
+    private final String text;ClassDecoration.text31,755
+    public ClassDecoration ClassDecoration.ClassDecoration40,914
+    public final boolean equals ClassDecoration.equals51,1123
+    public final List<ClassDetails<String>> fromClass ClassDecoration.fromClass69,1490
+    public final int hashCode ClassDecoration.hashCode91,2144
+    public final boolean isOrHas ClassDecoration.isOrHas99,2335
+    public final void print ClassDecoration.print117,2794
+    public final ClassDetail<?> replaceAll ClassDecoration.replaceAll132,3244
+
+ClassEnumeratedValues.java,769
+public class ClassEnumeratedValues17,274
+    public static final MODULE PARENT_MODULE ClassEnumeratedValues.PARENT_MODULE21,431
+    private static final long serialVersionUID ClassEnumeratedValues.serialVersionUID24,556
+    public ClassEnumeratedValues ClassEnumeratedValues.ClassEnumeratedValues32,713
+    public final boolean equals ClassEnumeratedValues.equals40,833
+    public final List<ClassDetails<Object>> fromClass ClassEnumeratedValues.fromClass64,1359
+    public final int hashCode ClassEnumeratedValues.hashCode95,2337
+    public final boolean isOrHas ClassEnumeratedValues.isOrHas103,2546
+    public final void print ClassEnumeratedValues.print121,3005
+    public final ClassDetail<?> replaceAll ClassEnumeratedValues.replaceAll147,3729
+
+ClassIf.java,821
+public class ClassIf20,393
+    public static final MODULE PARENT_MODULE ClassIf.PARENT_MODULE24,536
+    private static final long serialVersionUID ClassIf.serialVersionUID27,661
+    private final ClassDetail<?> ifDetail;ClassIf.ifDetail32,862
+    private final ClassDetail<?> thenDetail;ClassIf.thenDetail36,994
+    private final ClassDetail<?> elseDetail;ClassIf.elseDetail40,1142
+    public ClassIf ClassIf.ClassIf61,1897
+    public final boolean equals ClassIf.equals76,2278
+    public final List<ClassDetails<Object>> fromClass ClassIf.fromClass151,3992
+    public final int hashCode ClassIf.hashCode219,6255
+    public final boolean isOrHas ClassIf.isOrHas234,6715
+    @SuppressWarnings(ClassIf.@SuppressWarnings266,7556
+    public final ClassDetail<?> replaceAll ClassIf.replaceAll292,8512
+
+ClassInheritance.java,889
+public class ClassInheritance17,300
+    public static final MODULE PARENT_MODULE ClassInheritance.PARENT_MODULE21,454
+    private static final long serialVersionUID ClassInheritance.serialVersionUID24,579
+    public ClassInheritance ClassInheritance.ClassInheritance32,731
+    public final boolean equals ClassInheritance.equals40,846
+        public final List<ClassDetails<Class<?>>> fromClass ClassInheritance.fromClass64,1372
+    public final int hashCode ClassInheritance.hashCode97,2343
+    public final boolean isOrHas ClassInheritance.isOrHas105,2552
+    public final void print ClassInheritance.print123,3011
+    private static class SillyClass<ClassInheritance.SillyClass156,3959
+        public Class<CLASS_CLASS> getClassClass ClassInheritance.SillyClass.getClassClass159,4065
+    public final ClassDetail<?> replaceAll ClassInheritance.replaceAll169,4355
+
+ClassMembers.java,733
+public class ClassMembers25,530
+    public static final MODULE PARENT_MODULE ClassMembers.PARENT_MODULE29,678
+    private static final long serialVersionUID ClassMembers.serialVersionUID32,803
+    private final Order memberOrder;ClassMembers.memberOrder36,913
+    public ClassMembers ClassMembers.ClassMembers48,1248
+    public final boolean equals ClassMembers.equals58,1469
+    public final List<ClassDetails<Member>> fromClass ClassMembers.fromClass83,2060
+    public final int hashCode ClassMembers.hashCode121,3193
+    public final boolean isOrHas ClassMembers.isOrHas129,3402
+    public final void print ClassMembers.print147,3861
+    public final ClassDetail<?> replaceAll ClassMembers.replaceAll160,4327
+
+ClassName.java,625
+public class ClassName17,258
+    public static final MODULE PARENT_MODULE ClassName.PARENT_MODULE21,403
+    private static final long serialVersionUID ClassName.serialVersionUID24,528
+    public ClassName ClassName.ClassName32,673
+    public final boolean equals ClassName.equals40,781
+    public final List<ClassDetails<String>> fromClass ClassName.fromClass64,1307
+    public final int hashCode ClassName.hashCode97,2292
+    public final boolean isOrHas ClassName.isOrHas105,2501
+    public final void print ClassName.print123,2960
+    public final ClassDetail<?> replaceAll ClassName.replaceAll148,3592
+
+ClassPackage.java,661
+public class ClassPackage17,268
+    public static final MODULE PARENT_MODULE ClassPackage.PARENT_MODULE21,417
+    private static final long serialVersionUID ClassPackage.serialVersionUID24,542
+    public ClassPackage ClassPackage.ClassPackage32,690
+    public final boolean equals ClassPackage.equals40,801
+    public final List<ClassDetails<Package>> fromClass ClassPackage.fromClass64,1327
+    public final int hashCode ClassPackage.hashCode91,2122
+    public final boolean isOrHas ClassPackage.isOrHas99,2331
+    public final void print ClassPackage.print117,2790
+    public final ClassDetail<?> replaceAll ClassPackage.replaceAll148,3590
+
+ClassStereotype.java,697
+public class ClassStereotype21,412
+    public static final MODULE PARENT_MODULE ClassStereotype.PARENT_MODULE25,563
+    private static final long serialVersionUID ClassStereotype.serialVersionUID28,688
+    public ClassStereotype ClassStereotype.ClassStereotype36,839
+    public final boolean equals ClassStereotype.equals44,953
+    public final List<ClassDetails<String>> fromClass ClassStereotype.fromClass68,1479
+    public final int hashCode ClassStereotype.hashCode98,2361
+    public final boolean isOrHas ClassStereotype.isOrHas106,2570
+    public final void print ClassStereotype.print124,3029
+    public final ClassDetail<?> replaceAll ClassStereotype.replaceAll151,3750
+
+ClassDetails.java,909
+public class ClassDetails<ClassDetails18,311
+    public static final MODULE PARENT_MODULE ClassDetails.PARENT_MODULE22,479
+    private static final long serialVersionUID ClassDetails.serialVersionUID25,604
+    private final Class<?> classOrInterface;ClassDetails.classOrInterface29,733
+    private final ClassDetail<DETAIL> type;ClassDetails.type33,904
+    private final List<DETAIL> details;ClassDetails.details36,1025
+    public ClassDetails ClassDetails.ClassDetails45,1239
+    public final Class<?> classOrInterface ClassDetails.classOrInterface61,1706
+    public final List<DETAIL> details ClassDetails.details71,1981
+    public final boolean equals ClassDetails.equals79,2160
+    public final int hashCode ClassDetails.hashCode117,3025
+    public final Iterator<DETAIL> iterator ClassDetails.iterator129,3297
+    public final ClassDetail<DETAIL> type ClassDetails.type171,4627
+
+ClassDetailsFilter.java,209
+public interface ClassDetailsFilter16,309
+    public static final MODULE PARENT_MODULE ClassDetailsFilter.PARENT_MODULE19,418
+    public static final ClassDetailsFilter NONE ClassDetailsFilter.NONE23,523
+
+ClassDetailsListProcessor.java,143
+public interface ClassDetailsListProcessor25,597
+    public static final MODULE PARENT_MODULE ClassDetailsListProcessor.PARENT_MODULE28,713
+
+ClassDetailsOrder.java,684
+public class ClassDetailsOrder18,336
+    public static final MODULE PARENT_MODULE ClassDetailsOrder.PARENT_MODULE22,495
+    private static final long serialVersionUID ClassDetailsOrder.serialVersionUID25,620
+    public static final ClassDetailsOrder DEFAULT ClassDetailsOrder.DEFAULT30,833
+    private final ClassDetail<?> [] types;ClassDetailsOrder.types57,2347
+    public ClassDetailsOrder ClassDetailsOrder.ClassDetailsOrder71,2829
+    public List<ClassDetails<?>> process ClassDetailsOrder.process84,3220
+    public final ClassDetailsListProcessor replaceAll ClassDetailsOrder.replaceAll137,4983
+    public ClassDetail<?> [] types ClassDetailsOrder.types177,6193
+
+ClassDetailsPrinter.java,565
+public class ClassDetailsPrinter17,270
+    public static final MODULE PARENT_MODULE ClassDetailsPrinter.PARENT_MODULE21,431
+    private static final long serialVersionUID ClassDetailsPrinter.serialVersionUID24,556
+    private final StringBuilder out;ClassDetailsPrinter.out28,663
+    public ClassDetailsPrinter ClassDetailsPrinter.ClassDetailsPrinter36,848
+    public final String output ClassDetailsPrinter.output44,1003
+    public List<ClassDetails<?>> process ClassDetailsPrinter.process53,1194
+        void print ClassDetailsPrinter.print67,1520
+
+ClassFilter.java,406
+public interface ClassFilter17,289
+    public static final MODULE PARENT_MODULE ClassFilter.PARENT_MODULE20,391
+    public static final ClassFilter NONE ClassFilter.NONE24,496
+    public static final ClassFilter ABSTRACT ClassFilter.ABSTRACT28,637
+    public static final ClassFilter CONCRETE ClassFilter.CONCRETE32,806
+    public static final ClassFilter INTERFACE ClassFilter.INTERFACE38,1087
+
+ClassListProcessor.java,129
+public interface ClassListProcessor17,358
+    public static final MODULE PARENT_MODULE ClassListProcessor.PARENT_MODULE20,467
+
+ClassListProcessorFactory.java,143
+public interface ClassListProcessorFactory16,299
+    public static final MODULE PARENT_MODULE ClassListProcessorFactory.PARENT_MODULE19,415
+
+AlphaClassComparator.java,282
+public class AlphaClassComparator17,282
+    public static final MODULE PARENT_MODULE AlphaClassComparator.PARENT_MODULE21,439
+    private static final long serialVersionUID AlphaClassComparator.serialVersionUID24,564
+    public int compare AlphaClassComparator.compare27,631
+
+ClassExtractDetails.java,692
+public class ClassExtractDetails19,365
+    public static final MODULE PARENT_MODULE ClassExtractDetails.PARENT_MODULE23,519
+    private static final long serialVersionUID ClassExtractDetails.serialVersionUID26,644
+    public static final ClassListProcessorFactory FACTORY ClassExtractDetails.FACTORY36,913
+    private final ClassDetailsListProcessor [] classDetailsListProcessors;ClassExtractDetails.classDetailsListProcessors55,1598
+    public ClassExtractDetails ClassExtractDetails.ClassExtractDetails65,1931
+    public List<Class<?>> process ClassExtractDetails.process80,2501
+    public final List<ClassDetails<?>> processDetails ClassExtractDetails.processDetails93,2795
+
+ClassHierarchy.java,275
+public class ClassHierarchy18,301
+    public static final MODULE PARENT_MODULE ClassHierarchy.PARENT_MODULE22,450
+    private static final long serialVersionUID ClassHierarchy.serialVersionUID25,575
+    public final List<Class<?>> process ClassHierarchy.process32,750
+
+ClassListFilter.java,420
+public class ClassListFilter18,308
+    public static final MODULE PARENT_MODULE ClassListFilter.PARENT_MODULE22,458
+    private static final long serialVersionUID ClassListFilter.serialVersionUID25,583
+    private final ClassFilter [] filters;ClassListFilter.filters29,696
+    public ClassListFilter ClassListFilter.ClassListFilter38,913
+    public final List<Class<?>> process ClassListFilter.process52,1306
+
+DiaChunk.java,2428
+public class DiaChunk20,387
+    public static final MODULE PARENT_MODULE DiaChunk.PARENT_MODULE24,510
+    private static final long serialVersionUID DiaChunk.serialVersionUID27,635
+    public static final String xmlize DiaChunk.xmlize32,704
+    public static class XMLDiaChunk.XML44,953
+        public static final String fromDouble DiaChunk.XML.fromDouble50,1112
+        public static final String fromPairs DiaChunk.XML.fromPairs72,1748
+        public static final String fromHex DiaChunk.XML.fromHex100,2657
+        public static final String fromInt DiaChunk.XML.fromInt131,3731
+        public static final String fromPairs DiaChunk.XML.fromPairs153,4352
+        public final String name;DiaChunk.XML.name181,5246
+        public final String defaultContent;DiaChunk.XML.defaultContent182,5280
+        private String content;DiaChunk.XML.content185,5345
+        public XML DiaChunk.XML.XML187,5378
+        public XML DiaChunk.XML.XML195,5579
+        public String content DiaChunk.XML.content209,5955
+        public final int hashCode DiaChunk.XML.hashCode215,6060
+        public final boolean equals DiaChunk.XML.equals221,6178
+        public final String toString DiaChunk.XML.toString256,7112
+    public static final DiaChunk.XML DIAGRAM_HEAD DiaChunk.DIAGRAM_HEAD266,7271
+    public static final DiaChunk.XML DIAGRAM_TAIL DiaChunk.DIAGRAM_TAIL333,10709
+    public static final DiaChunk.XML LAYER_HEAD1 DiaChunk.LAYER_HEAD1338,10856
+    public static final DiaChunk.XML LAYER_NAME DiaChunk.LAYER_NAME342,11004
+    public static final DiaChunk.XML LAYER_HEAD2 DiaChunk.LAYER_HEAD2346,11129
+    public static final DiaChunk.XML LAYER_TAIL DiaChunk.LAYER_TAIL350,11295
+    public static final DiaChunk.XML GROUP_HEAD DiaChunk.GROUP_HEAD355,11438
+    public static final DiaChunk.XML GROUP_TAIL DiaChunk.GROUP_TAIL359,11581
+    private final LinkedHashMap<DiaChunk.LinkedHashMap368,11767
+    private final LinkedHashMap<String, DiaChunk.XML> xml;DiaChunk.xml368,11767
+    public DiaChunk DiaChunk.DiaChunk375,11934
+    public final List<DiaChunk.XML> get DiaChunk.get391,12359
+    public final DiaChunk.XML get DiaChunk.get401,12592
+    public final String getContent DiaChunk.getContent413,12890
+    public DiaChunk set DiaChunk.set432,13309
+    public final void printTo DiaChunk.printTo449,13672
+    public final void printTo DiaChunk.printTo465,14019
+
+DiaObject.java,1665
+public class DiaObject18,331
+    public static final MODULE PARENT_MODULE DiaObject.PARENT_MODULE23,476
+    private static final long serialVersionUID DiaObject.serialVersionUID26,601
+    public static final String type DiaObject.type29,668
+    public static final String default_type DiaObject.default_type30,714
+    public static final String id DiaObject.id32,783
+    public static final int default_id DiaObject.default_id33,825
+    public static final String obj_pos DiaObject.obj_pos35,871
+    public static final double [] default_obj_pos DiaObject.default_obj_pos36,923
+    public static final String obj_bb DiaObject.obj_bb40,1034
+    public static final double [] default_obj_bb DiaObject.default_obj_bb41,1084
+    private String current_type DiaObject.current_type48,1359
+    private int current_id DiaObject.current_id49,1407
+    private double [] current_obj_pos DiaObject.current_obj_pos50,1448
+    private double [] current_obj_bb DiaObject.current_obj_bb51,1505
+    public DiaObject DiaObject.DiaObject53,1561
+    private static final DiaChunk.XML [] createObjectXML DiaObject.createObjectXML63,1748
+    public String type DiaObject.type122,3659
+    public DiaObject type DiaObject.type126,3731
+    public int id DiaObject.id135,3952
+    public DiaObject id DiaObject.id139,4017
+    public double [] obj_pos DiaObject.obj_pos148,4224
+    public DiaObject obj_pos DiaObject.obj_pos152,4305
+    public double [] obj_bb DiaObject.obj_bb168,4927
+    public DiaObject obj_bb DiaObject.obj_bb172,5006
+    public DiaObject set DiaObject.set182,5274
+    public String toString DiaObject.toString192,5493
+
+DiaLinear.java,3011
+public class DiaLinear18,331
+    public static final MODULE PARENT_MODULE DiaLinear.PARENT_MODULE23,477
+    private static final long serialVersionUID DiaLinear.serialVersionUID26,602
+    public static class ConnectionDiaLinear.Connection34,771
+        public static enum PointDiaLinear.Connection.Point40,935
+            TOP_LEFT DiaLinear.Connection.Point.TOP_LEFT42,978
+            TOP_CENTRE DiaLinear.Connection.Point.TOP_CENTRE43,1006
+            TOP_RIGHT DiaLinear.Connection.Point.TOP_RIGHT44,1036
+            CENTRE_LEFT DiaLinear.Connection.Point.CENTRE_LEFT45,1065
+            CENTRE_RIGHT DiaLinear.Connection.Point.CENTRE_RIGHT46,1096
+            BOTTOM_LEFT DiaLinear.Connection.Point.BOTTOM_LEFT47,1128
+            BOTTOM_CENTRE DiaLinear.Connection.Point.BOTTOM_CENTRE48,1159
+            BOTTOM_RIGHT DiaLinear.Connection.Point.BOTTOM_RIGHT49,1192
+            private DiaLinear.Connection.Point.private50,1224
+            private final DiaLinear.Connection.Point.final50,1224
+            private final int DiaLinear.Connection.Point.int50,1224
+            private final int xml;DiaLinear.Connection.Point.xml50,1224
+            private DiaLinear.Connection.Point.private51,1259
+            private Point DiaLinear.Connection.Point.Point51,1259
+                           int DiaLinear.Connection.Point.int52,1287
+                           int xmlDiaLinear.Connection.Point.xml52,1287
+            public DiaLinear.Connection.Point.public57,1411
+            public final DiaLinear.Connection.Point.final57,1411
+            public final String DiaLinear.Connection.Point.String57,1411
+            public final String toXML DiaLinear.Connection.Point.toXML57,1411
+        public final int handle;DiaLinear.Connection.handle63,1529
+        public final DiaObject to;DiaLinear.Connection.to64,1562
+        public final Point point;DiaLinear.Connection.point65,1597
+        public Connection DiaLinear.Connection.Connection67,1632
+        public final String content DiaLinear.Connection.content84,2096
+    public static class ConnectionsDiaLinear.Connections105,2704
+        public final List<DiaLinear.Connection> connections;DiaLinear.Connections.connections111,2869
+        public Connections DiaLinear.Connections.Connections113,2931
+        public final String content DiaLinear.Connections.content130,3440
+    public static final String connections DiaLinear.connections145,3875
+    public static final DiaLinear.Connections default_connections DiaLinear.default_connections146,3935
+    private DiaLinear.Connections current_connections;DiaLinear.current_connections150,4043
+    public DiaLinear DiaLinear.DiaLinear152,4099
+    private static final DiaChunk.XML [] createObjectXML DiaLinear.createObjectXML173,4629
+    public DiaLinear connect DiaLinear.connect188,5103
+    public DiaLinear.Connection [] connections DiaLinear.connections282,8441
+    public DiaLinear connections DiaLinear.connections290,8790
+
+DiaBox.java,3230
+public class DiaBox18,331
+    public static final MODULE PARENT_MODULE DiaBox.PARENT_MODULE23,474
+    private static final long serialVersionUID DiaBox.serialVersionUID26,599
+    public static final String elem_width DiaBox.elem_width29,666
+    public static final double default_elem_width DiaBox.default_elem_width30,724
+    public static final String elem_height DiaBox.elem_height32,784
+    public static final double default_elem_height DiaBox.default_elem_height33,844
+    public static final String elem_corner DiaBox.elem_corner35,904
+    public static final double [] default_elem_corner DiaBox.default_elem_corner36,964
+    public static final String border_width DiaBox.border_width40,1137
+    public static final double default_border_width DiaBox.default_border_width41,1199
+    public static final String border_colour DiaBox.border_colour43,1260
+    public static final int [] default_border_colour DiaBox.default_border_colour44,1324
+    public static final String inner_colour DiaBox.inner_colour49,1463
+    public static final int [] default_inner_colour DiaBox.default_inner_colour50,1525
+    public static final String show_background DiaBox.show_background55,1663
+    public static final boolean default_show_background DiaBox.default_show_background56,1731
+    public static final String corner_radius DiaBox.corner_radius58,1796
+    public static final double default_corner_radius DiaBox.default_corner_radius59,1860
+    private double current_elem_width DiaBox.current_elem_width62,1923
+    private double current_elem_height DiaBox.current_elem_height63,1983
+    private double [] current_elem_corner DiaBox.current_elem_corner64,2045
+    private double current_border_width DiaBox.current_border_width65,2110
+    private int [] current_border_colour DiaBox.current_border_colour66,2174
+    private int [] current_inner_colour DiaBox.current_inner_colour67,2240
+    private boolean current_show_background DiaBox.current_show_background68,2304
+    private double current_corner_radius DiaBox.current_corner_radius69,2375
+    public DiaBox DiaBox.DiaBox71,2442
+    public DiaBox obj_pos DiaBox.obj_pos156,6133
+    public double elem_width DiaBox.elem_width176,6863
+    public DiaBox elem_width DiaBox.elem_width180,6947
+    public double elem_height DiaBox.elem_height198,7670
+    public DiaBox elem_height DiaBox.elem_height202,7756
+    public double [] elem_corner DiaBox.elem_corner220,8487
+    public DiaBox elem_corner DiaBox.elem_corner224,8576
+    public double border_width DiaBox.border_width233,8875
+    public DiaBox border_width DiaBox.border_width237,8963
+    public int [] border_colour DiaBox.border_colour246,9267
+    public DiaBox border_colour DiaBox.border_colour250,9357
+    public int [] inner_colour DiaBox.inner_colour259,9666
+    public DiaBox inner_colour DiaBox.inner_colour263,9754
+    public boolean show_background DiaBox.show_background272,10055
+    public DiaBox show_background DiaBox.show_background276,10150
+    public double corner_radius DiaBox.corner_radius285,10456
+    public DiaBox corner_radius DiaBox.corner_radius289,10546
+    public final DiaBox set DiaBox.set298,10858
+
+DiaLine.java,3418
+public class DiaLine18,331
+    public static final MODULE PARENT_MODULE DiaLine.PARENT_MODULE23,475
+    private static final long serialVersionUID DiaLine.serialVersionUID26,600
+    public static final String conn_endpoints1 DiaLine.conn_endpoints129,667
+    public static final double [] default_conn_endpoints1 DiaLine.default_conn_endpoints130,735
+    public static final String conn_endpoints2 DiaLine.conn_endpoints233,830
+    public static final double [] default_conn_endpoints2 DiaLine.default_conn_endpoints234,898
+    public static final String line_width DiaLine.line_width37,995
+    public static final double default_line_width DiaLine.default_line_width38,1053
+    public static final String line_style DiaLine.line_style40,1112
+    public static enum line_style_enumDiaLine.line_style_enum41,1170
+        SOLID DiaLine.line_style_enum.SOLID43,1215
+        DASHES DiaLine.line_style_enum.DASHES44,1238
+        DOTS DiaLine.line_style_enum.DOTS45,1262
+        DASHES_AND_DOTS DiaLine.line_style_enum.DASHES_AND_DOTS46,1284
+        private DiaLine.line_style_enum.private47,1317
+        private final DiaLine.line_style_enum.final47,1317
+        private final String DiaLine.line_style_enum.String47,1317
+        private final String xml;DiaLine.line_style_enum.xml47,1317
+        private DiaLine.line_style_enum.private48,1351
+        private line_style_enum DiaLine.line_style_enum.line_style_enum48,1351
+        private line_style_enum ( String DiaLine.line_style_enum.String48,1351
+        private line_style_enum ( String xml DiaLine.line_style_enum.xml48,1351
+        public DiaLine.line_style_enum.public52,1446
+        public final DiaLine.line_style_enum.final52,1446
+        public final String DiaLine.line_style_enum.String52,1446
+        public final String toXML DiaLine.line_style_enum.toXML52,1446
+    public static final line_style_enum default_line_style DiaLine.default_line_style57,1538
+    public static final String dashlength DiaLine.dashlength60,1631
+    public static final double default_dashlength DiaLine.default_dashlength61,1689
+    private double [] current_conn_endpoints1 DiaLine.current_conn_endpoints164,1749
+    private double [] current_conn_endpoints2 DiaLine.current_conn_endpoints265,1822
+    private double current_line_width DiaLine.current_line_width66,1895
+    private line_style_enum current_line_style DiaLine.current_line_style67,1955
+    private double current_dashlength DiaLine.current_dashlength68,2024
+    public DiaLine DiaLine.DiaLine70,2085
+    public DiaLine connections DiaLine.connections130,4569
+    public double [] conn_endpoints1 DiaLine.conn_endpoints1148,5067
+    public DiaLine conn_endpoints1 DiaLine.conn_endpoints1152,5164
+    public double [] conn_endpoints2 DiaLine.conn_endpoints2164,5623
+    public DiaLine conn_endpoints2 DiaLine.conn_endpoints2168,5720
+    public final double [] calculateBoundingBox DiaLine.calculateBoundingBox179,6130
+    public double line_width DiaLine.line_width210,7043
+    public DiaLine line_width DiaLine.line_width214,7127
+    public line_style_enum line_style DiaLine.line_style225,7486
+    public DiaLine line_style DiaLine.line_style229,7579
+    public double dashlength DiaLine.dashlength238,7860
+    public DiaLine dashlength DiaLine.dashlength242,7944
+    public final DiaLine set DiaLine.set255,8305
+
+DiaText.java,8566
+public class DiaText18,331
+    public static final MODULE PARENT_MODULE DiaText.PARENT_MODULE23,475
+    private static final long serialVersionUID DiaText.serialVersionUID26,600
+    public static final String text DiaText.text29,667
+    public static final String default_text DiaText.default_text30,713
+    public static final String font_family DiaText.font_family32,773
+    public static enum font_family_enumDiaText.font_family_enum33,833
+        SANS DiaText.font_family_enum.SANS35,879
+        SERIF DiaText.font_family_enum.SERIF36,904
+        private DiaText.font_family_enum.private37,931
+        private final DiaText.font_family_enum.final37,931
+        private final String DiaText.font_family_enum.String37,931
+        private final String xml;DiaText.font_family_enum.xml37,931
+        private DiaText.font_family_enum.private38,965
+        private font_family_enum DiaText.font_family_enum.font_family_enum38,965
+        private font_family_enum ( String DiaText.font_family_enum.String38,965
+        private font_family_enum ( String xml DiaText.font_family_enum.xml38,965
+        public DiaText.font_family_enum.public42,1061
+        public final DiaText.font_family_enum.final42,1061
+        public final String DiaText.font_family_enum.String42,1061
+        public final String toXML DiaText.font_family_enum.toXML42,1061
+    public static final font_family_enum default_font_family DiaText.default_font_family47,1153
+    public static final String font_style DiaText.font_style50,1248
+    public static enum font_style_enumDiaText.font_style_enum51,1306
+        NORMAL DiaText.font_style_enum.NORMAL53,1351
+        BOLD DiaText.font_style_enum.BOLD54,1375
+        ITALIC DiaText.font_style_enum.ITALIC55,1397
+        BOLD_ITALIC DiaText.font_style_enum.BOLD_ITALIC56,1421
+        private DiaText.font_style_enum.private57,1450
+        private final DiaText.font_style_enum.final57,1450
+        private final String DiaText.font_style_enum.String57,1450
+        private final String xml;DiaText.font_style_enum.xml57,1450
+        private DiaText.font_style_enum.private58,1484
+        private font_style_enum DiaText.font_style_enum.font_style_enum58,1484
+        private font_style_enum ( String DiaText.font_style_enum.String58,1484
+        private font_style_enum ( String xml DiaText.font_style_enum.xml58,1484
+        public DiaText.font_style_enum.public62,1579
+        public final DiaText.font_style_enum.final62,1579
+        public final String DiaText.font_style_enum.String62,1579
+        public final String toXML DiaText.font_style_enum.toXML62,1579
+    public static final font_style_enum default_font_style DiaText.default_font_style67,1671
+    public static final String font_name DiaText.font_name70,1765
+    public static enum font_name_enumDiaText.font_name_enum71,1821
+        HELVETICA DiaText.font_name_enum.HELVETICA73,1865
+        ARIAL DiaText.font_name_enum.ARIAL74,1900
+        private DiaText.font_name_enum.private75,1927
+        private final DiaText.font_name_enum.final75,1927
+        private final String DiaText.font_name_enum.String75,1927
+        private final String xml;DiaText.font_name_enum.xml75,1927
+        private DiaText.font_name_enum.private76,1961
+        private font_name_enum DiaText.font_name_enum.font_name_enum76,1961
+        private font_name_enum ( String DiaText.font_name_enum.String76,1961
+        private font_name_enum ( String xml DiaText.font_name_enum.xml76,1961
+        public DiaText.font_name_enum.public80,2055
+        public final DiaText.font_name_enum.final80,2055
+        public final String DiaText.font_name_enum.String80,2055
+        public final String toXML DiaText.font_name_enum.toXML80,2055
+    public static final font_name_enum default_font_name DiaText.default_font_name85,2147
+    public static final String height DiaText.height88,2241
+    public static final double default_height DiaText.default_height89,2291
+    public static final String pos DiaText.pos91,2346
+    public static final double [] default_pos DiaText.default_pos92,2390
+    public static final String colour DiaText.colour94,2466
+    public static final int [] default_colour DiaText.default_colour95,2516
+    public static final String alignment DiaText.alignment100,2648
+    public static enum alignment_enumDiaText.alignment_enum101,2704
+        LEFT DiaText.alignment_enum.LEFT103,2748
+        CENTRE DiaText.alignment_enum.CENTRE104,2770
+        RIGHT DiaText.alignment_enum.RIGHT105,2794
+        private DiaText.alignment_enum.private106,2817
+        private final DiaText.alignment_enum.final106,2817
+        private final String DiaText.alignment_enum.String106,2817
+        private final String xml;DiaText.alignment_enum.xml106,2817
+        private DiaText.alignment_enum.private107,2851
+        private alignment_enum DiaText.alignment_enum.alignment_enum107,2851
+        private alignment_enum ( String DiaText.alignment_enum.String107,2851
+        private alignment_enum ( String xml DiaText.alignment_enum.xml107,2851
+        public DiaText.alignment_enum.public111,2945
+        public final DiaText.alignment_enum.final111,2945
+        public final String DiaText.alignment_enum.String111,2945
+        public final String toXML DiaText.alignment_enum.toXML111,2945
+    public static final alignment_enum default_alignment DiaText.default_alignment116,3037
+    public static final String valign DiaText.valign119,3126
+    public static enum valign_enumDiaText.valign_enum120,3176
+        TOP DiaText.valign_enum.TOP122,3217
+        BOTTOM DiaText.valign_enum.BOTTOM123,3238
+        CENTRE DiaText.valign_enum.CENTRE124,3262
+        FIRST_LINE DiaText.valign_enum.FIRST_LINE125,3286
+        private DiaText.valign_enum.private126,3314
+        private final DiaText.valign_enum.final126,3314
+        private final String DiaText.valign_enum.String126,3314
+        private final String xml;DiaText.valign_enum.xml126,3314
+        private DiaText.valign_enum.private127,3348
+        private valign_enum DiaText.valign_enum.valign_enum127,3348
+        private valign_enum ( String DiaText.valign_enum.String127,3348
+        private valign_enum ( String xml DiaText.valign_enum.xml127,3348
+        public DiaText.valign_enum.public131,3439
+        public final DiaText.valign_enum.final131,3439
+        public final String DiaText.valign_enum.String131,3439
+        public final String toXML DiaText.valign_enum.toXML131,3439
+    public static final valign_enum default_valign DiaText.default_valign136,3531
+    private String current_text DiaText.current_text140,3618
+    private font_family_enum current_font_family;DiaText.current_font_family141,3666
+    private font_style_enum current_font_style;DiaText.current_font_style142,3716
+    private font_name_enum current_font_name;DiaText.current_font_name143,3764
+    private double current_height DiaText.current_height144,3810
+    private double [] current_pos DiaText.current_pos145,3862
+    private int [] current_colour DiaText.current_colour146,3911
+    private alignment_enum current_alignment;DiaText.current_alignment147,3963
+    private valign_enum current_valign;DiaText.current_valign148,4009
+    public DiaText DiaText.DiaText150,4050
+    public double guessWidth DiaText.guessWidth241,7910
+    public DiaText obj_pos DiaText.obj_pos249,8096
+    public String text DiaText.text265,8680
+    public DiaText text DiaText.text269,8752
+    public font_family_enum font_family DiaText.font_family278,8987
+    public DiaText font_family DiaText.font_family282,9083
+    public font_style_enum font_style DiaText.font_style291,9373
+    public DiaText font_style DiaText.font_style295,9466
+    public font_name_enum font_name DiaText.font_name304,9747
+    public DiaText font_name DiaText.font_name308,9837
+    public double height DiaText.height317,10109
+    public DiaText height DiaText.height321,10185
+    public double [] pos DiaText.pos339,10870
+    public DiaText pos DiaText.pos343,10943
+    public int [] colour DiaText.colour352,11181
+    public DiaText colour DiaText.colour356,11257
+    public alignment_enum alignment DiaText.alignment365,11513
+    public DiaText alignment DiaText.alignment369,11603
+    public valign_enum valign DiaText.valign378,11875
+    public DiaText valign DiaText.valign382,11956
+    public final DiaText set DiaText.set392,12202
+
+DiaGeneralization.java,5399
+public class DiaGeneralization18,331
+    public static final MODULE PARENT_MODULE DiaGeneralization.PARENT_MODULE23,485
+    private static final long serialVersionUID DiaGeneralization.serialVersionUID26,610
+    public static final String orth_endpoints1 DiaGeneralization.orth_endpoints129,677
+    public static final double [] default_orth_endpoints1 DiaGeneralization.default_orth_endpoints130,745
+    public static final String orth_endpoints2 DiaGeneralization.orth_endpoints233,840
+    public static final double [] default_orth_endpoints2 DiaGeneralization.default_orth_endpoints234,908
+    public static final String orient1 DiaGeneralization.orient137,1005
+    public static final String orient2 DiaGeneralization.orient238,1057
+    public static final String orient3 DiaGeneralization.orient339,1109
+    public static enum orient_enumDiaGeneralization.orient_enum40,1161
+        LEFT_RIGHT DiaGeneralization.orient_enum.LEFT_RIGHT42,1202
+        UP_DOWN DiaGeneralization.orient_enum.UP_DOWN43,1228
+        private DiaGeneralization.orient_enum.private44,1251
+        private final DiaGeneralization.orient_enum.final44,1251
+        private final int DiaGeneralization.orient_enum.int44,1251
+        private final int xml;DiaGeneralization.orient_enum.xml44,1251
+        private DiaGeneralization.orient_enum.private45,1282
+        private orient_enum DiaGeneralization.orient_enum.orient_enum45,1282
+        private orient_enum ( int DiaGeneralization.orient_enum.int45,1282
+        private orient_enum ( int xml DiaGeneralization.orient_enum.xml45,1282
+        public DiaGeneralization.orient_enum.public49,1370
+        public final DiaGeneralization.orient_enum.final49,1370
+        public final String DiaGeneralization.orient_enum.String49,1370
+        public final String toXML DiaGeneralization.orient_enum.toXML49,1370
+    public static final orient_enum default_orient1 DiaGeneralization.default_orient154,1467
+    public static final orient_enum default_orient2 DiaGeneralization.default_orient256,1550
+    public static final orient_enum default_orient3 DiaGeneralization.default_orient358,1636
+    public static final String text_colour DiaGeneralization.text_colour61,1720
+    public static final int [] default_text_colour DiaGeneralization.default_text_colour62,1780
+    public static final String line_colour DiaGeneralization.line_colour67,1917
+    public static final int [] default_line_colour DiaGeneralization.default_line_colour68,1977
+    public static final String name DiaGeneralization.name73,2114
+    public static final String default_name DiaGeneralization.default_name74,2160
+    public static final String stereotype DiaGeneralization.stereotype76,2211
+    public static final String default_stereotype DiaGeneralization.default_stereotype77,2269
+    private double [] current_orth_endpoints1 DiaGeneralization.current_orth_endpoints180,2327
+    private double [] current_orth_endpoints2 DiaGeneralization.current_orth_endpoints281,2400
+    private orient_enum current_orient1 DiaGeneralization.current_orient182,2473
+    private orient_enum current_orient2 DiaGeneralization.current_orient283,2532
+    private orient_enum current_orient3 DiaGeneralization.current_orient384,2591
+    private int [] current_text_colour DiaGeneralization.current_text_colour85,2650
+    private int [] current_line_colour DiaGeneralization.current_line_colour86,2712
+    private String current_name DiaGeneralization.current_name87,2774
+    private String current_stereotype DiaGeneralization.current_stereotype88,2822
+    public DiaGeneralization DiaGeneralization.DiaGeneralization90,2883
+    public DiaGeneralization connections DiaGeneralization.connections199,7730
+    public double [] orth_endpoints1 DiaGeneralization.orth_endpoints1218,8259
+    public DiaGeneralization orth_endpoints1 DiaGeneralization.orth_endpoints1222,8356
+    public double [] orth_endpoints2 DiaGeneralization.orth_endpoints2235,8895
+    public DiaGeneralization orth_endpoints2 DiaGeneralization.orth_endpoints2239,8992
+    private DiaGeneralization updateOrthEndpoints DiaGeneralization.updateOrthEndpoints251,9482
+    public final double [] calculateBoundingBox DiaGeneralization.calculateBoundingBox347,12901
+    public orient_enum orient1 DiaGeneralization.orient1378,13814
+    public DiaGeneralization orient1 DiaGeneralization.orient1382,13897
+    public orient_enum orient2 DiaGeneralization.orient2391,14178
+    public DiaGeneralization orient2 DiaGeneralization.orient2395,14261
+    public orient_enum orient3 DiaGeneralization.orient3404,14542
+    public DiaGeneralization orient3 DiaGeneralization.orient3408,14625
+    public int [] text_colour DiaGeneralization.text_colour417,14906
+    public DiaGeneralization text_colour DiaGeneralization.text_colour421,14992
+    public int [] line_colour DiaGeneralization.line_colour430,15318
+    public DiaGeneralization line_colour DiaGeneralization.line_colour434,15404
+    public String name DiaGeneralization.name443,15730
+    public DiaGeneralization name DiaGeneralization.name447,15802
+    public String stereotype DiaGeneralization.stereotype456,16067
+    public DiaGeneralization stereotype DiaGeneralization.stereotype460,16151
+    public final DiaGeneralization set DiaGeneralization.set470,16465
+
+DiaRepositioner.java,205
+public interface DiaRepositioner22,437
+    public static final MODULE PARENT_MODULE DiaRepositioner.PARENT_MODULE25,543
+    public static final DiaRepositioner STANDARD DiaRepositioner.STANDARD29,644
+
+DiaStandardRepositioner.java,2431
+public class DiaStandardRepositioner26,534
+    public static final MODULE PARENT_MODULE DiaStandardRepositioner.PARENT_MODULE30,675
+    private static final long serialVersionUID DiaStandardRepositioner.serialVersionUID33,800
+    public static interface CellDiaStandardRepositioner.Cell36,867
+    public static class SinkerDiaStandardRepositioner.Sinker42,954
+        private final Class<?> concept;DiaStandardRepositioner.Sinker.concept46,1057
+        private final DiaObject key;DiaStandardRepositioner.Sinker.key47,1097
+        private final List<DiaChunk> chunks;DiaStandardRepositioner.Sinker.chunks48,1134
+        private final int [] cell;DiaStandardRepositioner.Sinker.cell56,1443
+        public Sinker DiaStandardRepositioner.Sinker.Sinker58,1493
+        public final void addPull DiaStandardRepositioner.Sinker.addPull85,2280
+        public final void addWeight DiaStandardRepositioner.Sinker.addWeight92,2458
+        public final int [] cell DiaStandardRepositioner.Sinker.cell100,2662
+        public final void cell DiaStandardRepositioner.Sinker.cell105,2749
+        public final void cell DiaStandardRepositioner.Sinker.cell114,3023
+        public final List<DiaChunk> chunks DiaStandardRepositioner.Sinker.chunks125,3326
+        public int compareTo DiaStandardRepositioner.Sinker.compareTo131,3471
+        public final Class<?> concept DiaStandardRepositioner.Sinker.concept158,4186
+        public double [] direction DiaStandardRepositioner.Sinker.direction163,4281
+        public final boolean isWeight DiaStandardRepositioner.Sinker.isWeight216,5997
+        public final DiaObject key DiaStandardRepositioner.Sinker.key223,6201
+        public double speed DiaStandardRepositioner.Sinker.speed229,6290
+        public String toString DiaStandardRepositioner.Sinker.toString235,6395
+        private double weight DiaStandardRepositioner.Sinker.weight263,7479
+    public final void reposition DiaStandardRepositioner.reposition294,8212
+    public void sink DiaStandardRepositioner.sink425,12575
+    public void sinkIteration DiaStandardRepositioner.sinkIteration458,13473
+    public void sinkIteration DiaStandardRepositioner.sinkIteration470,13833
+    public void bounce DiaStandardRepositioner.bounce556,16725
+    public int clamp DiaStandardRepositioner.clamp613,18794
+    public void diagramPositions DiaStandardRepositioner.diagramPositions630,19068
+
+DiaUML.java,1337
+public class DiaUML25,508
+    public static final MODULE PARENT_MODULE DiaUML.PARENT_MODULE30,661
+    private static final long serialVersionUID DiaUML.serialVersionUID33,786
+    public static class FactoryDiaUML.Factory44,1100
+        private final OutputStream rawOutputStream;DiaUML.Factory.rawOutputStream47,1183
+        private final DiaRepositioner repositioner;DiaUML.Factory.repositioner48,1235
+        public Factory DiaUML.Factory.Factory49,1287
+        public Factory DiaUML.Factory.Factory57,1511
+        public final ClassListProcessor create DiaUML.Factory.create70,1964
+    private final GZIPOutputStream gzip;DiaUML.gzip85,2461
+    private final PrintWriter out;DiaUML.out88,2556
+    private final DiaRepositioner repositioner;DiaUML.repositioner91,2650
+    public DiaUML DiaUML.DiaUML101,2943
+    public List<Class<?>> process DiaUML.process136,3921
+    public void generalizeClasses DiaUML.generalizeClasses209,6153
+    public List<DiaChunk> connect DiaUML.connect274,8487
+    public DiaObject diaObject DiaUML.diaObject295,9092
+    public void beginDiagram DiaUML.beginDiagram312,9499
+    public void endDiagram DiaUML.endDiagram330,10053
+    public void createDiaObjects DiaUML.createDiaObjects346,10525
+    public List<DiaChunk> createUMLClass DiaUML.createUMLClass372,11493
+
+ClassWeb.java,726
+public class ClassWeb33,732
+    public static final MODULE PARENT_MODULE ClassWeb.PARENT_MODULE37,875
+    private static final long serialVersionUID ClassWeb.serialVersionUID40,1000
+    public static final Pattern REGULAR_EXPRESSION_CLASS_NAME ClassWeb.REGULAR_EXPRESSION_CLASS_NAME43,1067
+    @SuppressWarnings(ClassWeb.@SuppressWarnings52,1319
+    private static final String decorativeText ClassWeb.decorativeText504,19943
+    private static final Class<?> getClass ClassWeb.getClass514,20221
+    private final ClassListProcessor [] classListProcessors;ClassWeb.classListProcessors537,20717
+    public ClassWeb ClassWeb.ClassWeb545,20906
+    public final List<Class<?>> process ClassWeb.process559,21382

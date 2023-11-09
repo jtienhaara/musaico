@@ -1,0 +1,67 @@
+
+SimpleMetadata.java,1395
+public class SimpleMetadata80,1890
+    private final Map<SimpleMetadata.Map84,2018
+    private final Map<String,Field> attributes;SimpleMetadata.attributes84,2018
+    public SimpleMetadata SimpleMetadata.SimpleMetadata107,2819
+    public Field [] all SimpleMetadata.all135,3824
+    public Field attribute SimpleMetadata.attribute145,4025
+    protected static Field [] getSortedMetadata SimpleMetadata.getSortedMetadata170,4652
+    public Hash hash SimpleMetadata.hash196,5519
+    public ObjectSystemTypeIdentifier objectSystemType SimpleMetadata.objectSystemType205,5724
+    public RecordTypeIdentifier recordType SimpleMetadata.recordType215,6004
+    public Region region SimpleMetadata.region226,6269
+    public Size sizeFieldsFree SimpleMetadata.sizeFieldsFree234,6458
+    public Size sizeFieldsUsed SimpleMetadata.sizeFieldsUsed244,6696
+    public Size sizeRecordsFree SimpleMetadata.sizeRecordsFree254,6935
+    public Size sizeRecordsUsed SimpleMetadata.sizeRecordsUsed264,7176
+    public Space space SimpleMetadata.space274,7407
+    public Time timeAccessed SimpleMetadata.timeAccessed283,7612
+    public Time timeCreated SimpleMetadata.timeCreated293,7842
+    public Time timeDeleted SimpleMetadata.timeDeleted303,8070
+    public Time timeDirtied SimpleMetadata.timeDirtied313,8298
+    public Time timeModified SimpleMetadata.timeModified323,8527
+
+SimpleMetadataBuilder.java,3334
+public class SimpleMetadataBuilder76,1895
+    private final Serializable lock SimpleMetadataBuilder.lock80,2037
+    private final FieldTypingEnvironment environment;SimpleMetadataBuilder.environment83,2155
+    private final Map<SimpleMetadataBuilder.Map87,2311
+    private final Map<String,Field> defaults;SimpleMetadataBuilder.defaults87,2311
+    private final Map<SimpleMetadataBuilder.Map91,2438
+    private final Map<String,Field> attributes;SimpleMetadataBuilder.attributes91,2438
+    public SimpleMetadataBuilder SimpleMetadataBuilder.SimpleMetadataBuilder109,3054
+    public Field [] all SimpleMetadataBuilder.all195,7434
+    public Field attribute SimpleMetadataBuilder.attribute208,7720
+    public Field attribute SimpleMetadataBuilder.attribute261,10122
+                              Field attribute SimpleMetadataBuilder.attribute284,10695
+    public Field remove SimpleMetadataBuilder.remove316,12103
+    public Metadata build SimpleMetadataBuilder.build359,13304
+    public Hash hash SimpleMetadataBuilder.hash382,13938
+    public SimpleMetadataBuilder hash SimpleMetadataBuilder.hash397,14278
+    public ObjectSystemTypeIdentifier objectSystemType SimpleMetadataBuilder.objectSystemType413,14714
+    public SimpleMetadataBuilder objectSystemType SimpleMetadataBuilder.objectSystemType428,15195
+    public RecordTypeIdentifier recordType SimpleMetadataBuilder.recordType445,15769
+    public SimpleMetadataBuilder recordType SimpleMetadataBuilder.recordType460,16207
+    public Region region SimpleMetadataBuilder.region477,16732
+    public SimpleMetadataBuilder region SimpleMetadataBuilder.region492,17099
+    public Size sizeFieldsFree SimpleMetadataBuilder.sizeFieldsFree508,17549
+    public SimpleMetadataBuilder sizeFieldsFree SimpleMetadataBuilder.sizeFieldsFree523,17935
+    public Size sizeFieldsUsed SimpleMetadataBuilder.sizeFieldsUsed540,18473
+    public SimpleMetadataBuilder sizeFieldsUsed SimpleMetadataBuilder.sizeFieldsUsed555,18859
+    public Size sizeRecordsFree SimpleMetadataBuilder.sizeRecordsFree572,19398
+    public SimpleMetadataBuilder sizeRecordsFree SimpleMetadataBuilder.sizeRecordsFree587,19793
+    public Size sizeRecordsUsed SimpleMetadataBuilder.sizeRecordsUsed604,20337
+    public SimpleMetadataBuilder sizeRecordsUsed SimpleMetadataBuilder.sizeRecordsUsed619,20732
+    public Space space SimpleMetadataBuilder.space636,21266
+    public SimpleMetadataBuilder space SimpleMetadataBuilder.space651,21624
+    public Time timeAccessed SimpleMetadataBuilder.timeAccessed667,22064
+    public SimpleMetadataBuilder timeAccessed SimpleMetadataBuilder.timeAccessed682,22430
+    public Time timeCreated SimpleMetadataBuilder.timeCreated699,22950
+    public SimpleMetadataBuilder timeCreated SimpleMetadataBuilder.timeCreated714,23313
+    public Time timeDeleted SimpleMetadataBuilder.timeDeleted731,23827
+    public SimpleMetadataBuilder timeDeleted SimpleMetadataBuilder.timeDeleted746,24190
+    public Time timeDirtied SimpleMetadataBuilder.timeDirtied763,24704
+    public SimpleMetadataBuilder timeDirtied SimpleMetadataBuilder.timeDirtied778,25067
+    public Time timeModified SimpleMetadataBuilder.timeModified795,25582
+    public SimpleMetadataBuilder timeModified SimpleMetadataBuilder.timeModified810,25948

@@ -1,0 +1,107 @@
+
+MODULE.java,1065
+public final class MODULE38,558
+    private static final String ADDRESS MODULE.ADDRESS46,869
+    private static final String CONTACT MODULE.CONTACT57,1493
+    private static final String COPYRIGHT MODULE.COPYRIGHT61,1652
+    private static final String DESCRIPTION MODULE.DESCRIPTION65,1841
+    private static final String HASH MODULE.HASH69,2035
+    private static final License LICENSE MODULE.LICENSE75,2271
+    static final long VERSION MODULE.VERSION82,2636
+    private static final long serialVersionUID MODULE.serialVersionUID85,2681
+    public static final MODULE MODULE MODULE.MODULE95,2955
+    private MODULE MODULE.MODULE103,3088
+    public final String address MODULE.address112,3204
+    public final String contact MODULE.contact122,3357
+    public final String copyright MODULE.copyright132,3512
+    public final String description MODULE.description142,3673
+    public final String hash MODULE.hash152,3831
+    public final License license MODULE.license162,3978
+    public final long version MODULE.version172,4132
+
+Serializer.java,165
+public class Serializer32,568
+    public static final MODULE PARENT_MODULE Serializer.PARENT_MODULE35,655
+    public void serialize Serializer.serialize48,1048
+
+SerialHasher.java,164
+public class SerialHasher33,543
+    public static final MODULE PARENT_MODULE SerialHasher.PARENT_MODULE36,632
+    public byte [] hash SerialHasher.hash53,1132
+
+SourceHasher.java,164
+public class SourceHasher33,542
+    public static final MODULE PARENT_MODULE SourceHasher.PARENT_MODULE36,631
+    public byte [] hash SourceHasher.hash53,1156
+
+NotSerializableException.java,422
+public class NotSerializableException27,413
+    public static final MODULE PARENT_MODULE NotSerializableException.PARENT_MODULE31,533
+    private static final long serialVersionUID NotSerializableException.serialVersionUID34,663
+    public NotSerializableException NotSerializableException.NotSerializableException37,730
+    public NotSerializableException NotSerializableException.NotSerializableException44,899
+
+NotConcreteClassException.java,431
+public class NotConcreteClassException27,413
+    public static final MODULE PARENT_MODULE NotConcreteClassException.PARENT_MODULE31,534
+    private static final long serialVersionUID NotConcreteClassException.serialVersionUID34,664
+    public NotConcreteClassException NotConcreteClassException.NotConcreteClassException37,731
+    public NotConcreteClassException NotConcreteClassException.NotConcreteClassException44,903
+
+NoSerialVersionHashException.java,459
+public class NoSerialVersionHashException30,574
+    public static final MODULE PARENT_MODULE NoSerialVersionHashException.PARENT_MODULE34,698
+    private static final long serialVersionUID NoSerialVersionHashException.serialVersionUID37,828
+    public NoSerialVersionHashException NoSerialVersionHashException.NoSerialVersionHashException40,895
+    public NoSerialVersionHashException NoSerialVersionHashException.NoSerialVersionHashException47,1076
+
+SerializingException.java,386
+public class SerializingException27,368
+    public static final MODULE PARENT_MODULE SerializingException.PARENT_MODULE31,484
+    private static final long serialVersionUID SerializingException.serialVersionUID34,614
+    public SerializingException SerializingException.SerializingException37,681
+    public SerializingException SerializingException.SerializingException44,838
+
+SerialVersionHashGenerator.java,1328
+public class SerialVersionHashGenerator43,738
+    public static final MODULE PARENT_MODULE SerialVersionHashGenerator.PARENT_MODULE46,838
+    public byte [] hashObjectBytes SerialVersionHashGenerator.hashObjectBytes49,902
+    public byte [] hashSourceBytes SerialVersionHashGenerator.hashSourceBytes72,1624
+    public String bytesToHexString SerialVersionHashGenerator.bytesToHexString84,1920
+    public String hashObjectHexString SerialVersionHashGenerator.hashObjectHexString114,2724
+    public long hashObject63Bit SerialVersionHashGenerator.hashObject63Bit127,3074
+    public byte [] hash SerialVersionHashGenerator.hash152,3887
+               NotConcreteClassException,SerialVersionHashGenerator.NotConcreteClassException156,4029
+               NoSerialVersionHashException,SerialVersionHashGenerator.NoSerialVersionHashException157,4071
+    protected void checkSerialVersionHashField SerialVersionHashGenerator.checkSerialVersionHashField196,5422
+    private final Map<Class<?>, String> sourceFilenames SerialVersionHashGenerator.sourceFilenames264,8369
+    public Class<?> [] filterClasses SerialVersionHashGenerator.filterClasses267,8470
+    public String sourceFilename SerialVersionHashGenerator.sourceFilename323,10436
+    public static void main SerialVersionHashGenerator.main331,10639
+
+ModuleSerialVersionHashGenerator.java,344
+public class ModuleSerialVersionHashGenerator39,639
+    public static final MODULE PARENT_MODULE ModuleSerialVersionHashGenerator.PARENT_MODULE43,784
+    protected void checkSerialVersionHashField ModuleSerialVersionHashGenerator.checkSerialVersionHashField47,862
+    public static void main ModuleSerialVersionHashGenerator.main58,1235
+
+TestSerializableClass.java,194
+public class TestSerializableClass34,740
+    public static final MODULE PARENT_MODULE TestSerializableClass.PARENT_MODULE37,835
+    public static void main TestSerializableClass.main40,899
+
+TestSerializableModule.java,499
+public class TestSerializableModule41,874
+    public static final MODULE PARENT_MODULE TestSerializableModule.PARENT_MODULE44,970
+    public static void main TestSerializableModule.main47,1034
+               NoSerialVersionHashException,TestSerializableModule.NoSerialVersionHashException51,1185
+               NotConcreteClassException,TestSerializableModule.NotConcreteClassException52,1230
+               NotSerializableException,TestSerializableModule.NotSerializableException53,1272
+
+TestSerializable.java,464
+public class TestSerializable37,925
+    public static final MODULE PARENT_MODULE TestSerializable.PARENT_MODULE40,1015
+    public static void main TestSerializable.main43,1079
+               NoSerialVersionHashException,TestSerializable.NoSerialVersionHashException47,1230
+               NotConcreteClassException,TestSerializable.NotConcreteClassException48,1275
+               NotSerializableException,TestSerializable.NotSerializableException49,1317

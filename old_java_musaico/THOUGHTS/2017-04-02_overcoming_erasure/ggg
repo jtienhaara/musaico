@@ -1,0 +1,51 @@
+Type<String> string_type
+  elementClass = String.class
+  parameters = {}
+
+ElementType<ELEMENT>
+  containerClass = (parameter class)
+  elementClass = (parameter class)
+  parameters = {}
+  expose ( Type<CONTAINER> ) : Type<ELEMENT>
+  expose ( Term<CONTAINER> ) : Term<ELEMENT>
+
+ContainerType<CONTAINER>
+  containerClass = (parameter class)
+  elementClass = (parameter class)
+  parameters = { element_type }
+  enclose ( Type<ELEMENT> ) : Type<CONTAINER>
+  enclose ( Term<ELEMENT> ) : Term<CONTAINER>
+
+Type<Term<?>> term_type
+    extends ContainerType<Term<?>>
+  containerClass = Term.class
+  elementClass = Term.class
+  parameters = { ElementType<Object> ( Object.class ) }
+
+Type<Term<String>> term_of_strings_type
+    extends ContainerType<Term<?>>
+  containerClass = Term.class
+  elementClass = Term.class
+  parameters = { string_type }
+
+
+
+Type<String> string_type
+  elementClass = String.class
+  parameters = {}
+
+Type<Integer> int_type
+  elementClass = Integer.class
+  parameters = {}
+
+Type<Map<String, Integer>> map_string_to_int_type
+  elementClass = Map.class
+  parameters = { string_type, int_type }
+  check_elements operation: apply ( Term<Object> ) : Term<Map<String, Integer>>
+      If the elements of the Map all match their type parameters, pass
+      through as-is.  If anything is wrong - e.g. Integer pointing to String -
+      then return an Error.
+      The problem then becomes creating the check_elements Operation.
+      Perhaps any time we try to construct a Type with parameterized
+      element class, we insist on such an Operation being passed to
+      the Type constructor.

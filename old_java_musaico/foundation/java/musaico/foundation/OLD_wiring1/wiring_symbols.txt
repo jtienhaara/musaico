@@ -1,0 +1,88 @@
+Structure:
+=================
+ClassSquiggle
+MultiplicitySquiggle
+ContractSquiggle
+ElementSquiggle
+ContainerSquiggle
+IndicesSquiggle
+ConstructorSquiggle
+OrderSquiggle
+
+SymbolsSquiggle
+CapabilitiesSquiggle
+
+TypeSquiggle
+KindSquiggle
+InstanceSquiggle
+
+SuperTypeSquiggle
+SubTypeSquiggle
+
+Pipeline:
+=================
+CheckSquiggle
+EditSquiggle
+  append ~ sequence
+  except ~ set
+  insert ~ insert
+  intersection ~ set
+  move ~ various
+  pad ~ insert
+  prepend ~ sequence
+  remove ~ various
+  removeAll ~ pop ()
+  repeat ~ pop ()
+  replace ~ various
+  swap ~ various
+  union ~ set
+  xor ~ set
+OrderBySquiggle
+  reverse
+  shuffle
+SelectSquiggle
+  all ~ pop ()
+  at ~ pop ()
+  duplicate ~ @select
+  first ~ pop ()
+WhenSquiggle
+WhereSquiggle
+
+Nodes:
+=================
+RandomAt
+NoneAt
+ConstantAt
+
+
+@node1 ~ doSomething ( "foo", @anotherNode, 3 )
+is the same as either this:
+    { @"foo"
+      @anotherNode
+      @3 } ~ @node1 ~ doSomething ()
+Or this:
+    @node1 ~ { @"foo"
+               @anotherNode
+               @3 } ~ doSomething ()
+The latter feels a bit more natural, but they both have problems.
+Maybe just sticking with the most natural format would be best, either:
+    @node1 ~ doSomething { @"foo"
+                           @anotherNode
+                           @3 }
+Or, because it's more common to use parentheses, and maybe it somehow
+distinguishes the meaning:
+    @node1 ~ doSomething ( @"foo"
+                           @anotherNode
+                           @3 )
+
+doSomething is a Board with entry At, three Squiggles for its
+parameters, with an At node either before or after each parameter
+to indicate the name of the parameter and Contract defining what
+the parameter has to match, followed by the operational graph.
+
+A graph that is passed in to doSomething has its At nodes () picked
+off one at a time to fulfill the parameters.  anything that's left over
+in the input graph is sent to the inputErrors sink At node.
+
+Also have output At node(s) and error message At node(s) and
+various logging At node(s) (debug, info, warning, error, etc).

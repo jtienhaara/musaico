@@ -1,0 +1,373 @@
+
+Tag.java,29
+public interface Tag59,1393
+
+TypeException.java,225
+public class TypeException104,2928
+    public TypeException TypeException.TypeException119,3392
+    public TypeException TypeException.TypeException136,3862
+    public TypeException TypeException.TypeException162,4817
+
+TypeCastException.java,265
+public class TypeCastException110,3158
+    public TypeCastException TypeCastException.TypeCastException125,3634
+    public TypeCastException TypeCastException.TypeCastException142,4124
+    public TypeCastException TypeCastException.TypeCastException168,5099
+
+AbstractTypeCaster.java,46
+    implements TypeCaster<TypeCaster46,1156
+
+NoTypeCaster.java,36
+    implements Serializable51,1324
+
+PassThroughTypeCaster.java,46
+    implements TypeCaster<TypeCaster48,1212
+
+Type.java,271
+public interface Type<Type51,1183
+    public static final Type NONE Type.NONE56,1404
+    public abstract Type.abstract211,6598
+        Conditional<Type.Conditional212,6666
+    public abstract Type.abstract264,8652
+        Conditional<Type.Conditional265,8720
+
+TypeBuilder.java,2443
+public interface TypeBuilder<TypeBuilder51,1221
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation69,1805
+               TypeBuilderMustNotIncludeRawClass.Violation;TypeBuilder.Violation70,1855
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation84,2287
+               TypeBuilderMustNotIncludeTag.Violation;TypeBuilder.Violation85,2337
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation103,3029
+               TypeBuilderMustIncludeRawClass.Violation,TypeBuilder.Violation104,3079
+               TypeBuilderMustNotHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation105,3136
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation123,3839
+               TypeBuilderMustNotIncludeRawClass.Violation,TypeBuilder.Violation124,3889
+               TypeBuilderMustNotHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation125,3949
+    public abstractTypeBuilder.abstract190,6730
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation198,7138
+               TypeBuilderMustIncludeRawClass.Violation,TypeBuilder.Violation199,7188
+               TypeBuilderMustHaveTypeCasterToIntermediaryClass.Violation,TypeBuilder.Violation200,7245
+               TypeBuilderMustNotHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation201,7320
+    public abstractTypeBuilder.abstract253,9686
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation261,10086
+               TypeBuilderMustIncludeRawClass.Violation,TypeBuilder.Violation262,10136
+               TypeBuilderMustHaveTypeCasterFromIntermediaryClass.Violation,TypeBuilder.Violation263,10193
+               TypeBuilderMustHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation264,10270
+    public abstractTypeBuilder.abstract320,12115
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation327,12423
+               TypeBuilderMustIncludeRawClass.Violation,TypeBuilder.Violation328,12473
+               TypeBuilderMustNotHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation329,12530
+    public abstractTypeBuilder.abstract363,13871
+        throws ParametersMustNotBeNull.Violation,TypeBuilder.Violation370,14169
+               TypeBuilderMustIncludeRawClass.Violation,TypeBuilder.Violation371,14219
+               TypeBuilderMustNotHaveTypeCasterToTargetClass.Violation;TypeBuilder.Violation372,14276
+
+Instance.java,246
+public interface Instance48,1146
+            Conditional<Instance.Conditional156,4501
+            Conditional<Instance.Conditional194,5930
+    public abstractInstance.abstract234,7516
+            Conditional<Instance.Conditional236,7608
+
+InstanceBuilder.java,116
+public interface InstanceBuilder46,1104
+    public static final InstanceBuilder NONE InstanceBuilder.NONE50,1211
+
+NoInstanceBuilder.java,827
+public class NoInstanceBuilder49,1163
+    NoInstanceBuilder NoInstanceBuilder.NoInstanceBuilder62,1430
+    public InstanceBuilder add NoInstanceBuilder.add70,1550
+    public InstanceBuilder addTags NoInstanceBuilder.addTags82,1823
+    public Instance build NoInstanceBuilder.build94,2089
+    public InstanceBuilder copy NoInstanceBuilder.copy104,2328
+    public TypingEnvironment environment NoInstanceBuilder.environment116,2595
+    public InstanceBuilder remove NoInstanceBuilder.remove125,2777
+    public InstanceBuilder removeTags NoInstanceBuilder.removeTags137,3063
+    public Tag [] tags NoInstanceBuilder.tags149,3338
+    public Type<Object> type NoInstanceBuilder.type158,3473
+    public void validate NoInstanceBuilder.validate167,3614
+    public Object value NoInstanceBuilder.value177,3831
+
+TypeSystem.java,101
+public interface TypeSystem56,1372
+    public static final TypeSystem NONE TypeSystem.NONE60,1454
+
+TypeSystemBuilder.java,43
+public interface TypeSystemBuilder46,1117
+
+TypingEnvironment.java,785
+public interface TypingEnvironment55,1283
+    public static final TypingEnvironment NONE TypingEnvironment.NONE59,1386
+    public abstract TypingEnvironment.abstract124,4215
+            Conditional<TypingEnvironment.Conditional126,4308
+    public abstract TypingEnvironment.abstract150,5189
+            Conditional<TypingEnvironment.Conditional152,5282
+    public abstract TypingEnvironment.abstract191,6794
+            Conditional<TypingEnvironment.Conditional193,6887
+    public abstract TypingEnvironment.abstract241,8886
+            Conditional<TypingEnvironment.Conditional243,8979
+            Conditional<TypingEnvironment.Conditional278,10193
+    public abstractTypingEnvironment.abstract386,13526
+    public abstractTypingEnvironment.abstract415,14469
+
+NoTypeSystem.java,750
+public class NoTypeSystem46,1097
+    protected NoTypeSystem NoTypeSystem.NoTypeSystem54,1235
+    public boolean contains NoTypeSystem.contains63,1375
+    public final TypingEnvironment environment NoTypeSystem.environment74,1581
+    public final Tag [] tags NoTypeSystem.tags83,1744
+    publicNoTypeSystem.public92,1895
+            Type<STORAGE_VALUE> type NoTypeSystem.type94,1978
+    public final Type<Object> [] types NoTypeSystem.types105,2218
+    public final TypesRegistry typesRegistry NoTypeSystem.typesRegistry114,2392
+    public final TypeSystem typeSystemParent NoTypeSystem.typeSystemParent123,2561
+    public NoTypeSystem.public132,2744
+                           TypeSystem validate NoTypeSystem.validate134,2828
+
+NoTypesRegistry.java,563
+public class NoTypesRegistry57,1326
+    NoTypesRegistry NoTypesRegistry.NoTypesRegistry70,1586
+    public TypesRegistry put NoTypesRegistry.put79,1723
+    public Class<?> [] rawClasses NoTypesRegistry.rawClasses94,2269
+    public NoTypesRegistry.public104,2445
+                           Type<STORAGE_VALUE> type NoTypesRegistry.type106,2529
+    public Type<Object> [] types NoTypesRegistry.types118,2831
+    public TypeSystem typeSystem NoTypesRegistry.typeSystem127,2996
+    public TypeSystem [] typeSystems NoTypesRegistry.typeSystems138,3225
+
+NoTypeCastersRegistry.java,753
+public class NoTypeCastersRegistry54,1278
+    NoTypeCastersRegistry NoTypeCastersRegistry.NoTypeCastersRegistry67,1562
+                      TypeCastersFrom<FROM> from NoTypeCastersRegistry.from77,1726
+    public NoTypeCastersRegistry.public88,2063
+            TypeCaster<NoTypeCastersRegistry.TypeCaster90,2123
+            TypeCaster<FROM,TO> get NoTypeCastersRegistry.get90,2123
+    public NoTypeCastersRegistry.public102,2455
+            TypeCastersRegistry put NoTypeCastersRegistry.put104,2515
+                      TypeCastersTo<TO> to NoTypeCastersRegistry.to124,3318
+    public TypeCaster<NoTypeCastersRegistry.TypeCaster135,3616
+    public TypeCaster<Object,Object> [] typeCasters NoTypeCastersRegistry.typeCasters135,3616
+
+NoTypingEnvironment.java,1547
+public class NoTypingEnvironment57,1427
+    protected NoTypingEnvironment NoTypingEnvironment.NoTypingEnvironment65,1590
+    public NoTypingEnvironment.public74,1756
+            Conditional<NoTypingEnvironment.Conditional76,1840
+                cast NoTypingEnvironment.cast77,1892
+        Conditional<NoTypingEnvironment.Conditional102,2772
+            duplicate NoTypingEnvironment.duplicate103,2826
+    public final NoTypingEnvironment.final123,3572
+            Conditional<NoTypingEnvironment.Conditional125,3662
+                prepare NoTypingEnvironment.prepare126,3720
+    public final NoTypingEnvironment.final147,4480
+            Conditional<NoTypingEnvironment.Conditional149,4570
+                prepare NoTypingEnvironment.prepare150,4628
+    public final NoTypingEnvironment.final171,5443
+            Conditional<NoTypingEnvironment.Conditional173,5533
+                prepare NoTypingEnvironment.prepare174,5591
+    public final TypingEnvironment register NoTypingEnvironment.register195,6400
+    public final TypeSystem root NoTypingEnvironment.root209,6895
+    public Tag [] tags NoTypingEnvironment.tags219,7058
+    public Tag [] tags NoTypingEnvironment.tags229,7217
+    public final NoTypingEnvironment.final241,7450
+            Type<STORAGE_VALUE> type NoTypingEnvironment.type243,7540
+    publicNoTypingEnvironment.public255,7811
+            TypeSystem typeSystem NoTypingEnvironment.typeSystem257,7894
+    public final Type<Object> [] types NoTypingEnvironment.types269,8160
+
+ConstraintException.java,431
+public class ConstraintException103,2950
+    public ConstraintException ConstraintException.ConstraintException118,3432
+    public ConstraintException ConstraintException.ConstraintException135,3932
+    public ConstraintException ConstraintException.ConstraintException161,4917
+    public Constraint constraint ConstraintException.constraint177,5280
+    public Serializable instance ConstraintException.instance216,6471
+
+Constraint.java,36
+public interface Constraint56,1332
+
+TypesRegistry.java,162
+public interface TypesRegistry57,1359
+    public static final TypesRegistry NONE=TypesRegistry.NONE61,1445
+    public abstractTypesRegistry.abstract130,3818
+
+TypeCastersFrom.java,181
+public interface TypeCastersFrom<TypeCastersFrom56,1451
+        TypeCaster<TypeCastersFrom.TypeCaster90,2651
+    public abstract TypeCaster<TypeCastersFrom.TypeCaster115,3265
+
+TypeCastersTo.java,173
+public interface TypeCastersTo<TypeCastersTo56,1451
+        TypeCaster<TypeCastersTo.TypeCaster90,2669
+    public abstract TypeCaster<TypeCastersTo.TypeCaster115,3291
+
+TypeCastersRegistry.java,380
+public interface TypeCastersRegistry56,1458
+    public static final TypeCastersRegistry NONE TypeCastersRegistry.NONE60,1557
+    public abstractTypeCastersRegistry.abstract112,3302
+            TypeCaster<TypeCastersRegistry.TypeCaster114,3370
+    public abstractTypeCastersRegistry.abstract157,4783
+    public abstract TypeCaster<TypeCastersRegistry.TypeCaster191,5844
+
+SimpleType.java,1783
+public class SimpleType<SimpleType54,1268
+    private final String name;SimpleType.name58,1417
+    private final Class<STORAGE_VALUE> storageClass;SimpleType.storageClass62,1534
+    private final STORAGE_VALUE none;SimpleType.none67,1763
+    private final Class<? extends STORAGE_VALUE> [] rawClasses;SimpleType.rawClasses74,2084
+    private final Tag [] tags;SimpleType.tags78,2269
+        typeCastersFromThisType;SimpleType.typeCastersFromThisType84,2540
+        typeCastersToThisType;SimpleType.typeCastersToThisType90,2815
+    protected SimpleType SimpleType.SimpleType139,4951
+    public void check(SimpleType.check242,9146
+    public boolean equals SimpleType.equals260,9633
+    public int hashCode SimpleType.hashCode283,10099
+    public boolean isa SimpleType.isa292,10252
+    public String name SimpleType.name309,10563
+    public STORAGE_VALUE none SimpleType.none319,10697
+    public Class<? extends STORAGE_VALUE> [] rawClasses SimpleType.rawClasses329,10844
+    public Class<STORAGE_VALUE> storageClass SimpleType.storageClass365,12013
+    public final Tag [] tags SimpleType.tags374,12163
+    public String toString SimpleType.toString386,12430
+    public SimpleType.public403,12877
+        Conditional<SimpleType.Conditional404,12936
+            typeCasterFromThisType SimpleType.typeCasterFromThisType405,12995
+    public TypeCaster<? extends STORAGE_VALUE, ?> [] typeCastersFromThisType(SimpleType.typeCastersFromThisType473,16168
+    public SimpleType.public493,16831
+        Conditional<SimpleType.Conditional494,16890
+            typeCasterToThisType SimpleType.typeCasterToThisType495,16949
+    public TypeCaster<?, ? extends STORAGE_VALUE> [] typeCastersToThisType(SimpleType.typeCastersToThisType564,20256
+
+SimpleTypeBuilder.java,2423
+public class SimpleTypeBuilder<SimpleTypeBuilder59,1395
+    private final Serializable lock SimpleTypeBuilder.lock63,1583
+    private final String name;SimpleTypeBuilder.name67,1725
+    private final Class<STORAGE_VALUE> storageClass;SimpleTypeBuilder.storageClass70,1815
+    private final List<Class<? extends STORAGE_VALUE>> rawClasses SimpleTypeBuilder.rawClasses76,2112
+    private final STORAGE_VALUE none;SimpleTypeBuilder.none80,2286
+    private final List<Tag> tags SimpleTypeBuilder.tags85,2505
+    private final List<TypeCaster<? extends STORAGE_VALUE, ?>> typeCastersFrom SimpleTypeBuilder.typeCastersFrom89,2661
+    private final List<TypeCaster<?, ? extends STORAGE_VALUE>> typeCastersTo SimpleTypeBuilder.typeCastersTo94,2906
+    public SimpleTypeBuilder SimpleTypeBuilder.SimpleTypeBuilder142,4718
+    public SimpleTypeBuilder addRawClass SimpleTypeBuilder.addRawClass170,5694
+    public TypeBuilder<STORAGE_VALUE> addTag SimpleTypeBuilder.addTag187,6096
+    public TypeBuilder<STORAGE_VALUE> addTypeCasterFrom SimpleTypeBuilder.addTypeCasterFrom212,6819
+    public TypeBuilder<STORAGE_VALUE> addTypeCasterTo SimpleTypeBuilder.addTypeCasterTo230,7334
+    public Type<STORAGE_VALUE> build SimpleTypeBuilder.build248,7816
+    publicSimpleTypeBuilder.public264,8445
+        TypeBuilder<STORAGE_VALUE> chainFrom SimpleTypeBuilder.chainFrom268,8566
+    publicSimpleTypeBuilder.public313,10984
+        TypeBuilder<STORAGE_VALUE> chainTo SimpleTypeBuilder.chainTo317,11105
+    public String name SimpleTypeBuilder.name362,13467
+    public STORAGE_VALUE none SimpleTypeBuilder.none372,13608
+    publicSimpleTypeBuilder.public382,13799
+        TypeBuilder noTypeCasterFrom SimpleTypeBuilder.noTypeCasterFrom385,13883
+    publicSimpleTypeBuilder.public404,14532
+        TypeBuilder noTypeCasterTo SimpleTypeBuilder.noTypeCasterTo407,14616
+    public Class<? extends STORAGE_VALUE> [] rawClasses SimpleTypeBuilder.rawClasses426,15216
+    public Class<STORAGE_VALUE> storageClass SimpleTypeBuilder.storageClass444,15693
+    public Tag [] tags SimpleTypeBuilder.tags454,15864
+    public String toString SimpleTypeBuilder.toString471,16190
+    public TypeCaster<? extends STORAGE_VALUE, ?> [] typeCastersFrom SimpleTypeBuilder.typeCastersFrom481,16369
+    public TypeCaster<?, ? extends STORAGE_VALUE> [] typeCastersTo SimpleTypeBuilder.typeCastersTo500,16921
+
+SimpleTypeSystem.java,831
+public class SimpleTypeSystem49,1176
+    private TypingEnvironment environment;SimpleTypeSystem.environment54,1350
+    private final TypeSystem typeSystemParent;SimpleTypeSystem.typeSystemParent57,1447
+    private final Tag [] tags;SimpleTypeSystem.tags62,1662
+    private final Type<Object> [] types;SimpleTypeSystem.types65,1736
+    public SimpleTypeSystem SimpleTypeSystem.SimpleTypeSystem94,2799
+    public SimpleTypeSystem SimpleTypeSystem.SimpleTypeSystem178,6071
+    public boolean contains SimpleTypeSystem.contains249,8645
+    public TypingEnvironment environment SimpleTypeSystem.environment269,9044
+    public Tag [] tags SimpleTypeSystem.tags279,9209
+    public Type<Object> [] types SimpleTypeSystem.types292,9474
+    public TypeSystem typeSystemParent SimpleTypeSystem.typeSystemParent306,9798
+
+SimpleTypeSystemBuilder.java,1406
+public class SimpleTypeSystemBuilder48,1073
+    private final Serializable lock SimpleTypeSystemBuilder.lock52,1219
+    private final TypingEnvironment environment;SimpleTypeSystemBuilder.environment56,1375
+    private final TypeSystem typeSystemParent;SimpleTypeSystemBuilder.typeSystemParent59,1478
+    private final List<Tag> tags SimpleTypeSystemBuilder.tags64,1693
+    private final List<Type<Object>> types SimpleTypeSystemBuilder.types67,1814
+    public SimpleTypeSystemBuilder SimpleTypeSystemBuilder.SimpleTypeSystemBuilder89,2720
+    public TypeSystemBuilder add SimpleTypeSystemBuilder.add113,3662
+    public TypeSystemBuilder add SimpleTypeSystemBuilder.add138,4336
+    public SimpleTypeSystem build SimpleTypeSystemBuilder.build173,5228
+    public TypingEnvironment environment SimpleTypeSystemBuilder.environment192,5687
+            TypeBuilder<STORAGE_VALUE> prepare SimpleTypeSystemBuilder.prepare203,5953
+    public TypeSystemBuilder remove SimpleTypeSystemBuilder.remove219,6569
+    public TypeSystemBuilder remove SimpleTypeSystemBuilder.remove244,7263
+    public Tag [] tags SimpleTypeSystemBuilder.tags269,7954
+    public TypeSystem typeSystemParent SimpleTypeSystemBuilder.typeSystemParent286,8303
+    public Type<Object> [] types SimpleTypeSystemBuilder.types296,8479
+            TypeSystemBuilder validate SimpleTypeSystemBuilder.validate315,8922
+
+SimpleTypesRegistry.java,859
+public class SimpleTypesRegistry65,1546
+    private final Serializable lock SimpleTypesRegistry.lock69,1679
+    private final Map<Class<?>,Type<?>> registry SimpleTypesRegistry.registry76,1912
+    private final Set<TypeSystem> typeSystems SimpleTypesRegistry.typeSystems80,2062
+    public SimpleTypesRegistry SimpleTypesRegistry.SimpleTypesRegistry89,2235
+    public TypesRegistry put SimpleTypesRegistry.put98,2383
+    public Class<?> [] rawClasses SimpleTypesRegistry.rawClasses158,4928
+    public SimpleTypesRegistry.public175,5342
+                           Type<STORAGE_VALUE> type SimpleTypesRegistry.type177,5426
+    public Type<Object> [] types SimpleTypesRegistry.types192,5836
+    public TypeSystem typeSystem SimpleTypesRegistry.typeSystem216,6473
+    public TypeSystem [] typeSystems SimpleTypesRegistry.typeSystems246,7231
+
+SimpleTypeCastersFrom.java,881
+public class SimpleTypeCastersFrom<SimpleTypeCastersFrom56,1322
+    private final Serializable lock SimpleTypeCastersFrom.lock60,1508
+    private final Type<STORAGE_VALUE> fromType;SimpleTypeCastersFrom.fromType63,1619
+    private final Map<SimpleTypeCastersFrom.Map67,1794
+        typeCasters SimpleTypeCastersFrom.typeCasters68,1863
+    public SimpleTypeCastersFrom SimpleTypeCastersFrom.SimpleTypeCastersFrom79,2135
+        TypeCaster<SimpleTypeCastersFrom.TypeCaster98,2668
+        TypeCaster<STORAGE_VALUE,TO> to SimpleTypeCastersFrom.to98,2668
+        TypeCastersFrom register SimpleTypeCastersFrom.register150,4337
+    public Type<STORAGE_VALUE> type SimpleTypeCastersFrom.type199,6438
+    public TypeCaster<SimpleTypeCastersFrom.TypeCaster208,6593
+    public TypeCaster<STORAGE_VALUE,Object> [] typeCasters SimpleTypeCastersFrom.typeCasters208,6593
+
+SimpleTypeCastersTo.java,851
+public class SimpleTypeCastersTo<SimpleTypeCastersTo56,1320
+    private final Serializable lock SimpleTypeCastersTo.lock60,1502
+    private final Type<STORAGE_VALUE> toType;SimpleTypeCastersTo.toType63,1613
+    private final Map<SimpleTypeCastersTo.Map67,1786
+        typeCasters SimpleTypeCastersTo.typeCasters68,1855
+    public SimpleTypeCastersTo SimpleTypeCastersTo.SimpleTypeCastersTo79,2121
+        TypeCaster<SimpleTypeCastersTo.TypeCaster98,2642
+        TypeCaster<FROM,STORAGE_VALUE> from SimpleTypeCastersTo.from98,2642
+        TypeCastersTo register SimpleTypeCastersTo.register150,4346
+    public Type<STORAGE_VALUE> type SimpleTypeCastersTo.type199,6417
+    public TypeCaster<SimpleTypeCastersTo.TypeCaster208,6568
+    public TypeCaster<Object,STORAGE_VALUE> [] typeCasters SimpleTypeCastersTo.typeCasters208,6568
+
+SimpleTypeCastersRegistry.java,1401
+public class SimpleTypeCastersRegistry63,1588
+    private final Serializable lock SimpleTypeCastersRegistry.lock67,1733
+    private final Map<SimpleTypeCastersRegistry.Map70,1849
+    private final Map<Type<Object>,SimpleTypeCastersFrom<Object>> from SimpleTypeCastersRegistry.from70,1849
+    private final Map<SimpleTypeCastersRegistry.Map74,2051
+    private final Map<Type<Object>,SimpleTypeCastersTo<Object>> to SimpleTypeCastersRegistry.to74,2051
+    private final List<SimpleTypeCastersRegistry.List78,2243
+    private final List<TypeCaster<Object,Object>> typeCasters SimpleTypeCastersRegistry.typeCasters78,2243
+    public SimpleTypeCastersRegistry SimpleTypeCastersRegistry.SimpleTypeCastersRegistry87,2449
+                      TypeCastersFrom<FROM> from SimpleTypeCastersRegistry.from97,2624
+    public SimpleTypeCastersRegistry.public125,3485
+            TypeCaster<SimpleTypeCastersRegistry.TypeCaster127,3545
+            TypeCaster<FROM,TO> get SimpleTypeCastersRegistry.get127,3545
+    public SimpleTypeCastersRegistry.public148,4147
+            TypeCastersRegistry put SimpleTypeCastersRegistry.put150,4207
+                      TypeCastersTo<TO> to SimpleTypeCastersRegistry.to204,6559
+    public TypeCaster<SimpleTypeCastersRegistry.TypeCaster232,7349
+    public TypeCaster<Object,Object> [] typeCasters SimpleTypeCastersRegistry.typeCasters232,7349
+
+ChainCaster.java,46
+    implements TypeCaster<TypeCaster58,1517
+
+TypeCaster.java,0

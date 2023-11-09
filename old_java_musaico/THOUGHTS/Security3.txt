@@ -1,0 +1,113 @@
+SecurityPolicy : SecurityRule
+
+SecurityRule
++ request ( Permissions ) : Permissions
+
+SecurityRuleMatcher
++ patterns () : SecurityContextPattern []
++ rule ( SecurityContextPattern ) : SecurityRule
+
+SecurityRuleBuilder
++ addRule ( SecurityRule ) : SecurityRuleBuilder
++ removeRule ( SecurityRule ) : SecurityRuleBuilder
++ grant ( Capability... ) : SecurityRuleBuilder
++ revoke ( Capability... ) : SecurityRuleBuilder
++ push ( SecurityContextPattern ) : SecurityRuleBuilder
++ pop () : SecurityRuleBuilder
++ build () : SecurityRule
+
+SecurityPolicyBuilder : SecurityRuleBuilder
+
+Permissions
++ context () : SecurityContext
++ capabilities () : Capability []
++ isAllowed ( Permissions ) : boolean
++ isAllowed ( SecurityContext ) : boolean
++ isAllowed ( Capability... ) : boolean
+
+SecurityContext
++ subject () : Credentials
++ object () : Identifier (?) Reference (?)
+
+SecurityContextPattern
++ matches ( SecurityContext ) : boolean
+
+Capability
++ id () : Identifier
+
+CapabilityWithParameters
++ parameters () : CapabilityParameter []
+
+CapabilityParameter
++ id () : Identifier
++ value () : Serializable
+
+Credentials
++ id () : Identifier
+
+CredentialsPattern : Credentials
++ ANY : CredentialsPattern
++ matches ( Credentials ) : boolean
+
+
+Grant : SecurityRule
++ permissions () : Permissions
+
+Revoke : SecurityRule
++ permissions () : Permissions
+
+SecurityIf : SecurityRule
+
+
+
+KernelSecurityContext : SecurityContext
++ process () : Process
++ user () : User
++ executableOEntry () : OEntry
++ moduleID () : ModuleID
+
+KernelSecurityContextPattern : abstract SecurityContextPattern
++ matchesProcess ( Process ) : boolean
++ matchesUser ( User ) : boolean
++ matchesExecutableOEntry ( OEntry ) : boolean
++ matchesModuleID ( ModuleID ) : boolean
+
+ProcessPattern : KernelSecurityContextPattern
+
+UserPattern : KernelSecurityContextPattern
+
+GroupPattern : KernelSecurityContextPattern
+
+OtherUserPattern : KernelSecurityContextPattern
+
+ExecutableOEntryPattern : KernelSecurityContextPattern
+
+ModuleIDPattern : KernelSecurityContextPattern
+
+
+UserCredentials : Credentials
++ id () : UserID
++ groupIDs () : GroupID []
+
+ModuleCredentials : Credentials
++ id () : ModuleID
+
+ONodeData
++ READ : Capability
++ WRITE : Capability
++ EXECUTE : Capability
+
+etc
+
+
+
+
+OEntry entry = ...;
+SecurityPolicy data_policy = SecurityPolicyBuilder
+    .push ( new UserPattern ( entry.owner () ) )
+        .grant ( ONodeData.READ, ONodeData.WRITE, ONodeData.EXECUTE )
+    .pop ()
+    .push ( new GroupPattern ( entry.group () ) )
+        .grant ( ONodeData.READ )
+    .pop ()
+    .build ();

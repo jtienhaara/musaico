@@ -1,0 +1,96 @@
+2017-04-20
+
+IIRC Y combinator a, b = Y ( a, a ( b ) )
+or something like that...
+
+Y.a = a.a
+(Y.a).b = (a.a).b
+
+Pipeline combinators...?
+
+Recursive pipeline:
+term.recurse ( term.type ().when ( TermMustBeEmpty.CONTRACT ).select ().none ().otherwise ().select ().head ().where ( under_10 ).end ().induction ().tail ().end ();
+recurse / induction - induction specifies a selection
+    to continue the recursion.
+
+=====================================================================
+
+2017-04-21
+
+One possibility:
+term.induction ().when ().blablabla.otherwise ().recurse ( ... ).end ().output ()
+The induction () ... end () wraps the "lambda" that is recursed.
+The recurse ( ... ) call would somehow have to specify what to pass to
+the next induction input.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Parameters, side-effects at the Pipeline level (?):
+
+One possibility:
+
+pipeline.input ( Pipeline source )
+pipeline.output ( Pipeline target )
+
+e.g.
+OperationPipeline OR TermPipeline.input ( TermPipeline.TermSink )
+OperationPipeline OR TermPipeline.input ( OperationPipeline.OperationSink )
+
+Or:
+
+pipeline.input ( Sink )
+pipeline.output ( Source )
+
+But we also need to somehow identify the parameter / side-effect.
+OR we could just treat the input as a Branch, and it would muck about
+with the input, then end () and we'd carry on our way.  Need some way
+of passing information up from that Branch, though.
+The output would also then be a Branch, and we'd receive information
+from the parent Pipeline, and muck about with that information then
+end () to send it to the specified output.
+
+Or
+
+The input and output could each take another parameter: some kind of
+identifier - and then the input and output would be part of how the
+information gets stored and passed up and down the pipeline tree.
+
+e.g. input ( Source, my_id )
+     output ( my_id, Sink )
+
+Maybe...
+
+Not very functional, though.
+
+-------------------------------------------------------------------
+
+Induction<INPUT extends Object, OUTPUT extends Induction<INPUT, OUTPUT>>
+    extends Operation<INPUT, OUTPUT>
+    + apply ( Term<INPUT> ) : Maybe<Induction<INPUT, Induction...>
+
+pipeline.induction ( operation )
+--> pass the input term to the Induction operation
+If the output is One Induction operation, then what?
+If the output is No Induction operation, pass the input on down the pipeline.
+
+-------------------------------------------------------------------
+
+That's completely silly.
+
+This is all we need:
+
+Operation<INPUT extends Object, OUTPUT extends Object>
+    + apply ( Term<INPUT>) : Term<OUTPUT>
+
+pipeline.induction ( operation )
+--> apply the operation to the input from upstream.
+If output is No value, then pass the input from upstream down the pipeline.
+Otherwise if the output has no elements (Error etc) then pass it down as-is.
+Otherwise call the operation again, this time with its own output.
+
+Of course this means we can never turn non-No input into No output.
+
+Hmmm but that's not quite induction.  Need to append the output to the
+existing outputs, and pass a new input back to the operation.
+
+Sigh.

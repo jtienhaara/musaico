@@ -1,0 +1,108 @@
+- Inputs accepted:
+  - any
+  - Countable
+  - Cyclical
+  - Continuous
+- If elemental then:
+  - Minimum # of input elements
+  - Size change minimum (e.g. 0 or -10 to shrink or +3 to always grow)
+  - Size change maximum
+
+
+if ( term_filter != null
+     && ! term_filter.filter ( input ).isKept () )
+{
+  error;
+}
+
+final Countable<VALUE> countable;
+final Cyclical<VALUE> cyclical;
+final Continuous<VALUE> continuous;
+if ( input instanceof Countable )
+{
+  countable = (Countable<VALUE>) input;
+  cyclical = null;
+  continuous = null;
+}
+else if ( input instanceof Cyclical )
+{
+  countable = null;
+  cyclical = (Cyclical<VALUE>) input;
+  continuous = null;
+}
+else if ( input instanceof Continuous )
+{
+  countable = null;
+  cyclical = null;
+  continuous = (Continuous<VALUE>) input;;
+}
+
+if ( is_elemental )
+{
+  if ( continuous != null )
+  {
+    // not an elemental term.
+    error;
+  }
+
+  final VALUE [] elements_fixed = ... (reusable array, use for entire pipeline
+                                       if possible);
+  final VALUE [] elements_cycle = ... (reusable array, use for entire pipeline
+                                       if possible);
+  final VALUE [] bounds = new VALUE [ 2 ];
+  if ( minimum_num_elements > 0L )
+  {
+    if ( countable != null )
+    {
+      if ( countable.length () < minimum_num_elements )
+      {
+        error;
+      }
+    }
+    // Cyclical has infinite elements, so always ok for minimum # elements.
+  }
+
+  if ( countable != null )
+  {
+    num_elements [ FIXED ] = countable.somehowFillArray ( elements_fixed );
+    num_elements [ CYCLE ] = 0;
+    num_elements [ BOUNDS ] = 0;
+  }
+  else if ( cyclical != null )
+  {
+    num_elements [ FIXED ] =
+      cycle.header ().somehowFillArray ( elements_fixed );
+    num_elements [ CYCLE ] =
+      cycle.cycle ().somehowFillArray ( elements_cycle );
+    num_elements [ BOUNDS ] = 0;
+  }
+  else if ( continuous != null )
+  {
+    num_elements [ FIXED ] = 0;
+    num_elements [ CYCLE ] = 0;
+    num_elements [ BOUNDS ] =
+      continuous.somehowFillArray ( bounds );
+    if ( 0 < minimum_num_elements )
+    {
+      error;
+    }
+  }
+  else
+  {
+    num_elements [ FIXED ] =
+      input.somehowFillArray ( elements_fixed );
+    num_elements [ CYCLE ] = 0;
+    num_elements [ BOUNDS ] = 0;
+    if ( num_elements [ FIXED ] < minimum_num_elements )
+    {
+      error;
+    }
+  }
+
+  elemental_operation.apply ( input, elements_fixed, elements_cycle,
+                              bounds, num_elements,
+                              next_minimum_num_elements );
+
+  // Create output, if we are done the pipeline...
+  return output;
+}

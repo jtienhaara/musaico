@@ -1,0 +1,70 @@
+
+HashAlgorithmMustBeBuiltIn.java,626
+public class HashAlgorithmMustBeBuiltIn64,1707
+    private static final long serialVersionUID HashAlgorithmMustBeBuiltIn.serialVersionUID69,1981
+    private static final String serialVersionHash HashAlgorithmMustBeBuiltIn.serialVersionHash70,2040
+    private static final ObjectContracts classContracts HashAlgorithmMustBeBuiltIn.classContracts75,2207
+    public static final HashAlgorithmMustBeBuiltIn CONTRACT HashAlgorithmMustBeBuiltIn.CONTRACT81,2438
+    public static class ViolationHashAlgorithmMustBeBuiltIn.Violation117,3567
+        public Violation HashAlgorithmMustBeBuiltIn.Violation.Violation134,4174
+
+Hash.java,83
+public interface Hash60,1421
+    public static final Hash NONE Hash.NONE64,1528
+
+NoHash.java,239
+public class NoHash42,1018
+    private static final long serialVersionUID NoHash.serialVersionUID46,1145
+    private static final String serialVersionHash NoHash.serialVersionHash47,1205
+    public byte [] bytes NoHash.bytes55,1392
+
+AbstractHash.java,914
+public class AbstractHash57,1404
+    private static final long serialVersionUID AbstractHash.serialVersionUID61,1537
+    private static final String serialVersionHash AbstractHash.serialVersionHash62,1597
+    private static final ObjectContracts classContracts AbstractHash.classContracts67,1776
+    private final byte [] hash;AbstractHash.hash72,1933
+    private final int hashCode;AbstractHash.hashCode75,2025
+        throws ParametersMustNotBeNull.Violation,AbstractHash.Violation91,2465
+        throws ParametersMustNotBeNull.Violation,AbstractHash.Violation137,4054
+               HashAlgorithmMustBeBuiltIn.Violation,AbstractHash.Violation138,4104
+    public final byte [] bytes AbstractHash.bytes190,5831
+    public final boolean equals AbstractHash.equals201,6107
+    public final int hashCode AbstractHash.hashCode244,7019
+    public String toString AbstractHash.toString253,7152
+
+MD5.java,402
+public class MD552,1203
+    private static final long serialVersionUID MD5.serialVersionUID57,1346
+    private static final String serialVersionHash MD5.serialVersionHash58,1406
+        throws ParametersMustNotBeNull.Violation,MD5.Violation72,1736
+        throws ParametersMustNotBeNull.Violation,MD5.Violation91,2210
+               HashAlgorithmMustBeBuiltIn.Violation,MD5.Violation92,2260
+
+SHA1.java,408
+public class SHA152,1207
+    private static final long serialVersionUID SHA1.serialVersionUID57,1351
+    private static final String serialVersionHash SHA1.serialVersionHash58,1411
+        throws ParametersMustNotBeNull.Violation,SHA1.Violation74,1830
+        throws ParametersMustNotBeNull.Violation,SHA1.Violation93,2311
+               HashAlgorithmMustBeBuiltIn.Violation,SHA1.Violation94,2361
+
+SHA256.java,420
+public class SHA25652,1211
+    private static final long serialVersionUID SHA256.serialVersionUID57,1357
+    private static final String serialVersionHash SHA256.serialVersionHash58,1417
+        throws ParametersMustNotBeNull.Violation,SHA256.Violation74,1844
+        throws ParametersMustNotBeNull.Violation,SHA256.Violation93,2335
+               HashAlgorithmMustBeBuiltIn.Violation,SHA256.Violation94,2385
+
+SHA512.java,420
+public class SHA51252,1211
+    private static final long serialVersionUID SHA512.serialVersionUID57,1357
+    private static final String serialVersionHash SHA512.serialVersionHash58,1417
+        throws ParametersMustNotBeNull.Violation,SHA512.Violation74,1844
+        throws ParametersMustNotBeNull.Violation,SHA512.Violation93,2331
+               HashAlgorithmMustBeBuiltIn.Violation,SHA512.Violation94,2381
+
+TestHash.java,88
+public class TestHash49,1164
+    @SuppressWarnings(TestHash.@SuppressWarnings51,1188

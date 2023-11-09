@@ -1,0 +1,87 @@
+      // Throws exception if misconfigured:
+      try
+      {
+         if (cStoreConfiguration.getInstance() == null)
+         {
+            throw new eWrappedServiceException("ERROR could not find store configuration, EXITING");
+         }
+      }
+      catch (eWrappedServiceException e)
+      {
+         throw e;
+      }
+      catch (Exception e)
+      {
+         throw new eWrappedServiceException("ERROR could not find store configuration, EXITING", e);
+      }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /**
+   * <p>
+   * Throws an exception if the configuration is totally busted -- like
+   * no store configuration in the DB.
+   * </p>
+   */
+   public void checkConfiguration()
+      throws eWrappedServiceException
+   {
+      // If we can't load the store configuration then blow up and exit.
+      final String storeConfigurationQuery =
+            "select count(*) from tStoreConfiguration where mDeleted is null";
+      try
+      {
+         Statement masterStatement = null;
+         ResultSet masterResultSet = null;
+
+         try
+         {
+            masterStatement = mMasterDBConnection.getConnection().createStatement();
+
+            logger.fine("QUERY (MASTER): " + storeConfigurationQuery);
+            masterResultSet = masterStatement.executeQuery(storeConfigurationQuery);
+
+            while (masterResultSet.next())
+            {
+               final int numStoreConfigurations = masterResultSet.getInt(1);
+               if (numStoreConfigurations != 1)
+               {
+                  logger.severe("ERROR: Should be exactly ONE store configuration, but found "
+                        + numStoreConfigurations + " rows in tStoreConfiguration.  EXITING."
+                        + "  Query: " + storeConfigurationQuery);
+                  throw new eWrappedServiceException("ERROR: Should be exactly ONE store configuration, but found "
+                        + numStoreConfigurations + " rows in tStoreConfiguration.  Query: " + storeConfigurationQuery);
+               }
+            }
+         }
+         finally
+         {
+            cDBOperations.closeResultSet(masterResultSet);
+            cDBOperations.closeStatement(masterStatement);
+         }
+      }
+      catch (eWrappedServiceException e)
+      {
+         throw e;
+      }
+      catch (Exception e)
+      {
+         throw new eWrappedServiceException("ERROR could not find store configuration, EXITING", e);
+      }
+   }

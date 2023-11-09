@@ -1,0 +1,22 @@
+
+ReturnNeverNull.java,513
+public class ReturnNeverNull60,1603
+    private static final long serialVersionUID ReturnNeverNull.serialVersionUID65,1843
+    private static final String serialVersionHash ReturnNeverNull.serialVersionHash66,1903
+    public static final ReturnNeverNull CONTRACT ReturnNeverNull.CONTRACT71,2065
+    protected ReturnNeverNull ReturnNeverNull.ReturnNeverNull81,2317
+    public static class ViolationReturnNeverNull.Violation110,3023
+        public Violation ReturnNeverNull.Violation.Violation122,3342
+
+TimeoutGuarantee.java,867
+public class TimeoutGuarantee64,1775
+    private static final long serialVersionUID TimeoutGuarantee.serialVersionUID69,2018
+    private static final String serialVersionHash TimeoutGuarantee.serialVersionHash70,2078
+    private final long startTimeInNanoseconds;TimeoutGuarantee.startTimeInNanoseconds76,2310
+    private final long timeoutInNanoseconds;TimeoutGuarantee.timeoutInNanoseconds79,2409
+    private final ObjectContracts contracts TimeoutGuarantee.contracts82,2514
+    public long startTimeInNanoseconds TimeoutGuarantee.startTimeInNanoseconds231,8050
+    public long timeoutInNanoseconds TimeoutGuarantee.timeoutInNanoseconds245,8366
+    public String toString TimeoutGuarantee.toString254,8518
+    public static class ViolationTimeoutGuarantee.Violation267,8787
+        public Violation TimeoutGuarantee.Violation.Violation279,9108

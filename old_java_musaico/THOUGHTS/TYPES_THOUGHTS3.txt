@@ -1,0 +1,5 @@
+Typecasting
+- Need to be able to cast internal types (e.g. Integer <-> BigDecimal)
+- Need to be able to EITHER fall back on the most generic type caster
+  available (e.g. NumberToDouble, NumberToString) OR be able to
+  specify precisely which raw class(es) a type caster handles.

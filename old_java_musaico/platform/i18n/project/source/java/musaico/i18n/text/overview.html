@@ -1,0 +1,138 @@
+<html>
+<body>
+  <p>
+    Simple internationalized text, dates, numbers, currency
+    and so on.
+  </p>
+
+  <p>
+    For example, to create an internationalized piece of text
+    so that it can be displayed localized to any user:
+  </p>
+
+  <pre>
+      I18nString my_i18n_text = new I18nString ( "Hello, world." );
+  </pre>
+
+  <p>
+    The localized form of this text can then be retrieved with:
+  </p>
+
+  <pre>
+      Locale user_locale = ...; // For example, Locale.getDefault ().
+      String display_to_user =
+          my_i18n_text.localize ( user_locale )
+          .value ();
+  </pre>
+
+  <p>
+    Depending on the user's locale, the international string "Hello, world."
+    would then be displayed to the user as (for example) "Bonjour, le monde."
+  </p>
+
+  <p>
+    Various <code> MessageFormat </code>s can be used to format
+    internationalized messages with parameters, but the
+    default provided with Musaico treats <code> [%xyz%] </code>
+    blocks as parameter placeholders.  For example, the following
+    code will create an international message to say with
+    parameter <code> name </code> = "Johann",
+    and then localize it to "Bonjour, Johann":
+  </p>
+
+  <pre>
+      I18nString my_i18n_text = new I18nString ( "Hello, [%name%]",
+                                                 "name", "Johann" );
+      String my_localized_text =
+          my_i18n_text.localize ( Locale.FRENCH ).value ();
+  </pre>
+
+  <p>
+    Each internationalized object must be accompanied with localized
+    Messages file(s) in the package of the class which creates the
+    internationalized object.  For example, the following class:
+  </p>
+
+  <pre>
+      package com.example.tryi18n;
+
+      public class TryI18n
+      {
+          ...
+          public I18nString hello ( String first_name,
+                                    String last_name )
+          {
+              return new I18nString ( "Hello, [%first_name%] [%last_name%]",
+                                      "first_name", first_name,
+                                      "last_name", last_name );
+          }
+      }
+  </pre>
+
+  <p>
+    Would require a Java resource bundle called
+    <code> com.example.tryi18n.Messages.properties </code>
+    to be loadable.  The message bundle might look like:
+  </p>
+
+  <pre>
+      Hello,\ [%first_name%]\ [%last_name%] = Hello, [%first_name%] [%last_name%]
+  </pre>
+
+  <p>
+    This would provide the default (in this case English) localized message.
+  </p>
+
+  <p>
+    A French message bundle,
+    <code> com.example.tryi18n.Messages_fr.properties </code>,
+    might look like:
+  </p>
+
+  <pre>
+      Hello,\ [%first_name%]\ [%last_name%] = Bonjour, [%first_name%] [%last_name%]
+  </pre>
+
+  <p>
+    A Korean message bundle,
+    <code> com.example.tryi18n.Messages_kr.properties </code>,
+    might look something like:
+  </p>
+
+  <pre>
+      Ahn nyeong [%last_name%] [%first_name%]
+  </pre>
+
+  <p>
+    And so on.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2011 Johann Tienhaara <jtienhaara@yahoo.com>
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

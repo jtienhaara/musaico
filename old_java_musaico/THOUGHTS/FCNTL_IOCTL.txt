@@ -1,0 +1,168 @@
+    /**
+     * <p>
+     * Manipulates this open record.
+     * </p>
+     *
+     * <p>
+     * !!! Some (but probably not all) of the functionality of Linux's
+     * <code>fcntl (2)</code> command will probably be implemented here.
+     * This includes the fasync, dir_notify, check_flags calls, and so on.
+     * At this early stage of development I'm leaving this TBD...
+     * </p>
+     *
+     * @link{https://summersoft.fay.ar.us/repos/dwall/trunk/linux/Documentation/filesystems/vfs.txt}
+     *
+     * <p>
+     * See also the Linux kernel header <code>include/linux/fs.h</code>.
+     * </p>
+     *
+     * @param cursor The Cursor connection to this record.
+     *               The cursor might have opened this record
+     *               to stream in fields from a driver, or to
+     *               randomly access a persistent object, and so on.
+     *               Must not be null.
+     *
+     * @param progress The progress meter for this operation.
+     *                 At the start of the operation, the expected
+     *                 total number of steps will be set in this
+     *                 progress meter.  As the operation proceeds,
+     *                 the current step will be set in the progress
+     *                 meter.  Once complete, the progress meter
+     *                 will be updated to the end position.
+     *                 Must not be null.
+     *
+     * @param fcntl_command The record-type-specific command to
+     *                      execute (such as requesting an
+     *                      exclusive lease on the record).
+     *                      Must not be null.  Must be a valid
+     *                      command for this Record type.
+     *
+     * @param fcntl_args A buffer of parameters to the record-dependent
+     *                   command.  May be null only if the record's
+     *                   control command does not require any parameters.
+     *
+     * @return Can return any Serializable object, or null.
+     *         Implementation- and fcntl_command-specific.
+     *
+     * @throws RecordOperationException if anything goes horribly wrong.
+     *
+     * @throws I18nIllegalArgumentException If any of the parameters
+     *                                      are invalid (null and so on).
+     */
+    /* !!!
+    public abstract Serializable fcntl (
+                                        Cursor cursor,
+                                        Progress progress,
+                                        Reference fcntl_command,
+                                        Buffer fcntl_args
+                                        )
+        throws RecordOperationException,
+               I18nIllegalArgumentException;
+               !!! */
+
+
+    /**
+     * <p>
+     * Returns the unmapped area of this record (for mmap).
+     * </p>
+     *
+     * @param cursor The Cursor connection to this record.
+     *               The cursor might have opened this record
+     *               to stream in fields from a driver, or to
+     *               randomly access a persistent object, and so on.
+     *               Must not be null.
+     *
+     * @param progress The progress meter for this operation.
+     *                 At the start of the operation, the expected
+     *                 total number of steps will be set in this
+     *                 progress meter.  As the operation proceeds,
+     *                 the current step will be set in the progress
+     *                 meter.  Once complete, the progress meter
+     *                 will be updated to the end position.
+     *                 Must not be null.
+     *
+     * @return The position where the unmapped area begins.
+     *
+     * @throws RecordOperationException if anything goes horribly wrong.
+     *
+     * @throws I18nIllegalArgumentException If any of the parameters
+     *                                      are invalid (null and so on).
+     */
+    /* !!! In Linux this is only used by a few unusual filesystem
+     * components.  We probably don't need it.
+     *
+     *     fs/bad_inode.c
+     *     fs/hugetlbfs/inode.c
+     *     fs/ramfs/file-nommu.c
+     *     fs/romfs/mmap-nommu.c
+     *
+    public abstract Position getUnmappedArea (
+                                              Cursor cursor,
+                                              Progress progress,
+                                              Reference addr,
+                                              Size size,
+                                              Reference page,
+                                              int mmap_flags
+                                              )
+        throws RecordOperationException,
+               I18nIllegalArgumentException;
+    */
+
+
+    /**
+     * <p>
+     * Manipulates the an open record (typically, but not necessarily,
+     * the record pointing to a driver).
+     * </p>
+     *
+     * @param cursor The Cursor connection to this record.
+     *               The cursor might have opened this record
+     *               to stream in fields from a driver, or to
+     *               randomly access a persistent object, and so on.
+     *               Must not be null.
+     *
+     * @param onode The ONode representing some data in this
+     *              record.  If null, then this operation acts
+     *              like a sequential streaming operation, whereas
+     *              if the onode is non-null then this operation
+     *              works with the data representing some persistent
+     *              object inside some paged area or other.  Any
+     *              sequence of related operations invoked in a
+     *              Record (such as open, ioctl, close)
+     *              must be passed the same onode parameter.
+     *
+     * @param progress The progress meter for this operation.
+     *                 At the start of the operation, the expected
+     *                 total number of steps will be set in this
+     *                 progress meter.  As the operation proceeds,
+     *                 the current step will be set in the progress
+     *                 meter.  Once complete, the progress meter
+     *                 will be updated to the end position.
+     *                 Must not be null.
+     *
+     * @param ioctl_command The record-specific command to execute.
+     *                      Must not be null.
+     *
+     * @param ioctl_args The parameters to pass to the record-specific
+     *                   command.  May be null only if the command
+     *                   does not require any parameters.
+     *
+     * @return Any Serializable result can be returned, or null.
+     *         Implementation- and ioctl_command-specific.
+     *
+     * @throws RecordOperationException if anything goes horribly wrong.
+     *
+     * @throws I18nIllegalArgumentException If any of the parameters
+     *                                      are invalid (null and so on).
+     */
+    /* !!!
+    public abstract Serializable ioctl (
+                                        Cursor cursor,
+                                        ONode onode,
+                                        Progress progress,
+                                        Reference ioctl_command,
+                                        Buffer ioctl_args
+                                        )
+        throws RecordOperationException,
+               I18nIllegalArgumentException;
+               !!! */

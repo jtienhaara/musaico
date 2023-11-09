@@ -1,0 +1,1101 @@
+2020-12-16 Musaico wiring
+- Discrete conductors:
+  - Wire
+  - Tap
+  - Capacitor (in-memory single Carrier storage)
+- Built from Schematics:
+  - Board
+
+- Wire:
+  Built between a selector Conductor and its
+  selection:
+
+    Conductor1-[selector]-Wire-[selection]-Conductor2
+
+  Push to [selector]: Wire pushes to [selection]
+  Pull from [selector]: Wire pulls from [selection],
+    returns pulled Carriers.
+  Push to [selection]: Wire pushes to [selector].
+  Pull from [selection]: Wire pulls from [selector],
+    returns pulled Carriers.
+
+- Tap:
+  Replaces a Wire between a selector Conductor and its
+  selection:
+
+                      Superconductor
+                            |
+                          [tap]
+                            |
+    Conductor1-[selector]--Tap--[selection]-Conductor2
+
+  Push to [selector]: Tap tags the Carrier(s) with a
+    TapTarget Tag unique to this Tap pointing to
+    [selection], and pushes the tagged Carrier(s)
+    to [tap].
+  Pull from [selector]: Tap pulls from [tap].  For
+    each Carrier, if its TapTarget is [selection]
+    then it is pushed to [selection]; if its TapTarget
+    is [selector] then it is accumulated to be returned;
+    otherwise it is sent to the Board's ground.
+  Push to [selection]: TapTarget [selector], push to [tap].
+  Pull from [selection]: Pull from [tap].  TapTarget
+    [selector] is pushed to [selector]; TapTarget
+    [selection] is accumulated to be returned; otherwise
+    pushed to Board's ground.
+  Push to [tap]: push to the TapTarget if any, otherwise
+    ground.
+  Pull from [tap]: pull from both [selector] and [selected].
+
+- Ground:
+  A default ground for a Board that throws away every
+  push and returns {} for every pull (like /dev/null).
+
+    [selector]-Ground
+
+  Push to [selector]: discard.
+  Pull from [selecor]: return empty.
+
+- Capacitor:
+  In-memory storage; a variable.
+
+    [selector]-Capacitor
+
+  Push to [selector]: store Nth Carrier.
+  Pull from [selector]: return stored Carrier, or {}.
+
+^^^^^
+These could be defined in the Musaico language...
+(Whatever that language looks like.)
+
+A DiscreteConductor has 4 channels to push to / pull from:
+  - [selector]
+  - [selection]
+  - [tap]
+  - [ground]
+So it just needs to provide the logic for handling
+push to / pull from each channel.
+
+A Board, by contrast, has Terminals to push to / pull from.
+
+- Bus:
+  Connector between Boards.
+
+          /[X1]\   /[X2]\
+    Board1-[Y1]-Bus-[Y2]-Board2
+          \[Z1]/   \[Z2]/
+
+  Push to [X1]: push to X2.
+  Pull from [X1]: pull from X2, return results.
+  Push to [X2]: push to X1.
+  Pull from [X2]: pull from X1, return results.
+  ...etc for every Terminal1 with same name as Terminal2...
+  Push to unmatched Terminal: send to ground.
+  Pull from unmatched Terminal: pull from ground,
+    return results.
+
+- Terminal:
+  A named Conductor used to expose a Board's input/output
+  channels.
+
+    DiscreteConductor-[discrete]\
+       Intrenal Board-[internal]-Terminal
+       External Board-[external]/
+
+  Push to [discrete]: push to [internal], [external].
+  Pull from [discrete]: pull from [internal], [external].
+  Push to [internal]: push to [discrete], [external].
+  ...etc...
+
+  We need some way to distinguish between the selectors...
+
+  Do we?
+  We can just differentiate between internal and external:
+
+         Conductor-[internal]\
+                             Terminal
+    External Board-[external]/
+
+  And if te Selector is owned by a Bus then it is external
+  (either parent or child), otherwise it is internal.
+
+  Push to [internal]: push out to [external].
+  Pull from [internal]: pull from [external], return the
+    results.
+  Push to [external]: push in to [internal].
+  Pull from [external]: pull from [internal].
+
+  Likely scenario: Terminal T has Bus from child
+  Board(s) and parent Board(s).  For example, the "log"
+  Terminal might be used to pass logging up the
+  hierarchy.
+
+  It would be nice to not have to put Diodes in front
+  of Boards to dictate the direction the logs flow...
+  But maybe that is necessary.
+
+- Diode:
+  Controls which way Carriers are allowed to travel.
+
+    Conductor1-[source]-Diode-[target]-Conductor2
+
+  Push to [source]: push to [target].
+  Pull from [source]: pull from [ground].
+  Push to [target]: push to [ground].
+  Pull from [target]: pull from [source].
+
+  A Diode is created with the flag SOURCE or TARGET,
+  and 0..N Selectors.  If the flag is SOURCE, then every
+  Selector that is NOT included in the configured Selectors
+  is considered a TARGET.  If the flag is TARGET, then
+  every unknown Selector is a SOURCE.
+
+...
+
+First crack at language:
+- conductor has 0 Selectors of its own, and
+  therefore also 0 Selections.  Format is "" (no
+  name), since push/pull is not dependent on
+  Selectors etc.
+- wire has 1 Selector of its own, which generates
+  its Selection.  The two endpoints are named,
+  e.g. "selector" and "selection".
+- discrete has 0 or more named Selectors of its own,
+  each with its own Selection.  (Unnamed Selectors
+  go by their IDs.)  Format is "(name).selector"
+  or "(name).selection" or "(name)" for both.
+- board has 0 or more named Terminals of its own,
+  each with its own Selectors and Selections.
+  Format is "(name)".
+
+wire(conductor[] selector, conductor[] selection) standard {
+  // Push to / pull from the opposite endpoint:
+  selector | selection;
+}
+
+wire(conductor[] selector, conductor[] selection, conductor[] tap, conductor ground) tap {
+  selector > tag(target/1, { this, selection }) > tap;
+  selector < tap {
+    tag(target/1) == { this, selection } > selection;
+    tag(target/1) != { this, selector } > ground;
+    // Else accumulate and return the Carriers from tap:
+    keep;
+  }
+  selection > tag(target/1, { this, selector }) > tap;
+  selection < tap {
+    tag(target/1) == { this, selector } > selector;
+    tag(target/1) != { this, selection } > ground;
+    // Else accumulate and return the Carriers from tap:
+    keep;
+  }
+  tap > {
+    tag(target/1) == { this, selector } > selector;
+    tag(target/1) == { this, selection } > selection;
+    > ground;
+  }
+  tap < selector, selected;
+}
+
+conductor ground {
+  > discard;
+  < {};
+}
+
+conductor capacitor {
+  > store(); // Builtin function stores Nth Carrier.
+  < stored(); // Builtin function returns { 1 Carrier }.
+}
+
+wire(board[] board, terminal[] terminal) bus {
+  // Push to / pull from corresponding terminals
+  // in other boards:
+  board[b].terminal[t] | board[!b].terminal[t];
+
+  // Default to pushing to / pulling from ground:
+  board.terminal | board.ground;
+}
+
+discrete(!bus[] internal, bus[] external) terminal {
+  internal | external;
+}
+or maybe:
+discrete terminal {
+  selected by {
+    !bus[] internal;
+    bus[] external
+  }
+  internal | external;
+}
+
+discrete(flag/1 flag == { "source", "target" }, conductor[] selector, conductor[] selection, conductor[] ground) diode {
+  selector > {
+    flag == "target" > selection;
+    > ground;
+  }
+  selector < {
+    flag == "source" < selection;
+    < ground;
+  }
+  selector > {
+    flag == "source" > selection;
+    > ground;
+  }
+  selector < {
+    flag == "target" < selection;
+    < ground;
+  }
+}
+or maybe:
+discrete diode[flag/1 flag == { "source", "target" }] {
+  selector > {
+    flag == "target" > selection;
+    > ground;
+  }
+  selector < {
+    flag == "source" < selection;
+    < ground;
+  }
+  selector > {
+    flag == "source" > selection;
+    > ground;
+  }
+  selector < {
+    flag == "target" < selection;
+    < ground;
+  }
+}
+
+
+
+2020-12-17
+Tap should go back to the way it is now: multiple wires.
+
+- Tap
+
+                           ( superconductor )
+                           (         |      )
+                              [tap_selector]
+                                    |
+                                tap_wire
+                                 /     \
+    [selector]-selector_wire-[tap1]   [tap2]-selection_wire-[selection]
+
+  Perhaps this can be collapsed into a view similar to the previous
+  diagram, but more in line with multiple wires:
+
+                      Superconductor
+                            |
+                          [tap]
+                           | |
+    Conductor1-[selector]--Tap--[selection]-Conductor2
+
+  But the Superconductor still can't differentiate -- which side
+  of the tap sent the pull request?
+
+  We could try: Superconductor selects Wire to turn it into a Tap,
+  which in turn selects the Superconductor.
+
+                      Superconductor
+                          /   \
+                 [selector]   [selection]
+                     |             |
+                [selection]   [selector]
+                          \   /
+    Conductor1-[selector]--Tap--[selection]-Conductor2
+
+  But this seems a bit odd.
+
+  "Pushing down" the tapped wire, and splitting it into 2, still
+  seems easier to understand.
+
+                          Superconductor
+                                |
+                            [selector]
+                                |
+                           [selection]
+                                |
+                               Tap
+                               /  \
+                     [selection]  [selector]
+                             |      |   
+    Conductor1-[selector]--Wire1  Wire2--[selection]-Conductor2
+
+  But still doesn't solve the problem of understanding where the
+  pull comes from.
+
+                           Superconductor
+                                 |
+                             [selector]
+                                 |
+                            [selection]
+                             /       \
+                           Tap1     Tap2
+                             |       |
+                     [selection]   [selector]
+                             |       |   
+    Conductor1-[selector]--Wire1   Wire2--[selection]-Conductor2
+
+  Maybe it's better to just keep it simple, like the original
+  diagram, but allow passing Tags in push() and pull() calls.
+
+                      Superconductor
+                        [selector]
+                            |
+                          Wire (it, too, can be tapped)
+                            |
+                          [tap]
+                            |
+    Conductor1-[selector]--Tap--[selection]-Conductor2
+
+  Push to [selector]: Push to [tap] selector owner(s) with Tag
+    unique to this Tap indicating that the push came from
+    the selector side.
+  Pull from [selector]: Pull from [tap] selector owner(s) with Tag
+    unique to this Tap indicating that the pull request came from
+    the selector side.
+  Push to [selection]: Push to [tap] selector owner(s) with Tag
+    unique to this Tap indicating that the push came from
+    the selection side.
+  Pull from [selection]: Pull from [tap] selector owner(s) with Tag
+    unique to this Tap indicating that the pull request came from
+    the selection side.
+  Push to [tap]: If unique-to-this-Tap Tag indicates the source
+    was the selector side, then push to the selection side; if it
+    indicate that the source was the selection side, then push
+    to the selector side; if no such Tag is present, either
+    1) push to both sides or 2) push to ground (debatable).
+  Pull from [tap]: If unique-to-this-Tap Tag indicates the source
+    was the selector side, then pull from the selection side; if it
+    indicates that the source was the selection side, then pull
+    from the selector side; if no such Tag is present, either
+    1) pull from both sides or 2) pull from ground (debatable).
+
+wire(conductor[] selector, conductor[] selection, conductor[] tap, conductor ground) tap {
+  selector | tap ( tag(target/1, { this, selection }) );
+  selection | tap ( tag(target/1, { this, selector }) );
+  tap {
+    tag(target/1) == { this, selector } | selector;
+    tag(target/1) == { this, selection } | selection;
+    // Debatable, 2 options:
+    otherwise | selector, selection;
+    otherwise | ground;
+  }
+}
+
+
+
+- The constructor of each Conductor determines its Selector filter(s).
+  board(conductor[] foo, terminal[] bar) { ... }
+- An instance consructor starts with the name of the type, and fills in
+  one selector filter to match each of the type's constructor
+  parameters.  Thus the type selects the instance's selector-selection
+  wires, and can, if it needs, filter, modify or delay transmission
+  of Carriers between the instance and its selections.
+- Similarly, a kind selects an instance's wires.
+- Maybe a constructor is a thing that selects wires, too -- a sort of
+  root type-of-type-like-things.  More thoughts on this later.
+- Every Conductor always has access to the "source" of a push or pull.
+- A Wire has access to the "selector" and "selection".
+- A Tap has access to the "tap".
+- A Conductor can be constructed with [tag1][tag2]...[tagN].
+- The Conductor's { body } comprises rules.
+- Each rule defines the Conductor's behaviour when push/pull requests
+  come in from the specified source.
+- Each rule can be simple, as in x | y, x < y, x > y, where
+  x < y means "when a pull request comes in on x, return the result
+  of pulling from y", and x > y means "when a push comes in on x,
+  push the Carriers to y",  (x | y is the same as x < y plus x > y.)
+- A rule can include filters to the left of the operator, such as:
+    in ~ /^[0-9][0-9]*$/ > out;
+  A Carrier discarded by the filter is sent to ground.
+- A rule can include filters to the right of the operator, too,
+  typically inside a composite rule.
+- A filter can also be applied to Carrier tags, left or right:
+    in [direction="up"] > out;
+    in [direction="down"] > out;
+- The left or right sides (or both sides) of a rule can be composite,
+  using induction-like syntax.  Left composite:
+    {
+      in >= stored();
+      stored();
+    } > max;
+  Right composite:
+    weight >
+    {
+      <= 50 light;
+      <= 100 medium;
+      heavy;
+    };
+
+
+s+ = 1 or more space characters
+s* = 0 ore more space characters
+s? = 0 or 1 space characters
+
+musaico = header conductors;
+header = 'musaico/2021.01.01';
+conductors = s+ conductor conductors?;
+conductor = constructor s* body;
+constructor = type-id s* lparen s* instance-selectors s* rparen s* instance-id;
+lparen = '(';
+rparen = ')';
+body = lbrace rules s* rbrace;
+lbrace = '{';
+rbrace = '}';
+rules = s* rule rules?;
+rule = rule-left-operand s* rule-operator s* rule-right-operand;
+rule-operator = push | pull | pipe;
+push = '>';
+pull = '<';
+pipe = '|';
+rule-left-operand = rule-composite-left-operand | rule-simple-left-operand;
+rule-composite-left-operand = lbrace rule-simple-left-operands s* rbrace;
+rule-simple-left-operands = s* rule-simple-left-operand rule-simple-left-operands?;
+rule-simple-left-operand = selector-id left-filter-operand?;
+left-filter-operand = s* filter-call;
+filter-call = filter-id parameters;
+filter-id = '<' | '>' | '<=' | '>=' | '==' ...; // Can we start with no filter-ids,
+  // only use types / constructors to create new filter ids?
+parameters = s* parameter more-parameters?;
+more-parameters = s* ',' parameters;
+parameter = constant | expression;
+constant = number | string; // Can we start with no constant formats,
+  // only use types / constructors to create new constant formats?
+expression = function-id parameters;
+function-id = 'store', etc; // Can we start with no function-ids,
+  // only use types / constructors to create new function-ids?
+rule-right-operand = rule-composite-right-operand | rule-simple-right-operand;
+rule-composite-right-operand = lbrace rule-simple-right-operands s* rbrace;
+rule-simple-right-operands = s* rule-simple-right-operand rule-simple-right-operands?;
+rule-simple-right-operand = right-filter-operand? selector-id;
+right-filter-operand = filter-call s*;
+
+Attempt at representing Musaico grammar as Conductors:
+
+conductor ( conductor [] parser { state, position, out, err }, conductor header, conductor conductors ) musaico-grammar {
+  parser.state == "header" {
+    header == "musaico/2021.01.01" > ground;
+    "Error invalid header: " + header > parser.err;
+  }
+  parser.state == "conductors" {
+    conductors !!!;
+
+UGH...
+
+conductor musaico ( header, conductors, compiler ) {
+  state = "header";
+  header state == "header" >
+  {
+    state = "conductors";
+    > ground;
+  }
+  conductors state == "conductors" >
+  {
+    state = "header";
+    > compiler;
+  }
+}
+
+conductor literal ( in, regex, out ) {
+  in ~ /regex/ > out;
+}
+
+literal ( regex = "musaico/2021.01.01" ) header ( in, out );
+
+conductor conductors ( space1, conductor, conductors ) {
+  state = "space1";
+  !!!;
+}
+
+conductor grammar ( conductor [] sequence, out, error ) {
+  int [ value-range = 0..sequence.length - 1 ] [ value-wrap ] state = 0;
+  sequence [ state ] > {
+    tag ( sequence [ state ] [ name ] ) > out;
+    > error;
+    state ++; // Auto wrap to 0.
+  }
+}
+
+grammar ( sequence = { space1, conductor, conductors } ) conductors ( out, error );
+
+grammar ( sequence = { constructor, space0, body } ) conductor ( out, error );
+
+grammar ( sequence = { type-id, space0, lparen, space0, instance-selectors, space0, rparen, space0, instance-id } ) constructor ( out, error );
+
+
+
+=================================================================
+
+
+2020-12-19
+Maybe give each Conductor a Leg that has a Selector and also push/pull
+methods.
+
+Then a Board's legs are its external-facing terminals.
+
+Actually maybe just call them all terminals.
+
+Then the format for a rule in the language always starts with one
+single terminal-id (rather than allowing composite rules on the left side),
+and no filters on the left.
+
+In the implementation, the Conductor refers to the Terminal, but the
+Terminal also necessarily refers to the Conductor, so that its push/pull
+logic can be implemented.
+
+The Conductor can have extra functionality like storing / retrieving
+variables, but the Terminal is defined by rules that can be easily
+coded in the language.
+
+(We still need to pass the Board in to the push/pull methods, so that
+we can retrieve its ground () and do other queries.)
+
+***Maybe*** the source of a push pull is another Terminal, instead of
+a Selector?
+
+That way, we can always find out the parent Conductor directly from
+the source Terminal, instead of looking up possibly many parents
+by the source Selector, the way it's implemented now.
+
++ + +
+
+Maybe an AWK-like language would work.
+
+  on {
+    ...Custom implementation code can be placed here, in Java / C / etc,
+       to connect to servers, allocate memory or install things, etc...
+  }
+
+  start {
+    ...imperative language with variables...
+    ...can also push to / pull from the parent board...
+  }
+
+  terminal1 ...filter... > terminal2 {
+    ...imperative language to transform the input, throw it away, drop it,
+       store it, create output, retrieve stored output, etc etc etc...
+  }
+
+  end {
+    ...imperative language...
+  }
+
+  off {
+    ...custom implementation code...
+  }
+
+Hmmmmm doesn't look great.
+
+But the idea of state-dependent behaviour seems inevitable.
+
+Statefulness is stored in another Board.  It can contain many
+state machines, each one its own Board with its own state terminal,
+from which the current state can be pulled as a string.
+
+(Tags are also stored in a Board.  And each Tag is, itself, a Board,
+with the key potentially being made up of multiple hierarchical namespaces,
+and the value being a constant or another Board.)
+
+
+  conductor off ( transition, stopped, state ) {
+    transition {
+      == "on" > stopped;
+      == "start" > stopped;
+      == "off" > state;
+      else > ground;
+    }
+    stopped {
+      == "off" > state;
+      else > ground;
+    }
+  }
+
+  conductor stopped ( transition, off, started, state ) {
+    transition {
+      == "off" > off;
+      == "start" > started;
+      == "on" > state;
+      else > ground;
+    }
+    off {
+      == "on" > state;
+      == "start" > started;
+      else > ground;
+    }
+    started {
+      == "stop" > state;
+      == "off" > off;
+      else > ground;
+    }
+  }
+
+  conductor started ( transition, stopped, state ) {
+    transition {
+      == "off" > stopped;
+      == "stop" > stopped;
+      == "start" > state;
+      else > ground;
+    }
+    stopped {
+      == "start" > state;
+      else > ground;
+    }
+  }
+
+  conductor state ( off, stopped, started ) {
+    off > store ( "off" );
+    stopped > store ( "stopped" );
+    started > store ( "started" );
+  }
+
+  conductor transition ( in, off, stopped, started ) {
+    in > { off, stopped, started };
+  OR
+    in > parallel ( off, stopped, started );
+  (CONTRAST WITH)
+    in > series ( off, stopped, started );
+  OR MAYBE JUST
+    off < in;
+    stopped < in;
+    started < in;
+  BUT THAT LIMITS US FROM DOING m x n PUSHES / PULLS
+  }
+
++ + + + +
+
+2020-12-20
+
+in --> header --> body --> out
+       |    ^     |  ^
+       |    |     |  |
+       v    |     v  |
+     ...etc...  ...etc...
+
+At each step, we add Tag(s) so that we know what to do
+with the tokens / grammar sequences when they come back.
+
+E.g. read a chunk of text from stdin, tag it so that
+we know it's the start of the current Musaico file, push
+it down to the header parser.  When the result from the
+header parser comes back -- maybe a tagged header and
+the untagged bits that belong to the body -- we send the
+header along, and push the untagged bits down to the
+body parsing tree.
+
+Instead of executing in series, we can also push to each
+selector in parallel, and send along whatever we get back
+from whichever selector(s) was/were able to parse the text.
+
++ + + + +
+
+conductor wire ( left, right ) {
+  left | right;
+}
+
+conductor tap ( left, tap, right ) {
+  left | tap ( tag(target:1, { this, right }) );
+  right | tap ( tag(target:1, { this, left }) );
+  tap {
+    tag(target/1) == { this, left } | left;
+    tag(target/1) == { this, right } | right;
+    else | ground;
+  }
+}
+
++ + + + +
+
+(type-id) [ ( (type-terminal) = (constant), ... ) ] (instance-id) ( (instance-terminal), ... ) {
+  (source-terminal) (</>/|) (target-terminal) [ (function-id) ( (function-parameter), ... ) ] ;
+  (source-terminal) {
+    (filter) (</>/|) (target-terminal) [ (function-id) ( (function-parameter), ... ) ] ;
+    ...
+  }
+}
+
+* * * * *
+
+2020-12-21
+
+- Filters:
+  - Can be used for routing pushes/pulls inside a Conductor's schematic.
+  - Can be used for selecting Conductors inside the parent schematic.
+  - Are, of course, Conductors themselves.
+
+(type-id) [ ( (type-terminal) = (instance-terminal-selector), ... ) ] (instance-id) [ ( (instance-terminal) [ (selector) ], ... ) ] {
+  (source-terminal) [ (filter) ] (</>/|) [ (function-id) ( (function-parameter), ... ) ] (target-terminal) ;
+  (source-terminal) {
+    [ (filter) ] (</>/|) [ (function-id) ( (function-parameter), ... ) ] (target-terminal) ;
+    ...
+  }
+}
+
+(type-id) [ ( (type-terminal) = (instance-terminal-selector), ... ) ] (instance-id) [ ( (instance-terminal), ... ) ] {
+  (type-id) [ ( (type-terminal) = (instance-terminal-or-internal-conductor-selector), ... ) ] (internal-conductor-id) [ , ... etc ids ] ;
+
+  (source) [ (filter) ] (</>/|) [ (function-id) ( (function-parameter), ... ) ] (target) ;
+  (source) {
+    [ (filter) ] (</>/|) [ (function-id) ( (function-parameter), ... ) ] (target) ;
+    ...
+  }
+}
+// (source) and (target) are each either (instance-terminal) or (internal-conductor-id).
+
+^^^ still needs lots of work...
+
+
+* * * * *
+
+Various structures using Conductors:
+
+// State machine
+conductor conductor-state-machine ( state, transition ) {
+  conductor transition
+  conductor [] states = { off, stopped, started };
+  capacitor state = off;
+
+  transition {
+    > states [ < state ];
+  }
+
+  off {
+    < transition == "on" > stopped;
+    < transition == "start" > stopped;
+    < transition == "off" push ( this ) > state;
+    < stopped == "off" push ( this ) > state;
+    > ground;
+  }
+
+  stopped {
+    < transition == "off" > off;
+    < transition == "start" > started;
+    < transition == "on" push ( this ) > state;
+    < off == "on" push ( this ) > state;
+    < off == "start" > started;
+    < started == "stop" push ( this ) > state;
+    < started == "off" > off;
+    > ground;
+  }
+
+  started {
+    < transition == "off" > stopped;
+    < transition == "stop" > stopped;
+    < transition == "start" push ( this ) > state;
+    < stopped == "start" push ( this ) > state;
+    > ground;
+  }
+}
+
+
+* * * * *
+
+2020-12-22
+
+conductor concurrency ( *, log, logger, timeout, retry ) {
+  conductor main, log, timeout;
+  queue main_queue, log_queue, timeout_queue;
+
+  main {
+    < main_queue > *;
+    | log | log_queue;  // Redirect (x | y | z, x < y < z, x > y > z, ...)
+    | timeout | timeout_queue;  // Redirect
+    | *;
+  }
+
+  log {
+    < log_queue > logger;
+    > logger;
+    | timeout | timeout_queue;  // Redirect
+    | * | main_queue;
+  }
+
+  timeout {
+    < timeout_queue > retry;
+    > retry;
+    | log | log_queue;  // Redirect
+    | * | main_queue;
+  }
+}
+
+// * is a selector, not the name of a terminal.
+
+
+* * * * *
+
+2020-12-23
+Maybe the above is all about Boards and Terminals, whereas Conductors
+have to be written in the underlying language (C, Java, etc).
+
+Conductors:
+- wire
+- tap
+- terminal
+- filter
+
+Standard Boards:
+- capacitor
+- state-machine (or maybe just machine)
+- type
+- processor
+
+Language:
+
+(type-id) [ ( (type-terminal) = (constant-or-exposed-or-internal-terminal) , ... ) ] (instance-id) [ ( [ (type-id) ] (exposed-terminal) , ... ) ] {
+  (type-id) (type-terminal) [ = (constant) ] , ... ;
+  ...
+  (exposed-or-internal-terminal) (</>/|) (exposed-or-internal-terminal);
+  ...
+  (exposed-or-internal-terminal) {
+    [ (filter) ] [ (function) ] (</>/|) (exposed-or-internal-terminal);
+    ...
+  }
+}
+
+Redirects should probably be replaced with filters.
+Actually the whole concurrency attempt above is horribly borken.
+
+board processor ( state, terminal [] processes ) {
+  terminal main;
+  queue processor_queue;
+
+  main {
+    state == "started" < processor_queue;
+    state == "started" > processes;
+  }
+
+  // This selector results in Taps being created
+  // in the parent Board
+  // because multiple Conductors have been selected:
+  processes {
+    state != "started" | processor_queue;
+  }
+}
+
+Or maybe:
+
+// In this version, the tap is explicit, in the constructor.
+// However it begs the question: how to call the constructor?
+// Maybe "*" is an option, to tap every wire in the parent Board;
+// but it seems likely we also need to be able to specify individual
+// wires.  Maybe "x - y" ( the wire connecting Conductor "x" with
+// Conductor "y") or "x - y - z" ( the wire connecting the 3
+// Conductors), etc.
+board processor ( state, tap [] processes ) {
+  terminal main;
+  queue processor_queue;
+
+  main {
+    state == "started" < processor_queue;
+    state == "started" > processes;
+  }
+
+  processes {
+    state != "started" | processor_queue;
+  }
+}
+
+Built-in processor-controllers:
+- Runnable, main (), probably others (Java).
+- Promise (JavaScript).
+- main (), pthreads (C).
+- etc.
+
+
++ + + + +
+
+
+MAYBE what we've been thinking of as a Conductor is actually just
+a Schematic?
+
+A Schematic's Tags are, in fact, part of the Schematic.
+The off/stopped/started state machine is, in fact, part of the Schematic.
+
+A Type is a Schematic.
+
+Schematics can be merged, and of course also sent through other
+wiring networks to be filtered, refined, etc.
+
+Maybe a Schematic is immutable -- new version = new Schematic.
+
+schematic wire ( left, right ) {
+  left | right;
+}
+schematic tap ( left, right, tapper ) {
+  left {
+    tag ( "target" = "right" ) > tapper;
+  }
+
+  right {
+    tag ( "target" = "left" ) > tapper;
+  }
+
+  tapper {
+    tag ( "target" ) == "left" > left;
+    tag ( "target" ) == "right" > right;
+  }
+}
+schematic terminal ( 
+  !!! Not sure how to represent a terminal that is selected by other
+  !!! Conductors.  Maybe it should have an external Conductor / parameter?
+}
+
+
+
++ + + + +
+
+Maybe filters and functions are just Conductors or Types:
+  x == "foo" > z
+is the same as
+  x > y > z
+where y is a filter ( operator = ==, right_operand = "foo" ).
+And
+  x tag ( "foo" = "bar" ) > z
+is the same as
+  x > y > z
+where y is the Conductor tag ( tag_name = "foo", tag_value = "bar" ).
+So we can have more than 1 filters, and more than 1 functions:
+  x [ (filter) ... ] [ (function-call) ... ] (</>/|) y;
+In fact it's really just:
+  x [ (conductor) ... ] y;
+Where a (conductor) can be a terminal identifier, a Filter,
+the tag function, etc.  Basically either a builtin or user-defined
+Conductor.
+Constants (e.g. "foo" or 42) are conductors, too, of course.
+
++ + + + +
+
+Hmmmm maybe:
+
+Schematic
+{
+  + id () : String;
+  + type () : Construction;
+  + externalTerminals () : TerminalConstructor [];
+  + internalTerminals () : TerminalConstructor [];
+  + rules () : Rule [];
+}
+
+XXXConstructor
+XXX{
+XXX  + schematic () : Schematic
+XXX  + terminals () : TerminalConstructor [];
+XXX}
+
+Construction
+{
+  + schematic () : Schematic
+  + terminals () : TerminalConstruction [];
+}
+
+TerminalConstructor
+{
+  id () : String;
+  accepts () : Filter<Conductor>;
+}
+
+TerminalConstruction
+{
+  id () : String;
+  selection () : Filter<Conductor>;
+}
+
+Filter<Conductor> <|--- FixedFilter
+Filter<Conductor> <|--- (something or other that matches all wires)
+
+Conductor <|--- Constant
+etc
+
+
++ + + + +
+
+2020-12-24
+
+Schematic
+{
+  + header () : Header; // Like an interface
+  + body () : Body; // Like an implementation
+}
+
+Header
+{
+  constructor () : Constructor;
+  id () : String;
+  terminals () : Terminal []; // External terminals.
+}
+
+Constructor // A bit like a cable
+{
+  type () : Header; // A bit like a motherboard
+  selectors () : Selector []; // Ties 0 or more the motherboard's 0 to N terminals to instance terminals, constants, etc.  Any unselected terminals in the motherboard / type MUST have corresponding terminals with same ids in the instance.
+  instance () : Header; // ...daughterboard
+}
+
+Selector
+{
+  Filter<Conductor> filter;
+}
+
+Body
+{
+  terminals () : Terminal []; // Internal terminals.
+  rules () : Rule [];
+}
+
+Terminal ---|> Conductor
+{
+  id () : String;
+  // Pushes and pulls according to the rules of the Board it's working on behalf of.
+}
+
+Board
+{
+  id () : UUID;
+  schematic () : Schematic;
+}
+
+Rule
+{
+  source () : Terminal; // When this source is pulled from, it, in turn, pulls from the target.
+                        // When it is pushed to, it, in turn, pushes to the target.
+  branches () : Branch;
+}
+
+Branch
+{
+  path (): Function []; // Ugly
+  target () : Terminal;
+}
+
+Function ---|> Schematic
+{
+  // Exactly 2 external terminals: "in" and "out". // Ugly
+}
+
+
++ + + + +
+
+Filters are just schematics pushed onto a stack, and pulled off as soon
+as the input is DISCARDed.
+
++ + + + +
+
+Rule
+{
+  source () : Conductor;
+  target () : Conductor;
+}
+
+This schematic:
+  x {
+    == "foo" > y;
+    tag ( "bar" ) > z;
+  }
+
+Would thus be represented as:
+
+  Rule { source () : x;            target () : composite1; }
+  Rule { source () : composite1;   target ()!!!!!!!;
+
+
++ + + + +
+
+Way too complex.

@@ -1,0 +1,10 @@
+Cannot\ build\ Message\ with\ null\ format = Cannot build Message with null format
+Cannot\ build\ Message\ with\ null\ id = Cannot build Message with null id
+Cannot\ build\ Message\ with\ null\ parameter\ name = Cannot build Message with null parameter name
+Cannot\ build\ Message\ with\ null\ text = Cannot build Message with null text
+Cannot\ create\ a\ SimpleMessage\ with\ null\ format\ (id\ \=\ [%id%] = Cannot create a SimpleMessage with null format (id = [%id%]
+Cannot\ create\ a\ SimpleMessage\ with\ null\ id = Cannot create a SimpleMessage with null id
+Cannot\ create\ a\ SimpleMessage\ with\ null\ parameter_names\ (id\ \=\ [%id%] = Cannot create a SimpleMessage with null parameter_names (id = [%id%]
+Cannot\ create\ a\ SimpleMessage\ with\ null\ parameter_values\ (id\ \=\ [%id%] = Cannot create a SimpleMessage with null parameter_values (id = [%id%]
+Cannot\ create\ a\ SimpleMessage\ with\ null\ text\ (id\ \=\ [%id%] = Cannot create a SimpleMessage with null text (id = [%id%]
+Cannot\ create\ a\ SimpleMessage\ with\ [%parameter_names.length%]\ parameter\ names\ but\ [%parameter_values.length%]\ parameter\ values = Cannot create a SimpleMessage with [%parameter_names.length%] parameter names but [%parameter_values.length%] parameter values

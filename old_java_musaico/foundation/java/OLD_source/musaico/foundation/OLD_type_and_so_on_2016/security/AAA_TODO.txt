@@ -1,0 +1,68 @@
+TO DO:
+=======================================================================
+
+maybe:
+
+CapabilityWithParameters
++ parameters () : CapabilityParameter []
+
+CapabilityParameter
++ id () : Identifier
++ value () : Serializable
+
+
+
+
+DONE:
+=======================================================================
+
+SecurityPolicy
++ request ( Permissions ) : PartialConditional<Permissions>
+
+SecurityPolicyTable : SecurityPolicy
++ policies () : SecurityPolicyRow []
++ on ( SecurityContext ) : SecurityPolicy
+
+SecurityPolicyRow
++ contextPattern () : SecurityContextPattern
++ policy () : SecurityPolicy
+
+Grant : SecurityPolicy
++ permissions () : Permissions
+
+Revoke : SecurityPolicy
++ permissions () : Permissions
+
+SecurityPolicyBuilder
+<changed the API but done>
++ addRule ( SecurityPolicy ) : SecurityPolicyBuilder
++ removeRule ( SecurityPolicy ) : SecurityPolicyBuilder
++ grant ( Capability... ) : SecurityPolicyBuilder
++ revoke ( Capability... ) : SecurityPolicyBuilder
++ push ( SecurityContextPattern ) : SecurityPolicyBuilder
++ pop () : SecurityPolicyBuilder
++ build () : SecurityPolicy
+
+Permissions
++ context () : SecurityContext
++ capabilities () : Capability []
++ isAllowed ( Permissions ) : boolean
++ isAllowed ( SecurityContext ) : boolean
++ isAllowed ( Capability... ) : boolean
+
+SecurityContext
++ subject () : Credentials
++ object () : Identifier (?) Reference (?)
+
+Capability
++ id () : Identifier
+
+Credentials
++ id () : Identifier
+
+SecurityContextPattern
++ matches ( SecurityContext ) : boolean
+
+CredentialsPattern : Credentials
++ ANY : CredentialsPattern
++ matches ( Credentials ) : boolean

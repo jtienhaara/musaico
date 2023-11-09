@@ -1,0 +1,557 @@
+package musaico.foundation.value;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+
+import musaico.foundation.contract.Contract;
+import musaico.foundation.contract.ObjectContracts;
+import musaico.foundation.contract.Violation;
+
+import musaico.foundation.contract.obligations.Parameter1;
+import musaico.foundation.contract.obligations.Parameter2;
+import musaico.foundation.contract.obligations.Parameter3;
+import musaico.foundation.contract.obligations.ParametersMustNotBeNull;
+
+import musaico.foundation.contract.guarantees.Return;
+import musaico.foundation.contract.guarantees.ReturnNeverNull;
+
+import musaico.foundation.domains.BoundedDomain;
+
+import musaico.foundation.filter.Filter;
+
+import musaico.foundation.order.Order;
+
+
+/**
+ * <p>
+ * An offshoot from a Countable value, possibly mutable, which can be used
+ * to filter, sort, replace, and so on, and build new Countable values.
+ * </p>
+ *
+ * <p>
+ * A CountableView can be created to work with any type of "view items",
+ * such as the elements of the Countable value, or the indices of the
+ * Countable value (0, 1, 2, ...), and so on.
+ * </p>
+ *
+ *
+ * <p>
+ * In Java every CountableView must be Serializable in order to
+ * play nicely across RMI.  However users of the CountableView
+ * must be careful, since the values and expected data stored inside
+ * might not be Serializable.
+ * </p>
+ *
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ * <hr> </hr>
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ *
+ * <p>
+ * For copyright and licensing information refer to:
+ * </p>
+ *
+ * @see musaico.foundation.value.MODULE#COPYRIGHT
+ * @see musaico.foundation.value.MODULE#LICENSE
+ */
+public interface CountableView<VALUE extends Object, VIEW_ITEM extends Object>
+    extends Serializable
+{
+    /** The MusaicoModule to which this class or interface belongs. */
+    public static final MODULE PARENT_MODULE = MODULE.MODULE;
+
+
+    /**
+     * <p>
+     * Removes the elements of the specified countable value that are
+     * contained in this countable elements, and adds the elements
+     * which are not contained in this countable elements.
+     * </p>
+     *
+     * <p>
+     * Multiple copies of the same element will be kept, even though
+     * this is a set operation at heart.
+     * </p>
+     *
+     * @param that The counbtable value whose element differences will
+     *             be stored in this countable elements.
+     *             Must not be null.
+     *
+     * @return This countable elements, containing only the
+     *         elements that are different between the input and
+     *         that specified value.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If the specified value is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> difference (
+                                                                Countable<VIEW_ITEM> that
+                                                                )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * @return A newly created copy of this CountableView, which
+     *         can be modified independently of this one.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> duplicate ()
+        throws ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Adds the specified countable value(s) to (each of) the specified
+     * location(s) in the value being built.
+     * </p>
+     *
+     * <p>
+     * For example, if the value being built is <code> 1, 2, 3, 4, 5 </code>
+     * and the sub-value <code> A, B </code> is inserted at
+     * index <code> { 2 } </code> then the resulting value being built
+     * will be <code> { 1, 2, A, B, 3, 4, 5 } </code>.
+     * </p>
+     *
+     * <p>
+     * Or if the same sub-value is inserted into the same value being
+     * built at indices <code> { 0, 1, 2, 3, 4, 5 } </code> then
+     * the resulting value being built will be
+     * <code> { A, B, 1, A, B, 2, A, B, 3, A, B, 4, A, B, 5, A, B } <code>.
+     * </p>
+     *
+     * @param sub_value The element(s) to insert into the value being
+     *                  built.  Must not be null.
+     *
+     * @param insert_at_indices The location(s) in the value being built
+     *                          at which to insert the specified sub-value.
+     *                          If an index is less than or equal to 0L
+     *                          or greater than or equal to the length
+     *                          of the countable value being built
+     *                          then it is ignored.  If an index is greater
+     *                          than <code> Integer.MAX_VALUE </code>
+     *                          then the sub-value is appended AFTER the
+     *                          element counted backward from
+     *                          <code> Countable.LAST </code>.
+     *                          If an index appears more
+     *                          than once then the sub-values will be
+     *                          inserted multiple times at the same
+     *                          location.  Must not be null.
+     *
+     * @return This countable elements, with the sub-value(s) inserted
+     *         at the specified index/indices.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If either of the specified values is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> insert (
+                                                            Countable<VIEW_ITEM> sub_value,
+                                                            long insert_at_index
+                                                            )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Removes the elements of the specified countable value that are
+     * not contained in both this countable elements, leaving
+     * behind only the intersecting or overlapping elements.
+     * </p>
+     *
+     * <p>
+     * Multiple copies of the same element will be kept, even though
+     * this is a set operation at heart.
+     * </p>
+     *
+     * @param that The counbtable value whose element intersections will
+     *             be stored in this countable elements.
+     *             Must not be null.
+     *
+     * @return This countable elements, containing only the
+     *         elements that are contained in both the input and
+     *         that specified value.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If the specified value is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> intersection (
+                                                                  Countable<VIEW_ITEM> that
+                                                                  )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Keeps only the view item(s) (elements / indices / and so on)
+     * from this Countable view which match the specified filter,
+     * removing all other view item(s).
+     * </p>
+     *
+     * @param filter The Filter which will keep or discard view item(s)
+     *               of this Countable view.
+     *               Must not be null.
+     *
+     * @return A filtered view of the source CountableView, containing only
+     *         the view item(s) that were KEPT by the specified filter.
+     *         Can result in an empty countable view, if
+     *         no view item(s) were kept by the filter.
+     *         If the source Countable view was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> keep (
+                                                          Filter<VIEW_ITEM> filter
+                                                          )
+        throws ParametersMustNotBeNull.Violation,
+        ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Inserts padding elements to make the value being built
+     * a specific length.
+     * </p>
+     *
+     * <p>
+     * For example, if the countable elements <code> { 1, 2, 3 } </code>
+     * is padded with element <code> { 0 } </code>
+     * at index <code> { 0 } </code> to reach target length <code> 6 </code>,
+     * the result will be <code> { 0, 0, 0, 1, 2, 3 } </code>.
+     * </p>
+     *
+     * <p>
+     * If there are multiple padding elements then each will be added
+     * in sequence, followed by a repeat of the sequence, and so on,
+     * until one of the elements is added to reach the final target length.
+     * For example, starting from countable elements
+     * <code> { 1, 2, 3 } </code>, padding the start index <code> { 0 } </code>
+     * with <code> { A, B, C } </code> to reach target length <code> 7 </code>
+     * would result in <code> { A, B, C, A, 1, 2, 3 } </code>.
+     * </p>
+     *
+     * <p>
+     * If the padding is to be inserted at multiple locations, then
+     * one sequence of padding is inserted at the first index, then
+     * one sequence at the seond index, and so on, until one sequence
+     * has been inserted at each of the specified indices; then another
+     * sequence is inserted at each index; and so on, until one of the
+     * values inserted at one of the elements causes the countable elements
+     * to reach the target length.  For example, with countable
+     * countable elements <code> { 1, 2, 3 } </code>, padding both the
+     * start and the end indices <code> { 0, 3 } </code> with
+     * padding <code> { A, B, C } </code> to reach target length
+     * <code> 11 </code> would result in
+     * <code> { A, B, C, A, B, 1, 2, 3, A, B, C } </code>.
+     * </p>
+     *
+     * @param padding The element(s) to insert at specific indices
+     *                in this countable elements.  Must not be null.
+     *
+     * @param pad_at_indices Where to insert the padding in the
+     *                       value being built.  Indices less than 0L
+     *                       or greater than or equal to the length
+     *                       of the countable value being built are
+     *                       ignored.  An index greater than
+     *                       <code> Integer.MAX_VALUE </code>
+     *                       causes the the padding to be appended
+     *                       AFTER the index counting backward from
+     *                       <code> Countable.LAST </code>.
+     *                       Must not be null.
+     *
+     * @param target_length How many elements this countable elements
+     *                      should have after the padding has
+     *                      been inserted.  If less than or equal to
+     *                      the length of the value being built
+     *                      (for example, if the target length is 0 or
+     *                      or -1 or length - 1) then no padding
+     *                      will be added.
+     *
+     * @return This CountableView, with the specified padding added.
+     *         However if this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If either of the specified values is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> pad (
+                                                         Countable<VALUE> padding,
+                                                         long pad_at_index,
+                                                         long target_length
+                                                         )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Returns all elements in the given range.
+     * </p>
+     *
+     * <p>
+     * For example, a Countable elements with elements
+     * { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, when the range 1-3
+     * is requested, would result in: { 2, 3, 4 }.
+     * </p>
+     *
+     * <p>
+     * If the end index is less than the right index then the result
+     * is empty.
+     * </p>
+     *
+     * @param start_index !!!
+     *
+     * @param end_index
+     *
+     * @return This Countable elements, containing only
+     *         the elements in the specified index ranges.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If the specified value is an Error or Warning,
+     *         then a new CountableElements constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> range (
+                                                           long start_index,
+                                                           long end_index
+                                                           )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Removes the view item(s) (elements / indices / and so on)
+     * from this Countable view which match the specified filter,
+     * keeping all other view item(s).
+     * </p>
+     *
+     * @param filter The Filter which will remove or keep view item(s)
+     *               of this Countable view.
+     *               Must not be null.
+     *
+     * @return A filtered view of the source CountableView, containing only
+     *         the view item(s) that were not REMOVED by the specified filter.
+     *         Can result in an empty countable view, if
+     *         no view item(s) were kept by the filter.
+     *         If the source Countable view was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> remove (
+                                                            Filter<VIEW_ITEM> filter
+                                                            )
+        throws ParametersMustNotBeNull.Violation,
+        ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Creates a new Countable elements which contains the same
+     * element(s) as this value, repeated the specified number
+     * of times.
+     * </p>
+     *
+     * <p>
+     * Specifying 1 repeat leaves the elements as-is.
+     * </p>
+     *
+     * <p>
+     * For example, if this is a CountableView<Integer, Integer> whose
+     * elements are <code> { A, B } </code>, then calling
+     * <code> repeat ( 3 ) </code> would result in a new Countable
+     * with elements <code> { A, B, A, B, A, B } </code>.
+     * </p>
+     *
+     * @param repetitions The number of times to repeat the pattern
+     *                    of elements.  If the number is less than
+     *                    or equal to 1L then it is ignored and no
+     *                    repetitions are performed.
+     *
+     * @return This countable elements, with its elements
+     *         repeated the specified number of times.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> repeat (
+                                                            long repetitions
+                                                            )
+        throws ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Replaces any and all view items (elements / indices and so on)
+     * matching the specified filter with the specified element value(s).
+     * </p>
+     *
+     * <p>
+     * For example, replacing all instances of <code> { B, C, D } </code>
+     * with replacement <code> { X } </code> inside the countable elements
+     * <code> { A, B, C, D, A, B, C, D, E } </code> would result
+     * in <code> { A, X, A, X, E } </code>.
+     * </p>
+     *
+     * @param sub_value The elements to find and replace in this
+     *                  countable elements.  Must not be null.
+     *
+     * @param replacement The elements to insert in place of each matching
+     *                    sequence.  Can be empty.  Must not be null.
+     *
+     * @return This countable elements, with each and every instance
+     *         of the specified sub value replaced by the specified
+     *         replacement sequence.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If either of the specified values is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> replace (
+                                                             long start_index,
+                                                             long end_index,
+                                                             Countable<VALUE> replacement
+                                                             )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Reverses the order of the element(s) of this Countable elements.
+     * </p>
+     *
+     * @return This countable elements, with its elements
+     *         in reverse order.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> reverse ()
+        throws ReturnNeverNull.Violation;
+
+
+    // !!!;
+    public abstract CountableSelect<VALUE, VIEW_ITEM> select ();
+
+
+    /**
+     * <p>
+     * Re-orders the element(s) of this Countable elements using
+     * the specified rank generator to assign a rank to each indexed
+     * element of this Countable elements.
+     * </p>
+     *
+     * @param ranker Generates the rank for each index'ed element of
+     *               this Countable elements.  For example, a
+     *               PseudoRandom number generator could be used.
+     *               The lower the ranking number generated, the earlier
+     *               in the sequence the corresponding indexed element
+     *               will be placed.  Ties will result in the tied
+     *               indexed elements maintaining their existing relative
+     *               ordering.  If the ranker runs out of ranks, then
+     *               subsequent indexed elements are placed at the end.
+     *               Must not be null.
+     *
+     * @return This Countable elements, re-ordered so that the
+     *         each indexed element is ordered according to the rank
+     *         generated for it by the specified ranker.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract <RANK extends Comparable<? super RANK>>
+        CountableView<VALUE, VIEW_ITEM> shuffle (
+                                                 Value<RANK> ranker
+                                                 )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    /**
+     * <p>
+     * Sorts the element(s) of this Countable elements according to the
+     * specified Order.
+     * </p>
+     *
+     * @param order The Order in which to sort the element(s) of this
+     *              Countable elements.  Must not be null.
+     *
+     * @return This countable elements, with its elements sorted
+     *         according to the specified order.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> sort (
+                                                          Order<VIEW_ITEM> order
+                                                          )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+
+
+    // !!!;
+    public abstract CountableSplit<VALUE, VIEW_ITEM> split ();
+
+
+    /**
+     * <p>
+     * Adds all elements from that specified value which are not already
+     * contained in this countable value being built, leaving the union
+     * of this and that.
+     * </p>
+     *
+     * <p>
+     * Multiple copies of the same element will be kept, even though
+     * this is a set operation at heart.
+     * </p>
+     *
+     * @param that The counbtable value whose element unions will
+     *             be stored in this countable elements.
+     *             Must not be null.
+     *
+     * @return This countable elements, containing all the
+     *         elements from the input and that specified value.
+     *         If this Countable elements was constructed from
+     *         an Error or Warning then it is returned as-is.
+     *         If the specified value is an Error or Warning,
+     *         then a new CountableView constructed from one such,
+     *         with the same violation, is returned.
+     *         Never null.
+     */
+    public abstract CountableView<VALUE, VIEW_ITEM> union (
+                                                           Countable<VIEW_ITEM> that
+                                                           )
+        throws ParametersMustNotBeNull.Violation,
+               ReturnNeverNull.Violation;
+}

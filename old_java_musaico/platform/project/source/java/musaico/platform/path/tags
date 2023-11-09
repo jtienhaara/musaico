@@ -1,0 +1,29 @@
+Path	Path.java	62
+Path.ESCAPED_CHARACTERS	Path.java	73
+Path.ESCAPE_REPLACEMENT	Path.java	78
+Path.Violation	Path.java	109
+Path.Violation	Path.java	191
+Path.Violation	Path.java	229
+Path.child	Path.java	/^    public Path child ()$/
+Path.classContracts	Path.java	82
+Path.depth	Path.java	/^    public int depth ()$/
+Path.equals	Path.java	/^    public boolean equals ($/
+Path.hashCode	Path.java	/^    public int hashCode ()$/
+Path.isAbsolute	Path.java	95
+Path.isAbsolute	Path.java	/^    public boolean isAbsolute ()$/
+Path.leafName	Path.java	/^    public String leafName ()$/
+Path.name	Path.java	/^    public Path name ()$/
+Path.names	Path.java	/^    public String [] names ()$/
+Path.objectContracts	Path.java	87
+Path.parent	Path.java	/^    public Path parent ()$/
+Path.parentNamespace	Path.java	/^    public Path parentNamespace ()$/
+Path.path	Path.java	91
+Path.serialVersionHash	Path.java	67
+Path.serialVersionUID	Path.java	66
+Path.toString	Path.java	/^    public String toString ()$/
+ValidPathString	ValidPathString.java	54
+ValidPathString.DOMAIN	ValidPathString.java	65
+ValidPathString.isValid	ValidPathString.java	/^    public boolean isValid ($/
+ValidPathString.serialVersionHash	ValidPathString.java	59
+ValidPathString.serialVersionUID	ValidPathString.java	58
+ValidPathString.toString	ValidPathString.java	/^    public String toString ()$/

@@ -1,0 +1,70 @@
+Blocking<MULTIPLICITY extends Multiplicity<VALUE>, ELEMENT extends Object>
+{
+    public MULTIPLICITY await ();
+    public void async ( TermProcessor<ELEMENT> );
+}
+
+WithSideEffects<VALUE extends Term<ELEMENT>, ELEMENT extends Object>
+    extends Extension<VALUE, ELEMENT>
+{
+    public VALUE term ();
+    public Idempotent<Countable<SideEffect>, SideEffect> sideEffects ();
+}
+
+WithMetadata<VALUE extends Term<ELEMENT>, ELEMENT extends Object>
+    extends Extension<VALUE, ELEMENT>
+{
+    public VALUE term ();
+    public Idempotent<Countable<Metadata>, Metadata> metadata ();
+}
+
+Typed<VALUE extends Term<ELEMENT>, ELEMENT extends Object>
+{
+    public VALUE term ();
+    public Idempotent<Countable<Type<ELEMENT>>> types ();
+}
+
+Invocation<OUTPUT extends Typed<ELEMENT>, ELEMENT extends Object>
+{
+    public Idempotent<Countable<Typed<ELEMENT>>> outputTypes ();
+    public Idempotent<Countable<Typed<ELEMENT>>> parameters ();
+    public OUTPUT evaluate ();
+}
+
+
+
+
+older:
+
+Term<MIN extends Multiplicity,
+      MAX extends Multiplicity,
+      BLOCKING extends Blockability,
+      IDEMPOTENT extends Idempotency,
+      NORMAL extends Normality,
+      EXTENSION extends Extension>
+
+new Term<One, Many, NonBlocking, Idempotent, Normal, WithSideEffects> ( ... );
+
+
+
+Multiplicity:
+  No, Countable, Finite, Indefinite, Infinite
+  Cyclical, Acyclical
+  Zero, One, Many
+  Unlimited
+
+Blockability:
+  NonBlocking, Blocking, Timeout
+  BlockingOrNot
+
+Idempotency:
+  Idempotent, Unidempotent
+  IdempotentOrNot
+
+Normality:
+  Normal, Abnormal
+  Error, Warning
+
+Extension:
+  Standard
+  WithSideEffects, WithMetadata, WithSideEffectsAndMetadata

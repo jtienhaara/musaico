@@ -1,0 +1,47 @@
+public interface Symbol<SYMBOL extends Symbol>
+  public abstract Type<SYMBOL> type ();
+
+
+public interface Namespace<NAMESPACE extends Symbol>
+    extends Symbol<NAMESPACE>
+  public <SYMBOL extends Symbol>
+    Value<SYMBOL> symbols (
+                           Type<SYMBOL> type
+                           );
+
+
+public interface SymbolTable
+  public <SYMBOL extends Symbol>
+    Value<SYMBOL> symbols (
+                           Type<SYMBOL> type
+                           );
+
+  public <SYMBOL extends Symbol>
+    SymbolTable add (
+                     Value<SYMBOL> symbols
+                     );
+
+  public <SYMBOL extends Symbol>
+    SymbolTable remove (
+                        Type<SYMBOL> type
+                        );
+
+  public <SYMBOL extends Symbol>
+    SymbolTable remove (
+                        Value<SYMBOL> symbols
+                        );
+
+  public <SYMBOL extends Symbol>
+    SymbolTable replace (
+                         Value<SYMBOL> symbols
+                         );
+
+
+Value<VALUE> extends Symbol<VALUE>
+
+Type<VALUE> extends Symbol<Type<VALUE>>
+
+Operation<INPUT, OUTPUT> extends Symbol<Operation<INPUT, OUTPUT>>
+
+
+Type.select () calls SymbolTable.symbols ( Select.TYPE??? ).orNone ()

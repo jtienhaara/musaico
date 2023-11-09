@@ -1,0 +1,14 @@
+
+
+    /**
+     * @see musaico.foundation.typing.Symbol#id()
+     *
+     * Cannot be final, since some Symbols return more specific
+     * IDs than the generic SymbolID (such as Operation and Kind).
+     */
+    @Override
+    public ID id ()
+        throws ReturnNeverNull.Violation
+    {
+        return this.id;
+    }

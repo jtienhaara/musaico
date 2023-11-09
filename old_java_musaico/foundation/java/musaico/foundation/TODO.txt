@@ -1,0 +1,186 @@
+2018-06-01
+
+Restructuring
+=============
+We are throwing away Elements.java (in a sense).
+Countable.java already has everything we need and more.
+We have been bending over backwards trying to make a second
+"ArrayObject" that we don't need.
+
+Old structure and order:
+
+filter
+    composite
+domains
+    generators
+    iterators
+    elements
+    comparability
+    equality
+    number
+    array
+    string
+    time
+contract
+    obligations
+    guarantees
+order
+capability
+    operating
+    permission
+pipeline
+term
+    pipeline
+    multiplicities
+    contracts
+    iterators
+    countable
+    infinite
+    abnormal
+    incomplete
+    expression
+    generators
+    builder
+graph
+operation
+    primitive
+
+
+Restructured:
+
+include
+    filter
+    contract
+    order
+    capability
+    pipeline
+    term
+    graph
+    operation
+
+source
+    procedure (ClassName, StringRepresentation, etc)
+    structure (HashedObject, BloomFilter, etc)
+    iterator
+    filter
+        composite
+        comparability
+        equality
+        number
+        string
+        time
+    contract
+        obligation
+        guarantee
+    order
+    capability
+        operating
+        permission
+    pipeline
+    term
+        structure (was pipeline)
+        multiplicity
+        ??? maybe filter ???
+        contract
+        iterator
+        countable
+        infinite
+        abnormal
+        incomplete
+        expression
+        generator
+        builder
+    graph
+    operation
+        primitive
+
+
+Except we can't do that, because the includes require concrete Contracts
+like Parameter1.MustNotBeNull.
+So restructured again:
+
+include
+    filter
+        composite
+        comparability
+        equality
+        number
+        string
+        time
+    contract
+        obligation
+        guarantee
+    order
+    capability
+    pipeline
+    term
+    graph
+    operation
+
+source
+    procedure (ClassName, StringRepresentation, etc)
+    structure (HashedObject, BloomFilter, etc)
+    iterator
+    filter
+    contract
+    order
+    capability
+        operating
+        permission
+    pipeline
+    term
+        structure (was pipeline)
+        multiplicity
+        ??? maybe filter ???
+        contract
+        iterator
+        countable
+        infinite
+        abnormal
+        incomplete
+        expression
+        generator
+        builder
+    graph
+    operation
+        primitive
+
+
+
+The include/source divide seems pointless now.
+Back to more or less the original, no include/source division:
+
+    procedure (ClassName, StringRepresentation, etc)
+    structure (HashedObject, BloomFilter, etc)
+    iterator
+    filter
+        composite
+        comparability
+        equality
+        number
+        string
+        time
+    contract
+        obligation
+        guarantee
+    order
+    capability
+        operating
+        permission
+    pipeline
+    term
+        structure (was pipeline)
+        multiplicity
+        ??? maybe filter ???
+        contract
+        iterator
+        countable
+        infinite
+        abnormal
+        incomplete
+        expression
+        generator
+        builder
+    graph
+    operation
+        primitive

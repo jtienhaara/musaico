@@ -1,0 +1,43 @@
+An application is more or less an object system.
+
+Musaico processes (and, via Musaico processes, other applications)
+can access the data that an application accesses via virtual memory.
+
+The furthest "swapped out" state is the application not running.
+
+The next "swapped out" state contains documents which have not been loaded
+into memory -- files, database data, and so on.
+
+The first "swapped in" state contains documents that have been loaded
+into objects of some kind in memory.
+
+The next "swapped in" state is useful to Musaico, and contains the field/buffer
+representations of documents.
+
+
+Example: Dia. Suppose we have a patchbays Dia diagram on disk.
+
+An application wants to "grep" that diagram.
+
+Musaico discovers that Dia is currently swapped out.  So swaps Dia in
+by executing it.  Of course this pops up the Dia window; the user can
+interact with it.
+
+Next Musaico sends driver requests to the Dia instance to "swap in"
+the patchbays document.  Dia loads the patchbays diagram and displays it
+on the screen.
+
+Next Musaico sends driver requests to the Dia instance's Dia<->Musaico
+swapper, asking it to swap the diagram into the buffer swap space.
+This has no effect on the user, who can continue editing the diagram.
+
+Now Musaico reads blocks from the Dia instance, searching for some
+text or other.
+
+Meanwhile the user can be editing the diagram, causing the swapped-out
+state to become "dirty".  This induces updates to the swapped-in state.
+
+Of course another user could make changes to the diagram simultaneously
+while the user is editing, by writing to the Dia instance's virtual
+object system, causing the swapped-in states to become dirty, leading
+to the in-memory diagram being updated, and the screen refreshing.

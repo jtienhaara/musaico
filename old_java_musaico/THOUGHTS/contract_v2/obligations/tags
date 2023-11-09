@@ -1,0 +1,493 @@
+Parameter1	Parameter1.java	62
+Parameter1.DependsOn	Parameter1.java	331
+Parameter1.DependsOn.This	Parameter1.java	335
+Parameter1.DependsOn.This.This	Parameter1.java	/^            public This ($/
+Parameter1.DependsOn.This.Violation	Parameter1.java	348
+Parameter1.MustBe	Parameter1.java	85
+Parameter1.MustBe.DomainViolation	Parameter1.java	98
+Parameter1.MustBe.MustBe	Parameter1.java	/^        public MustBe ($/
+Parameter1.MustBeGreaterThanOrEqualToZero	Parameter1.java	129
+Parameter1.MustBeGreaterThanOrEqualToZero.Violation	Parameter1.java	138
+Parameter1.MustBeGreaterThanZero	Parameter1.java	110
+Parameter1.MustBeGreaterThanZero.Violation	Parameter1.java	119
+Parameter1.MustBeInBounds	Parameter1.java	186
+Parameter1.MustBeInBounds.MustBeInBounds	Parameter1.java	/^        public MustBeInBounds ($/
+Parameter1.MustBeInBounds.Violation	Parameter1.java	212
+Parameter1.MustBeInBounds.over	Parameter1.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter1.MustBeLessThanOrEqualToZero	Parameter1.java	167
+Parameter1.MustBeLessThanOrEqualToZero.Violation	Parameter1.java	176
+Parameter1.MustBeLessThanZero	Parameter1.java	148
+Parameter1.MustBeLessThanZero.Violation	Parameter1.java	157
+Parameter1.MustContain	Parameter1.java	222
+Parameter1.MustContain.MustContain	Parameter1.java	/^        public MustContain ($/
+Parameter1.MustContain.Violation	Parameter1.java	235
+Parameter1.MustContainNoDuplicates	Parameter1.java	268
+Parameter1.MustContainNoDuplicates.Violation	Parameter1.java	277
+Parameter1.MustContainNoNulls	Parameter1.java	287
+Parameter1.MustContainNoNulls.Violation	Parameter1.java	296
+Parameter1.MustExclude	Parameter1.java	245
+Parameter1.MustExclude.MustExclude	Parameter1.java	/^        public MustExclude ($/
+Parameter1.MustExclude.Violation	Parameter1.java	258
+Parameter1.MustExcludeClasses	Parameter1.java	306
+Parameter1.MustExcludeClasses.MustExcludeClasses	Parameter1.java	/^        public MustExcludeClasses ($/
+Parameter1.MustExcludeClasses.Violation	Parameter1.java	319
+Parameter1.Parameter1	Parameter1.java	/^    protected Parameter1 ()$/
+Parameter1.serialVersionHash	Parameter1.java	70
+Parameter1.serialVersionUID	Parameter1.java	69
+Parameter2	Parameter2.java	62
+Parameter2.DependsOn	Parameter2.java	329
+Parameter2.DependsOn.Parameter1	Parameter2.java	356
+Parameter2.DependsOn.Parameter1.Parameter1	Parameter2.java	/^            public Parameter1 ($/
+Parameter2.DependsOn.Parameter1.Violation	Parameter2.java	369
+Parameter2.DependsOn.This	Parameter2.java	333
+Parameter2.DependsOn.This.This	Parameter2.java	/^            public This ($/
+Parameter2.DependsOn.This.Violation	Parameter2.java	346
+Parameter2.MustBe	Parameter2.java	85
+Parameter2.MustBe.DomainViolation	Parameter2.java	98
+Parameter2.MustBe.MustBe	Parameter2.java	/^        public MustBe ($/
+Parameter2.MustBeGreaterThanOrEqualToZero	Parameter2.java	127
+Parameter2.MustBeGreaterThanOrEqualToZero.Violation	Parameter2.java	136
+Parameter2.MustBeGreaterThanZero	Parameter2.java	108
+Parameter2.MustBeGreaterThanZero.Violation	Parameter2.java	117
+Parameter2.MustBeInBounds	Parameter2.java	184
+Parameter2.MustBeInBounds.MustBeInBounds	Parameter2.java	/^        public MustBeInBounds ($/
+Parameter2.MustBeInBounds.Violation	Parameter2.java	210
+Parameter2.MustBeInBounds.over	Parameter2.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter2.MustBeLessThanOrEqualToZero	Parameter2.java	165
+Parameter2.MustBeLessThanOrEqualToZero.Violation	Parameter2.java	174
+Parameter2.MustBeLessThanZero	Parameter2.java	146
+Parameter2.MustBeLessThanZero.Violation	Parameter2.java	155
+Parameter2.MustContain	Parameter2.java	220
+Parameter2.MustContain.MustContain	Parameter2.java	/^        public MustContain ($/
+Parameter2.MustContain.Violation	Parameter2.java	233
+Parameter2.MustContainNoDuplicates	Parameter2.java	266
+Parameter2.MustContainNoDuplicates.Violation	Parameter2.java	275
+Parameter2.MustContainNoNulls	Parameter2.java	285
+Parameter2.MustContainNoNulls.Violation	Parameter2.java	294
+Parameter2.MustExclude	Parameter2.java	243
+Parameter2.MustExclude.MustExclude	Parameter2.java	/^        public MustExclude ($/
+Parameter2.MustExclude.Violation	Parameter2.java	256
+Parameter2.MustExcludeClasses	Parameter2.java	304
+Parameter2.MustExcludeClasses.MustExcludeClasses	Parameter2.java	/^        public MustExcludeClasses ($/
+Parameter2.MustExcludeClasses.Violation	Parameter2.java	317
+Parameter2.Parameter2	Parameter2.java	/^    protected Parameter2 ()$/
+Parameter2.serialVersionHash	Parameter2.java	70
+Parameter2.serialVersionUID	Parameter2.java	69
+Parameter3	Parameter3.java	63
+Parameter3.DependsOn	Parameter3.java	330
+Parameter3.DependsOn.Parameter1	Parameter3.java	357
+Parameter3.DependsOn.Parameter1.Parameter1	Parameter3.java	/^            public Parameter1 ($/
+Parameter3.DependsOn.Parameter1.Violation	Parameter3.java	370
+Parameter3.DependsOn.Parameter2	Parameter3.java	380
+Parameter3.DependsOn.Parameter2.Parameter2	Parameter3.java	/^            public Parameter2 ($/
+Parameter3.DependsOn.Parameter2.Violation	Parameter3.java	393
+Parameter3.DependsOn.This	Parameter3.java	334
+Parameter3.DependsOn.This.This	Parameter3.java	/^            public This ($/
+Parameter3.DependsOn.This.Violation	Parameter3.java	347
+Parameter3.MustBe	Parameter3.java	86
+Parameter3.MustBe.DomainViolation	Parameter3.java	99
+Parameter3.MustBe.MustBe	Parameter3.java	/^        public MustBe ($/
+Parameter3.MustBeGreaterThanOrEqualToZero	Parameter3.java	128
+Parameter3.MustBeGreaterThanOrEqualToZero.Violation	Parameter3.java	137
+Parameter3.MustBeGreaterThanZero	Parameter3.java	109
+Parameter3.MustBeGreaterThanZero.Violation	Parameter3.java	118
+Parameter3.MustBeInBounds	Parameter3.java	185
+Parameter3.MustBeInBounds.MustBeInBounds	Parameter3.java	/^        public MustBeInBounds ($/
+Parameter3.MustBeInBounds.Violation	Parameter3.java	211
+Parameter3.MustBeInBounds.over	Parameter3.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter3.MustBeLessThanOrEqualToZero	Parameter3.java	166
+Parameter3.MustBeLessThanOrEqualToZero.Violation	Parameter3.java	175
+Parameter3.MustBeLessThanZero	Parameter3.java	147
+Parameter3.MustBeLessThanZero.Violation	Parameter3.java	156
+Parameter3.MustContain	Parameter3.java	221
+Parameter3.MustContain.MustContain	Parameter3.java	/^        public MustContain ($/
+Parameter3.MustContain.Violation	Parameter3.java	234
+Parameter3.MustContainNoDuplicates	Parameter3.java	267
+Parameter3.MustContainNoDuplicates.Violation	Parameter3.java	276
+Parameter3.MustContainNoNulls	Parameter3.java	286
+Parameter3.MustContainNoNulls.Violation	Parameter3.java	295
+Parameter3.MustExclude	Parameter3.java	244
+Parameter3.MustExclude.MustExclude	Parameter3.java	/^        public MustExclude ($/
+Parameter3.MustExclude.Violation	Parameter3.java	257
+Parameter3.MustExcludeClasses	Parameter3.java	305
+Parameter3.MustExcludeClasses.MustExcludeClasses	Parameter3.java	/^        public MustExcludeClasses ($/
+Parameter3.MustExcludeClasses.Violation	Parameter3.java	318
+Parameter3.Parameter3	Parameter3.java	/^    protected Parameter3 ()$/
+Parameter3.serialVersionHash	Parameter3.java	71
+Parameter3.serialVersionUID	Parameter3.java	70
+Parameter4	Parameter4.java	62
+Parameter4.DependsOn	Parameter4.java	329
+Parameter4.DependsOn.Parameter1	Parameter4.java	356
+Parameter4.DependsOn.Parameter1.Parameter1	Parameter4.java	/^            public Parameter1 ($/
+Parameter4.DependsOn.Parameter1.Violation	Parameter4.java	369
+Parameter4.DependsOn.Parameter2	Parameter4.java	379
+Parameter4.DependsOn.Parameter2.Parameter2	Parameter4.java	/^            public Parameter2 ($/
+Parameter4.DependsOn.Parameter2.Violation	Parameter4.java	392
+Parameter4.DependsOn.Parameter3	Parameter4.java	402
+Parameter4.DependsOn.Parameter3.Parameter3	Parameter4.java	/^            public Parameter3 ($/
+Parameter4.DependsOn.Parameter3.Violation	Parameter4.java	415
+Parameter4.DependsOn.This	Parameter4.java	333
+Parameter4.DependsOn.This.This	Parameter4.java	/^            public This ($/
+Parameter4.DependsOn.This.Violation	Parameter4.java	346
+Parameter4.MustBe	Parameter4.java	85
+Parameter4.MustBe.DomainViolation	Parameter4.java	98
+Parameter4.MustBe.MustBe	Parameter4.java	/^        public MustBe ($/
+Parameter4.MustBeGreaterThanOrEqualToZero	Parameter4.java	127
+Parameter4.MustBeGreaterThanOrEqualToZero.Violation	Parameter4.java	136
+Parameter4.MustBeGreaterThanZero	Parameter4.java	108
+Parameter4.MustBeGreaterThanZero.Violation	Parameter4.java	117
+Parameter4.MustBeInBounds	Parameter4.java	184
+Parameter4.MustBeInBounds.MustBeInBounds	Parameter4.java	/^        public MustBeInBounds ($/
+Parameter4.MustBeInBounds.Violation	Parameter4.java	210
+Parameter4.MustBeInBounds.over	Parameter4.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter4.MustBeLessThanOrEqualToZero	Parameter4.java	165
+Parameter4.MustBeLessThanOrEqualToZero.Violation	Parameter4.java	174
+Parameter4.MustBeLessThanZero	Parameter4.java	146
+Parameter4.MustBeLessThanZero.Violation	Parameter4.java	155
+Parameter4.MustContain	Parameter4.java	220
+Parameter4.MustContain.MustContain	Parameter4.java	/^        public MustContain ($/
+Parameter4.MustContain.Violation	Parameter4.java	233
+Parameter4.MustContainNoDuplicates	Parameter4.java	266
+Parameter4.MustContainNoDuplicates.Violation	Parameter4.java	275
+Parameter4.MustContainNoNulls	Parameter4.java	285
+Parameter4.MustContainNoNulls.Violation	Parameter4.java	294
+Parameter4.MustExclude	Parameter4.java	243
+Parameter4.MustExclude.MustExclude	Parameter4.java	/^        public MustExclude ($/
+Parameter4.MustExclude.Violation	Parameter4.java	256
+Parameter4.MustExcludeClasses	Parameter4.java	304
+Parameter4.MustExcludeClasses.MustExcludeClasses	Parameter4.java	/^        public MustExcludeClasses ($/
+Parameter4.MustExcludeClasses.Violation	Parameter4.java	317
+Parameter4.Parameter4	Parameter4.java	/^    protected Parameter4 ()$/
+Parameter4.serialVersionHash	Parameter4.java	70
+Parameter4.serialVersionUID	Parameter4.java	69
+Parameter5	Parameter5.java	62
+Parameter5.DependsOn	Parameter5.java	329
+Parameter5.DependsOn.Parameter1	Parameter5.java	356
+Parameter5.DependsOn.Parameter1.Parameter1	Parameter5.java	/^            public Parameter1 ($/
+Parameter5.DependsOn.Parameter1.Violation	Parameter5.java	369
+Parameter5.DependsOn.Parameter2	Parameter5.java	379
+Parameter5.DependsOn.Parameter2.Parameter2	Parameter5.java	/^            public Parameter2 ($/
+Parameter5.DependsOn.Parameter2.Violation	Parameter5.java	392
+Parameter5.DependsOn.Parameter3	Parameter5.java	402
+Parameter5.DependsOn.Parameter3.Parameter3	Parameter5.java	/^            public Parameter3 ($/
+Parameter5.DependsOn.Parameter3.Violation	Parameter5.java	415
+Parameter5.DependsOn.Parameter4	Parameter5.java	425
+Parameter5.DependsOn.Parameter4.Parameter4	Parameter5.java	/^            public Parameter4 ($/
+Parameter5.DependsOn.Parameter4.Violation	Parameter5.java	438
+Parameter5.DependsOn.This	Parameter5.java	333
+Parameter5.DependsOn.This.This	Parameter5.java	/^            public This ($/
+Parameter5.DependsOn.This.Violation	Parameter5.java	346
+Parameter5.MustBe	Parameter5.java	85
+Parameter5.MustBe.DomainViolation	Parameter5.java	98
+Parameter5.MustBe.MustBe	Parameter5.java	/^        public MustBe ($/
+Parameter5.MustBeGreaterThanOrEqualToZero	Parameter5.java	127
+Parameter5.MustBeGreaterThanOrEqualToZero.Violation	Parameter5.java	136
+Parameter5.MustBeGreaterThanZero	Parameter5.java	108
+Parameter5.MustBeGreaterThanZero.Violation	Parameter5.java	117
+Parameter5.MustBeInBounds	Parameter5.java	184
+Parameter5.MustBeInBounds.MustBeInBounds	Parameter5.java	/^        public MustBeInBounds ($/
+Parameter5.MustBeInBounds.Violation	Parameter5.java	210
+Parameter5.MustBeInBounds.over	Parameter5.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter5.MustBeLessThanOrEqualToZero	Parameter5.java	165
+Parameter5.MustBeLessThanOrEqualToZero.Violation	Parameter5.java	174
+Parameter5.MustBeLessThanZero	Parameter5.java	146
+Parameter5.MustBeLessThanZero.Violation	Parameter5.java	155
+Parameter5.MustContain	Parameter5.java	220
+Parameter5.MustContain.MustContain	Parameter5.java	/^        public MustContain ($/
+Parameter5.MustContain.Violation	Parameter5.java	233
+Parameter5.MustContainNoDuplicates	Parameter5.java	266
+Parameter5.MustContainNoDuplicates.Violation	Parameter5.java	275
+Parameter5.MustContainNoNulls	Parameter5.java	285
+Parameter5.MustContainNoNulls.Violation	Parameter5.java	294
+Parameter5.MustExclude	Parameter5.java	243
+Parameter5.MustExclude.MustExclude	Parameter5.java	/^        public MustExclude ($/
+Parameter5.MustExclude.Violation	Parameter5.java	256
+Parameter5.MustExcludeClasses	Parameter5.java	304
+Parameter5.MustExcludeClasses.MustExcludeClasses	Parameter5.java	/^        public MustExcludeClasses ($/
+Parameter5.MustExcludeClasses.Violation	Parameter5.java	317
+Parameter5.Parameter5	Parameter5.java	/^    protected Parameter5 ()$/
+Parameter5.serialVersionHash	Parameter5.java	70
+Parameter5.serialVersionUID	Parameter5.java	69
+Parameter6	Parameter6.java	62
+Parameter6.DependsOn	Parameter6.java	329
+Parameter6.DependsOn.Parameter1	Parameter6.java	356
+Parameter6.DependsOn.Parameter1.Parameter1	Parameter6.java	/^            public Parameter1 ($/
+Parameter6.DependsOn.Parameter1.Violation	Parameter6.java	369
+Parameter6.DependsOn.Parameter2	Parameter6.java	379
+Parameter6.DependsOn.Parameter2.Parameter2	Parameter6.java	/^            public Parameter2 ($/
+Parameter6.DependsOn.Parameter2.Violation	Parameter6.java	392
+Parameter6.DependsOn.Parameter3	Parameter6.java	402
+Parameter6.DependsOn.Parameter3.Parameter3	Parameter6.java	/^            public Parameter3 ($/
+Parameter6.DependsOn.Parameter3.Violation	Parameter6.java	415
+Parameter6.DependsOn.Parameter4	Parameter6.java	425
+Parameter6.DependsOn.Parameter4.Parameter4	Parameter6.java	/^            public Parameter4 ($/
+Parameter6.DependsOn.Parameter4.Violation	Parameter6.java	438
+Parameter6.DependsOn.Parameter5	Parameter6.java	448
+Parameter6.DependsOn.Parameter5.Parameter5	Parameter6.java	/^            public Parameter5 ($/
+Parameter6.DependsOn.Parameter5.Violation	Parameter6.java	461
+Parameter6.DependsOn.This	Parameter6.java	333
+Parameter6.DependsOn.This.This	Parameter6.java	/^            public This ($/
+Parameter6.DependsOn.This.Violation	Parameter6.java	346
+Parameter6.MustBe	Parameter6.java	85
+Parameter6.MustBe.DomainViolation	Parameter6.java	98
+Parameter6.MustBe.MustBe	Parameter6.java	/^        public MustBe ($/
+Parameter6.MustBeGreaterThanOrEqualToZero	Parameter6.java	127
+Parameter6.MustBeGreaterThanOrEqualToZero.Violation	Parameter6.java	136
+Parameter6.MustBeGreaterThanZero	Parameter6.java	108
+Parameter6.MustBeGreaterThanZero.Violation	Parameter6.java	117
+Parameter6.MustBeInBounds	Parameter6.java	184
+Parameter6.MustBeInBounds.MustBeInBounds	Parameter6.java	/^        public MustBeInBounds ($/
+Parameter6.MustBeInBounds.Violation	Parameter6.java	210
+Parameter6.MustBeInBounds.over	Parameter6.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter6.MustBeLessThanOrEqualToZero	Parameter6.java	165
+Parameter6.MustBeLessThanOrEqualToZero.Violation	Parameter6.java	174
+Parameter6.MustBeLessThanZero	Parameter6.java	146
+Parameter6.MustBeLessThanZero.Violation	Parameter6.java	155
+Parameter6.MustContain	Parameter6.java	220
+Parameter6.MustContain.MustContain	Parameter6.java	/^        public MustContain ($/
+Parameter6.MustContain.Violation	Parameter6.java	233
+Parameter6.MustContainNoDuplicates	Parameter6.java	266
+Parameter6.MustContainNoDuplicates.Violation	Parameter6.java	275
+Parameter6.MustContainNoNulls	Parameter6.java	285
+Parameter6.MustContainNoNulls.Violation	Parameter6.java	294
+Parameter6.MustExclude	Parameter6.java	243
+Parameter6.MustExclude.MustExclude	Parameter6.java	/^        public MustExclude ($/
+Parameter6.MustExclude.Violation	Parameter6.java	256
+Parameter6.MustExcludeClasses	Parameter6.java	304
+Parameter6.MustExcludeClasses.MustExcludeClasses	Parameter6.java	/^        public MustExcludeClasses ($/
+Parameter6.MustExcludeClasses.Violation	Parameter6.java	317
+Parameter6.Parameter6	Parameter6.java	/^    protected Parameter6 ()$/
+Parameter6.serialVersionHash	Parameter6.java	70
+Parameter6.serialVersionUID	Parameter6.java	69
+Parameter7	Parameter7.java	62
+Parameter7.DependsOn	Parameter7.java	329
+Parameter7.DependsOn.Parameter1	Parameter7.java	356
+Parameter7.DependsOn.Parameter1.Parameter1	Parameter7.java	/^            public Parameter1 ($/
+Parameter7.DependsOn.Parameter1.Violation	Parameter7.java	369
+Parameter7.DependsOn.Parameter2	Parameter7.java	379
+Parameter7.DependsOn.Parameter2.Parameter2	Parameter7.java	/^            public Parameter2 ($/
+Parameter7.DependsOn.Parameter2.Violation	Parameter7.java	392
+Parameter7.DependsOn.Parameter3	Parameter7.java	402
+Parameter7.DependsOn.Parameter3.Parameter3	Parameter7.java	/^            public Parameter3 ($/
+Parameter7.DependsOn.Parameter3.Violation	Parameter7.java	415
+Parameter7.DependsOn.Parameter4	Parameter7.java	425
+Parameter7.DependsOn.Parameter4.Parameter4	Parameter7.java	/^            public Parameter4 ($/
+Parameter7.DependsOn.Parameter4.Violation	Parameter7.java	438
+Parameter7.DependsOn.Parameter5	Parameter7.java	448
+Parameter7.DependsOn.Parameter5.Parameter5	Parameter7.java	/^            public Parameter5 ($/
+Parameter7.DependsOn.Parameter5.Violation	Parameter7.java	461
+Parameter7.DependsOn.Parameter6	Parameter7.java	471
+Parameter7.DependsOn.Parameter6.Parameter6	Parameter7.java	/^            public Parameter6 ($/
+Parameter7.DependsOn.Parameter6.Violation	Parameter7.java	484
+Parameter7.DependsOn.This	Parameter7.java	333
+Parameter7.DependsOn.This.This	Parameter7.java	/^            public This ($/
+Parameter7.DependsOn.This.Violation	Parameter7.java	346
+Parameter7.MustBe	Parameter7.java	85
+Parameter7.MustBe.DomainViolation	Parameter7.java	98
+Parameter7.MustBe.MustBe	Parameter7.java	/^        public MustBe ($/
+Parameter7.MustBeGreaterThanOrEqualToZero	Parameter7.java	127
+Parameter7.MustBeGreaterThanOrEqualToZero.Violation	Parameter7.java	136
+Parameter7.MustBeGreaterThanZero	Parameter7.java	108
+Parameter7.MustBeGreaterThanZero.Violation	Parameter7.java	117
+Parameter7.MustBeInBounds	Parameter7.java	184
+Parameter7.MustBeInBounds.MustBeInBounds	Parameter7.java	/^        public MustBeInBounds ($/
+Parameter7.MustBeInBounds.Violation	Parameter7.java	210
+Parameter7.MustBeInBounds.over	Parameter7.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter7.MustBeLessThanOrEqualToZero	Parameter7.java	165
+Parameter7.MustBeLessThanOrEqualToZero.Violation	Parameter7.java	174
+Parameter7.MustBeLessThanZero	Parameter7.java	146
+Parameter7.MustBeLessThanZero.Violation	Parameter7.java	155
+Parameter7.MustContain	Parameter7.java	220
+Parameter7.MustContain.MustContain	Parameter7.java	/^        public MustContain ($/
+Parameter7.MustContain.Violation	Parameter7.java	233
+Parameter7.MustContainNoDuplicates	Parameter7.java	266
+Parameter7.MustContainNoDuplicates.Violation	Parameter7.java	275
+Parameter7.MustContainNoNulls	Parameter7.java	285
+Parameter7.MustContainNoNulls.Violation	Parameter7.java	294
+Parameter7.MustExclude	Parameter7.java	243
+Parameter7.MustExclude.MustExclude	Parameter7.java	/^        public MustExclude ($/
+Parameter7.MustExclude.Violation	Parameter7.java	256
+Parameter7.MustExcludeClasses	Parameter7.java	304
+Parameter7.MustExcludeClasses.MustExcludeClasses	Parameter7.java	/^        public MustExcludeClasses ($/
+Parameter7.MustExcludeClasses.Violation	Parameter7.java	317
+Parameter7.Parameter7	Parameter7.java	/^    protected Parameter7 ()$/
+Parameter7.serialVersionHash	Parameter7.java	70
+Parameter7.serialVersionUID	Parameter7.java	69
+Parameter8	Parameter8.java	62
+Parameter8.DependsOn	Parameter8.java	329
+Parameter8.DependsOn.Parameter1	Parameter8.java	356
+Parameter8.DependsOn.Parameter1.Parameter1	Parameter8.java	/^            public Parameter1 ($/
+Parameter8.DependsOn.Parameter1.Violation	Parameter8.java	369
+Parameter8.DependsOn.Parameter2	Parameter8.java	379
+Parameter8.DependsOn.Parameter2.Parameter2	Parameter8.java	/^            public Parameter2 ($/
+Parameter8.DependsOn.Parameter2.Violation	Parameter8.java	392
+Parameter8.DependsOn.Parameter3	Parameter8.java	402
+Parameter8.DependsOn.Parameter3.Parameter3	Parameter8.java	/^            public Parameter3 ($/
+Parameter8.DependsOn.Parameter3.Violation	Parameter8.java	415
+Parameter8.DependsOn.Parameter4	Parameter8.java	425
+Parameter8.DependsOn.Parameter4.Parameter4	Parameter8.java	/^            public Parameter4 ($/
+Parameter8.DependsOn.Parameter4.Violation	Parameter8.java	438
+Parameter8.DependsOn.Parameter5	Parameter8.java	448
+Parameter8.DependsOn.Parameter5.Parameter5	Parameter8.java	/^            public Parameter5 ($/
+Parameter8.DependsOn.Parameter5.Violation	Parameter8.java	461
+Parameter8.DependsOn.Parameter6	Parameter8.java	471
+Parameter8.DependsOn.Parameter6.Parameter6	Parameter8.java	/^            public Parameter6 ($/
+Parameter8.DependsOn.Parameter6.Violation	Parameter8.java	484
+Parameter8.DependsOn.Parameter7	Parameter8.java	494
+Parameter8.DependsOn.Parameter7.Parameter7	Parameter8.java	/^            public Parameter7 ($/
+Parameter8.DependsOn.Parameter7.Violation	Parameter8.java	507
+Parameter8.DependsOn.This	Parameter8.java	333
+Parameter8.DependsOn.This.This	Parameter8.java	/^            public This ($/
+Parameter8.DependsOn.This.Violation	Parameter8.java	346
+Parameter8.MustBe	Parameter8.java	85
+Parameter8.MustBe.DomainViolation	Parameter8.java	98
+Parameter8.MustBe.MustBe	Parameter8.java	/^        public MustBe ($/
+Parameter8.MustBeGreaterThanOrEqualToZero	Parameter8.java	127
+Parameter8.MustBeGreaterThanOrEqualToZero.Violation	Parameter8.java	136
+Parameter8.MustBeGreaterThanZero	Parameter8.java	108
+Parameter8.MustBeGreaterThanZero.Violation	Parameter8.java	117
+Parameter8.MustBeInBounds	Parameter8.java	184
+Parameter8.MustBeInBounds.MustBeInBounds	Parameter8.java	/^        public MustBeInBounds ($/
+Parameter8.MustBeInBounds.Violation	Parameter8.java	210
+Parameter8.MustBeInBounds.over	Parameter8.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter8.MustBeLessThanOrEqualToZero	Parameter8.java	165
+Parameter8.MustBeLessThanOrEqualToZero.Violation	Parameter8.java	174
+Parameter8.MustBeLessThanZero	Parameter8.java	146
+Parameter8.MustBeLessThanZero.Violation	Parameter8.java	155
+Parameter8.MustContain	Parameter8.java	220
+Parameter8.MustContain.MustContain	Parameter8.java	/^        public MustContain ($/
+Parameter8.MustContain.Violation	Parameter8.java	233
+Parameter8.MustContainNoDuplicates	Parameter8.java	266
+Parameter8.MustContainNoDuplicates.Violation	Parameter8.java	275
+Parameter8.MustContainNoNulls	Parameter8.java	285
+Parameter8.MustContainNoNulls.Violation	Parameter8.java	294
+Parameter8.MustExclude	Parameter8.java	243
+Parameter8.MustExclude.MustExclude	Parameter8.java	/^        public MustExclude ($/
+Parameter8.MustExclude.Violation	Parameter8.java	256
+Parameter8.MustExcludeClasses	Parameter8.java	304
+Parameter8.MustExcludeClasses.MustExcludeClasses	Parameter8.java	/^        public MustExcludeClasses ($/
+Parameter8.MustExcludeClasses.Violation	Parameter8.java	317
+Parameter8.Parameter8	Parameter8.java	/^    protected Parameter8 ()$/
+Parameter8.serialVersionHash	Parameter8.java	70
+Parameter8.serialVersionUID	Parameter8.java	69
+Parameter9	Parameter9.java	62
+Parameter9.DependsOn	Parameter9.java	329
+Parameter9.DependsOn.Parameter1	Parameter9.java	356
+Parameter9.DependsOn.Parameter1.Parameter1	Parameter9.java	/^            public Parameter1 ($/
+Parameter9.DependsOn.Parameter1.Violation	Parameter9.java	369
+Parameter9.DependsOn.Parameter2	Parameter9.java	379
+Parameter9.DependsOn.Parameter2.Parameter2	Parameter9.java	/^            public Parameter2 ($/
+Parameter9.DependsOn.Parameter2.Violation	Parameter9.java	392
+Parameter9.DependsOn.Parameter3	Parameter9.java	402
+Parameter9.DependsOn.Parameter3.Parameter3	Parameter9.java	/^            public Parameter3 ($/
+Parameter9.DependsOn.Parameter3.Violation	Parameter9.java	415
+Parameter9.DependsOn.Parameter4	Parameter9.java	425
+Parameter9.DependsOn.Parameter4.Parameter4	Parameter9.java	/^            public Parameter4 ($/
+Parameter9.DependsOn.Parameter4.Violation	Parameter9.java	438
+Parameter9.DependsOn.Parameter5	Parameter9.java	448
+Parameter9.DependsOn.Parameter5.Parameter5	Parameter9.java	/^            public Parameter5 ($/
+Parameter9.DependsOn.Parameter5.Violation	Parameter9.java	461
+Parameter9.DependsOn.Parameter6	Parameter9.java	471
+Parameter9.DependsOn.Parameter6.Parameter6	Parameter9.java	/^            public Parameter6 ($/
+Parameter9.DependsOn.Parameter6.Violation	Parameter9.java	484
+Parameter9.DependsOn.Parameter7	Parameter9.java	494
+Parameter9.DependsOn.Parameter7.Parameter7	Parameter9.java	/^            public Parameter7 ($/
+Parameter9.DependsOn.Parameter7.Violation	Parameter9.java	507
+Parameter9.DependsOn.Parameter8	Parameter9.java	517
+Parameter9.DependsOn.Parameter8.Parameter8	Parameter9.java	/^            public Parameter8 ($/
+Parameter9.DependsOn.Parameter8.Violation	Parameter9.java	530
+Parameter9.DependsOn.This	Parameter9.java	333
+Parameter9.DependsOn.This.This	Parameter9.java	/^            public This ($/
+Parameter9.DependsOn.This.Violation	Parameter9.java	346
+Parameter9.MustBe	Parameter9.java	85
+Parameter9.MustBe.DomainViolation	Parameter9.java	98
+Parameter9.MustBe.MustBe	Parameter9.java	/^        public MustBe ($/
+Parameter9.MustBeGreaterThanOrEqualToZero	Parameter9.java	127
+Parameter9.MustBeGreaterThanOrEqualToZero.Violation	Parameter9.java	136
+Parameter9.MustBeGreaterThanZero	Parameter9.java	108
+Parameter9.MustBeGreaterThanZero.Violation	Parameter9.java	117
+Parameter9.MustBeInBounds	Parameter9.java	184
+Parameter9.MustBeInBounds.MustBeInBounds	Parameter9.java	/^        public MustBeInBounds ($/
+Parameter9.MustBeInBounds.Violation	Parameter9.java	210
+Parameter9.MustBeInBounds.over	Parameter9.java	/^            MustBeInBounds<NATURALLY_ORDERED> over/
+Parameter9.MustBeLessThanOrEqualToZero	Parameter9.java	165
+Parameter9.MustBeLessThanOrEqualToZero.Violation	Parameter9.java	174
+Parameter9.MustBeLessThanZero	Parameter9.java	146
+Parameter9.MustBeLessThanZero.Violation	Parameter9.java	155
+Parameter9.MustContain	Parameter9.java	220
+Parameter9.MustContain.MustContain	Parameter9.java	/^        public MustContain ($/
+Parameter9.MustContain.Violation	Parameter9.java	233
+Parameter9.MustContainNoDuplicates	Parameter9.java	266
+Parameter9.MustContainNoDuplicates.Violation	Parameter9.java	275
+Parameter9.MustContainNoNulls	Parameter9.java	285
+Parameter9.MustContainNoNulls.Violation	Parameter9.java	294
+Parameter9.MustExclude	Parameter9.java	243
+Parameter9.MustExclude.MustExclude	Parameter9.java	/^        public MustExclude ($/
+Parameter9.MustExclude.Violation	Parameter9.java	256
+Parameter9.MustExcludeClasses	Parameter9.java	304
+Parameter9.MustExcludeClasses.MustExcludeClasses	Parameter9.java	/^        public MustExcludeClasses ($/
+Parameter9.MustExcludeClasses.Violation	Parameter9.java	317
+Parameter9.Parameter9	Parameter9.java	/^    protected Parameter9 ()$/
+Parameter9.serialVersionHash	Parameter9.java	70
+Parameter9.serialVersionUID	Parameter9.java	69
+ParameterN	ParameterN.java	70
+ParameterN.DependsOn	ParameterN.java	344
+ParameterN.DependsOn.Parameter1	ParameterN.java	364
+ParameterN.DependsOn.Parameter1.Parameter1	ParameterN.java	/^            public Parameter1 ($/
+ParameterN.DependsOn.Parameter2	ParameterN.java	380
+ParameterN.DependsOn.Parameter2.Parameter2	ParameterN.java	/^            public Parameter2 ($/
+ParameterN.DependsOn.Parameter3	ParameterN.java	396
+ParameterN.DependsOn.Parameter3.Parameter3	ParameterN.java	/^            public Parameter3 ($/
+ParameterN.DependsOn.Parameter4	ParameterN.java	412
+ParameterN.DependsOn.Parameter4.Parameter4	ParameterN.java	/^            public Parameter4 ($/
+ParameterN.DependsOn.Parameter5	ParameterN.java	428
+ParameterN.DependsOn.Parameter5.Parameter5	ParameterN.java	/^            public Parameter5 ($/
+ParameterN.DependsOn.Parameter6	ParameterN.java	444
+ParameterN.DependsOn.Parameter6.Parameter6	ParameterN.java	/^            public Parameter6 ($/
+ParameterN.DependsOn.Parameter7	ParameterN.java	460
+ParameterN.DependsOn.Parameter7.Parameter7	ParameterN.java	/^            public Parameter7 ($/
+ParameterN.DependsOn.Parameter8	ParameterN.java	476
+ParameterN.DependsOn.Parameter8.Parameter8	ParameterN.java	/^            public Parameter8 ($/
+ParameterN.DependsOn.Parameter9	ParameterN.java	492
+ParameterN.DependsOn.Parameter9.Parameter9	ParameterN.java	/^            public Parameter9 ($/
+ParameterN.DependsOn.This	ParameterN.java	348
+ParameterN.DependsOn.This.This	ParameterN.java	/^            public This ($/
+ParameterN.DomainObligation	ParameterN.java	96
+ParameterN.MustBeGreaterThanOrEqualToZero	ParameterN.java	203
+ParameterN.MustBeGreaterThanOrEqualToZero.MustBeGreaterThanOrEqualToZero	ParameterN.java	/^        protected MustBeGreaterThanOrEqualToZero (/
+ParameterN.MustBeGreaterThanZero	ParameterN.java	189
+ParameterN.MustBeGreaterThanZero.MustBeGreaterThanZero	ParameterN.java	/^        protected MustBeGreaterThanZero ()$/
+ParameterN.MustBeLessThanOrEqualToZero	ParameterN.java	231
+ParameterN.MustBeLessThanOrEqualToZero.MustBeLessThanOrEqualToZero	ParameterN.java	/^        protected MustBeLessThanOrEqualToZero ()$/
+ParameterN.MustBeLessThanZero	ParameterN.java	217
+ParameterN.MustBeLessThanZero.MustBeLessThanZero	ParameterN.java	/^        protected MustBeLessThanZero ()$/
+ParameterN.MustContain	ParameterN.java	266
+ParameterN.MustContain.MustContain	ParameterN.java	/^        public MustContain ($/
+ParameterN.MustContainNoDuplicates	ParameterN.java	298
+ParameterN.MustContainNoDuplicates.MustContainNoDuplicates	ParameterN.java	/^        protected MustContainNoDuplicates ()$/
+ParameterN.MustContainNoNulls	ParameterN.java	312
+ParameterN.MustContainNoNulls.MustContainNoNulls	ParameterN.java	/^        protected MustContainNoNulls ()$/
+ParameterN.MustExclude	ParameterN.java	282
+ParameterN.MustExclude.MustExclude	ParameterN.java	/^        public MustExclude ($/
+ParameterN.MustExcludeClasses	ParameterN.java	326
+ParameterN.MustExcludeClasses.MustExcludeClasses	ParameterN.java	/^        public MustExcludeClasses ($/
+ParameterN.Obligation	ParameterN.java	172
+ParameterN.Obligation	ParameterN.java	246
+ParameterN.ParameterN	ParameterN.java	/^    protected ParameterN ()$/
+ParameterN.Violation	ParameterN.java	153
+ParameterN.Violation.Violation	ParameterN.java	/^        protected Violation ()$/
+ParameterN.currentDomainObligation	ParameterN.java	144
+ParameterN.currentInspectableData	ParameterN.java	148
+ParameterN.currentObjectUnderContract	ParameterN.java	146
+ParameterN.serialVersionHash	ParameterN.java	78
+ParameterN.serialVersionUID	ParameterN.java	77
+ParametersMustNotBeNull	ParametersMustNotBeNull.java	61
+ParametersMustNotBeNull.CONTRACT	ParametersMustNotBeNull.java	72
+ParametersMustNotBeNull.ParametersMustNotBeNull	ParametersMustNotBeNull.java	/^    protected ParametersMustNotBeNull ()$/
+ParametersMustNotBeNull.Violation	ParametersMustNotBeNull.java	120
+ParametersMustNotBeNull.Violation.Violation	ParametersMustNotBeNull.java	/^        public Violation ($/
+ParametersMustNotBeNull.serialVersionHash	ParametersMustNotBeNull.java	67
+ParametersMustNotBeNull.serialVersionUID	ParametersMustNotBeNull.java	66
+Test1	Test1.java	5
+Test1.contracts	Test1.java	7
+Test1.main	Test1.java	/^    public static void main ( String [] args )$/

@@ -1,0 +1,70 @@
+Copyright (c) 2010 Johann Tienhaara
+
+
+What is an applications system?
+
+An applications system is software which provides sharing and management of resources to applications.
+
+The applications system layer is typically a layer above the operating system, programming language and libraries which an application might rely on.  It provides abstractions of the lower layers to the applications which interact with it, much in the same way an operating systems abstracts the lower layers (hardware and drivers) to higher level software.
+
+An applications system provides support to application developers similar to what libraries, frameworks, middleware and enterprise service buses provide.  The support to application developers may very widely, depending on the applications system.  Its distinguishing feature is not in terms of what support it provides, so much as how it provides it.  Specifically, an applications system is deliberately designed to provide structure and behaviour similar to an operating system.
+
+Whereas an operating system provides manages physical resources (such as memory, disks, networking, user input, screen output, and so on), an applications system manages software resources (such as objects, high-level protocol drivers, file formats, and so on).
+
+For example, an operating system might provide an application developer with an abstract and relatively high-level interface to access data stored on disks as sequences of bytes, referred to by file names.
+
+By way of contrast, an applications system might provide an application developer with an abstract and much higher-level interface to access application objects retrieved from a parser or database client as sequences of fields, referred to by object names.
+
+This contrast will be explored further later on, in the discussion of virtual "object systems".
+
+Of course just as there are many varieties of operating systems, there may some day be many varieties of applications systems.  In particular, a message-oriented micro-kernel approach to applications system probably has numerous benefits.
+
+However the model on which the first applications system, Musaico, is built, is an operating system family that has been thoroughly documented by numerous authors over the course of more than four decades: UNIX and its descendants.  The UNIX model was used to design the kernel of Musaico.
+
+In particular the support provided by a UNIX-inspired applications system to application developers include:
+
+  - Virtual memory.  Large and numerous objects can be
+    swapped in and out from files, databases, HTTP, and
+    so on, depending on the application system's needs.
+    Whether developing an application for a mobile device
+    or for a distributed web environment, the application
+    developer's memory management job is simplified.
+
+  - Multi-processing.  In the applications world, a
+    process often involves interaction with humans or
+    other devices which can take hours, days, weeks,
+    or years.  Processes must of course be runnable
+    concurrently, but also must be persistent, so
+    that network outages, power cycles, and so on
+    do not affect long-term processes.
+
+  - Drivers.  Communications protocols such as D-Bus,
+    file formats such as XML or OpenOffice spreadsheets,
+    database protocols and syntax such as PostgreSQL or
+    MySQL, output formats such as widgets, 3-D or
+    scientific graphs, are all "drivers" in the
+    applications system world.  This allows a division
+    of labour: driver developers build "views" and
+    "models" separately, as drivers; and application
+    developers build "controllers", which interact
+    with abstract models and views.  Porting an
+    application from one graphics library to another,
+    or from one database engine to another, becomes
+    straightforward.
+
+
+What platforms does an applications system run on?
+
+Software is typically closely coupled with a platform.  Traditionally this has meant developing an operating system which is closely tied to a specific machine architecture, or developing an application which is closely tied to a specific operating system, and so on.  An applications system lives at a higher level still, being closely tied to the programming language and libraries it is built upon.
+
+For example, one applications system might be tied to JavaScript running in a web browser, while another applications system might be tied to C libraries running inside an Apache webserver module.  In turn, the Apache webserver module might provide an entirely different applications system environment than a C applications system running on a mobile phone with graphics capabilities.  (Hopefully the two C applications systems at least share the bulk of their code.)
+
+But wait, if an applications system is running in the browser, and another one running in the webserver, then how does one create a "web application"?
+
+The short answer is: one does not create a "web application".  One creates a JavaScript application to run in the browser, and a C application to run in the webserver.  Depending on the nature of the "web application" one wants to develop, one reasonable outcome might be:
+
+  - The view: A customized driver in the browser to display application data.
+  - The controller: JavaScript to interact between the model and the view, controlling the flow of data to user output, and the flow of user input to data and business rules.
+  - The model: an HTTP driver in the browser; and one or more applications and drivers in the webserver.  For example, the webserver applications system might have: an HTTP driver; an SQL driver; and several running applications implementing business rules for the webserver.
+
+This is deliberately at odds with the way most "web applications" are developed, as monolithic monstrosities riddled with close coupling and programming languages and HTML strewn into unreadable, un-parseable horrors.  The applications system forces a "web application" developer to break down the problem she is attempting to solve into small, independent problems which can be solved with small, independent, modular applications, and subsequently can also be reused.

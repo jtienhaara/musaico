@@ -1,0 +1,203 @@
+Copyright (c) 2010 Johann Tienhaara
+
+
+How do I develop an application for an applications system?
+
+Before we delve into developing an application for an applications system, let's discuss the model of application development which has been prevalent since the 1970s.
+
+A traditional application is built atop an operating system, and relies on the underlying machine architecture to provide its building blocks.
+
+Most contemporary applications are built atop UNIX-like operating systems, built on hardware providing 8 bit bytes and 32 or 64 bit words, 4 gigabyyte or larger physical memory address spaces, and storage space measuring in the gigabytes, terabytes or even petabytes.
+
+This has several implications for the traditional application developer:
+
+  - Everything boils down to an 8 bit byte.  All exchanges
+    with "external" systems (disks, networks, and so on)
+    are done at the greatest common denominator level, the byte.
+
+  - The largest chunk of data accessible to physical registers
+    or "primitive" types is some finite multiple of the machine's
+    word size (such as 64 bits or 128 bits).  For example, the
+    largest number usable in a 32 bit environment typically
+    spans 2 4-byte words, or 64 bits.  A reference to memory
+    typically spans 1 word (32 bits in a 32 bit environment,
+    or 64 bits in a 64 bit environment).  And so on.
+
+  - Hardware and operating systems developers have built
+    concepts such as virtual memory, virtual file systems,
+    and so on, to allow application developers to expand
+    beyond the boundaries of these "fixed" environments.
+
+All of the discussion so far has surrounded "traditional" application development, which, by the standards of today's applications, is exceedingly low-level.
+
+The applications system concept is designed to provide a higher level of support to the application developer, while leveraging all of the tried-and-tested concepts of yesteryear.
+
+The pieces of a UNIX-like operating system (including Microsoft and Apple products) look something along the lines of:
+
+  - Application programming interface
+  - Memory management
+  - Persistent storage (file system) management
+  - Networking
+  - Drivers (physical devices)
+
+Similarly, an applications system looks something along the lines of:
+
+  - Application programming interface
+  - Memory management
+  - Persistent storage (object system) management
+  - Inter-process communication
+  - Drivers
+
+Each area of the applications system will be explored further below.
+
+
+What is the application programming interface for an applications system?
+
+This is the layer of classes, objects, procedures, and so on which an application developer uses to interact with the applications system.
+
+For example, an application developer may wish to read a "product" in from a database:
+
+  record = api.open ( "/products/teddy_bear", READ );
+  teddy_bear = record->read ();
+  record->close ();
+
+Or an application developer may wish to write out an "order" to the business rules layer and database:
+
+  my_order = new Order ( teddy_bear );
+  my_order->ship_to ( "Halifax, N.S., Canada" );
+  record = api.open ( "~/orders/12345", WRITE );
+  record->write ( my_order );
+  record->close ();
+
+
+Memory management
+
+The applications system kernel manages the memory requested for use by the application, as well as by drivers and so on.
+
+For example, an application developer may wish to read in all of the products from the database:
+
+  products = api.mmap ( "/products/", READ );
+
+If there are 1,000,000 products listed in the database, most applications would choke when reading such a list into memory.
+
+However the applications system typically "pages" this application data to prevent memory shortages.  Only when a specific region of the product list is requested will the application data be read into memory:
+
+  display = api.open ( "/dev/display", WRITE );
+  display->write ( products->range ( 500, 999 ) );
+  display->close ();
+
+In the above case, 500 products are sent to the "display", rather than all 1,000,000.
+
+Memory management also involves protection and sharing and other advanced concepts beyond the scope of this tutorial.
+
+
+Persistent storage
+
+An applications system provides an "application objects storage layer" which abstracts various persistent storage mechanisms.
+
+For example, an application which executes:
+
+  record = api->open ( "/products/teddy_bear", READ );
+
+Might be reading in the "teddy bear product" from a PostgreSQL or MySQL database; or it might come from an XML file; or it might come from an HTTP/S connection to a webserver; or it might come from a test driver.
+
+The application developer need not know whence the "teddy bear product" object comes.  The application developer only cares that the source is accessible, and the object is created for her.
+
+Meanwhile, if two applications concurrently access the same product, then a sensible applications system will have cached the content by the time the second application reads in the product object:
+
+  record->read ();
+
+The buffer cache is one important aspect of UNIX-inspired applications systems.
+
+
+Inter-process communication
+
+Not all objects should be cached as though they were retrieved from persistent storage.  Some objects arrive across the network as messages from other applications systems.
+
+  record = api.open ( "/dev/message", READ );
+  message = record->read ();
+  record->close ();
+  sales_order = message->payload ();
+
+An applications system worth its weight provides:
+
+  - inter-application messaging within the applications system;
+  - a means for sending messages to / receiving messages from other applications systems; and, in some cases
+  - implementations on multiple platforms (C, Java, JavaScript, and so on), so that applications across platforms can communicate with one another.
+
+
+Drivers
+
+The bulk of an applications system is really in its drivers.  While an application developer decides "what to do", the applications system drivers determine "how to do it".
+
+For example, an application might allow a user to select products and check out with an order.
+
+One applications system might be configured to store products and orders in a database.
+
+Another applications system might provide test data for products, and not even store orders -- simply verify them against expected results.
+
+Another applications system might be configured to retrieve products from a remote webserver, and send orders to a business process management engine.
+
+And so on.
+
+A mature applications system has many drivers to choose from, including GUI drivers, persistent storage drivers, data format drivers (such as JSON, XML, YAML, and so on), protocol drivers (such as EBXML), and so on.  The application developer need only configure a default environment with specific drivers providing specific object system functionality (for example, "/products" mounted on an XML file driver) in order to build and test the product.  Application users then have the freedom of tweaking the applications system to their hearts' content (for example, mounting "/products" on an XML/HTTP/S connection to the developer's webserver).
+
+
+This sounds like magic?
+
+It isn't.
+
+There are two key concepts from the UNIX operating system world which have succeeded above all others:
+
+  - Treat everything as bytes
+  - Treat every stream of bytes as a file
+
+These two important abstractions from the operating system world have their correspondences in the applications system world:
+
+  - Treat everything as fields
+  - Treat every stream of fields as a record
+
+The "field" in the applications system world corresponds to the 8-bit byte in the operating system world, but is a much higher-level data structure.  For example, a field might represent the name of a product and carry some text as its value; or a field might be the date when an order is placed; or a field might even encapsulate an entire product or order.
+
+Fields are read from and written to records.  A record might be an abstraction for an XML file, or a row in a table in a database, or a stream of UTF-8 characters from an HTTP/S connection.  Everything which the application developer needs to "read" or "write" is a record, whether it be a single field, or a set of fields, or a hierarchy of application object data.
+
+  fields = record->read_fields ();
+
+A robust applications system provides interfaces which abstract out even the fields -- so that the only construct the application developer need deal with is the class or structure or application objects in her application:
+
+  my_product = record->read ();
+
+Under the hood, the applications system API converts the stream of fields into the desired application object type.
+
+
+Summing it all up
+
+So to return to the original question: how do I develop an application for an applications system?
+
+Like this:
+
+  products = api->mmap ( "/products/", READ );
+  gui = api->mmap ( "/gui/", READ );
+
+  record = api->open ( "/display", WRITE );
+  record->write ( gui );
+  record->close ();
+
+  input = api->open ( "/display/messages/", READ );
+  while ( message = input->read () )
+  {
+      if ( message->request ()->equals ( "order" ) )
+      {
+          order = message->payload ();
+
+          record = api->open ( "~/orders/", WRITE );
+          record->write ( order );
+          record->close ();
+      }
+      else
+      {
+          ...error...
+      }
+  }
+
+  input->close ();

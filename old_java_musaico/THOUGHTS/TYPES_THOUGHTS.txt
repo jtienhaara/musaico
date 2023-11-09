@@ -1,0 +1,35 @@
+TypingEnvironment
+       |
+  TypeSystem
+       |
+     Type
+
+PrimitiveTypes
+     |_______________
+     |               |
+ MathTypes          etc
+     |___________
+     |           |
+NumberType FractionType
+    /_\
+     |______________________________________________________________
+     |          |           |          |            |               |
+DoubleType  FloatType  IntegerType  LongType  BigIntegerType  BigDecimalType
+
+- No storage casters (so that we can have better type safety at compile
+  time, e.g. TypingEnvironment.create/prepare ( Type<X>, Y extends X ).
+- Caching done only in the TypingEnvironment NOT each individual Instance.
+- Condition handling.  (Maybe a dependency project.)
+
+TypingEnvironment.setConditionHandler ( handler )
+
+<<interface>>
+ConditionHandler<REQUEST extends ?, RESPONSE extends ?, THROWABLE extends Throwable>
++ handle ( REQUEST request, RESPONSE default_response, Throwable condition )
+      : RESPONSE
+      throws THROWABLE
+
+Option 1: throw the incoming condition (if it is of the right type).
+Option 2: throw a new exception etc.
+Option 3: return the default response object.
+Option 4: ???retry???  (Mechanism for this????)

@@ -1,0 +1,1 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!! continue allowing null, removing "throw new BlaBlaException" from filters !!!!!!!!!!!!!!!!!!!!!!!! also use ClassName.of () and set indents for method parameters, also changing protected constructors for singletons to private !!!!!!!!!!!!!!!!!!!!

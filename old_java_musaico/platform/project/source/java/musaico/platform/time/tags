@@ -1,0 +1,90 @@
+AbsoluteTime	AbsoluteTime.java	60
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.AbsoluteTime	AbsoluteTime.java	/^    public AbsoluteTime ($/
+AbsoluteTime.Violation	AbsoluteTime.java	268
+AbsoluteTime.add	AbsoluteTime.java	/^    public Time add ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.calendar	AbsoluteTime.java	/^    public Calendar calendar ($/
+AbsoluteTime.calendarTime	AbsoluteTime.java	/^    public CalendarTime calendarTime ($/
+AbsoluteTime.calendarTime	AbsoluteTime.java	/^    public CalendarTime calendarTime ($/
+AbsoluteTime.calendarTime	AbsoluteTime.java	/^    public CalendarTime calendarTime ($/
+AbsoluteTime.calendarTime	AbsoluteTime.java	/^    public CalendarTime calendarTime ($/
+AbsoluteTime.classContracts	AbsoluteTime.java	70
+AbsoluteTime.compareTo	AbsoluteTime.java	/^    public int compareTo ($/
+AbsoluteTime.convert	AbsoluteTime.java	/^    public static AbsoluteTime [] convert ($/
+AbsoluteTime.date	AbsoluteTime.java	/^    public Date date ()$/
+AbsoluteTime.equals	AbsoluteTime.java	/^    public boolean equals ($/
+AbsoluteTime.hashCode	AbsoluteTime.java	/^    public int hashCode ()$/
+AbsoluteTime.milliseconds	AbsoluteTime.java	/^    public long milliseconds ()$/
+AbsoluteTime.nanoseconds	AbsoluteTime.java	78
+AbsoluteTime.nanoseconds	AbsoluteTime.java	/^    public long nanoseconds ()$/
+AbsoluteTime.seconds	AbsoluteTime.java	75
+AbsoluteTime.seconds	AbsoluteTime.java	/^    public long seconds ()$/
+AbsoluteTime.serialVersionHash	AbsoluteTime.java	65
+AbsoluteTime.serialVersionUID	AbsoluteTime.java	64
+AbsoluteTime.subtract	AbsoluteTime.java	/^    public Time subtract ($/
+AbsoluteTime.toString	AbsoluteTime.java	/^    public String toString ()$/
+CalendarTime	CalendarTime.java	77
+CalendarTime.@SuppressWarnings	CalendarTime.java	/^    @SuppressWarnings("unchecked") \/\/ Calendar.clo/
+CalendarTime.add	CalendarTime.java	/^    public Time add ($/
+CalendarTime.calendar	CalendarTime.java	96
+CalendarTime.classContracts	CalendarTime.java	87
+CalendarTime.create	CalendarTime.java	/^    protected CalendarTime create ($/
+CalendarTime.locale	CalendarTime.java	104
+CalendarTime.lock	CalendarTime.java	92
+CalendarTime.serialVersionHash	CalendarTime.java	82
+CalendarTime.serialVersionUID	CalendarTime.java	81
+CalendarTime.subtract	CalendarTime.java	/^    public Time subtract ($/
+CalendarTime.timezone	CalendarTime.java	100
+ImpossibleTime	ImpossibleTime.java	75
+ImpossibleTime.ImpossibleTime	ImpossibleTime.java	/^    public ImpossibleTime ($/
+ImpossibleTime.add	ImpossibleTime.java	/^    public Time add ($/
+ImpossibleTime.compareTo	ImpossibleTime.java	/^    public int compareTo ($/
+ImpossibleTime.equals	ImpossibleTime.java	/^    public boolean equals ($/
+ImpossibleTime.hashCode	ImpossibleTime.java	/^    public int hashCode ()$/
+ImpossibleTime.milliseconds	ImpossibleTime.java	/^    public long milliseconds ()$/
+ImpossibleTime.nanoseconds	ImpossibleTime.java	88
+ImpossibleTime.nanoseconds	ImpossibleTime.java	/^    public long nanoseconds ()$/
+ImpossibleTime.seconds	ImpossibleTime.java	85
+ImpossibleTime.seconds	ImpossibleTime.java	/^    public long seconds ()$/
+ImpossibleTime.serialVersionHash	ImpossibleTime.java	80
+ImpossibleTime.serialVersionUID	ImpossibleTime.java	79
+ImpossibleTime.subtract	ImpossibleTime.java	/^    public Time subtract ($/
+ImpossibleTime.toString	ImpossibleTime.java	/^    public String toString ()$/
+LocalTime	LocalTime.java	79
+LocalTime.LocalTime	LocalTime.java	/^    public LocalTime ($/
+LocalTime.LocalTime	LocalTime.java	/^    public LocalTime ($/
+LocalTime.LocalTime	LocalTime.java	/^    public LocalTime ($/
+LocalTime.Violation	LocalTime.java	188
+LocalTime.add	LocalTime.java	/^    public Time add ($/
+LocalTime.classContracts	LocalTime.java	90
+LocalTime.now	LocalTime.java	/^    public static final LocalTime now ()$/
+LocalTime.serialVersionHash	LocalTime.java	85
+LocalTime.serialVersionUID	LocalTime.java	84
+LocalTime.subtract	LocalTime.java	/^    public Time subtract ($/
+RelativeTime	RelativeTime.java	75
+RelativeTime.RelativeTime	RelativeTime.java	/^    public RelativeTime ($/
+RelativeTime.Violation	RelativeTime.java	111
+RelativeTime.Violation	RelativeTime.java	190
+RelativeTime.add	RelativeTime.java	/^    public Time add ($/
+RelativeTime.classContracts	RelativeTime.java	85
+RelativeTime.compareTo	RelativeTime.java	/^    public int compareTo ($/
+RelativeTime.equals	RelativeTime.java	/^    public boolean equals ($/
+RelativeTime.hashCode	RelativeTime.java	/^    public int hashCode ()$/
+RelativeTime.milliseconds	RelativeTime.java	/^    public long milliseconds ()$/
+RelativeTime.nanoseconds	RelativeTime.java	93
+RelativeTime.nanoseconds	RelativeTime.java	/^    public long nanoseconds ()$/
+RelativeTime.negate	RelativeTime.java	/^    public RelativeTime negate ()$/
+RelativeTime.seconds	RelativeTime.java	90
+RelativeTime.seconds	RelativeTime.java	/^    public long seconds ()$/
+RelativeTime.serialVersionHash	RelativeTime.java	80
+RelativeTime.serialVersionUID	RelativeTime.java	79
+RelativeTime.subtract	RelativeTime.java	/^    public Time subtract ($/
+RelativeTime.toString	RelativeTime.java	/^    public String toString ()$/
+Time	Time.java	91
+Time.FOREVER	Time.java	113
+Time.MAX_NANOSECONDS	Time.java	99
+Time.MIN_NANOSECONDS	Time.java	103
+Time.NANOSECONDS_PER_SECOND	Time.java	95
+Time.NEVER	Time.java	108

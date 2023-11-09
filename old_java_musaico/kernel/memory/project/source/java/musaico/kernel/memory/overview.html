@@ -1,0 +1,267 @@
+<html>
+<body>
+  <p>
+    Memory management layer.
+  </p>
+
+  <p>
+    Memory in the kernel is represented as a single region of
+    contiguous Fields.  However under the hood the region is
+    broken up into many pieces.
+  </p>
+
+  <p>
+    All kernel members (including modules, such as drivers,
+    object systems, and so on) are allowed to use some physical
+    memory directly, as "module memory".  Access to a given
+    module's memory is restricted to that module only.
+  </p>
+
+  <p>
+    User space applications are always allotted virtual memory.
+    Virtual memory can be shared or private, and can be swapped
+    in or out from different areas (from file storage to in-memory buffers,
+    for example; or from in-memory buffers out to a driver; or
+    from in-memory buffers in to a faster cached object; and
+    so on).
+  </p>
+
+  <p>
+    Virtual memory is broken down into multiple segments, one
+    per purpose or mapping.  For example, a user space application
+    might allocate one small segment for the "code" it will
+    execute, another small segment for general purpose heap data,
+    perhaps another for stack, and finally another segment to map
+    a read-only object from some backing store in an object system.
+    The code and object segments would probably share their
+    paged areas with any other processes using the same code
+    and/or objects, while the heap and stack would be private to
+    the one process.  The code and object paged areas would
+    probably map between physical memory and objects in an object
+    system, while the heap and stack paged areas would probably
+    map between physical memory and some sort of dedicated swap space.
+  </p>
+
+  <p>
+    Each segment's purpose is to control access.  So a given
+    paged area of memory may be shared by multiple processes,
+    but with different segment access controls.  For example,
+    one process may have read/write access to a paged area,
+    while others only have read access to the same paged area.
+    And so on.
+  </p>
+
+  <p>
+    A kernel has only so much physical memory to work with,
+    limited in terms of number of Fields.  (Note that there is
+    a non-linear relationship between number of Fields and
+    number of bytes at the operating system / hardware level!)
+    To be fair, the kernel periodically swaps out chunks of
+    memory (Pages) in order to make room for other users
+    of virtual memory.  When the memory is accessed again, it is
+    swapped back in.
+  </p>
+
+  <p>
+    Swapping between layers of fast and slow memory is done
+    by each paged area.  For example, if a process reads in
+    an object with 10,000 fields from a network protocol driver,
+    then under the hood the kernel might set up a paged area
+    which swaps between buffer memory (fields) and the slower
+    driver.  Whenever a particular field is requested by the
+    user process, the kernel checks to see if the page containing
+    that field position has already been read in.  If so, the
+    field can be returned immediately.  If not, the kernel tells
+    the paged area to swap in the page containing that field.
+    The paged area might then read in a block of, say, 256 fields
+    from the network protocol driver, so that the field (and a number
+    of its neighbours) is now in buffer memory.  Then the kernel
+    can return the requested field.  This process of the paged
+    area is called swapping, and is induced whenever a position
+    within virtual memory induces a page fault (the page containing
+    that field position must be swapped in).
+  </p>
+
+  <p>
+    Different paged areas may have different layers of memory
+    to swap through.  For example, a paged area for some
+    particular task might retrieve data from remote sources, swap
+    them into local storage, swap the local storage into buffer
+    memory, and even swap the buffer memory into a "fast cache"
+    (which relieves the need for field-structured data and allows
+    the process to work directly on a mutable object).  Such a
+    paged area might be the basis of a kernel which accesses
+    distributed objects, for example.
+  </p>
+
+  <p>
+    Another implementation might swap full-sized images
+    into thumbnails for fast (but low-resolution) access,
+    and then swap back out to slow (but high-resolution)
+    images when the faster access is no longer needed.
+  </p>
+
+  <p>
+    Typically a kernel's hierarchy of memory objects
+    looks something like the following.  (Note that many of
+    the classes in a typical kernel's memory management
+    layer are not contained in the memory module itself.
+    For example, many of the paged area related classes
+    are in the "kernel/swappers" module.  This is because
+    they depend on other modules, such as the "kernel/objectsystem"
+    and "kernel/driver" modules.)
+  </p>
+
+  <p>
+    At the API level, users of kernel memory allocate and free
+    Buffers of Fields using some sort of Memory:
+  </p>
+
+  <pre>
+                      Memory
+                      + allocate ( Size ): Buffer
+                      + free ( Buffer )
+                         /_\
+               ___________|____________________________
+              |                     |                  |
+              V 1         1         V 0..n             V 0..n
+          PhysicalMemory <----- ModuleMemory      VirtualMemory
+         (shared by all        (physical memory  (per process / module /
+          members of kernel)    for modules only, task / and so on)
+              .                 controls access)       .
+              .                     .                  .
+              . allocates           . allocates        . allocates
+              .                     .                  .
+              V                     V                  V
+         SimpleBuffer            relies on          VirtualBuffer
+      (in-memory fields)       PhysicalMemory,      (Paged memory,
+                             but adds restrictions   see below)
+  </pre>
+
+  <p>
+    The bulk of the kernel memory module is dedicated to
+    providing the infrastructure for virtual memory.  A VirtualBuffer
+    is a fairly complex Buffer of Fields which, though it pretends
+    to the caller to give instant access to in-memory Field data,
+    actually hides several layers of security and memory management:
+  </p>
+
+  <pre>
+                                                            SwapDaemon
+                                                           (periodically
+                                                            synchronizes
+                                                            dirty Pages)
+                                                                  |
+                                                                1 V
+                                                               Paging
+                                                         + dirty ( Page )
+                                                                  ^ 1
+                                                                  |___________
+                                                  VirtualBuffer               |
+                                                         | 0..n               |
+                                                         |                    |
+                               1               1..n      V 1                  |
+                  PagedArea  <----------------------- Segment                 |
+         (maps memory <-> storage,       (controls access to virtual memory,  |
+          can be shared between                   never shared between        |
+          segments, users, processes)                 processes               |
+          ___________|___________                                             |
+         |                       |                                            |
+         V 0..n                1 V                                            |
+      Swapper                PageTable <---------------------------------------
+     (swaps physical             |
+      pages in/out)              |
+       |      |                  |
+       V out  V in               V 1..n
+       SwapState <------------- Page
+                  pageSwapState /_\
+                      ___________|___________
+                     |           |           |
+        CachedObjectPage     BufferPage    BlockPage
+        (a real object,     (a Buffer of  (a block of Fields
+         for fastest         in-memory     in swap space or in
+         access)             Fields)       an object system)
+             |                   |           |
+           1 V                 1 V         1 V
+           Object              Buffer      ONode (see kernel/objectsystem)
+                                 |
+                            0..n V
+                               Field
+  </pre>
+
+  <p>
+    The swapping of pages of virtual memory happens between
+    SwapStates.  Each Page of virtual memory represents a
+    Region of Fields in some particular SwapState.  For
+    example, a Page might represent an array of 16 Fields
+    in a "swapped-into-physical-memory" SwapState.
+    Another Page might represent an array of 256 Fields
+    in a "swapped-out-to-persistent-storage" SwapState.
+    Multiple Pages make up a VirtualMemory, and each Page
+    of a VirtualMemory can be in a different SwapState
+    the other Pages at any given time.  Only when needed
+    is a Page swapped into a "more-swapped-in" level of
+    virtual memory.  Also, when necessary, Pages are
+    swapped back out again to free up space.
+  </p>
+
+  <p>
+    Between every pair of SwapStates in a kernel, a
+    Swapper reads in and writes out Pages to / from the
+    next higher or lower SwapState.
+  </p>
+
+  <pre>
+      ExampleSwapStates:
+      +------------------------------------------------------+
+      |  SwapState: swapped way out to a remote web server.  |
+      +------------------------------------------------------+
+                                  ^
+                                  | Swapper
+                                  v
+      +------------------------------------------------------+
+      |  SwapState: swapped out to a local database server.  |
+      +------------------------------------------------------+
+                                  ^
+                                  | Swapper
+                                  v
+      +------------------------------------------------------+
+      |  SwapState: swapped in to physical Buffer memory.    |
+      +------------------------------------------------------+
+                                  ^
+                                  | Swapper
+                                  v
+      +------------------------------------------------------+
+      |  SwapState: swapped way in to fast cache.            |
+      +------------------------------------------------------+
+  </pre>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009, 2010, 2011, 2012 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

@@ -1,0 +1,11 @@
+long = 64 bits
+max 64 nodes, 64 arcs per graph
+64 sub-graphs
+
+graphs       = Graph<NODE, ARC> [ 64 ]
+nodes        = NODE [ 64 ]
+arcs         = ARC  [ 64 ]
+arcsFrom     = long [ 64 ]
+arcsToGraphs = long [ 64 ]
+arcsToNodes  = long [ 64 ]
+nodeArcsFrom = naw bits won't work need to be ordered

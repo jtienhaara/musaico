@@ -1,0 +1,6 @@
+Expected\ build\ ()\ to\ throw\ NullPointerException\ when\ the\ source\ and\ target\ have\ not\ yet\ been\ set = Expected build () to throw NullPointerException when the source and target have not yet been set
+Expected\ build\ ()\ to\ throw\ NullPointerException\ when\ the\ source\ node\ has\ not\ yet\ been\ set = Expected build () to throw NullPointerException when the source node has not yet been set
+Expected\ build\ ()\ to\ throw\ NullPointerException\ when\ the\ target\ node\ has\ not\ yet\ been\ set = Expected build () to throw NullPointerException when the target node has not yet been set
+Expected\ from\ (\ null\ )\ to\ throw\ NullPointerException = Expected from ( null ) to throw NullPointerException
+Expected\ to\ (\ null\ )\ to\ throw\ NullPointerException = Expected to ( null ) to throw NullPointerException
+Received\ trigger\ [%trigger%] = Received trigger [%trigger%]

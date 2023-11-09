@@ -1,0 +1,101 @@
+Space
++ origin () : Position
++ none () : Position
++ min () : Position
++ max () : Position
++ from ( Position ) : PositionExpression
++ expr ( Size ) : SizeExpression
++ expr ( Region ) : RegionExpression
++ ordering () : Ordering<Position>
++ all () : Region
++ none () : Region
+
+PositionExpression
++ to ( Position ) : Region
++ add ( Size ) : Position
++ step ( long ) : Position
++ subtract ( Size ) : Position
++ subtract ( Position ) : Size
+
+SizeExpression
++ add ( Size ) : Size
++ subtract ( Size ) : Size
++ multiply ( double ) : Size
++ divide ( double ) : Size
+
+RegionExpression
++ invert () : Region
++ union ( Region ) : Region
++ intersection ( Region ) : Region
++ difference ( Region ) : Region
++ subtract ( Region ) : Region
++ split ( long ) : SparseRegion
++ filter ( Filter<Position> ) : Region
++ from ( Position ) : PositionExpression
+
+Region
++ start () : Position
++ end () : Position
++ size () : Size
++ contains ( Position ) : boolean
++ iterator () : Iterator<Position>
++ space () : RegionExpression
+
+SparseRegion : Region
++ startRegion () : Region
++ endRegion () : Region
++ regionsSize () : Size
++ containsRegion ( Region ) : boolean
++ regionsIterator () : Iterator<Region>
+
+Position
++ space () : Space
+
+
+
+
+
+
+
+Space<X>
++ origin () : Position<X>
++ none () : Position<X>
++ min () : Position<X>
++ max () : Position<X>
++ from ( Position<X> ) : FromPosition<X>
++ filter ( Region<X>, Filter<Position<X>> ) : Region<X>
++ step ( Position<X>, ? Size<X>, ? long ) : Position<X>
++ ordering () : Ordering<X>
++ region ( Region<X> ) : RegionBuilder<X>
++ all () : Region<X>
++ none () : Region<X>
+
+FromPosition<X>
++ to ( Position<X> ) : Region<X>
++ add ( Size<X> ) : Position<X>
++ subtract ( Size<X> ) : Position<X>
++ subtract ( Position<X> ) : Size<X>
+
+RegionBuilder<X>
++ invert () : Region<X>
++ union ( Region<X> ) : Region<X>
++ intersection ( Region<X> ) : Region<X>
++ difference ( Region<X> ) : Region<X>
++ subtract ( Region<X> ) : Region<X>
+
+Region<X>
++ start () : Position<X>
++ end () : Position<X>
++ size () : Size<X>
++ contains ( Position<X> ) : boolean
++ space () : Space<X>
++ iterator () : Iterator<Position<X>>
+
+SparseRegion<X> : Region<X>
++ startRegion () : Region<X>
++ endRegion () : Region<X>
++ regionsSize () : Size<Long>
++ containsRegion ( Region<X> ) : boolean
+
+Position<X>
++ space () : Space<X>

@@ -1,0 +1,96 @@
+package !!!;
+
+import junit.framework.JUnit4TestAdapter;
+
+import org.jmock.Mockery;
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JMock;
+import org.jmock.integration.junit4.JUnit4Mockery;
+import org.jmock.lib.legacy.ClassImposteriser;
+
+import org.junit.Rule;
+import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import org.junit.rules.ExpectedException;
+
+
+/**
+ * <p>
+ * !!! test cases for !!!
+ * </p>
+ *
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ * <hr> </hr>
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ *
+ * <pre>
+ * Copyright (c) 2016-2018 Johann Tienhaara
+ * All rights reserved.
+ *
+ * This file is part of Musaico.
+ *
+ * Musaico is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Musaico is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Musaico.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+ * </pre>
+ */
+public class !!!Tests
+{
+    /**
+     * <p>
+     * Tests that !!!
+     * </p>
+     */
+    @Test
+    public void !!! ()
+    {
+        !!!;
+
+        fail ( "Write test !!!" );
+    }
+
+
+    /**
+     * !!! Expect an exception:
+     */
+    @Rule public ExpectedException thrown = ExpectedException.none ();
+    @Test
+    @SuppressWarnings("unchecked") // Generic array Filter<String> []
+    public void testAndConstructorNullArray ()
+    {
+        thrown.expect ( NullPointerException.class );
+
+        And<String> under_test;
+        Class<Exception> expected_exception_class;
+        Class<Exception> actual_exception_class;
+
+        // 1. And ( (Filter<String>[]) null )
+        //    throws NullPointerException
+        under_test = new And<String> ( (Filter[]) null );
+    }
+}

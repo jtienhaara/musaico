@@ -1,0 +1,60 @@
+Time
+|
++- ImpossibleTime
+|  (BEGINNING, END, etc)
+|
++- AbsoluteTime
+|  |
+|  +- LocalTime
+|  |  (milliseconds only in Java, settable by system user)
+|  |
+|  +- UniversalTime
+|  |  (e.g. from an internet time server or NTP server etc)
+|  |
+|  +- CalendarTime
+|  |  (contains a Celandar representation of a fixed time, for use with
+|  |   CalendarRelativeTimes)
+|  |
+|  +- StopwatchTime
+|     (nanoseconds only in Java)
+|
++- RelativeTime
+   |
+   +- CalendarRelativeTime
+      |
+      +- CalendarOffset
+      |  |
+      |  +- Nanoseconds, Milliseconds, Seconds, Minutes, Hours, Days, Weeks,
+      |     Months, Years, Decades, Centuries, Millenia
+      |
+      +- CalendarEvent
+         |
+         +- UNIXTimeRunsOut etc
+         |
+         +- CalendarPeriodicEvent
+            |
+            +- Next, Previous
+
+CalendarPeriod
+|
++- Monday, Tuesday, Wednesday, Thursday, Friday, Saturday,
+   Sunday, January, February, March, April, May, June, July,
+   August, September, October, November, December,
+   NewYearsEve, NewYearsDay, ChineseNewYear, FamilyDay.ALBERTA,
+   FamilyDay.ONTARIO, GoodFriday, EasterMonday, VictoriaDay.CANADA,
+   CanadaDay, IndependenceDay, CivicDay.CANADA, LabourDay,
+   ThanksGiving.CANADA, ThanksGiving.USA, RemembranceDay,
+   ChristmasEve, ChristmasDay, BoxingDay, Ramadan, etc
+
+CalendarTime
++ calendar () : Calendar
+
+CalendarRelativeTime
++ modifyCalendar ( Calendar ) : void
+
+CalendarEvent --|> Filter<Time>
++ filter ( Time ) : Filter.State
+
+
+CalendarPeriod --|> Filter<Time>
++ filter ( Time ) : Filter.State

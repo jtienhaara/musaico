@@ -1,0 +1,17 @@
+new Schedule (
+
+  // first iteration:
+  new Now (),
+    // or new AfterNSeconds ( BigDecimal.TEN )
+    // or new AtTime ( !!!??? )
+
+  // subsequent iterations:
+  new AfterNSeconds ( BigDecimal.TEN )
+    // or new AtTime ( !!!??? )
+
+  // # of times to iterate:
+  new Forever ()
+    // or new Once ()
+    // or new Repeatedly ( 1, 17 ) 1-17 tries
+
+  );

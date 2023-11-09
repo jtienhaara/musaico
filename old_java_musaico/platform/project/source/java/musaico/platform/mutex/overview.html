@@ -1,0 +1,144 @@
+<html>
+<body>
+  <p>
+    Mutual exclusion for complex locking.
+  </p>
+
+  <p>
+    This library provides a means of locking multiple objects at
+    once, avoiding the dining philosophers problem inherent to using
+    nested synchronized () blocks for mutually exclusive access to
+    multiple objects at once.
+  </p>
+
+  <p>
+    The code for move/rename in Linux, for example, relies on nested
+    spinlocks and a great big comment requiring developers to always
+    lock the 2 objects in the same sequence.  This library is designed
+    to help avoid that kind of "be on your best behaviour" wishful
+    thinking.
+  </p>
+
+  <p>
+    It is based on
+    <a href="http://www.cs.utexas.edu/users/misra/scannedPdf.dir/DrinkingPhil.pdf">
+        the Chandy / Misra solution to the dining philosophers
+        problem
+    </a>.  Note that only the dining philosophers solution is
+    needed for our situation; we do not need the drinking philosophers
+    solution.
+  </p>
+
+  <p>
+    In Java, mutually exclusive access to one or more objects is
+    typically granted via code such as:
+  </p>
+
+  <pre>
+      MutexLock mutex_lock = new MutexLock ( resource1.mutex (),
+                                             resource2.mutex (),
+                                             resource3.mutex (),
+                                             ... );
+      mutex_lock.lock ();
+      try
+      {
+          ...do stuff...
+      }
+      finally
+      {
+          mutex_lock.unlock ();
+      }
+  </pre>
+
+  <p>
+    Of course in order to provide mutual exclusion, the resources
+    have to have immutable Mutexes to give out in the first place!
+    Each object to lock has a <code> Mutex mutex () </code>
+    method, and everyone who wants to access the resource with
+    mutual exclusion MUST use MutexLocks (not
+    <code> synchronized </code> blocks and so on).
+  </p>
+
+  <p>
+    Some systems (such as much of Musaico) might introduce security
+    checks in the request for a mutex, in order to prevent
+    unauthorized code from locking an object.  For example,
+    a lockable object might provide a
+    <code> Mutex mutex ( Credentials ) </code> method, so that
+    anyone wishing to lock the resource must request the Mutex
+    with valid authorization before the Mutex is returned to the
+    caller.
+  </p>
+
+  <p>
+    Under the hood, each mutex ()-able object might or might not do any
+    synchronization during operations that must be atomic.
+    Atomic code can check that the current thread of execution
+    does have the resource's mutex locked, and throw a
+    MutexLockedGuarantee.Violation runtime exception if the current
+    thread does not have the Mutex locked:
+  </p>
+
+  <pre>
+      public void doSomethingAtomic ()
+          throws MutexLockedGuarantee.Violation
+      {
+          Contracts.check ( MutexLockedGuarantee.CONTRACT, // Locked obligation
+                            this,                          // Lockable object
+                            this.mutex () );               // The mutex
+
+          ...Now the mutex is guaranteed to be locked by the current thread...
+      }
+  </pre>
+
+  <p>
+    Using the terminology of the Chandry / Misra algorithm:
+  </p>
+
+  <ul>
+    <li> The dining "philosopher" is a MutexLock in this library. </li>
+    <li> The "fork" is a Fork object in this library. </li>
+    <li> The "token" is a Dibs object in this library. </li>
+    <li> The food is a Mutex object in this library. </li>
+  </ul>
+
+  <p>
+    Thus a MutextLock (philosopher) starts out hungry and waits to get
+    the Fork from every MutexLock (philosopher) competing for a shared
+    meal (Mutex).  Once the MutexLock (philosopher) has all the Forks she
+    needs, she eats, so the thread which locked the Mutex can
+    perform its work, then release the lock, killing the philosopher
+    with hemlockso that she no longer competes for any meals, and
+    the remaining philosophers at the table can lock the Mutexes they need
+    (and eat) using the same mechanism.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2011, 2012, 2013 Johann Tienhaara <jtienhaara@yahoo.com>
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

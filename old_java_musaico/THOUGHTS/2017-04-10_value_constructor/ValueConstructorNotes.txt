@@ -1,0 +1,282 @@
+Type<VALUE>
+    extends OperationPipeline.OperationTap<VALUE>
+
+
+Can my_type.apply ( Double x )
+           .apply ( Double y )
+           .apply ( Double z )
+           .output () : Point
+be considered an operation pipeine?
+
+Eventually<VALUE> is either:
+Operation<X, VALUE>
+Or:
+Operation<X, Eventually<VALUE>>
+
+Eventually<VALUE>
+    Operation<X, VALUE> : Eventually<VALUE>
+    Curry<X, Eventually<VALUE>> : Eventually<VALUE>
+
+Need to keep Type.select (), Type.from ( Term<VALUE> ).
+when (), group (), orderBy (), etc are sort of pointless.
+
+Eventually<VALUE> : Tap<Term<VALUE>>
+    Term<VALUE> : Eventually<VALUE>
+    Operation<X, VALUE> : Eventually<VALUE>
+    Curry<X, Eventually<VALUE>> : Eventually<VALUE>
+
+Term<VALUE> can't be applied.
+Operation<X, VALUE> can be applied to Term<X> in order to get Term<VALUE>.
+Curry<X, Eventually<VALUE>> is one of:
+    Curry<X, Term<VALUE>> can be applied to Term<X> to get Term<VALUE>. <-Op!
+    Curry<X, Operation<X, VALUE>> applied to Term<X>=Term<Operation<X, VALUE>>
+    Curry<X, Curry<X, ...>> etc.
+
+Term<VALUE> : Eventual<VALUE>
+Operation<X, Eventual<VALUE>> : Eventual<VALUE>
+But Operation<X, FOO> is NOT an Eventual<VALUE>!
+
+So maybe:
+
+Term<VALUE> : Eventual<VALUE>
+Constructor<X, EVENTUAL extends Eventual<VALUE>, VALUE>
+    : Operation<X, EVENTUAL>,
+      Eventual<VALUE>
+
+
+Type<VALUE>
+    construct () : Eventual<VALUE>
+OR Type<VALUE> : Eventual<VALUE>
+
+Kind<X, EVENTUAL extends Eventual<Type<VALUE>>, VALUE>
+    : Constructor<X, EVENTUAL, VALUE>
+
+
+Constructor<Double, Constructor<Double, Constructor<Double, Term<double []>, double []>>> vector_maker;
+final double [] vector =
+    vector_maker.apply ( Term x ) // Returns Constructor.
+                .apply ( Term y ) // Returns Constructor.
+                .apply ( Term z ) // Returns Term.
+        .orNull ();
+
+Eventual<VALUE> is package-private and has a method that must be implemented,
+so everybody HAS to choose to implement either Term<VALUE>, Type<VALUE>
+or Constructor<VALUE>.
+
+Would be nice to make it impossible to implement Type<VALUE> without also
+choosing EITHER to implement Term<VALUE> (unlikely) OR Constructor<VALUE>.
+
+Maybe the construct () method is the best approach...
+
+final Term<double []> vector =
+    vector_type.construct ().apply ( x ).apply ( y ).apply ( z ).orNull ();
+
+The problem is that then every type has to be defined with 1 or
+more additional parameters: Type1<X, Term/Type<...>, VALUE> or etc.
+Makes use of Types awkward when we care nothing about the constructor.
+
+
+
+*********************************************************************
+
+
+2017-04-11
+
+Construction<VALUE extends Object>
+    Term<VALUE> : Construction<VALUE>
+        + constructor () : Constructor<VALUE> <-- specify when overridden.
+    Operation<X extends Object,
+              CONSTRUCTION extends Construction<VALUE>,
+              VALUE extends Object> : Construction<VALUE>,
+                                      Constructor<VALUE>
+        + apply ( Term<X> ) : CONSTRUCTION
+        ??? + constructor () : Constructor<VALUE> <-- specify when overridden.
+    Curried<CONSTRUCTOR extends Constructor<VALUE>,
+            X extends Object,
+            Y extends Object,
+            CONSTRUCTION extends Construction<VALUE>,
+            VALUE extends Object> : Construction<VALUE>,
+                                    Constructor<VALUE> < also implied by : Op
+                                    Operation<Y, CONSTRUCTION, VALUE>
+        + constructor () : CONSTRUCTOR
+        + input () : Term<X>
+        + apply ( Term<Y> ) : CONSTRUCTION
+
+Constructor<VALUE extends Object>
+    Type<VALUE> : Constructor<VALUE>
+        + construct () : Construction<VALUE> <-- specify when overridden.
+    Operation<X extends Object,
+              CONSTRUCTION extends Construction<VALUE>,
+              VALUE extends Object> : Construction<VALUE>,
+                                      Constructor<VALUE>
+        + apply ( Term<X> ) : CONSTRUCTION
+    Curried<CONSTRUCTOR extends Constructor<VALUE>,
+            X extends Object,
+            Y extends Object,
+            CONSTRUCTION extends Construction<VALUE>,
+            VALUE extends Object> : Construction<VALUE>,
+                                    Constructor<VALUE> < also implied by : Op
+                                    Operation<Y, CONSTRUCTION, VALUE>
+        + constructor () : CONSTRUCTOR
+        + input () : Term<X>
+        + apply ( Term<Y> ) : CONSTRUCTION
+
+Type.construct () -> Term<VALUE> if singleton,
+                     otherwise (almost) always Operation<...VALUE>
+                     (probably never Curried<...>)
+
+Term.constructor () -> Type<VALUE>
+                       or Curried<..., VALUE>
+                       etc.
+
+Maybe a Type *can* be a Construction<Type<VALUE>>, so that it
+can provide the type constructors / Kind / etc.
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2017-04-12
+
+Construction<VALUE extends Object>
+    Term<VALUE> : Construction<VALUE>
+        + constructor () : Constructor<VALUE> <-- specify when overridden.
+               eg Many<VALUE, CONSTRUCTOR extends Constructor<VALUE>>
+                  and new Many<VALUE, MyConstructor<VALUE>> ( my_constr., ... )
+    Applied<CONSTRUCTOR extends Constructor<VALUE>,
+            INPUT extends Object,
+            VALUE extends Object> : Construction<VALUE>
+        + constructor () : CONSTRUCTOR
+        + input () : Term<INPUT>
+
+Constructor<VALUE extends Object>
+    Type<VALUE> : Constructor<VALUE>
+        + construct () : Construction<VALUE> <-- specify when overridden.
+    Operation<INPUT extends Object,
+              CONSTRUCTION extends Construction<VALUE>,
+              VALUE extends Object> : Constructor<VALUE>
+        + apply ( Term<INPUT> ) : CONSTRUCTION
+
+Curried<CONSTRUCTOR extends Constructor<VALUE>,
+        CURRIED_INPUT extends Object,
+        INPUT extends Object,
+        CONSTRUCTION extends Construction<VALUE>,
+        VALUE extends Object> : Applied<CONSTRUCTOR,
+                                        CURRIED_INPUT,
+                                        VALUE>,
+                                Operation<INPUT,
+                                          CONSTRUCTION,
+                                          VALUE>
+        + constructor () : CONSTRUCTOR
+        + input () : Term<CURRIED_INPUT>
+        + apply ( Term<INPUT> ) : CONSTRUCTION
+
+
+Type.construct () -> Term<VALUE> if singleton,
+                     otherwise (almost) always Operation<...VALUE>
+                     (probably never Curried<...>)
+
+Term.constructor () -> Type<VALUE>
+                       or Curried<..., VALUE>
+                       etc.
+
+e.g. Vector3<VALUE extends Number>
+Type<VALUE>, VALUE>, Type<VALUE>, VALUE>, Type<VALUE>, VALUE>
+    : Type<VALUE>, Operation<VALUE, Operation<VALUE, Operation<VALUE, Term<VALUE>, VALUE>, Term<VALUE>, VALUE>, Term<VALUE>, VALUE>
+
+final Term<Double> vector3 = new Vector3<Double> ()
+    .apply ( Term 1.0D )
+    .apply ( Term 2.0D )
+    .apply ( Term 3.0D );
+
+
+Kind<INPUT, CONSTRUCTION extends Constructor<Type<VALUE>>, VALUE>
+    : Operation<INPUT, CONSTRUCTION, Type<VALUE>>
+    + apply ( Term<INPUT> ) : CONSTRUCTION
+
+Vector<VALUE extends Number>
+    : Kind<Long, Type<VALUE>, VALUE>
+    + apply ( Term<Long> ) : Type<VALUE>
+
+E.g.
+final Type<Double> vector3 =
+    new Vector<Double> ()
+        .apply ( Term 3L );
+
+Hmmmm this unfortunately does NOT give us the same Type we want, which
+extends Operation<...> and so we can construct term with (length) numbers.
+
+One ugly solution: Use a class Parameters3, with an instance THREE,
+pass in the instance THREE to get a value constructor with 3 parameters.
+
+Or maybe:
+
+public static class TypeParameters
+{
+    public <KIND extends Kind<P1, Constructor<TYPE>>, P1 extends Object, TYPE extends Type<VALUE>, VALUE extends Object>
+        Operation<P1, TYPE> constructor ( KIND kind, Type<P1> parameter1_type );
+
+    public <KIND extends Kind<P1, Kind<P2, Constructor<TYPE>>>, P1 extends Object, P2 extends Object, TYPE extends Type<VALUE>, VALUE extends Object>
+        Operation<P1, Operation<P2, TYPE>> constructor ( KIND kind, Type<P1> parameter1_type, Type<P2> parameter2_type );
+}
+
+
+
+====================================================================
+
+final Type<ONode> onode_type =
+    new ValueConstructor
+...!!!;
+
+final Type<Memory> memory_type =
+    new ValueConstructor1<Long, Memory> ( Type<Long>
+
+
+====================================================================
+
+Constructor<VALUE>
+    Type<VALUE> : Constructor<VALUE>
+    Operation<FROM, TO> : Constructor<TO>
+    Transform<FROM, TO> : Constructor<TO>
+    OperationPipeline<VALUE> : Constructor<Operation<VALUE, VALUE>>
+    TermPipeline<VALUE> : Constructor<Term<VALUE>>
+    TypePipeline<VALUE> : Constructor<Type<VALUE>>
+
+Construction<VALUE>
+
+Or
+
+Sink xxxTapxxx and Source xxxSinkxxx
+
+Source<VALUE>
+    Type<VALUE> : Source<Term<VALUE>>
+no that's not right either.
+
+
+_----------------------------------------------------------------_
+
+2017-04-13
+
+OperationPipeline<VALUE> : Source<TermPipeline<VALUE>>
+    + from ( Term<VALUE> ) : TermPipeline<VALUE>
+    + apply ( X... ).apply ( Y... ).apply ( Z... ) : TermPipeline<VALUE>
+    + something to get the constructor or history or something???
+
+TermPipeline<VALUE> : Sink<Term<VALUE>>
+
+TypePipeline<VALUE> : Source<TermPipeline<Type<VALUE>>>
+    + from ( Type<VALUE> ) : TermPipeline<Type<VALUE>>
+    + apply ( X... ).apply ( Y... ).apply ( Z... ) : TermPipeline<Type<VALUE>>
+
+Choice5<C1, C2, C3, C4, C5, STREAM, PIPELINE> : Choice4<C1, C2, C3, C4, S, P>
+    + apply ( C5 )...
+Choice4<C1, C2, C3, C4, STREAM, PIPELINE> : Choice3<C1, C2, C3, S, P>
+    + apply ( C4 )...
+Choice3<C1, C2, C3, STREAM, PIPELINE> : Choice2<C1, C2, S, P>
+    + apply ( C3 )...
+Choice2<C1, STREAM, PIPELINE> : Source<C1, STREAM, PIPELINE>
+    + apply ( C1 )...
+
+e.g. Choice3<String, Number, Date, Something, TermPipeline<Something>>
+    + apply ( String ) ...
+    + apply ( Number ) ...
+    + apply ( Date ) ...

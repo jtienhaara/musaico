@@ -1,0 +1,62 @@
+<html>
+<body>
+  <p>
+    An "opaque" type is one which the typing systems know nothing
+    about.
+  </p>
+
+  <p>
+    Instances of an OpaqueType are not very useful for the typing
+    system.  However when trying to squeeze complex objects into
+    Instance format, an OpaqueType can be used in a pinch.  The
+    typing systems will not be able to provide any proper typing
+    functionality.  But typically this is done in order to pass
+    complex data via local communications protocols which rely
+    on Instances.
+  </p>
+
+  <p>
+    For example, a method might be invoked with an array of
+    Instances as the parameters.  If that method understands
+    FooBar objects, then an Instance can be created to carry
+    the FooBar object into the method:
+  </p>
+
+  <pre>
+    TypingEnvironment typing = ...;
+    OpaqueTypeSystem.standard ( typing );
+    FooBar my_foobar = ...;
+    Instance foobar_instance = typing.create ( Object.class, my_foobar );
+    Instance [] parameters = { ..., foobar_instance, ... };
+    xyz.doSomething ( parameters );
+  </pre>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

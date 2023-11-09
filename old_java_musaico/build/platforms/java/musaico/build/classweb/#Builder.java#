@@ -1,0 +1,460 @@
+package musaico.build.classweb;
+
+
+/**
+ * <p>
+ * Builds some 
+ * Outputs the hierarchy of interfaces, classes, and so on
+ * inherited by class X, including methods and data for each
+ * class.
+ * </p>
+ */
+public class ClassWeb
+    implements ClassListProcessor, Serializable
+{
+    /** The MusaicoModule to which this class or interface belongs. */
+    public static final MODULE PARENT_MODULE = MODULE.MODULE;
+
+    /** The version of the parent module, YYYYMMDD format. */
+    private static final long serialVersionUID = MODULE.VERSION;
+
+
+    /**
+     * <p>
+     * Usage: <code> java musaico.build.classweb.ClassWeb path.to.MyClass </code>
+     * </p>
+     */
+    @SuppressWarnings("rawtypes") // No way to declare MemberOrder<Constructor<?>> without raw types.
+    public static void main (
+                             String [] args
+                             )
+        throws Exception
+    {
+        if ( args == null
+             || args.length < 1 )
+        {
+            System.out.println ( "Usage: java musaico.build.classweb.ClassWeb path.to.MyClass" );
+            System.out.println ( "" );
+            return;
+        }
+
+        final List<ClassListProcessor> class_list_processors =
+            new ArrayList<ClassListProcessor> ();
+
+        final List<ClassDetail<?>> detail_types =
+            new ArrayList<ClassDetail<?>> ();
+        final List<MemberOrder> member_orders =
+            new ArrayList<MemberOrder> ();
+
+        final List<Class<?>> my_classes = new ArrayList<Class<?>> ();
+
+        final Stack<Integer> stack_arg = new Stack<Integer> ();
+        final Stack<Class<?>> stack_op = new Stack<Class<?>> ();
+        final Stack<Integer> stack_min_parameters = new Stack<Integer> ();
+        final Stack<Integer> stack_min_parameters = new Stack<Integer> ();
+        final Stack<List<?>> stack_parameters = new Stack<List<?>> ();
+        for ( int a = 0; a < args.length; a ++ )
+        {
+            if ( ! args [ a ].startsWith ( "-" ) )
+            {
+                String my_class_name = args [ args.length - 1 ];
+                Class<?> my_class = Class.forName ( my_class_name );
+                my_classes.add ( my_class );
+            }
+            else
+            {
+                String arg = args [ a ];
+                final ClassListProcessor class_list_processor;
+                final ClassDetail<?> detail_type;
+                final MemberOrder<?> member_order;
+                if ( "-hierarchy".equals ( arg ) )
+                {
+                    class_list_processor = new ClassHierarchy ();
+                    detail_type = null;
+                    member_order = null;
+                }
+                else if ( "-decoration".equals ( arg )
+                          && args.length > ( a + 1 ) )
+                {
+                    final String decorative_text = args [ a + 1 ];
+                    a ++;
+                    class_list_processor = null;
+                    detail_type = new ClassDecoration ( decorative_text );
+                    member_order = null;
+                }
+                else if ( "-enum".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.ENUMERATED_VALUES;
+                    member_order = null;
+                }
+                else if ( "-if".equals ( arg ) )
+                {
+                    stack_arg.push ( a );
+                    stack_op.push ( a );
+                    stack_arg.push ( a );
+                    stack_arg.push ( a );
+                    stack_arg.push ( a );
+                    stack_arg.push ( a );
+                    // The content of the "if" will come next...
+                    continue;
+                }
+                else if ( "-inheritance".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.INHERITANCE;
+                    member_order = null;
+                }
+                else if ( "-members".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.MEMBERS;
+                    member_order = null;
+                }
+                else if ( "-name".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.NAME;
+                    member_order = null;
+                }
+                else if ( "-package".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.PACKAGE;
+                    member_order = null;
+                }
+                else if ( "-stereotypes".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = ClassDetail.STEREOTYPE;
+                    member_order = null;
+                }
+                else if ( "-constants".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.NONE,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-publicconstants".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PUBLIC_CONSTANT,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-protectedconstants".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PROTECTED_CONSTANT,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-privateconstants".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PRIVATE_CONSTANT,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-constructors".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Constructor> ( Constructor.class,
+                                                       MemberFilter.NONE,
+                                                       new AlphaConstructorComparator () );
+                }
+                else if ( "-publicconstructors".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Constructor> ( Constructor.class,
+                                                       MemberFilter.PUBLIC,
+                                                       new AlphaConstructorComparator () );
+                }
+                else if ( "-protectedconstructors".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Constructor> ( Constructor.class,
+                                                       MemberFilter.PROTECTED,
+                                                       new AlphaConstructorComparator () );
+                }
+                else if ( "-privateconstructors".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Constructor> ( Constructor.class,
+                                                       MemberFilter.PRIVATE,
+                                                       new AlphaConstructorComparator () );
+                }
+                else if ( "-methods".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Method> ( Method.class,
+                                                  MemberFilter.NONE,
+                                                  new AlphaMethodComparator () );
+                }
+                else if ( "-publicmethods".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Method> ( Method.class,
+                                                  MemberFilter.PUBLIC,
+                                                  new AlphaMethodComparator () );
+                }
+                else if ( "-protectedmethods".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Method> ( Method.class,
+                                                  MemberFilter.PROTECTED,
+                                                  new AlphaMethodComparator () );
+                }
+                else if ( "-privatemethods".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Method> ( Method.class,
+                                                  MemberFilter.PRIVATE,
+                                                  new AlphaMethodComparator () );
+                }
+                else if ( "-fields".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.NONE,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-publicfields".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PUBLIC,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-protectedfields".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PROTECTED,
+                                                 new AlphaFieldComparator () );
+                }
+                else if ( "-privatefields".equals ( arg ) )
+                {
+                    class_list_processor = null;
+                    detail_type = null;
+                    member_order =
+                        new MemberOrder<Field> ( Field.class,
+                                                 MemberFilter.PRIVATE,
+                                                 new AlphaFieldComparator () );
+                }
+                else
+                {
+                    System.err.println ( "Unrecognized argument: " + arg );
+                    return;
+                }
+
+                if ( class_list_processor != null )
+                {
+                    class_list_processors.add ( class_list_processor );
+                }
+
+                if ( detail_type != null )
+                {
+                    detail_types.add ( detail_type );
+                }
+
+                if ( member_orders != null )
+                {
+                    member_orders.add ( member_order );
+                }
+            }
+        }
+
+
+        final Order members;
+        if ( member_orders.size () > 0 )
+        {
+            MemberOrder<?> [] member_order_template =
+                new MemberOrder<?> [ member_orders.size () ];
+            members = new Order ( member_orders.toArray ( member_order_template ) );
+        }
+        else
+        {
+            members = Order.DEFAULT;
+        }
+
+
+        for ( int cd = 0; cd < detail_types.size (); cd ++ )
+        {
+            if ( ClassDetail.MEMBERS.equals ( detail_types.get ( cd ).type () ) )
+            {
+                detail_types.remove ( cd );
+                detail_types.add ( cd, new ClassMembers ( members ) );
+            }
+        }
+
+
+        final ClassDetailOrder class_details;
+        if ( detail_types.size () == 0 )
+        {
+            for ( ClassDetail<?> type : ClassDetailOrder.DEFAULT.types () )
+            {
+                detail_types.add ( type );
+            }
+        }
+        ClassDetail<?> [] class_detail_template =
+            new ClassDetail<?> [ detail_types.size () ];
+        final ClassDetail<?> [] detail_types_array =
+            detail_types.toArray ( class_detail_template );
+        class_details = new ClassDetailOrder ( detail_types_array );
+
+
+        if ( class_list_processors.size () == 0 )
+        {
+            class_list_processors.add ( new ClassHierarchy () );
+        }
+        final ClassListProcessor [] class_list_processors_template =
+            new ClassListProcessor [ class_list_processors.size () ];
+        final ClassListProcessor [] class_list_processors_array =
+            class_list_processors.toArray ( class_list_processors_template );
+
+        ClassWeb web =
+            new ClassWeb ( class_list_processors_array,
+                           class_details );
+
+        web.process ( my_classes );
+
+        final String output = web.output ();
+
+        System.out.println ( output );
+    }
+
+
+
+
+    // Sorts the classes to print, filters out unwanted classes,
+    // and so on.
+    private final ClassListProcessor [] classListProcessors;
+
+    // Filters and orders the class details of each class.
+    private final ClassDetailOrder classDetails;
+
+    // Writes output.
+    private final StringBuilder out;
+
+    /**
+     * <p>
+     * Creates a new ClassWeb with the specified filters and ordering
+     * and so on.
+     * </p>
+     */
+    public ClassWeb (
+                     ClassListProcessor [] class_list_processors,
+                     ClassDetailOrder class_details
+                     )
+    {
+        this.classDetails = class_details;
+        this.classListProcessors =
+            new ClassListProcessor [ class_list_processors.length ];
+        System.arraycopy ( class_list_processors, 0,
+                           this.classListProcessors, 0, class_list_processors.length );
+        this.out = new StringBuilder ();
+    }
+
+    public final String output ()
+    {
+        return this.out.toString ();
+    }
+
+    /**
+     * @see musaico.build.classweb.ClassListProcessor#process(java.util.List)
+     */
+    @Override
+    public final List<Class<?>> process (
+                                         List<Class<?>> input
+                                         )
+    {
+        List<Class<?>> output = new ArrayList<Class<?>> ( input );
+
+        for ( ClassListProcessor processor : this.classListProcessors )
+        {
+            output = processor.process ( output );
+        }
+
+        for ( Class<?> class_or_interface : output )
+        {
+            final List<ClassDetails<?>> details =
+                this.processClass ( class_or_interface );
+
+            this.print ( details );
+        }
+
+        return output;
+    }
+
+    public List<ClassDetails<?>> processClass (
+                                               Class<?> class_or_interface
+                                               )
+    {
+        final List<ClassDetails<?>> details =
+            new ArrayList<ClassDetails<?>> ();
+
+        for ( ClassDetail<?> type : this.classDetails.types () )
+        {
+            for ( ClassDetails<?> from_class :
+                type.fromClass ( class_or_interface ) )
+            {
+                details.add ( from_class );
+            }
+        }
+
+        return details;
+    }
+
+
+    public void print (
+                       List<ClassDetails<?>> details
+                       )
+    {
+        for ( ClassDetails<?> detail : details )
+        {
+            print ( detail );
+        }
+    }
+
+
+    public <DETAIL> void print (
+                                ClassDetails<DETAIL> detail
+                                )
+    {
+        final ClassDetail<DETAIL> type = detail.type ();
+        type.print ( detail,
+                     this.out );
+    }
+}

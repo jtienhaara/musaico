@@ -1,0 +1,198 @@
+Dibs	Dibs.java	41
+Dibs.Dibs	Dibs.java	/^    public Dibs ($/
+Dibs.NONE	Dibs.java	51
+Dibs.fork	Dibs.java	54
+Dibs.fork	Dibs.java	/^    public Fork fork ()$/
+Dibs.serialVersionHash	Dibs.java	46
+Dibs.serialVersionUID	Dibs.java	45
+Dibs.toString	Dibs.java	/^    public String toString ()$/
+Fork	Fork.java	53
+Fork.LeftMustNotEqualRight	Fork.java	95
+Fork.LeftMustNotEqualRight.Violation	Fork.java	105
+Fork.MutexLockMustBeBesideThisFork	Fork.java	249
+Fork.MutexLockMustBeBesideThisFork.MutexLockMustBeBesideThisFork	Fork.java	/^        public MutexLockMustBeBesideThisFork ( Mut/
+Fork.MutexLockMustBeBesideThisFork.Violation	Fork.java	261
+Fork.NONE	Fork.java	68
+Fork.Violation	Fork.java	120
+Fork.Violation	Fork.java	121
+Fork.Violation	Fork.java	289
+Fork.classContracts	Fork.java	63
+Fork.contracts	Fork.java	75
+Fork.dibs	Fork.java	83
+Fork.dibs	Fork.java	/^    public Dibs dibs ()$/
+Fork.dirty	Fork.java	/^    public boolean dirty ()$/
+Fork.dirty	Fork.java	/^    public void dirty ($/
+Fork.isDirty	Fork.java	85
+Fork.left	Fork.java	79
+Fork.left	Fork.java	/^    public MutexLock left ()$/
+Fork.mutex	Fork.java	77
+Fork.mutex	Fork.java	/^    public Mutex mutex ()$/
+Fork.right	Fork.java	81
+Fork.right	Fork.java	/^    public MutexLock right ()$/
+Fork.serialVersionHash	Fork.java	58
+Fork.serialVersionUID	Fork.java	57
+Fork.toString	Fork.java	/^    public String toString ()$/
+ForkMustBeNeededByMutexLock	ForkMustBeNeededByMutexLock.java	67
+ForkMustBeNeededByMutexLock.Violation	ForkMustBeNeededByMutexLock.java	146
+ForkMustBeNeededByMutexLock.Violation.Violation	ForkMustBeNeededByMutexLock.java	/^        public Violation ($/
+ForkMustBeNeededByMutexLock.classContracts	ForkMustBeNeededByMutexLock.java	78
+ForkMustBeNeededByMutexLock.mutexLock	ForkMustBeNeededByMutexLock.java	84
+ForkMustBeNeededByMutexLock.mutexLock	ForkMustBeNeededByMutexLock.java	/^    public MutexLock mutexLock ()$/
+ForkMustBeNeededByMutexLock.serialVersionHash	ForkMustBeNeededByMutexLock.java	73
+ForkMustBeNeededByMutexLock.serialVersionUID	ForkMustBeNeededByMutexLock.java	72
+ForkMustNotBeNeededByMutexLock	ForkMustNotBeNeededByMutexLock.java	67
+ForkMustNotBeNeededByMutexLock.Violation	ForkMustNotBeNeededByMutexLock.java	146
+ForkMustNotBeNeededByMutexLock.Violation.Violation	ForkMustNotBeNeededByMutexLock.java	/^        public Violation ($/
+ForkMustNotBeNeededByMutexLock.classContracts	ForkMustNotBeNeededByMutexLock.java	78
+ForkMustNotBeNeededByMutexLock.mutexLock	ForkMustNotBeNeededByMutexLock.java	84
+ForkMustNotBeNeededByMutexLock.mutexLock	ForkMustNotBeNeededByMutexLock.java	/^    public MutexLock mutexLock ()$/
+ForkMustNotBeNeededByMutexLock.serialVersionHash	ForkMustNotBeNeededByMutexLock.java	73
+ForkMustNotBeNeededByMutexLock.serialVersionUID	ForkMustNotBeNeededByMutexLock.java	72
+Mutex	Mutex.java	129
+Mutex.ALL_MUTEX_LOCK_CAPABILITIES	Mutex.java	169
+Mutex.Capabilities	Mutex.java	160
+Mutex.Capabilities.MUTEX_LOCK	Mutex.java	164
+Mutex.Capabilities.MUTEX_LOCK_CREATE	Mutex.java	163
+Mutex.Capabilities.MUTEX_LOCK_DESTROY	Mutex.java	166
+Mutex.Capabilities.MUTEX_UNLOCK	Mutex.java	165
+Mutex.Conditional	Mutex.java	477
+Mutex.Mutex	Mutex.java	/^    public Mutex ($/
+Mutex.NONE	Mutex.java	144
+Mutex.Violation	Mutex.java	279
+Mutex.Violation	Mutex.java	280
+Mutex.Violation	Mutex.java	428
+Mutex.Violation	Mutex.java	429
+Mutex.Violation	Mutex.java	430
+Mutex.Violation	Mutex.java	549
+Mutex.Violation	Mutex.java	550
+Mutex.Violation	Mutex.java	551
+Mutex.Violation	Mutex.java	616
+Mutex.Violation	Mutex.java	617
+Mutex.classContracts	Mutex.java	139
+Mutex.competingPhilosophers	Mutex.java	210
+Mutex.contracts	Mutex.java	180
+Mutex.eatingPhilosopher	Mutex.java	216
+Mutex.id	Mutex.java	206
+Mutex.isLocked	Mutex.java	/^    public boolean isLocked ()$/
+Mutex.isLockedByCurrentThread	Mutex.java	/^    public boolean isLockedByCurrentThread ()$/
+Mutex.lock	Mutex.java	177
+Mutex.lockOwner	Mutex.java	/^    public Conditional<MutexLock, MutexMustBeLocke/
+Mutex.mutexLockMustBeCompetingContract	Mutex.java	188
+Mutex.mutexLockMustBeEligibleContract	Mutex.java	184
+Mutex.mutexLockMustBeLockOwnerContract	Mutex.java	192
+Mutex.mutexLockMustNotBeLockOwnerContract	Mutex.java	196
+Mutex.philosophers	Mutex.java	/^    protected MutexLock [] philosophers ()$/
+Mutex.security	Mutex.java	201
+Mutex.security	Mutex.java	/^    public SecurityPolicy security ()$/
+Mutex.serialVersionHash	Mutex.java	134
+Mutex.serialVersionUID	Mutex.java	133
+Mutex.toString	Mutex.java	/^    public String toString ()$/
+MutexLock	MutexLock.java	114
+MutexLock.DEFAULT_TIMEOUT_IN_MILLISECONDS	MutexLock.java	142
+MutexLock.LOCAL_SYSTEM_ID	MutexLock.java	124
+MutexLock.MutexLock	MutexLock.java	/^    private MutexLock ($/
+MutexLock.NONE	MutexLock.java	132
+MutexLock.NONE2	MutexLock.java	136
+MutexLock.SecurityViolation	MutexLock.java	819
+MutexLock.Violation	MutexLock.java	257
+MutexLock.Violation	MutexLock.java	258
+MutexLock.Violation	MutexLock.java	319
+MutexLock.Violation	MutexLock.java	320
+MutexLock.Violation	MutexLock.java	421
+MutexLock.Violation	MutexLock.java	818
+MutexLock.Violation	MutexLock.java	/^        throws ParametersMustNotBeNull.Violation$/
+MutexLock.Violation	MutexLock.java	1085
+MutexLock.Violation	MutexLock.java	1155
+MutexLock.Violation	MutexLock.java	1190
+MutexLock.Violation	MutexLock.java	1259
+MutexLock.applyRules	MutexLock.java	/^    private Set<MutexLock> applyRules ()$/
+MutexLock.classContracts	MutexLock.java	128
+MutexLock.cleanForks	MutexLock.java	196
+MutexLock.close	MutexLock.java	/^    public void close ()$/
+MutexLock.contracts	MutexLock.java	146
+MutexLock.dirtyForks	MutexLock.java	185
+MutexLock.finalize	MutexLock.java	/^    protected void finalize ()$/
+MutexLock.forkMustBeNeededByMutexLockContract	MutexLock.java	158
+MutexLock.forkMustNotBeNeededByMutexLockContract	MutexLock.java	152
+MutexLock.isEating	MutexLock.java	211
+MutexLock.isEating	MutexLock.java	/^    protected boolean isEating ()$/
+MutexLock.isHungry	MutexLock.java	205
+MutexLock.lock	MutexLock.java	170
+MutexLock.mutexes	MutexLock.java	173
+MutexLock.mutexes	MutexLock.java	/^    public Mutex [] mutexes ()$/
+MutexLock.myDibs	MutexLock.java	200
+MutexLock.name	MutexLock.java	225
+MutexLock.name	MutexLock.java	/^    public String name ()$/
+MutexLock.neededForks	MutexLock.java	180
+MutexLock.receivedDibs	MutexLock.java	192
+MutexLock.security	MutexLock.java	167
+MutexLock.securityContext	MutexLock.java	163
+MutexLock.securityContext	MutexLock.java	/^    protected SecurityContext securityContext ()$/
+MutexLock.serialVersionHash	MutexLock.java	119
+MutexLock.serialVersionUID	MutexLock.java	118
+MutexLock.systemID	MutexLock.java	217
+MutexLock.systemID	MutexLock.java	/^    public String systemID ()$/
+MutexLock.threadNum	MutexLock.java	221
+MutexLock.threadNum	MutexLock.java	/^    public long threadNum ()$/
+MutexLock.toString	MutexLock.java	/^    public String toString ()$/
+MutexLockMustBeCompeting	MutexLockMustBeCompeting.java	68
+MutexLockMustBeCompeting.Violation	MutexLockMustBeCompeting.java	156
+MutexLockMustBeCompeting.Violation.Violation	MutexLockMustBeCompeting.java	/^        public Violation ($/
+MutexLockMustBeCompeting.classContracts	MutexLockMustBeCompeting.java	79
+MutexLockMustBeCompeting.mutex	MutexLockMustBeCompeting.java	84
+MutexLockMustBeCompeting.mutex	MutexLockMustBeCompeting.java	/^    public Mutex mutex ()$/
+MutexLockMustBeCompeting.serialVersionHash	MutexLockMustBeCompeting.java	74
+MutexLockMustBeCompeting.serialVersionUID	MutexLockMustBeCompeting.java	73
+MutexLockMustBeEligible	MutexLockMustBeEligible.java	66
+MutexLockMustBeEligible.Violation	MutexLockMustBeEligible.java	154
+MutexLockMustBeEligible.Violation.Violation	MutexLockMustBeEligible.java	/^        public Violation ($/
+MutexLockMustBeEligible.classContracts	MutexLockMustBeEligible.java	77
+MutexLockMustBeEligible.mutex	MutexLockMustBeEligible.java	82
+MutexLockMustBeEligible.mutex	MutexLockMustBeEligible.java	/^    public Mutex mutex ()$/
+MutexLockMustBeEligible.serialVersionHash	MutexLockMustBeEligible.java	72
+MutexLockMustBeEligible.serialVersionUID	MutexLockMustBeEligible.java	71
+MutexLockMustBeLockOwner	MutexLockMustBeLockOwner.java	68
+MutexLockMustBeLockOwner.Violation	MutexLockMustBeLockOwner.java	155
+MutexLockMustBeLockOwner.Violation.Violation	MutexLockMustBeLockOwner.java	/^        public Violation ($/
+MutexLockMustBeLockOwner.classContracts	MutexLockMustBeLockOwner.java	79
+MutexLockMustBeLockOwner.mutex	MutexLockMustBeLockOwner.java	85
+MutexLockMustBeLockOwner.mutex	MutexLockMustBeLockOwner.java	/^    public Mutex mutex ()$/
+MutexLockMustBeLockOwner.serialVersionHash	MutexLockMustBeLockOwner.java	74
+MutexLockMustBeLockOwner.serialVersionUID	MutexLockMustBeLockOwner.java	73
+MutexLockMustNotBeLockOwner	MutexLockMustNotBeLockOwner.java	66
+MutexLockMustNotBeLockOwner.Violation	MutexLockMustNotBeLockOwner.java	152
+MutexLockMustNotBeLockOwner.Violation.Violation	MutexLockMustNotBeLockOwner.java	/^        public Violation ($/
+MutexLockMustNotBeLockOwner.classContracts	MutexLockMustNotBeLockOwner.java	77
+MutexLockMustNotBeLockOwner.mutex	MutexLockMustNotBeLockOwner.java	83
+MutexLockMustNotBeLockOwner.mutex	MutexLockMustNotBeLockOwner.java	/^    public Mutex mutex ()$/
+MutexLockMustNotBeLockOwner.serialVersionHash	MutexLockMustNotBeLockOwner.java	72
+MutexLockMustNotBeLockOwner.serialVersionUID	MutexLockMustNotBeLockOwner.java	71
+MutexMustBeLocked	MutexMustBeLocked.java	57
+MutexMustBeLocked.CONTRACT	MutexMustBeLocked.java	68
+MutexMustBeLocked.MutexMustBeLocked	MutexMustBeLocked.java	/^    protected MutexMustBeLocked ()$/
+MutexMustBeLocked.Violation	MutexMustBeLocked.java	109
+MutexMustBeLocked.Violation.Violation	MutexMustBeLocked.java	/^        public Violation ($/
+MutexMustBeLocked.serialVersionHash	MutexMustBeLocked.java	63
+MutexMustBeLocked.serialVersionUID	MutexMustBeLocked.java	62
+MutexMustBeLockedByCurrentThread	MutexMustBeLockedByCurrentThread.java	126
+MutexMustBeLockedByCurrentThread.CONTRACT	MutexMustBeLockedByCurrentThread.java	137
+MutexMustBeLockedByCurrentThread.MutexMustBeLockedByCurrentThread	MutexMustBeLockedByCurrentThread.java	/^    protected MutexMustBeLockedByCurrentThread ()$/
+MutexMustBeLockedByCurrentThread.Violation	MutexMustBeLockedByCurrentThread.java	178
+MutexMustBeLockedByCurrentThread.Violation.Violation	MutexMustBeLockedByCurrentThread.java	/^        public Violation ($/
+MutexMustBeLockedByCurrentThread.serialVersionHash	MutexMustBeLockedByCurrentThread.java	132
+MutexMustBeLockedByCurrentThread.serialVersionUID	MutexMustBeLockedByCurrentThread.java	131
+MutexMustBeUnlocked	MutexMustBeUnlocked.java	57
+MutexMustBeUnlocked.CONTRACT	MutexMustBeUnlocked.java	68
+MutexMustBeUnlocked.MutexMustBeUnlocked	MutexMustBeUnlocked.java	/^    protected MutexMustBeUnlocked ()$/
+MutexMustBeUnlocked.Violation	MutexMustBeUnlocked.java	109
+MutexMustBeUnlocked.Violation.Violation	MutexMustBeUnlocked.java	/^        public Violation ($/
+MutexMustBeUnlocked.serialVersionHash	MutexMustBeUnlocked.java	63
+MutexMustBeUnlocked.serialVersionUID	MutexMustBeUnlocked.java	62
+Test	Test.java	13
+Test.Test	Test.java	/^    public Test ($/
+Test.isBlowupThread	Test.java	41
+Test.isNestedMutexThread	Test.java	40
+Test.main	Test.java	/^    public static void main ( String [] args )$/
+Test.mutexes	Test.java	16
+Test.numTimedOutThreads	Test.java	37
+Test.run	Test.java	/^    public void run ()$/

@@ -1,0 +1,55 @@
+Need to figure out how to tie each SwapState to a Region in a
+Device of some sort.
+
+Maybe this information belongs in the PagedArea...  But then
+how to communicate it from the SegmentFactory (which is called
+by the SuperBlock when allocating ONodes).
+
+Example:
+
+                      SuperBlock for object system
+                                   |
+                       ____________|_____________
+                      |  |  |  |  |  |  |  |  |  |
+                    O     N     o     d     e     s
+                      |  |  |  |  |  |  |  |  |  |
+               O n e   S e g m e n t   p e r   O N o d e
+
+We could conceivably rearrange the structure so that each ONode
+points to one piece of the Segment & PagedArea:
+
+                      SuperBlock for object system
+                                   |
+                       ____________|_____________
+                      |  |  |  |  |  |  |  |  |  |
+                    O     N     o     d     e     s
+                      |  |  |  |  |  |  |  |  |  |
+                       \  \  \  \ |  | /  /  /  /
+                        \__\__\__\|__|/  /  /  /
+                                   |
+                    O  n  e     S  e  g  m  e  n  t
+
+                           Each Segment
+                                |
+      ______________________________________________________
+     |                |                   |                 |
+Fast cache     Fields in memory      Local file     Remote DB server
+objects               |                   |          (database table)
+     |                |                   |                 |
+ No positons    StartPosition        StartPosition    SomeSQLPosition
+
+
+So each ONode simply needs a Region which is one small piece
+of the overall Segment Region:
+
+ <--------------------- Segment ----------------------->
+ _______________________________________________________
+|       |       |       |       |       |       |       |
+| ONode | ONode | ONode | ONode | ONode | ONode | ONode |
+|_______|_______|_______|_______|_______|_______|_______|
+
+This also makes it easier for the SuperBlock to retrieve its
+own super block ONode, since we just pass in one Segment to
+the SuperBlock constructor, and then maybe call initialize ()
+to have it read out the ONodes, and poof -- all the swapping
+is done automagically.

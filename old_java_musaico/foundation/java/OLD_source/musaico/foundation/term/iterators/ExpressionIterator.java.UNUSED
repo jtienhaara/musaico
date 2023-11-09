@@ -1,0 +1,191 @@
+!!! Cannot call apply ( VALUE ).
+!!! This is better off being implemented by Operations, anyway.
+!!! Not useful as an iterator.;
+package musaico.foundation.term.iterators;
+
+import java.io.Serializable;
+
+import java.util.Iterator;
+
+
+import musaico.foundation.contract.Advocate;
+
+import musaico.foundation.contract.guarantees.Return;
+import musaico.foundation.contract.guarantees.ReturnNeverNull;
+
+import musaico.foundation.contract.obligations.ParametersMustNotBeNull;
+
+import musaico.foundation.domains.ClassName;
+import musaico.foundation.domains.StringRepresentation;
+
+import musaico.foundation.term.NonBlockingOperation;
+
+
+/**
+ * <p>
+ * An Iterator which wraps another Iterator, passing each element
+ * stepped through by the wrapped Iterator into a NonBlockingOperation,
+ * which transforms the elements to be iterated over.
+ * </p>
+ *
+ * <p>
+ * NOT thread-safe.  Do not access an ExpressionIterator from multiple
+ * threads without providing external synchronization.
+ * </p>
+ *
+ *
+ * <p>
+ * In Java, every ExpressionIterator must be Serializable in order to
+ * play nicely over RMI.  However, be warned that there is nothing
+ * stopping someone from creating an ExpressionIterator to wrap
+ * a non-Serializable Iterator.  Trying to serialize such an
+ * ExpressionIterator will result in exceptions.
+ * </p>
+ *
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ * <hr> </hr>
+ *
+ * <br> </br>
+ * <br> </br>
+ *
+ *
+ * <p>
+ * For copyright and licensing information refer to:
+ * </p>
+ *
+ * @see musaico.foundation.term.iterators.MODULE#COPYRIGHT
+ * @see musaico.foundation.term.iterators.MODULE#LICENSE
+ */
+public class ExpressionIterator<SOURCE extends Object, VALUE extends Object>
+    implements Iterator<VALUE>, Serializable
+{
+    /** The MusaicoModule to which this class or interface belongs. */
+    public static final MODULE PARENT_MODULE = MODULE.MODULE;
+
+    /** The version of the parent module, YYYYMMDD format. */
+    private static final long serialVersionUID = MODULE.VERSION;
+
+
+    // Enforces constructor parameter obligations and so on for us.
+    private static final Advocate classContracts =
+        new Advocate ( ExpressionIterator.class );
+
+
+    // Enforces parameter obligations and so on for us.
+    private final Advocate contracts;
+
+    // The Iterator whose elements we pass through a NonBlockingOperation.
+    private final Iterator<SOURCE> source;
+
+    // The NonBlockingOperation which transforms
+    // the elements returned by the source Iterator.
+    private final NonBlockingOperation<SOURCE, VALUE> operation;
+
+
+    /**
+     * <p>
+     * Creates a new ExpressionIterator.
+     * </p>
+     *
+     * @param source The Iterator whose elements we pass through a
+     *               NonBlockingOperation.  Must not be null.
+     *
+     * @param operation The NonBlockingOperation which transforms
+     *                  the elements returned by the source Iterator.
+     *                  Must not be null.  Must not contain any null elements.
+     */
+    public ExpressionIterator (
+                               Iterator<SOURCE> source,
+                               NonBlockingOperation<SOURCE, VALUE> operation
+                               )
+        throws ParametersMustNotBeNull.Violation
+    {
+        classContracts.check ( ParametersMustNotBeNull.CONTRACT,
+                               source, operation ); // next can be null.
+
+        this.source = source;
+        this.operation = operation;
+
+        this.contracts = new Advocate ( this );
+    }
+
+
+    /**
+     * @see java.util.Iterator#hasNext()
+     */
+    @Override
+    public final boolean hasNext ()
+    {
+        return this.source.hasNext ();
+    }
+
+
+
+    /**
+     * @see java.util.Iterator#next()
+     */
+    @Override
+    public final VALUE next ()
+        throws ReturnNeverNull.Violation,
+               IteratorMustHaveNextObject.Violation
+    {
+        if ( ! this.source.hasNext () )
+        {
+            Exception cause = null;
+            try
+            {
+                this.source.next (); // For giggles, and to generate exception.
+            }
+            catch ( Exception e )
+            {
+                cause = e;
+            }
+
+            throw IteratorMustHaveNextObject.CONTRACT.violation ( this,
+                                                                  this,
+                                                                  cause );
+        }
+
+        final SOURCE next_source = this.source.next ();
+        final VALUE next = this.operation.apply ( next_source );
+
+        this.contracts.check ( ReturnNeverNull.CONTRACT,
+                               next );
+
+        return next;
+    }
+
+
+    /**
+     * @return The Operation through which every element 
+
+
+    /**
+     * @see java.util.Iterator#remove()
+     */
+    @Override
+    public final void remove ()
+        throws UnsupportedOperationException
+    {
+        throw new UnsupportedOperationException ( ClassName.of ( this.getClass () )
+                                                  + ".remove () not supported" );
+    }
+
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public final String toString ()
+    {
+        return ClassName.of ( this.getClass () )
+            + " "
+            + this.source
+            + " | "
+            + this.operation
+            + " ()";
+    }
+}

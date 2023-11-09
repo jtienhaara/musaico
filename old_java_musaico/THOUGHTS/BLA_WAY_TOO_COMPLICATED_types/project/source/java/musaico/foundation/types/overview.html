@@ -1,0 +1,274 @@
+<html>
+<body>
+  <p>
+    Cross-platform dynamic (and optionally implicit) typing system,
+    with configurable type consistency checking (ensuring immutability
+    and so on).
+  </p>
+
+  <p>
+    A Instance is an object of some particular Type in some particular
+    TypingEnvironment.
+  </p>
+
+  <pre>
+      TypingEnvironment
+             ^
+             |
+             |
+         Instance ------>  Type
+        + value ()
+  </pre>
+
+  <p>
+    A number of builtin primitive Types are available and interchangeable
+    across programming language and operating system / hardware
+    boundaries.  For example, text, numbers, dates, times, timezones,
+    URLs, and so on.  User-defined Types (UDTs) are not cross-platform,
+    but may be used for internally passing complex data structures
+    within a system.
+  </p>
+
+  <pre>
+      Java            C                    JavaScript
+      ----            ---------------      ----------
+      StringType  ==  string_type_t *  ==  StringType
+      IntType     ==  int_type_t *     ==  IntType
+      TimeType    ==  time_type_t *    ==  TimeType
+  </pre>
+
+  <p>
+    Wherever typecasting has been implemented (such as between
+    primitive Instances), converting an Instance from one Type
+    to another is a simple matter.  For example, to convert from
+    a text Instance to an integer:
+  </p>
+
+  <pre>
+      TypingEnvironment typing = new StandardTypingEnvironment ();
+      String text = "0xA7";
+      Instance x = typing.create ( text );
+      int number = x.value ( Integer.class );
+  </pre>
+
+  <pre>
+       Instance  x --> value ( Integer.class ) --> 167
+       |type   val\
+       v          _\|
+      StringType   "0xA7"
+  </pre>
+
+  <p>
+    In cases where a duplicate value is always desired,
+    even if the instances are of the same type, the
+    Type's <code> duplicate () </code> method can be used:
+  </p>
+
+  <pre>
+      Instance x = typing.create ( StringType.class, "Hello, world!" );
+      Instance y = typing.duplicate ( x );
+  </pre>
+
+  <pre>
+      Instance x  --> typing.duplicate ( x ) --> Instance y
+       |        \                                /        |
+       |         \________\ StringType /________/         |
+       v                  /            \                  v
+      "Hello, world!"                        "Hello, world!"
+  </pre>
+
+  <p>
+    If the Type to use for an Instance is unknown to the developer,
+    then the TypingEnvironment can figure it out:
+  </p>
+
+  <pre>
+      Object foo = ...;
+      Instance x = typing.create ( foo );
+      Type type_of_x = x.type ();
+  </pre>
+
+  <p>
+    Within an application, multiple TypeSystems can coexist with
+    different constraints for the type instances they govern,
+    and sometimes also constraints on what Types are allowed in
+    each TypeSystem as well.
+  </p>
+
+  <p>
+    For example, all primitive Instances must obey certain
+    rules (immutability, idempotence, and so on), whereas
+    user-defined type Instances (or UDT Instances) are
+    free to mis-behave however they like.
+  </p>
+
+  <pre>
+              _____\ TypingEnvironment
+             /     /        |
+            /               v
+           /            TypeSystem
+          /                 |    \
+         /                  v    _\|
+      Instance ----------> Type   TypeSystem constraints
+         |                   \
+         v                   _\|
+      Instance constraints  Type constraints
+  </pre>
+
+  <p>
+    Any time an instance's <code> validate () </code> method
+    is invoked, all the applicable Constraints for the instance
+    in its typing environment are invoked.  For example, one
+    constraint might check that the value has not changed since
+    the instance was constructed; another constraint might check
+    that the instance's value is formatted correctly; and so on.
+  </p>
+
+  <p>
+    Exception handling is necessary periodically.  For
+    example, when a cast from an instance of Type A
+    to an Instance of Type B fails because there is no
+    known way to "cast" from A to B, then the default
+    exception handler for the typing environment is
+    invoked with the error.
+  </p>
+
+  <p>
+    The default exception handler simply wraps type exceptions
+    inside RuntimeTypeExceptions, and throws them up the stack.
+    This "fail fast" behaviour can be desirable during
+    development and testing, since programming errors
+    will shut the system down, or generate error logs, and
+    so on.
+  </p>
+
+  <pre>
+      Instance x = ...;
+      try
+      {
+          int as_int = x.value ( Integer.class );
+      }
+      catch ( RuntimeTypeException e )
+      {
+          ...Defensive programming goes here...
+          ...Of course if you prefer, just throw the unchecked
+             exception up the stack...
+      }
+  </pre>
+
+  <p>
+    However "failing fast" is not always desirable, especially
+    in production.  Some system designers might wish to log
+    errors but continue operating as long as possible.
+    Since many errors amount to bad runtime data (such as
+    trying to convert text "xyz" into a number), default
+    error values can be returned rather than blowing up
+    the system with an unchecked exception.
+  </p>
+
+  <p>
+    Since Instances are essentially the bytes of the Musaico
+    world, failures to cast between Instances can be treated
+    similarly to truncations in many programming languages:
+  </p>
+
+  <pre>
+      int x = 257;
+      byte y = (byte) x;
+  </pre>
+
+  <p>
+    Before deciding what to do with a TypingEnvironment's default
+    exception handler, consider whether your project would
+    benefit more from "failing fast" every time a large
+    value is assigned to a byte variable, or whether it
+    would benefit more from truncating the value and
+    continuing on.  Both approaches have benefits and
+    pitfalls.
+  </p>
+
+  <p>
+    Of course if you decide you've made the wrong choice, it's
+    a simple matter of calling
+    <code> typing.exceptionHandler ( my_new_exception_handler ) </code>
+    to change the behaviour of your typing environment.
+  </p>
+
+  <p>
+    Finally, the Musaico typing environment provides "tags" which can
+    be attached to instances.  Every instance can have as many tags
+    attached as the application designer chooses.  Tags can provide
+    additional information about an Instance beyound its basic
+    Type and Constraints.  The information is left entirely up
+    to the developer.  However it should be noted that both Type
+    and Constraint are themselves derivations of the Tag class.
+  </p>
+
+  <pre>
+           Tag
+           /_\
+            |
+       ___________
+       |         |
+      Type   Constraint
+  </pre>
+
+  <p>
+    So an Instance can have one primary Type as well as secondary
+    Types included as tags.  For example, one approach to defining
+    specific formats of Strings would be to specify the Type of
+    the instance as the primitive StringType, but then add a
+    Type tag specifying that the instance is also of type
+    <code> PostalCodeType </code> and must meet particular String
+    formatting Constraints.  Of course this is only one of many
+    ways to approach such an Instance...
+  </p>
+
+  <p>
+    Tags do not need to be implemented as Types or Constraints.
+    For example, a <code> PrivacyTag </code> can be used as a
+    simple flag that the instance contains private data which
+    should not be sent out over the network or stored unencrypted.
+  </p>
+
+  <pre>
+      Instance social_insurance_number
+       | type         | value       | tags
+       v              v             v
+      IntType        000000000     PrivacyTag
+  </pre>
+
+  <p>
+    A few example Tags can be found in the
+    <code> musaico/types/tag </code> sub-module.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009,2010 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

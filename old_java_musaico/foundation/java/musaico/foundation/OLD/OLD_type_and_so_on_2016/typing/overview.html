@@ -1,0 +1,215 @@
+<html>
+<body>
+  <p>
+    The foundation for various dynamic type systems (with
+    some help from the unerlying language to provide static
+    type safety).
+  </p>
+
+  <p>
+    Typically the developer of a type system provides a toplevel
+    RootNamespace to hold the Types.
+  </p>
+
+  <pre>
+      RootNamespace documents =
+          new StandardRootNamespace ( Namespace.ROOT, // parent_namespace
+                                      "documents",    // name
+                                      new SymbolTable () );
+  </pre>
+
+  <p>
+    Then the Types for the type system are created.
+    Typically each Type's SymbolTable is created first,
+    and filled in after the Type itself has been created.
+  </p>
+
+  <pre>
+      SymbolTable plain_text_symbols = new SymbolTable ();
+      Type<PlainTextDocument> plain_text =
+          new StandardType<PlainTextDocument> ( documents, // parent_namespace
+                                                "plaintext", // name
+                                                PlainTextDocument.class,
+                                                PlainTextDocument.NONE, // none
+                                                plain_text_symbols );
+  </pre>
+
+  <p>
+    Once the Type has been created, its Symbols are filled in:
+  </p>
+
+  <ul>
+    <li> <b>Cast</b>s to and from other Types; </li>
+    <li> <b>Constraint</b>s on values of the Type; </li>
+    <li> <b>Operation</b>s; </li>
+  </ul>
+
+  <pre>
+      Cast<PlainTextDocument, HTMLDocument> cast_to_html =
+          new CastPlainTextToHTML ();
+      plain_text_symbols.add ( cast_to_html );
+      Cast<HTMLDocument, PlainTextDocument> cast_from_html =
+          new CastHTMLToPlainText ();
+      plain_text_symnols.add ( cast_from_html );
+
+      Constraint must_contain_only_printable_characters =
+          new MustContainOnlyPrintableCharacters ();
+      plain_text_symbols.add ( must_contain_only_printable_characters );
+
+      Operation<PlainTextDcument> spell_check =
+          new SpellChecker ();
+      plain_text_symbols.add ( spell_check );
+  </pre>
+
+  <p>
+    Besides Types, a type system can provide Tags to modify Types.
+    Each Tag also has a SymbolTable, the contents of which are
+    combined with a Type's SymbolTable to form a new Type.  A Type
+    can be dynamically sub-typed by calling Type.sub ( tag1, tag2, ... ).
+    Each sub-Type provides behavioural changes from its parent, induced
+    by the Tags merged with it.
+  </p>
+
+  <pre>
+      Constraint must_be_less_than_100_words =
+          new MustBeLessThan100Words ();
+      SymbolTable short_symbols = new SymbolTable ();
+      short_symbols.add ( must_be_less_than_100_words );
+      Tag short = new StandardTag ( documents,
+                                    "short",
+                                    short_symbols );
+      documents.add ( short );
+  </pre>
+
+  <p>
+    Users of the type system can then use whichever variants of
+    the Type they wish, by sub-typing it using Tags.
+  </p>
+
+  <pre>
+      // A plain PlainTextDocument:
+      Type<PlainTextDocument> plain_text_document_type =
+          documents_type_system.symbol ( new TypeID ( "plaintext" ) );
+
+      // A PlainTextDocument restricted by the "short" Tag:
+      Tag short = documents_type_system.symbol ( new TagID ( "short" ) );
+      Type<PlainTextDocument> short_plain_text_document_type =
+          plain_text_document_type.sub ( short );
+  </pre>
+
+  <p>
+    Often a Tag will contain one or more Refinements.  When a sub-Type
+    is created with a Tag, every Symbol from the parent Type is
+    passed through every Refinement from every Tag.  Each Refinement
+    can replace any or all Symbols, often replacing specific Casts,
+    Constraints and Operations.
+  </p>
+
+  <pre>
+      Refinement grammar_refinement =
+          new RefineSpellCheckerOperationToGrammarCheckerOperation ();
+      SymbolTable grammar_symbols = new SymbolTable ();
+      grammar_symbols.add ( grammar_refinement );
+      Tag grammar = new StandardTag ( documents,
+                                      "grammar",
+                                      grammar_symbols );
+      documents.add ( grammar );
+  </pre>
+
+  <p>
+    When a user sub-types a Type with a Tag, the new Casts, Constraints
+    and Operations are used in the sub-Type.
+  </p>
+
+  <p>
+    Multiple Tags can be combined to form a single sub-Type with several
+    behaviour modifications.
+  </p>
+
+  <pre>
+      // A plain PlainTextDocument:
+      Type<PlainTextDocument> plain_text_document_type =
+          documents_type_system.symbol ( new TypeID ( "plaintext" ) );
+
+      // A PlainTextDocument restricted by the "short" Tag and
+      // refined by the "grammar" Tag:
+      Tag short = documents_type_system.symbol ( new TagID ( "short" ) );
+      Tag short = documents_type_system.symbol ( new TagID ( "grammar" ) );
+      Type<PlainTextDocument> short_grammar_checked_plain_text_document_type =
+          plain_text_document_type.sub ( short, grammar );
+  </pre>
+
+  <p>
+    The IDs of Types reflect the Tags which they've been sup-typed with.
+  </p>
+
+  <pre>
+      plain_text_document_type.id ().name ();
+          // "plaintext"
+      short_plain_text_document_type.id ().name ();
+          // "plaintext[short]"
+      short_grammar_checked_plain_text_document_type.id ().name ();
+          // "plaintext[short, grammar]"
+  </pre>
+
+  <p>
+    Much like the processors of most computers are built around types
+    made up of bytes (integers of various lengths and signs, floating
+    points of specific formats, and so on), with opcodes to process
+    them, the Musaico foundation provides types made up of its most
+    basic data type, the Value.
+  </p>
+
+  @see musaico.foundation.value.Value
+
+  <p>
+    On top of a computer processor's built-in types, a programming
+    language provides higher-level and extensible data types.
+    The equivalent types in Musaico comprises a stack of packages,
+    the bottom layer of which is this musaico.foundation.typing package.
+  </p>
+
+  <p>
+    Programming languages typically support some form of expressions,
+    sequences of instructions interspersed with data terms such as
+    constants, pointers, and other expressions.  The equivalent
+    expressions in Musaico comprise a stack of packages, the bottom
+    layer of which is this package.  A Term has a Type and a Value
+    representation akin to the byte(s) representing a term in a
+    programming language.  Various Terms can be used: a Constant,
+    a Variable, an Expression, and so on.  The utility and usage
+    of Terms are detailed in various other Musaico packages which
+    make use of them.
+  </p>
+
+
+ <br> </br>
+ <br> </br>
+
+ <hr> </hr>
+
+ <br> </br>
+ <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009-2018 Johann Tienhaara <jtienhaara@yahoo.com>
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

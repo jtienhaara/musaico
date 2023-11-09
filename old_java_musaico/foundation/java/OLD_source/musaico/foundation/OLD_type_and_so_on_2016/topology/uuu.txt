@@ -1,0 +1,2 @@
+find .. -name "*.java" -exec grep -l "new [^ ]*Metadata[ ]*(" \{\} \; | sort --dictionary | less
+

@@ -1,0 +1,26 @@
+public interface MusaicoFoundation
+{
+  public abstract Filters filters ();
+  public abstract Contracts contracts ();
+  public abstract Judge judge ();
+  public abstract Advocate advocate ( Object ); // For a Class or an instance
+  public abstract Orders orders ();
+  public abstract Capabilities capabilities ();
+  public abstract Pipelines pipelines ();
+  public abstract Types types ();
+  public abstract Operations () operations;
+}
+
+
+public interface Parameterized<OUTPUT>
+public interface Constructed<OUTPUT> extends Parameterized<OUTPUT>
+public interface Parameterized1<PARAMETER, OUTPUT> extends Constructor<PARAMETER, Constructed<OUTPUT>, Constructed<OUTPUT>>
+public interface Parameterized2<PARAMETER1, PARAMETER2, OUTPUT> extends Constructor<PARAMETER1, Parameterized1<PARAMETER2, OUTPUT>, Constructed<OUTPUT>>
+public interface Parameterized3<PARAMETER1, PARAMETER2, PARAMETER3, OUTPUT> extends Constructor<PARAMETER1, Parameterized2<PARAMETER2, PARAMETER3, OUTPUT>, Constructed<OUTPUT>>
+public abstract <GRAIN extends Object>
+    Constructor<Class<GRAIN>, Choose<Parameterized<Filter<GRAIN>>>, Constructed<Filter<GRAIN>>>
+
+
+Constructor<Class<GRAIN>, 
+
+Constructor<Choose<

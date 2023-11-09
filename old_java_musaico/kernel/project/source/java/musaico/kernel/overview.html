@@ -1,0 +1,90 @@
+<html>
+<body>
+  <p>
+    The Musaico kernel.
+  </p>
+
+  <p>
+    The kernel is responsible for memory management, drivers,
+    object systems, and process management.
+  </p>
+
+  <p>
+    Memory management entails providing sufficient buffers to
+    the object systems and user space to keep blocks of Fields
+    in memory for quick access, while staying within acceptable
+    boundaries to prevent the application system from hogging
+    system memory.  When necessary (such as when an application
+    loads a very large document into memory), the kernel may
+    swap out buffers.
+  </p>
+
+  <p>
+    Drivers provide input into the application system and output
+    from it.  Applications indirectly or directly use Drivers to
+    retrieve and store persistent data or communicate across
+    the network to other applications or kernels.  A Driver
+    might provide access to a SQL database, an HTTP server,
+    an in-memory object, and so on.  Driver stacks are also possible,
+    so that, for example, the data written to or retrieved from
+    a persistent file Driver might be translated to or from XML
+    or JSON or YAML, and so on.
+  </p>
+
+  <p>
+    Object systems are akin to file systems in a UNIX environment.
+    They are hierarchically-organized structures of documents.
+    A document might be a simple record of fields, a symbolic
+    link to another document elsewhere in the system, a driver
+    which can handle requests, or a more complex object which
+    (like a directory in a file system) can contain child documents.
+    The object systems are the main organizing principle behind
+    applications running in the Musaico environment: Since
+    tedious details such as serialization of data, guaranteed
+    transactions, and inter-process communication are all
+    handled by the application system, the application developer
+    need only organize objects to best suit her needs, and
+    then provide an interface for ths user.  Meanwhile, another
+    developer can build a complementary or supplemental interface
+    to the same object layout.  Finally, a third developer can
+    replace the object layout and reuse the interface for the
+    same look and feel on a completely different set of
+    information.
+  </p>
+
+  <p>
+    Process management governs how programs are executed and
+    how processes are scheduled.  Programs may include full-blown
+    applications, or simpler text-based utilities which can
+    be glued together to form quick and dirty applications.
+  </p>
+
+
+  <br> </br>
+  <br> </br>
+  <hr> </hr>
+  <br> </br>
+  <br> </br>
+
+
+  <pre>
+    Copyright (c) 2009 Johann Tienhaara
+    All rights reserved.
+
+    This file is part of Musaico.
+
+    Musaico is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Musaico is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Musaico.  If not, see <http://www.gnu.org/licenses/>.
+  </pre>
+</body>
+</html>

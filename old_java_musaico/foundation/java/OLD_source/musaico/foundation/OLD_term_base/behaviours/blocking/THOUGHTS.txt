@@ -1,0 +1,40 @@
+public interface Edit extends Capability, Pipeline
+public interface FilterElements extends Capability, Pipeline
+public interface OrderElements extends Capability, Pipeline
+public interface Select extends Capability, Pipeline
+
+Maybe then Type has:
++ capabilities () : Countable<Capability>
++ symbol ( Capability ) : Operation
+
+^^^^ maybe or maybe not...
+vvvv worth exploring
+
+public interface Read extends Capability, Pipeline
+  + await ( BigDecimal seconds ) : Read
+  + partial () : Read
+  + pipe ( Operation callback ) : Read
+public interface Write extends Capability, Pipeline
+  + value ( NonBlocking ) : Write
+  + partial ( NonBlocking ) : Write
+
+// Read a partial result:
+Term partial = type.read ().partial ().apply ( value );
+
+// Wait up to 10 seconds for the final result, then pipe it to an operation:
+Term piped =
+   type.read ().await ( Seconds.in ( 10 ) ).pipe ( operation ).apply ( value );
+
+// Asynchronously pipe the result to an operation, but only if it
+// is finalized within 10 seconds:
+Term background_piped =
+  tyoe.read ().pipe (
+    type.read ().await ( Seconds.in ( 10 ) )
+  ).apply ( value );
+^^^ might be hard to implement without threads or Tasks or Executors etc... ^^^
+
+// Write out a final asynchronous result:
+type.write ().term ( final_value ).apply ( asynchronous_result );
+
+// Write out a partial result:
+type.write ().partialTerm ( partial_value ).apply ( asynchronous_result );

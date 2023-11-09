@@ -1,0 +1,6 @@
+Y.java:123: error: name clash: <A#1,B#1>doSomething(A#1,B#1) in X and <A#2, B#2>doSomething(A#2, B#2) in Y have the same erasure, yet neither overrides the other
+
+    void doSomething (
+         ^
+
+  where A#1, B#1

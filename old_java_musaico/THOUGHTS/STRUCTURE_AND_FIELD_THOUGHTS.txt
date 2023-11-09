@@ -1,0 +1,44 @@
+- Do away with Fields as they are.  The Field name is actually a
+  Position within a data structure (Region).  All we need to
+  make Buffers work are Positions and Instances.
+- Problem: when translating between devices we could lose or gain
+  information.  For example writing an Address to a List device will
+  translate the field positions "street", "city" and so on to numeric
+  positions 0, 1, ...  And reading the data back out will translate
+  numeric positions 0, 1, ... to named positions "street", "city", ...
+  As long as we know what to expect this is fine...
+- Although it would be nice to be able to apply constraints (e.g.
+  "the field at position 'x' must be castable to Y").  Maybe using Tags
+  and Types???  Maybe an Attribute comprises a Position and a Type.
+  (Not too far off what it is right now.)
+
+- Data structure examples:
+
+  StructureBuilder builder =
+      new StructureBuilder ( "address" );
+  Attribute street = builder.prepare ( "street" )
+                            .rawClass ( String.class )
+                            .constraint ( new WarnOnFailure ( new StreetParser () ) )
+                            .build ();
+  builder.addMandatory ( street );
+
+- Way too verbose!
+
+- interface Structure extends Region.
+
+- Structure address = new StructureBuilder ()
+      .add ( String.class, "street", new WarnOnFailureTag ( new StreetParser () ) )
+      .add ( String.class, "city", new DictionaryTag () )
+      .add ( String.class, "province_state", new DictionaryTag () )
+      .add ( String.class, "country", new DictionaryTag () )
+      .build ();
+
+  Buffer buf = ...;
+  Dictionary address_dictionary = ...;
+
+  String default_country = address_dictionary.get ( "default_country" );
+
+  String street  = buf.get ( address.position ( "street" ) ).orDefault ( "" );
+  String city    = buf.get ( address.position ( "city" ) ).orDefault ( "" );
+  String state   = buf.get ( address.position ( "province_state" ) ).orDefault ( "" );
+  String country = buf.get ( address.position ( "country" ) ).orDefault ( "" );
