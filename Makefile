@@ -1,5 +1,5 @@
 .PHONY: all
-all: install build test
+all: install build test test_language
 
 .PHONY: create_settings
 create_settings:
@@ -71,3 +71,8 @@ test_language: settings install build test
 	    && ls -l $$MUSAICO_BIN \
 	    && echo "For example: $$MUSAICO_BIN /path/to/my.musaico" \
 	    && echo "         or: $$MUSAICO_BIN $$PWD/language/test.musaico"
+	@echo "Running $$MUSAICO_BIN $$PWD/language/test.musaico:"
+	@. ./runtime/root/settings.env \
+	    && export MUSAICO_BIN=$$MUSAICO_RUNTIME/app/musaico/work/musaico \
+	    && $$MUSAICO_BIN $$PWD/language/test.musaico \
+	    && echo "SUCCESS parsing test.musaico"

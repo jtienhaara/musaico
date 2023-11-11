@@ -42,6 +42,8 @@ test: check_settings
 	cp -f \
 	    ./musaico.c \
 	    ./musaico.h \
+	    ./musaico_syntax.h \
+	    ./musaico_semantics.h \
 	    ./work/
 	gcc -c ./work/musaico_parse.c -o ./work/musaico_parse.o
 	gcc -c ./work/musaico.c -o ./work/musaico.o

@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 #include "musaico.h"
+#include "musaico_syntax.h"
+#include "musaico_semantics.h"
 
 int main(
         int argc,
