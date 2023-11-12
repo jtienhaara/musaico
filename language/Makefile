@@ -1,3 +1,8 @@
+#
+# Parameters for gcc compiling .c into .o files:
+#
+CC_ARGS = -Werror
+
 .PHONY: all
 all: install build test
 
@@ -36,20 +41,27 @@ test: check_settings
 	fi
 	mkdir -p ./work
 	bison musaico.y \
-	    --output ./work/musaico_parse.c \
+	    --output ./work/musaico_grammar.c \
 	    -Wcounterexamples \
 	    -Werror
 	cp -f \
+	    ./musaico_compiler.c \
 	    ./musaico.c \
+	    ./musaico_parser.c \
 	    ./musaico.h \
+	    ./musaico_parser.h \
 	    ./musaico_syntax.h \
 	    ./musaico_semantics.h \
 	    ./work/
-	gcc -c ./work/musaico_parse.c -o ./work/musaico_parse.o
-	gcc -c ./work/musaico.c -o ./work/musaico.o
+	gcc $(CC_ARGS) -c ./work/musaico_grammar.c -o ./work/musaico_grammar.o
+	gcc $(CC_ARGS) -c ./work/musaico_compiler.c -o ./work/musaico_compiler.o
+	gcc $(CC_ARGS) -c ./work/musaico.c -o ./work/musaico.o
+	gcc $(CC_ARGS) -c ./work/musaico_parser.c -o ./work/musaico_parser.o
 	gcc \
-	    ./work/musaico_parse.o \
+	    ./work/musaico_grammar.o \
+	    ./work/musaico_compiler.o \
 	    ./work/musaico.o \
+	    ./work/musaico_parser.o \
 	    -o ./work/musaico
 	@echo "Trying to compile test.musaico:"
 	./work/musaico test.musaico
