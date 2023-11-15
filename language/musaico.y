@@ -38,6 +38,7 @@
 %token <char>       BRACKET_CLOSE               ']'
 %token <char>       BRACKET_OPEN                '['
 %token <char *>     COMMENT_SINGLE_LINE         // // comment etc...
+%token <char>       DIVIDED_BY                  '/'
 %token <char>       DOT                         '.'
 %token <char>       EQUAL                       '='
 %token <double>     FLOAT                       // [0-9]+(\.[0-9]+)?
@@ -207,103 +208,127 @@ static int is_id_char(
   }
 }
 
-// TODO write 100% coverage unit tests for yylex!  Yeesh.
-static int yylex (
+static int musaico_lex_brace_close (
         YYSTYPE *lvalp,
         YYLTYPE *llocp,
         musaico_parser_t *parser
         )
 {
-  // !!! check parser != NULL, internals look good.
-  if (llocp->last_line != llocp->first_line
-      || llocp->last_column != llocp->first_column) {
-    llocp->first_line = llocp->last_line;
-    llocp->first_column = llocp->last_column;
-  }
+  // BRACE_CLOSE
+  parser->next_char = -1;
+  lvalp->MUSAICO_T_BRACE_CLOSE = '}';
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              "}",  // context
+                              NULL);  // source
+  return MUSAICO_T_BRACE_CLOSE;
+}
 
-  if (parser->next_char < 0) {
-    parser->next_char = musaico_read_char(parser->fd, llocp);
-    if (parser->next_char == EOF) {
-      parser->musaico->trace_step(parser->musaico,
-                                  MUSAICO_TRACE_LEX,
-                                  "EOF",  // context
-                                  NULL);  // source
-      return MUSAICO_T_YYEOF;
-    }
-  } else {
-    llocp->first_column ++;
-    llocp->last_column ++;
-  }
+static int musaico_lex_brace_open (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // BRACE_OPEN
+  parser->next_char = -1;
+  lvalp->MUSAICO_T_BRACE_OPEN = '{';
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              "{",  // context
+                              NULL);  // source
+  return MUSAICO_T_BRACE_OPEN;
+}
 
-  if (parser->next_char == '}') {
-    // BRACE_CLOSE
-    parser->next_char = -1;
-    lvalp->MUSAICO_T_BRACE_CLOSE = '}';
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                "}",  // context
-                                NULL);  // source
-    return MUSAICO_T_BRACE_CLOSE;
-  } else if (parser->next_char == '{') {
-    // BRACE_OPEN
-    parser->next_char = -1;
-    lvalp->MUSAICO_T_BRACE_OPEN = '{';
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                "{",  // context
-                                NULL);  // source
-    return MUSAICO_T_BRACE_OPEN;
-  } else if (parser->next_char == ']') {
-    // BRACKET_CLOSE
-    parser->next_char = -1;
-    lvalp->MUSAICO_T_BRACKET_CLOSE = ']';
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                "]",  // context
-                                NULL);  // source
-    return MUSAICO_T_BRACKET_CLOSE;
-  } else if (parser->next_char == '[') {
-    // BRACKET_OPEN
-    parser->next_char = -1;
-    lvalp->MUSAICO_T_BRACKET_OPEN = '[';
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                "[",  // context
-                                NULL);  // source
-    return MUSAICO_T_BRACKET_OPEN;
-  } else if (parser->next_char == '/') {
-    parser->next_char = musaico_read_char(parser->fd, llocp);
-    if (parser->next_char != '/') {
-      return MUSAICO_T_YYerror; // !!! error
-    }
-    // COMMENT_SINGLE_LINE
-    char buffer[4096];
-    buffer[0] = '/';
-    int b = 1;
-    while (parser->next_char != '\n'
-           && parser->next_char != EOF) {
-      if (b >= 4096) {
-        return MUSAICO_T_YYerror; // !!! error;
-      }
-      buffer[b] = parser->next_char;
-      b ++;
-      parser->next_char = musaico_read_char(parser->fd, llocp);
-    }
+static int musaico_lex_bracket_close (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // BRACKET_CLOSE
+  parser->next_char = -1;
+  lvalp->MUSAICO_T_BRACKET_CLOSE = ']';
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              "]",  // context
+                              NULL);  // source
+  return MUSAICO_T_BRACKET_CLOSE;
+}
+
+static int musaico_lex_bracket_open (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // BRACKET_OPEN
+  parser->next_char = -1;
+  lvalp->MUSAICO_T_BRACKET_OPEN = '[';
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              "[",  // context
+                              NULL);  // source
+  return MUSAICO_T_BRACKET_OPEN;
+}
+
+static int musaico_lex_divided_by (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // DIVIDED_BY
+  // parser->next_char = (something).
+  lvalp->MUSAICO_T_DIVIDED_BY = '/';
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              "/",   // context
+                              NULL);  // source
+  return MUSAICO_T_DIVIDED_BY;
+}
+
+static int musaico_lex_comment_single_line (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // COMMENT_SINGLE_LINE
+  char buffer[4096];
+  buffer[0] = '/';
+  int b = 1;
+  while (parser->next_char != '\n'
+         && parser->next_char != EOF) {
     if (b >= 4096) {
       return MUSAICO_T_YYerror; // !!! error;
     }
-    buffer[b] = '\0';
-    // parser->next_char = '\n';
-    llocp->last_column --;
-    char *semantics = (char *) malloc((b + 1) * sizeof(char));
-    strcpy(semantics, buffer);  // Everything including the "//".
-    lvalp->MUSAICO_T_COMMENT_SINGLE_LINE = semantics;
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                semantics,  // context
-                                NULL);  // source
-    return MUSAICO_T_COMMENT_SINGLE_LINE;
-  } else if (parser->next_char == '.') {
+    buffer[b] = parser->next_char;
+    b ++;
+    parser->next_char = musaico_read_char(parser->fd, llocp);
+  }
+  if (b >= 4096) {
+    return MUSAICO_T_YYerror; // !!! error;
+  }
+  buffer[b] = '\0';
+  // parser->next_char = '\n';
+  llocp->last_column --;
+  char *semantics = (char *) malloc((b + 1) * sizeof(char));
+  strcpy(semantics, buffer);  // Everything including the "//".
+  lvalp->MUSAICO_T_COMMENT_SINGLE_LINE = semantics;
+  parser->musaico->trace_step(parser->musaico,
+                              MUSAICO_TRACE_LEX,
+                              semantics,  // context
+                              NULL);  // source
+  return MUSAICO_T_COMMENT_SINGLE_LINE;
+}
+
+static int musaico_lex_dot (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // DOT
     parser->next_char = -1;
     lvalp->MUSAICO_T_DOT = '.';
@@ -312,7 +337,14 @@ static int yylex (
                                 ".",  // context
                                 NULL);  // source
     return MUSAICO_T_DOT;
-  } else if (parser->next_char == '=') {
+}
+
+static int musaico_lex_equal (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // EQUAL
     parser->next_char = -1;
     lvalp->MUSAICO_T_EQUAL = '=';
@@ -321,8 +353,14 @@ static int yylex (
                                 "=",  // context
                                 NULL);  // source
     return MUSAICO_T_EQUAL;
-  } else if (parser->next_char >= '0'
-             && parser->next_char <= '9') {
+}
+
+static int musaico_lex_number (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // FLOAT
     // INT
     yytoken_kind_t token_kind = MUSAICO_T_INT;
@@ -378,7 +416,32 @@ static int yylex (
                                   NULL);  // source
     }
     return token_kind;
-  } else if (is_id_first_char(parser->next_char)) {
+}
+
+static int musaico_lex_newline (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+    // NEWLINE
+    llocp->last_line ++;
+    llocp->last_column = 1;
+    parser->next_char = -1;
+    lvalp->MUSAICO_T_NEWLINE = '\n';
+    parser->musaico->trace_step(parser->musaico,
+                                MUSAICO_TRACE_LEX,
+                                "\\n",  // context
+                                NULL);  // source
+    return MUSAICO_T_NEWLINE;
+}
+
+static int musaico_lex_id (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // ID
     char buffer[4096];
     int b = 0;
@@ -404,18 +467,14 @@ static int yylex (
                                 "id",  // context
                                 NULL);  // source
     return MUSAICO_T_ID;
-  } else if (parser->next_char == '\n') {
-    // NEWLINE
-    llocp->last_line ++;
-    llocp->last_column = 1;
-    parser->next_char = -1;
-    lvalp->MUSAICO_T_NEWLINE = '\n';
-    parser->musaico->trace_step(parser->musaico,
-                                MUSAICO_TRACE_LEX,
-                                "\\n",  // context
-                                NULL);  // source
-    return MUSAICO_T_NEWLINE;
-  } else if (parser->next_char == ';') {
+}
+
+static int musaico_lex_semi_colon (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // SEMI_COLON
     parser->next_char = -1;
     lvalp->MUSAICO_T_SEMI_COLON = ';';
@@ -424,8 +483,14 @@ static int yylex (
                                 ";",  // context
                                 NULL);  // source
     return MUSAICO_T_SEMI_COLON;
-  } else if (parser->next_char == '"'
-             || parser->next_char == '\'') {
+}
+
+static int musaico_lex_string (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // STRING
     char buffer[4096];
     int b = 0;
@@ -461,7 +526,14 @@ static int yylex (
                                 "string",  // context
                                 NULL);  // source
     return MUSAICO_T_STRING;
-  } else if (parser->next_char == '*') {
+}
+
+static int musaico_lex_times (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // TIMES
     parser->next_char = -1;
     lvalp->MUSAICO_T_TIMES = '*';
@@ -470,9 +542,14 @@ static int yylex (
                                 "*",  // context
                                 NULL);  // source
     return MUSAICO_T_TIMES;
-  } else if (parser->next_char == ' '
-             || parser->next_char == '\r'
-             || parser->next_char == '\t') {
+}
+
+static int musaico_lex_whitespace (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
     // WHITESPACE
     char buffer[4096];
     int b = 0;
@@ -497,6 +574,76 @@ static int yylex (
     lvalp->MUSAICO_T_WHITESPACE = semantics;
     // Don't bother creating a trace_step() for whitespace.
     return MUSAICO_T_WHITESPACE;
+}
+
+
+// TODO write 100% coverage unit tests for yylex!  Yeesh.
+static int yylex (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+  // !!! check parser != NULL, internals look good.
+  if (llocp->last_line != llocp->first_line
+      || llocp->last_column != llocp->first_column) {
+    llocp->first_line = llocp->last_line;
+    llocp->first_column = llocp->last_column;
+  }
+
+  if (parser->next_char < 0) {
+    parser->next_char = musaico_read_char(parser->fd, llocp);
+    if (parser->next_char == EOF) {
+      parser->musaico->trace_step(parser->musaico,
+                                  MUSAICO_TRACE_LEX,
+                                  "EOF",  // context
+                                  NULL);  // source
+      return MUSAICO_T_YYEOF;
+    }
+  } else {
+    llocp->first_column ++;
+    llocp->last_column ++;
+  }
+
+  if (parser->next_char == '}') {
+    return musaico_lex_brace_close(lvalp, llocp, parser);
+  } else if (parser->next_char == '{') {
+    return musaico_lex_brace_open(lvalp, llocp, parser);
+  } else if (parser->next_char == ']') {
+    return musaico_lex_bracket_close(lvalp, llocp, parser);
+  } else if (parser->next_char == '[') {
+    return musaico_lex_bracket_open(lvalp, llocp, parser);
+  } else if (parser->next_char == '/') {
+    parser->next_char = musaico_read_char(parser->fd, llocp);
+    if (parser->next_char == '/') {
+      return musaico_lex_comment_single_line(lvalp, llocp, parser);
+    }
+    else
+    {
+      return musaico_lex_divided_by(lvalp, llocp, parser);
+    }
+  } else if (parser->next_char == '.') {
+    return musaico_lex_dot(lvalp, llocp, parser);
+  } else if (parser->next_char == '=') {
+    return musaico_lex_equal(lvalp, llocp, parser);
+  } else if (parser->next_char >= '0'
+             && parser->next_char <= '9') {
+    return musaico_lex_number(lvalp, llocp, parser);
+  } else if (is_id_first_char(parser->next_char)) {
+    return musaico_lex_id(lvalp, llocp, parser);
+  } else if (parser->next_char == '\n') {
+    return musaico_lex_newline(lvalp, llocp, parser);
+  } else if (parser->next_char == ';') {
+    return musaico_lex_semi_colon(lvalp, llocp, parser);
+  } else if (parser->next_char == '"'
+             || parser->next_char == '\'') {
+    return musaico_lex_string(lvalp, llocp, parser);
+  } else if (parser->next_char == '*') {
+    return musaico_lex_times(lvalp, llocp, parser);
+  } else if (parser->next_char == ' '
+             || parser->next_char == '\r'
+             || parser->next_char == '\t') {
+    return musaico_lex_whitespace(lvalp, llocp, parser);
   }
   else {
     return MUSAICO_T_YYUNDEF; // !!! error

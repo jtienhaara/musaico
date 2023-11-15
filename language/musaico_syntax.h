@@ -85,39 +85,44 @@ enum _ENUM_musaico_operator
   MUSAICO_OP_AND_AND,  // "&&"
   MUSAICO_OP_ASSIGN,  // "="
   MUSAICO_OP_ASSIGN_AND,  // "&="
-  MUSAICO_OP_ASSIGN_DECREMENT,  // "--"
+  MUSAICO_OP_ASSIGN_AND_AND,  // "&&="
+  MUSAICO_OP_ASSIGN_DECREMENT,  // "--" (unary)
   MUSAICO_OP_ASSIGN_DIVIDE,  // "/="
-  MUSAICO_OP_ASSIGN_INCREMENT,  // "++"
+  MUSAICO_OP_ASSIGN_INCREMENT,  // "++" (unary)
   MUSAICO_OP_ASSIGN_MINUS,  // "-="
   MUSAICO_OP_ASSIGN_MODULO,  // "%="
   MUSAICO_OP_ASSIGN_OR,  // "|="
+  MUSAICO_OP_ASSIGN_OR_OR,  // "||="
   MUSAICO_OP_ASSIGN_PLUS,  // "+="
   MUSAICO_OP_ASSIGN_POWER,  // "**="
   MUSAICO_OP_ASSIGN_TIMES,  // "*="
   MUSAICO_OP_ASSIGN_XOR,  // "^="
+  MUSAICO_OP_ASSIGN_XOR,  // "^^="
   MUSAICO_OP_AT,  // "@"
   MUSAICO_OP_COLON,  // ":"
   MUSAICO_OP_COMMA,  // ","
   MUSAICO_OP_DIVIDED_BY,  // "/"
-  MUSAICO_OP_DOLLAR,  // "$"
+  MUSAICO_OP_DOLLAR,  // "$" (unary)
   MUSAICO_OP_EQUALS,  // "=="
   MUSAICO_OP_GREATER_THAN,  // ">"
   MUSAICO_OP_GREATER_THAN_OR_EQUALS,  // ">="
-  MUSAICO_OP_HASH,  // "#"
-  MUSAICO_OP_MATCHES,  // "~"
+  MUSAICO_OP_HASH,  // "#" (unary)
   MUSAICO_OP_LESS_THAN,  // "<"
   MUSAICO_OP_LESS_THAN_OR_EQUALS,  // "<="
   MUSAICO_OP_MINUS,  // "-"
   MUSAICO_OP_MODULO,  // "%"
-  MUSAICO_OP_NOT,  // "!"
+  MUSAICO_OP_NOT,  // "!" (unary)
   MUSAICO_OP_NOT_EQUALS,  // "!="
   MUSAICO_OP_OR,  // "|"
   MUSAICO_OP_OR_OR,  // "||"
   MUSAICO_OP_PLUS,  // "+"
   MUSAICO_OP_POWER,  // "**"
-  MUSAICO_OP_QUESTION,  // "?"
+  MUSAICO_OP_QUESTION,  // "?" (unary)
+  MUSAICO_OP_TILDE,  // "~"
+  MUSAICO_OP_TILDE_EQUALS,  // "~="
   MUSAICO_OP_TIMES,  // "*"
-  MUSAICO_OP_XOR  // "^"
+  MUSAICO_OP_XOR,  // "^"
+  MUSAICO_OP_XOR_XOR  // "^^"
 };
 
 struct _STRUCT_musaico_operation
