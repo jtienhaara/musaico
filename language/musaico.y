@@ -1,7 +1,10 @@
 %{
   #include <stdio.h>
+  #include <errno.h>
+  #include <float.h>  // For LDBL_MIN
   #include <malloc.h>
-  #include <stdlib.h>  // For atof(), atol()
+  #include <math.h>  // For HUGE_VALL
+  #include <stdlib.h>  // For strtold(), strfroml(), strtoll()
   #include <string.h>
   #include <unistd.h>  // For read()
 
@@ -33,22 +36,22 @@
 %start musaico_syntax
 
 %define api.value.type union /* Generate YYSTYPE from these types: */
-%token <char>       BRACE_CLOSE                 '}'
-%token <char>       BRACE_OPEN                  '{'
-%token <char>       BRACKET_CLOSE               ']'
-%token <char>       BRACKET_OPEN                '['
-%token <char *>     COMMENT_SINGLE_LINE         // // comment etc...
-%token <char>       DIVIDED_BY                  '/'
-%token <char>       DOT                         '.'
-%token <char>       EQUAL                       '='
-%token <double>     FLOAT                       // [0-9]+(\.[0-9]+)?
-%token <char *>     ID                          // xyz etc
-%token <long>       INT                         // [0-9]+
-%token <char>       NEWLINE                     '\n'
-%token <char>       SEMI_COLON                  ';'
-%token <char *>     STRING                      // 'xyz' or "xyz" etc
-%token <char>       TIMES                       '*'
-%token <char *>     WHITESPACE                  // [ \t\r]
+%token <char>           BRACE_CLOSE             '}'
+%token <char>           BRACE_OPEN              '{'
+%token <char>           BRACKET_CLOSE           ']'
+%token <char>           BRACKET_OPEN            '['
+%token <char *>         COMMENT_SINGLE_LINE     // // comment etc...
+%token <char>           DIVIDED_BY              '/'
+%token <char>           DOT                     '.'
+%token <char>           EQUAL                   '='
+%token <long double>    FLOAT                   // [0-9]+(\.[0-9]+)?
+%token <char *>         ID                      // xyz etc
+%token <long long>      INT                     // [0-9]+
+%token <char>           NEWLINE                 '\n'
+%token <char>           SEMI_COLON              ';'
+%token <char *>         STRING                  // 'xyz' or "xyz" etc
+%token <char>           TIMES                   '*'
+%token <char *>         WHITESPACE              // [ \t\r]
 
 
 %%
@@ -355,6 +358,26 @@ static int musaico_lex_equal (
     return MUSAICO_T_EQUAL;
 }
 
+static int musaico_lex_float (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+    // FLOAT
+  return MUSAICO_T_YYerror;  // !!!
+}
+
+static int musaico_lex_int (
+        YYSTYPE *lvalp,
+        YYLTYPE *llocp,
+        musaico_parser_t *parser
+        )
+{
+    // INT
+  return MUSAICO_T_YYerror;  // !!!
+}
+
 static int musaico_lex_number (
         YYSTYPE *lvalp,
         YYLTYPE *llocp,
@@ -375,6 +398,13 @@ static int musaico_lex_number (
       b ++;
       parser->next_char = musaico_read_char(parser->fd, llocp);
       if (parser->next_char == '.') {
+        if (token_kind == MUSAICO_T_FLOAT)
+        {
+          // Could be a range, something like 3.5..4.5, for example,
+          // and we've stumbled on the first dot of the middle "..".
+          break;
+        }
+
         if (b >= 4096) {
           return MUSAICO_T_YYerror; // !!! error;
         }
@@ -401,14 +431,30 @@ static int musaico_lex_number (
     // parser->next_char = (something).
     llocp->last_column --;
     if (token_kind == MUSAICO_T_FLOAT) {
-      double semantics = atof(buffer);
+      char *endptr = buffer;  // Point to start of buffer by default.
+      long double semantics = strtold(buffer, &endptr);
+      if (endptr != (buffer + b)  // Not all chars consumed in parse
+          || semantics == HUGE_VALL  // Positive overflow
+          || semantics == -HUGE_VALL  // Negative overflow
+          || semantics == LDBL_MIN  // Positive underflow
+          || semantics == -LDBL_MIN)  // Negative underflow
+      {
+        return MUSAICO_T_YYerror;  // !!! error
+      }
+
       lvalp->MUSAICO_T_FLOAT = semantics;
       parser->musaico->trace_step(parser->musaico,
                                   MUSAICO_TRACE_LEX,
                                   "float",  // context
                                   NULL);  // source
     } else {
-      long semantics = atol(buffer);
+      char *endptr = buffer;  // Point to start of buffer by default.
+      long long semantics = strtoll(buffer, &endptr, 10);
+      if (endptr != (buffer + b))  // Not all chars consumed in parse
+      {
+        return MUSAICO_T_YYerror;  // !!! error
+      }
+
       lvalp->MUSAICO_T_INT = semantics;
       parser->musaico->trace_step(parser->musaico,
                                   MUSAICO_TRACE_LEX,

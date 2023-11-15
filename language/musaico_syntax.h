@@ -41,8 +41,8 @@ struct _STRUCT_musaico_literal
   union
   {
     char *v_string;
-    long v_int;
-    double v_float;
+    long long v_int;
+    long double v_float;
   };
   int string_length;
   musaico_literal_t *prev;  // 1, 2, 3, 4, 5
